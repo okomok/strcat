@@ -4,14 +4,14 @@
 
 Given two infrafunctors
 \In{align*}{
-    (F(f) \in \mathcal{D}(FA,FB)) _ {f \in \mathcal{C}(A,B)}\\
-    (G(f) \in \mathcal{D}(GA,GB)) _ {f \in \mathcal{C}(A,B)}
+    (F(f) \in \cat{D}(FA,FB)) _ {f \in \cat{C}(A,B)}\\
+    (G(f) \in \cat{D}(GA,GB)) _ {f \in \cat{C}(A,B)}
 }
 , a family of morphisms
 \In{align*}{
-    (\tau_A \in \catMor{D}(FA,GA)) _ {A \in \catOb{C}}
+    (\tau_A \in \cat{D}(FA,GA)) _ {A \in \catOb{C}}
 }
-is \textit{natural} if for any $f \in \mathcal{C}(A,B)$,
+is \textit{natural} if for any $f \in \cat{C}(A,B)$,
 \In{align*}{
     \tau_B \circ F(f) = G(f) \circ \tau_A
 }
@@ -22,7 +22,7 @@ In particular case $F$ and $G$ are functorial(then they are functors), $\tau$ is
 
 \subsection{Natural Connectors}
 
-In string diagrams, a natural transformation is a connector of two functors:
+In string diagrams, a natural transformation is a connector of two open boxes
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -38,7 +38,7 @@ In string diagrams, a natural transformation is a connector of two functors:
         }
     }
 }
-, for the naturality guarantees
+, for the naturality guarantees a node can travel between two open boxes:
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -95,11 +95,11 @@ In string diagrams, a natural transformation is a connector of two functors:
 
 \subsection{Vertical Composition}
 
-Given three \textit{parallel} functors
+Given three functors
 \In{align*}{
-    F : \mathcal{C} \to \mathcal{D}\\
-    G : \mathcal{C} \to \mathcal{D}\\
-    H : \mathcal{C} \to \mathcal{D}
+    F : \cat{C} \to \cat{D}\\
+    G : \cat{C} \to \cat{D}\\
+    H : \cat{C} \to \cat{D}
 }
 and two natural transformations
 \In{align*}{
@@ -125,16 +125,16 @@ and two natural transformations
         }
     }
 }
-The naturality is trivial; You can travel by bus and train.
+The naturality is trivial.
 
 \subsection{Horizontal Composition}
 
 Given four functors
 \In{align*}{
-    F &: \mathcal{A} \to \mathcal{B}\\
-    G &: \mathcal{A} \to \mathcal{B}\\
-    H &: \mathcal{B} \to \mathcal{C}\\
-    K &: \mathcal{B} \to \mathcal{C}
+    F &: \cat{A} \to \cat{B}\\
+    G &: \cat{A} \to \cat{B}\\
+    H &: \cat{B} \to \cat{C}\\
+    K &: \cat{B} \to \cat{C}
 }
 and two natural transformations
 \In{align*}{
@@ -164,18 +164,18 @@ and two natural transformations
         }
     }
 }
-You can easily check the naturality; Travel by car ferry.
+You can easily check the naturality. Travel by car ferry.
 
 
 \subsection{Identity Natural Transformations}
 
 Given a functor
 \In{align*}{
-    F &: \mathcal{C} \to \mathcal{D}
+    F &: \cat{C} \to \cat{D}
 }
 , the \textit{identity natural transformation}
 \In{align*}{
-    i _F : F \to F
+    \operatorname{id} _F : F \to F
 }
 is defined by
 \In{align*}{
@@ -186,7 +186,7 @@ is defined by
         ,\strdtube{
             \strdtubestartline
             ,\strdtubemid
-            ,\strdtubeat{Mid}{\strdtwincell{i}}
+            ,\strdtubeat{Mid}{\strdtwincell{\operatorname{id}}}
             ,\strdtubeendline
         }
     } \mydefeq\,
@@ -201,4 +201,46 @@ is defined by
         }
     }
 }
+A \textit{whikering} is a horizontal composition with identity natural transformations:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestart
+            ,\strdfork{
+                \strdtubemid
+                ,\strdtwincell{\tau}
+                ,\strdtubemid
+            }
+            ,\strdtubeextend{1}{1}
+            ,\strdcutoff\strdtubebound
+            ,\strdtubemid
+            ,\strdtubemid
+            ,\strdcutoff\strdtubebound
+        }
+    }\ \ 
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestart
+            ,\strdfork{
+                \strdtubemid
+                ,\strdtubemid
+            }
+            ,\strdtubeextend{1}{1}
+            ,\strdcutoff\strdtubebound
+            ,\strdtubemid
+            ,\strdtwincell{\sigma}
+            ,\strdtubemid
+            ,\strdcutoff\strdtubebound
+        }
+    }
+}
+
 

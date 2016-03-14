@@ -1,7 +1,17 @@
-\section{Preliminary}
+\section{Preliminaries}
 
 \subsection{Vacuous Truth}
-todo
+
+Given boolean expressions $P$ and $Q$, a boolean expression
+\In{align*}{
+    P \implies Q
+} 
+is true if $P$ is false.
+As a consequence,
+\In{align*}{
+    (\forall x \in X)(Q(x)) \mydefeq (\forall x)(x \in X \implies Q(x))
+}
+is true in case $X$ is the empty set.
 
 \subsection{Uniqueness Quantification}
 
@@ -25,11 +35,11 @@ Category theory introduces many \textit{universal properties} like
 \In{align*}{
     (\forall x \in X)(\exists!a\in A)(P(x,a))
 }
-, which is equivalent to an easier one:
+, which is equivalent to an easier form:
 \In{align*}{
     (\exists f : X \to A)(\forall x \in X)(\forall a \in A)(P(x,a) \iff a = f(x))
 }
-Find such a function $f$, that's the category theory.
+Category theory is the study to build such a function $f$.
 
 
 \subsection{Lambda Expressions}
@@ -78,7 +88,7 @@ such that
 \In{align*}{
     (\forall x \in X)(f(x) \in F(x))
 }
-Such $f$ is called a \textit{dependent function}, for the $F(x)$ depends on a $x$. 
+Such $f$ is called a \textit{dependent function}, for the $F(x)$ depends on $x$. 
 In case $F$ is a constant function which ignores $x$:
 \In{align*}{
     (f(x) \in Y)_{x \in X}
@@ -96,11 +106,11 @@ rather than
 \In{align*}{
     (3+(0+1))+2
 }
-, because you know the arithmetic laws
+because you know the arithmetic laws
 \In{align*}{
     x+(y+z) = (x+y)+z \\
     0+x = x = x+0
 }
 disambiguate unparenthesized expressions.
-Informally laws which offers simpler syntax are called \textit{coherence conditions} or \textit{coherence}.
+Informally a set of laws to introduce simpler syntax is called a \textit{coherence condition} or briefly \textit{coherence}.
 

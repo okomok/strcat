@@ -1,28 +1,28 @@
 \section{Functors}
 
 \subsection{Definition}
-Given categories $\mathcal{C}$ and $\mathcal{D}$, a \textit{functor}
+Given categories $\cat{C}$ and $\cat{D}$, a \textit{functor}
 \In{align*}{
-    F : \mathcal{C} \to \mathcal{D}
+    F : \cat{C} \to \cat{D}
 }
 consists of:
 \In{enumerate}{
 \item a family of objects
 \In{align*}{
-    (FA \in \operatorname{Ob}\mathcal{D}) _ {A \in \operatorname{Ob}\mathcal{C}}
+    (FA \in \operatorname{Ob}\cat{D}) _ {A \in \operatorname{Ob}\cat{C}}
 }
 \item a family of morphisms
 \In{align*}{
-    (F(f) \in \mathcal{D}(FA,FB)) _ {f \in \mathcal{C}(A,B)}
+    (F(f) \in \cat{D}(FA,FB)) _ {f \in \cat{C}(A,B)}
 }
 }
-satisfying the coherence(\textit{functoriality}):
+satisfying the \textit{functoriality}:
 \In{enumerate}{
-\item \textit{Composition-compatibility}: for any $f \in \mathcal{C}(A,B)$ and $g \in \mathcal{C}(B,C)$,
+\item \textit{Composition-compatibility}: for any $f \in \cat{C}(A,B)$ and $g \in \cat{C}(B,C)$,
     \In{align*}{
         F(g \circ f) = F(g) \circ F(f)
     }
-\item \textit{Unit-compatibility}: for any $A \in \operatorname{Ob}\mathcal{C}$,
+\item \textit{Unit-compatibility}: for any $A \in \operatorname{Ob}\cat{C}$,
     \In{align*}{
         F(\operatorname{id}_A) = \operatorname{id}_{FA}
     }
@@ -32,7 +32,7 @@ An \textit{infrafunctor} is a structure without functoriality.
 
 \subsection{Functorial Boxes}
 
-In string diagrams, a functor is represented by an open box
+In string diagrams, a functor is represented as an open box
 
 \In{align*}{
     \strdgathered{
@@ -75,7 +75,7 @@ Placeholders make it simple:
         }
     } 
 }
-One can check the functoriality guarantees strings like
+One can check the functoriality ensures any string like
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -92,17 +92,21 @@ One can check the functoriality guarantees strings like
         }
     }
 }
-are not umbiguous; "Join then box" equals to "Box then join".
+be unambiguous. "Join then box" is the same as "Box then join".
 
 
 \subsection{Composite Functors}
 
-For any two functors $F : \mathcal{A} \to \mathcal{B}$ and $G : \mathcal{B} \to \mathcal{C}$, %
-the \textit{composite functor} of $F$ and $G$
+For any two functors 
 \In{align*}{
-    G \circ F : \mathcal{A} \to \mathcal{C}
+    F &: \cat{A} \to \cat{B}\\
+    G &: \cat{B} \to \cat{C}
 }
-is defined by
+, the \textit{composite functor} of $F$ and $G$
+\In{align*}{
+    G \circ F : \cat{A} \to \cat{C}
+}
+is depicted as 
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -133,7 +137,11 @@ One can easily check the functoriality.
 
 \subsection{Identity Functors}
 
-An idenity functor $\operatorname{Id}_{\mathcal{C}} : \mathcal{C} \to \mathcal{C}$ is a transparent box
+An \textit{idenity functor}
+\In{align*}{
+    \operatorname{Id}_{\cat{C}} : \cat{C} \to \cat{C}
+}
+is depicted as a transparent box
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -157,16 +165,14 @@ An idenity functor $\operatorname{Id}_{\mathcal{C}} : \mathcal{C} \to \mathcal{C
 The functoriality is trivial.
 
 
-\subsection{Binary Functors}
-
-A functor $F : \mathcal{A} \times \mathcal{B} \to \mathcal{C}$ is called \textit{binary}, while
-a functor $F : \mathcal{A} \to \mathcal{C}$ is \textit{unary}.
-Binary functoriality is in detail:
-
 \subsection{Contravariant Functors}
 
-A functor $F : \mathcal{C}^{\operatorname{op}} \to \mathcal{D}$ is called \textit{contravariant}, while
-a functor $F : \mathcal{C} \to \mathcal{D}$ is \textit{covariant}. A contravariant functor $F$ is denoted by
+A functor whose domain is an opposite category
+\In{align*}{
+    F : \cat{C}^{\operatorname{op}} \to \cat{D}
+}
+is called \textit{contravariant}, while a normal functor is called \textit{covariant}.
+A contravariant functor is depicted as
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -177,12 +183,25 @@ a functor $F : \mathcal{C} \to \mathcal{D}$ is \textit{covariant}. A contravaria
         ,\strdtube{
             \strdtubestartline
             ,\strdtubemid
-            ,\strdat{Left End}{\strdoverlabel{F}} 
+            %,\strdat{Left End}{\strdoverlabel{F}} 
             ,\strdtubemid
             ,\strdtubeendline
         }
     }
 }
+
+
+\subsection{Binary Functors}
+
+A functor whose domain is a product category
+\In{align*}{
+    F : \cat{A} \times \cat{B} \to \cat{C}
+}
+is called a \textit{binary functor} or \textit{bifunctor}.
+Spelling out the definition of functoriality, you get
+TODO
+
+
 
 \subsection{Hom Functors}
 TODO
