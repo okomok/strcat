@@ -1,22 +1,22 @@
 \section{Functors}
 
 \subsection{Definition}
-Given categories $\mathcal{C}$ and $\mathcal{D}$, a \textit{functor}:
+Given categories $\mathcal{C}$ and $\mathcal{D}$, a \textit{functor}
 \In{align*}{
     F : \mathcal{C} \to \mathcal{D}
 }
-is an algebraic structure consisting of:
+consists of:
 \In{enumerate}{
-\item a family of objects:
+\item a family of objects
 \In{align*}{
     (FA \in \operatorname{Ob}\mathcal{D}) _ {A \in \operatorname{Ob}\mathcal{C}}
 }
-\item a family of morphisms:
+\item a family of morphisms
 \In{align*}{
     (F(f) \in \mathcal{D}(FA,FB)) _ {f \in \mathcal{C}(A,B)}
 }
 }
-with the coherence(\textit{functoriality}):
+satisfying the coherence(\textit{functoriality}):
 \In{enumerate}{
 \item \textit{Composition-compatibility}: for any $f \in \mathcal{C}(A,B)$ and $g \in \mathcal{C}(B,C)$,
     \In{align*}{
@@ -29,9 +29,10 @@ with the coherence(\textit{functoriality}):
 }
 An \textit{infrafunctor} is a structure without functoriality.
 
+
 \subsection{Functorial Boxes}
 
-In string diagrams, a functor is represented by an open box:
+In string diagrams, a functor is represented by an open box
 
 \In{align*}{
     \strdgathered{
@@ -58,7 +59,7 @@ In string diagrams, a functor is represented by an open box:
         ,\strdmid,\strdrlabel{FA}
     }
 }
-With placeholders, it is simply:
+Placeholders make it simple:
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -74,7 +75,7 @@ With placeholders, it is simply:
         }
     } 
 }
-One can check the functoriality guarantees strings like:
+One can check the functoriality guarantees strings like
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -97,11 +98,11 @@ are not umbiguous; "Join then box" equals to "Box then join".
 \subsection{Composite Functors}
 
 For any two functors $F : \mathcal{A} \to \mathcal{B}$ and $G : \mathcal{B} \to \mathcal{C}$, %
-the \textit{composite functor} of $F$ and $G$:
+the \textit{composite functor} of $F$ and $G$
 \In{align*}{
     G \circ F : \mathcal{A} \to \mathcal{C}
 }
-is defined by:
+is defined by
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -132,7 +133,7 @@ One can easily check the functoriality.
 
 \subsection{Identity Functors}
 
-An idenity functor $\operatorname{Id}_{\mathcal{C}} : \mathcal{C} \to \mathcal{C}$ is a transparent box:
+An idenity functor $\operatorname{Id}_{\mathcal{C}} : \mathcal{C} \to \mathcal{C}$ is a transparent box
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -165,7 +166,7 @@ Binary functoriality is in detail:
 \subsection{Contravariant Functors}
 
 A functor $F : \mathcal{C}^{\operatorname{op}} \to \mathcal{D}$ is called \textit{contravariant}, while
-a functor $F : \mathcal{C} \to \mathcal{D}$ is \textit{covariant}. A contravariant functor $F$ is denoted by:
+a functor $F : \mathcal{C} \to \mathcal{D}$ is \textit{covariant}. A contravariant functor $F$ is denoted by
 \In{align*}{
     \strdgathered{
         \strdfork{

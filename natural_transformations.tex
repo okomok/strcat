@@ -2,12 +2,12 @@
 
 \subsection{Definition}
 
-Given two infrafunctors:
+Given two infrafunctors
 \In{align*}{
     (F(f) \in \mathcal{D}(FA,FB)) _ {f \in \mathcal{C}(A,B)}\\
     (G(f) \in \mathcal{D}(GA,GB)) _ {f \in \mathcal{C}(A,B)}
 }
-, a family of morphisms:
+, a family of morphisms
 \In{align*}{
     (\tau_A \in \catMor{D}(FA,GA)) _ {A \in \catOb{C}}
 }
@@ -20,9 +20,9 @@ In particular case $F$ and $G$ are functorial(then they are functors), $\tau$ is
     \tau : F \to G
 }
 
-\subsection{Natural Boxes}
+\subsection{Natural Connectors}
 
-A natural transformation $\tau : F \to G$ is represented by a connected box:
+In string diagrams, a natural transformation is a connector of two functors:
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -38,7 +38,7 @@ A natural transformation $\tau : F \to G$ is represented by a connected box:
         }
     }
 }
-The naturality states:
+, for the naturality guarantees
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -73,7 +73,7 @@ The naturality states:
         }
     }
 }
-You can freely move a node up and down. So you can define them as:
+, which inspires you to define them as
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -95,18 +95,18 @@ You can freely move a node up and down. So you can define them as:
 
 \subsection{Vertical Composition}
 
-Given three \textit{parallel} functors:
+Given three \textit{parallel} functors
 \In{align*}{
     F : \mathcal{C} \to \mathcal{D}\\
     G : \mathcal{C} \to \mathcal{D}\\
     H : \mathcal{C} \to \mathcal{D}
 }
-and two natural transformations:
+and two natural transformations
 \In{align*}{
     \tau &: F \to G\\
     \sigma &: G \to H
 }
-, the \textit{vertical composition} of $\tau$ and $\sigma$ is defined by:
+, the \textit{vertical composition} of $\tau$ and $\sigma$ is defined by
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -129,19 +129,19 @@ The naturality is trivial; You can travel by bus and train.
 
 \subsection{Horizontal Composition}
 
-Given four functors:
+Given four functors
 \In{align*}{
     F &: \mathcal{A} \to \mathcal{B}\\
     G &: \mathcal{A} \to \mathcal{B}\\
     H &: \mathcal{B} \to \mathcal{C}\\
     K &: \mathcal{B} \to \mathcal{C}
 }
-and two natural transformations:
+and two natural transformations
 \In{align*}{
     \tau &: F \to G\\
     \sigma &: H \to K
 }
-, the \textit{horizontal composition} of $\tau$ and $\sigma$ is defined by:
+, the \textit{horizontal composition} of $\tau$ and $\sigma$ is defined by
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -165,4 +165,40 @@ and two natural transformations:
     }
 }
 You can easily check the naturality; Travel by car ferry.
+
+
+\subsection{Identity Natural Transformations}
+
+Given a functor
+\In{align*}{
+    F &: \mathcal{C} \to \mathcal{D}
+}
+, the \textit{identity natural transformation}
+\In{align*}{
+    i _F : F \to F
+}
+is defined by
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdtubeat{Mid}{\strdtwincell{i}}
+            ,\strdtubeendline
+        }
+    } \mydefeq\,
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+}
 
