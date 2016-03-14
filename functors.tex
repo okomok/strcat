@@ -1,33 +1,35 @@
 \section{Functors}
 
 \subsection{Definition}
-Given categories $\cat{C}$ and $\cat{D}$, a \textit{functor}
-\In{align*}{
+A \textit{functor}
+$
     F : \cat{C} \to \cat{D}
-}
+$
 consists of:
 \In{enumerate}{
+\item \textit{domain}: a category $\cat{C}$
+\item \textit{codomain}: a category $\cat{D}$
 \item a family of objects
+$
+    (FA \in \catOb{D}) _ {A \in \catOb{C}}
+$
+\item families of morphisms
 \In{align*}{
-    (FA \in \operatorname{Ob}\cat{D}) _ {A \in \operatorname{Ob}\cat{C}}
-}
-\item a family of morphisms
-\In{align*}{
-    (F(f) \in \cat{D}(FA,FB)) _ {f \in \cat{C}(A,B)}
+    \big( (F(f) \in \cat{D}(FA,FB)) _ {f \in \cat{C}(A,B)} \big)_{A,B \in \catOb{C}}
 }
 }
 satisfying the \textit{functoriality}:
 \In{enumerate}{
-\item \textit{Composition-compatibility}: for any $f \in \cat{C}(A,B)$ and $g \in \cat{C}(B,C)$,
+\item \textit{composition-compatibility}: for any $f \in \cat{C}(A,B)$ and $g \in \cat{C}(B,C)$,
     \In{align*}{
         F(g \circ f) = F(g) \circ F(f)
     }
-\item \textit{Unit-compatibility}: for any $A \in \operatorname{Ob}\cat{C}$,
+\item \textit{unit-compatibility}: for any $A \in \catOb{C}$,
     \In{align*}{
         F(\operatorname{id}_A) = \operatorname{id}_{FA}
     }
 }
-An \textit{infrafunctor} is a structure without functoriality.
+An \textit{infrafunctor} is a functor without the requirement of functoriality.
 
 
 \subsection{Functorial Boxes}
@@ -165,6 +167,7 @@ is depicted as a transparent box
 The functoriality is trivial.
 
 
+
 \subsection{Contravariant Functors}
 
 A functor whose domain is an opposite category
@@ -198,10 +201,120 @@ A functor whose domain is a product category
     F : \cat{A} \times \cat{B} \to \cat{C}
 }
 is called a \textit{binary functor} or \textit{bifunctor}.
-Spelling out the definition of functoriality, you get
-TODO
+Spelling out the definition of functoriality, one can check a diagram like
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdxscale{0.7}\strdljump
+            ,\strdmid
+            ,\strdcell{a\myprime}
+            ,\strdmid
+            ,\strdcell{a}
+            ,\strdmid
+        }
+        ,\strdfork{
+            \strdxscale{0.7}\strdrjump
+            ,\strdmid
+            ,\strdcell{b\myprime}
+            ,\strdmid
+            ,\strdcell{b}
+            ,\strdmid
+        }
+        ,\strdfork{
+            \strdtube{
+                \strdtubestart
+                ,\strdtubeextend{1}{1}
+                ,\strdcutoff\strdtubebound
+                ,\strdyscale{1.5}\strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
+                ,\strdyscale{1.5}\strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
+                ,\strdcutoff\strdtubebound
+            }
+        }
+    }
+}
+is unambiguous.
+% One can spell out the functoriality:
+% \In{align*}{
+%     \strdgathered{
+%         \strdfork{
+%             \strdxscale{0.7}\strdljump
+%             ,\strdmid
+%             ,\strdcell{a\myprime}
+%             ,\strdmid
+%             ,\strdcell{a}
+%             ,\strdmid
+%         }
+%         ,\strdfork{
+%             \strdxscale{0.7}\strdrjump
+%             ,\strdmid
+%             ,\strdcell{b\myprime}
+%             ,\strdmid
+%             ,\strdcell{b}
+%             ,\strdmid
+%         }
+%         ,\strdfork{
+%             \strdtube{
+%                 \strdtubestart
+%                 ,\strdtubeextend{2}{2}
+%                 ,\strdcutoff\strdtubebound
+%                 ,\strdyscale{3}\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+%                 ,\strdcutoff\strdtubebound
+%             }
+%         }
+%         ,\strdfork{
+%             \strdtubeof{strd cutoff}{
+%                 \strdtubestart
+%                 ,\strdtubeextend{1}{1}
+%                 ,\strdyscale{3}\strdtubemid
+%             }
+%         }
+%     } \,=\,
+%     \strdgathered{
+%         \strdfork{
+%             \strdxscale{0.7}\strdljump
+%             ,\strdmid
+%             ,\strdcell{a\myprime}
+%             ,\strdmid
+%             ,\strdcell{a}
+%             ,\strdmid
+%         }
+%         ,\strdfork{
+%             \strdxscale{0.7}\strdrjump
+%             ,\strdmid
+%             ,\strdcell{b\myprime}
+%             ,\strdmid
+%             ,\strdcell{b}
+%             ,\strdmid
+%         }
+%         ,\strdfork{
+%             \strdtube{
+%                 \strdtubestart
+%                 ,\strdtubeextend{1}{1}
+%                 ,\strdcutoff\strdtubebound
+%                 ,\strdyscale{1.5}\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+%                 ,\strdcutoff\strdtubebound
+%                 ,\strdyscale{1.5}\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+%                 ,\strdcutoff\strdtubebound
+%             }
+%         }
+%     }
+% }
 
+\subsection{Category of Small Categories}
 
+A category $\cat{C}$ is \textit{small} when its $\catOb{C}$ is a set. %
+The \textit{category of small categories} $\catCat$ is the category whose objects are %
+all small categories and whose morphisms are functors:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{\cat{C}}
+            ,\strdcell{G}
+            ,\strdmid,\strdrlabel{\cat{B}}
+            ,\strdcell{F}
+            ,\strdmid,\strdrlabel{\cat{A}}
+        }
+    }
+}
+, where composite functors join the strings.
 
-\subsection{Hom Functors}
-TODO

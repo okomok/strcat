@@ -1,5 +1,8 @@
 \ProvidesPackage{cat}
 
+\usepackage{amsmath}% boldsymbol
+
 \newcommand*{\cat}[1]{\ensuremath{\mathcal{#1}}}
-\newcommand*{\catOb}[1]{\ensuremath{\operatorname{Ob}\mathcal{#1}}}
+\newcommand*{\catOb}[1]{\ensuremath{\operatorname{ob}\mathcal{#1}}}
+\newcommand*{\catCat}{\ensuremath{\boldsymbol{\mathrm{Cat}}}}
 

@@ -38,7 +38,7 @@ In string diagrams, a natural transformation is a connector of two open boxes
         }
     }
 }
-, for the naturality guarantees a node can travel between two open boxes:
+because the naturality states a node can travel between two open boxes:
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -73,7 +73,7 @@ In string diagrams, a natural transformation is a connector of two open boxes
         }
     }
 }
-, which inspires you to define them as
+, which inspires you to define
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -90,6 +90,7 @@ In string diagrams, a natural transformation is a connector of two open boxes
         }
     }
 }
+as the naturality equation.
 
 
 
@@ -244,3 +245,93 @@ A \textit{whikering} is a horizontal composition with identity natural transform
 }
 
 
+\subsection{Natural Isomorphisms}
+
+A \textit{natural isomorphism} is a pair of natural transformations
+\In{align*}{
+    \tau &: F \to G\\
+    \sigma &: G \to F
+}
+satisfying the \textit{invertibilty}:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdtwincell{\sigma}
+            ,\strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } & =\
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } \\
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubemid
+            ,\strdtwincell{\sigma}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } & =\
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+}
+The same symbol is often used for the pair. 
+
+
+\subsection{Functor Categories}
+
+Given a small category $\cat{C}$ and a category $\cat{D}$, %
+the functor category
+$
+    [\cat{C},\cat{D}]
+$
+is a category whose objects are functors from $\cat{C}$ to $\cat{D}$ and %
+whose morphisms are natural transformations:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{H}
+            ,\strdcell{\sigma}
+            ,\strdmid,\strdrlabel{G}
+            ,\strdcell{\tau}
+            ,\strdmid,\strdrlabel{F}
+        }
+    }
+}
+, where vertical compositions join the strings. %
+For lambda expressions, define a notation for a set of natural transformations:
+\In{align*}{
+    \operatorname{nat}_A(FA,GA) \mydefeq [\cat{C},\cat{D}](F,G)
+}
