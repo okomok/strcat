@@ -1,0 +1,27 @@
+\ProvidesPackage{my}
+
+\usepackage{amsmath,mathtools,etoolbox,lambda,graphicx,stmaryrd}
+
+\newcommand*{\mydefeq}{\coloneqq}
+\newcommand*{\myeqdef}{\eqqcolon}
+
+\newcommand*{\mycomment}[1]{}
+
+\newcommand*\myassign[2]{%
+    \global\csdef{#1}{#2}
+    #2%
+}
+
+\newcommand*{\myprime}{^{\prime}\mkern-1.2mu}
+\newcommand*{\mydprime}{^{\prime\prime}\mkern-1.2mu}
+\newcommand*{\mytrprime}{^{\prime\prime\prime}\mkern-1.2mu}
+
+\newcommand*{\myitem}{\>\raisebox{0.13ex}{\scalebox{0.85}{$\bullet$}}\,\ }
+\newcommand*{\mynitem}[1]{\>\text{#1.}\,\ }
+
+\newcommand*{\mydint}[1]{\ensuremath{\displaystyle\int_{\mathrlap{#1}}\;}}
+
+\newcommand*{\mymapsfrom}{\mapsfrom}
+
+\newcommand*{\myreason}[1]{\lbrace\text{#1}\rbrace}
+

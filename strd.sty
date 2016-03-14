@@ -1,0 +1,1171 @@
+\ProvidesPackage{strd}
+
+\usepackage{tikz,lambdax,mathtools,graphicx}
+\usetikzlibrary{shapes,calc,backgrounds,calc,shapes.misc}
+
+
+% Styles
+%
+
+\tikzset{strd normaltextvaligned/.style={text height=1.9ex,text depth=0.65ex}}
+\tikzset{strd scripttextvaligned/.style={text height=1.5ex,text depth=0.4ex}}
+\tikzset{strd coord/.style={coordinate}}
+\tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
+\tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
+\tikzset{strd picturevaligned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
+\tikzset{strd picture/.style={strd picturevaligned,strd mathnodes,strd default,rounded corners=2pt}}
+\tikzset{strd draw/.style={}}
+
+
+% Layers
+%
+
+\pgfdeclarelayer{strd gradedlayer}
+\pgfdeclarelayer{strd pavelayer}
+\pgfdeclarelayer{strd whitelayer}
+\pgfdeclarelayer{strd celllayer}
+\pgfdeclarelayer{strd labellayer}
+\pgfdeclarelayer{strd framelayer}
+\pgfdeclarelayer{strd framearoundlayer}
+\pgfdeclarelayer{strd tubelayer}
+\pgfdeclarelayer{strd tubeframearoundlayer}
+\pgfsetlayers{background,main,strd pavelayer,strd framearoundlayer,strd gradedlayer,strd whitelayer,%
+    strd tubelayer,strd tubeframearoundlayer,strd framelayer,strd celllayer,strd labellayer}
+
+% Layers forget surrounding line styles, so we define...
+\newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{\strdstringwidth}}
+
+\newcommand*{\strdonlayer@}[2]{%
+    \begin{pgfonlayer}{#1}
+        \strdresetlinewidth
+        #2
+    \end{pgfonlayer}
+    \strdresetlinewidth%
+}
+
+
+% Environments 
+%
+
+\newcommand*{\strd}[1]{%
+    \begin{tikzpicture}[strd picture]
+        \strddeclorigin
+        #1;
+    \end{tikzpicture}%
+}
+\newcommand*{\strdin}[2]{\Foldr{\strdin@}{#2}{\List{#1}}}
+\newcommand*{\strdin@}[2]{\begin{#1}\!\strd{#2}\end{#1}}
+
+
+% Constants
+%
+
+\tikzset{strd default/.style={very thin}}
+\tikzset{strd black/.style={fill=black}}
+
+\newcommand*{\strdstringwidth}{0.2pt}% very thin
+\newcommand*{\strdxunit}{0.5}
+\newcommand*{\strdyunit}{0.4}
+\newcommand*{\strdunitmergin}{0.1}
+
+% for "anti"-anti-alias
+\newcommand*{\strdnoiseunit}{0.2pt}
+\newcommand*{\strddoublenoiseunit}{0.4pt}
+
+
+% Concepts
+%   An _id_ `id` is a name of tikz nodes.
+%   A _node_ `node` is a node of tikz.
+%   A _string_ `s` is a triple of nodes `s Start`, `s` and `s End`.
+%   A _string constructor_ `sc` is a unit-valued function such that `sc{newid}{previd}` is valid.
+%   A _string transformation_ `stm` is an endofunction between string constructors.
+
+% Helpers
+%
+
+\newcommand*{\strdcoord@}[2]{% {newid}{node}
+    \node[strd coord] (#1) at (#2) {};%
+}
+
+\newcommand*{\strddraw@}[1]{% {expr}
+    \draw[strd draw]{#1};%
+}
+
+\newcommand*{\strdstring@}[4]{% {newid}{startnode}{middlenode}{endnode}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 Mid}{#3}
+    \strdcoord@{#1 End}{#4}
+    \pgfnodealias{#1}{#1 Mid}%
+}
+\newcommand*{\strdstringmid@}[3]{% {newid}{startnode}{endnode}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 End}{#3}
+    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 End)$}
+    \pgfnodealias{#1}{#1 Mid}%
+}
+
+\newcommand*{\strdcomposeC}[4]{% {nextsc}{prevsc}{newid}{previd}
+    \strduse{#2}{#3 Prev}{#4}
+    \strduse{#1}{#3}{#3 Prev}%
+}
+
+\newcommand*{\strdundoC@}[3]{% {sc}{newid}{previd}
+    \strdnone@{\strdflip@{ \strduse{#1}{#2 None}{#3} }}
+    \strdinv@{ \strduse{#1}{#2 Inv}{#2 None} }
+    \strdstring@{#2}{#2 Inv End}{#2 Inv}{#2 Inv Start}
+    \strdcopyundo@{#2}{#2 Inv}%
+}
+\newcommand*{\strdcopyundo@}[2]{% {to}{from}
+    \ifnodedefined{#2 Corner}{ \strdcoord@{#1 Corner}{#2 Corner} }{}
+    \ifnodedefined{#2 StartCorner}{ \strdcoord@{#1 EndCorner}{#2 StartCorner} }{}
+    \ifnodedefined{#2 EndCorner}{ \strdcoord@{#1 StartCorner}{#2 EndCorner} }{}
+}
+
+
+% String constructors
+%
+
+% halfmid
+\newcommand*{\strdhalfmid}{\strdcomposeC\strdhalfmidC}
+\newcommand*{\strdhalfmidC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 End}{$(#1 Start)+(0,-\strdyunit)$}
+    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 End)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strddraw@{ (#1 Start) -- (#1 End) }%
+}
+
+% lbend/rbend
+\newcommand*{\strdlbend}{\strdcomposeC\strdlbendC}
+\newcommand*{\strdlbendC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 Corner}{$(#1 Start)+(0,-\strdunitmergin)$}
+    \strdcoord@{#1 End}{$(#1 Start)+(-\strdxunit,-\strdyunit)$}
+    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 End)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strddraw@{ (#1 Start) -- (#1 Corner) parabola[bend at end] (#1 End) }%
+}
+\newcommand*{\strdunlbend}{\strdcomposeC\strdunlbendC}
+\newcommand*{\strdunlbendC}{\strdundoC@\strdlbendC}
+\newcommand*{\strdrbend}{\strdcomposeC\strdrbendC}
+\newcommand*{\strdrbendC}{\strdflipC\strdlbendC}
+\newcommand*{\strdunrbend}{\strdcomposeC\strdunrbendC}
+\newcommand*{\strdunrbendC}{\strdundoC@\strdrbendC}
+
+% origin
+\newcommand*{\strdorigin}{strdorigin}
+\newcommand*{\strddeclorigin}{%
+    \strdempty@{strdorigin}{0,0}
+}
+
+% empty
+\newcommand*{\strdempty@}[2]{% {newid}{node}
+    \strdstring@{#1}{#2}{#2}{#2}%
+}
+\newcommand*{\strdempty}{\strdcomposeC\strdemptyC}
+\newcommand*{\strdemptyC}{\strdemptyatC{End}}
+% \newcommand*{\strdemptyC}[2]{% {newid}{previd}
+%     \strdemptyC@{#1}{#2}
+%     \ifnodedefined{#2 Left}{
+%         \strdempty@{#1 Left}{#2 Left End}
+%     }{}
+%     \ifnodedefined{#2 Right}{
+%         \strdempty@{#1 Right}{#2 Right End}
+%     }{}
+% }
+\newcommand*{\strdemptyat}{\Compose\strdcomposeC\strdemptyatC}
+\newcommand*{\strdemptyatC}[3]{% {at}{newid}{previd}
+    \strdempty@{#2}{#3 #1}
+}
+
+% http://tex.stackexchange.com/questions/85528
+\long\def\ifnodedefined#1#2#3{
+    \@ifundefined{pgf@sh@ns@#1}{#3}{#2}%
+}
+
+% Polymorphic for tubes. Deep-copy is infeasible, though.
+\newcommand*{\strdcopyC}[2]{% {newid}{previd}
+    \strdcopyC@{#1}{#2}
+    \ifnodedefined{#2 Left}{ \strdcopyC{#1 Left}{#2 Left} }{}
+    \ifnodedefined{#2 Right}{ \strdcopyC{#1 Right}{#2 Right} }{}
+}
+\newcommand*{\strdcopyC@}[2]{% {newid}{previd}
+    \pgfnodealias{#1}{#2}
+    \strdcopyfield@{Start}{#1}{#2}
+    \strdcopyfield@{StartCorner}{#1}{#2}
+    \strdcopyfield@{Mid}{#1}{#2}
+    \strdcopyfield@{Corner}{#1}{#2}
+    \strdcopyfield@{EndCorner}{#1}{#2}
+    \strdcopyfield@{End}{#1}{#2}%
+}
+\newcommand*{\strdcopyfield@}[3]{% {field}{newid}{previd}
+    \ifnodedefined{#3 #1}{ \pgfnodealias{#2 #1}{#3 #1} }{}
+}
+
+% left/right
+\newcommand*{\strdleft}{\strdcomposeC\strdleftC}
+\newcommand*{\strdleftC}[2]{% {newid}{previd}
+    \strdunrbendC{#1 1}{#2}
+    \strdhalfmidC{#1 2}{#1 1}
+    \strdstring@{#1}{#1 1 Start}{#1 1 End}{#1 2 End}%
+}
+\newcommand*{\strdright}{\strdcomposeC\strdrightC}
+\newcommand*{\strdrightC}{\strdflipC\strdleftC}
+\newcommand*{\strdunleft}{\strdcomposeC\strdunleftC}
+\newcommand*{\strdunleftC}{\strdundoC@\strdleftC}
+\newcommand*{\strdunright}{\strdcomposeC\strdunrightC}
+\newcommand*{\strdunrightC}{\strdundoC@\strdrightC}
+
+% mid
+\newcommand*{\strdmid}{\strdcomposeC\strdmidC}
+\newcommand*{\strdmidC}[2]{% {newid}{previd}
+    \strdyscale@{2}{ \strdhalfmidC{#1}{#2} }%
+    % \strdhalfmidC{#1 1}{#2}
+    % \strdhalfmidC{#1 2}{#1 1}
+    % \strdstring@{#1}{#1 1 Start}{#1 1 End}{#1 2 End}%
+}
+
+% lturn/rturn
+\newcommand*{\strdlturn}{\strdcomposeC\strdlturnC}
+\newcommand*{\strdlturnC}[2]{% {newid}{previd}
+    \strdlbendC{#1 1}{#2}
+    \strdunrbendC{#1 2}{#1 1}
+    \strdrbendC{#1 3}{#1 2}
+    \strdinv@{ \strdunlbendC{#1 4}{#1 3} }
+    \strdstring@{#1}{#2 End}{#1 2 End}{#1 4 End}
+}
+\newcommand*{\strdrturn}{\strdcomposeC\strdrturnC}
+\newcommand*{\strdrturnC}{\strdflipC\strdlturnC}
+\newcommand*{\strdunlturn}{\strdcomposeC\strdunlturnC}
+\newcommand*{\strdunlturnC}[2]{% {newid}{previd}
+    \strdinv@{ \strdlbendC{#1 1}{#2} }
+    \strdunrbendC{#1 2}{#1 1}
+    \strdrbendC{#1 3}{#1 2}
+    \strdunlbendC{#1 4}{#1 3}
+    \strdstring@{#1}{#2 End}{#1 2 End}{#1 4 End}
+}
+\newcommand*{\strdunrturn}{\strdcomposeC\strdunrturnC}
+\newcommand*{\strdunrturnC}{\strdflipC\strdunlturnC}
+
+% hleft/hright
+\newcommand*{\strdhleft}{\strdcomposeC\strdhleftC}
+\newcommand*{\strdhleftC}[2]{% {newid}{previd}
+    \strdstringmid@{#1}{#2 End}{$(#2 End)+(-\strdxunit,0)$}
+    \strddraw@{ (#1 Start) -- (#1 End) }%
+}
+\newcommand*{\strdhright}{\strdcomposeC\strdhrightC}
+\newcommand*{\strdhrightC}{\strdflipC\strdhleftC}
+
+% minus
+\newcommand*{\strdminus}{\strdcomposeC\strdminusC}
+\newcommand*{\strdminusC}[2]{% {newid}{previd}
+    \strdxscale@{0.5}{ \strdljumpC{#1 Impl}{#2} }
+    \strdhrightC{#1}{#1 Impl}
+}
+
+% subset/supset
+\newcommand*{\strdsubset}{\strdcomposeC\strdsubsetC}
+\newcommand*{\strdsubsetC}[2]{% {newid}{previd}
+    \strdunrbendC{#1 1}{#2}
+    \strdrbendC{#1 2}{#1 1}
+    \strdstring@{#1}{#1 1 Start}{#1 1 End}{#1 2 End}
+}
+\newcommand*{\strdsupset}{\strdcomposeC\strdsupsetC}
+\newcommand*{\strdsupsetC}{\strdflipC\strdsubsetC}
+
+% lint/rint
+\newcommand*{\strdlint}{\strdcomposeC\strdlintC}
+\newcommand*{\strdlintC}[2]{% {newid}{previd}
+    \strdunrbendC{#1 1}{#2}
+    \strdlbendC{#1 2}{#1 1}
+    \strdstringmid@{#1}{#1 1 Start}{#1 2 End}
+}
+\newcommand*{\strdrint}{\strdcomposeC\strdrintC}
+\newcommand*{\strdrintC}{\strdflipC\strdlintC}
+
+% lchange/rchange
+\newcommand*{\strdlchange}{\strdcomposeC\strdlchangeC}
+\newcommand*{\strdlchangeC}[2]{% {newid}{previd}
+    \strdlbendC{#1 1}{#2}
+    \strdunrbendC{#1 2}{#1 1}
+    \strdstringmid@{#1}{#1 1 Start}{#1 2 End}
+}
+\newcommand*{\strdrchange}{\strdcomposeC\strdrchangeC}
+\newcommand*{\strdrchangeC}{\strdflipC\strdlchangeC}
+
+% jumps
+\newcommand*{\strdjump}{\strdcomposeC\strdjumpC}
+\newcommand*{\strdjumpC}{\strdnoneC\strdmidC}
+\newcommand*{\strdljump}{\strdcomposeC\strdljumpC}
+\newcommand*{\strdljumpC}{\strdnoneC\strdhleftC}
+\newcommand*{\strdrjump}{\strdcomposeC\strdrjumpC}
+\newcommand*{\strdrjumpC}{\strdnoneC\strdhrightC}
+\newcommand*{\strdjumpto@}[3]{% {nextnode}{newid}{prevnode}
+    \strdstringmid@{#2}{#3}{#1}%
+}
+
+% dup
+\newcommand*{\strddup}{\strdcomposeC\strddupC}
+\newcommand*{\strddupC}{\strdnoneC\strdminusC}
+
+% lcorner/rcorner
+\newcommand*{\strdlcorner}{\strdcomposeC\strdlcornerC}
+\newcommand*{\strdlcornerC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 Corner}{$(#1 Start)+(-\strdxunit,0)$}
+    \strdcoord@{#1 End}{$(#1 Corner)+(0,-\strdyunit)$}
+    \strdcoord@{#1 Mid}{$(#1 Corner)!.5!(#1 End)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strddraw@{ (#1 Start) -- (#1 Corner) -- (#1 End) }%
+}
+\newcommand*{\strdrcorner}{\strdcomposeC\strdrcornerC}
+\newcommand*{\strdrcornerC}{\strdflipC\strdlcornerC}
+\newcommand*{\strdunlcorner}{\strdcomposeC\strdunlcornerC}
+\newcommand*{\strdunlcornerC}{\strdundoC@\strdlcornerC}
+\newcommand*{\strdunrcorner}{\strdcomposeC\strdunrcornerC}
+\newcommand*{\strdunrcornerC}{\strdundoC@\strdrcornerC}
+
+% sqsubset/sqsupset
+\newcommand*{\strdsqsubsettoC}[3]{% {nextid}{newid}{previd}
+    % Note \getlastxy doesn't work with calc.
+    \strdcoord@{#2 Start}{#3 End}
+    \strdcoord@{#2 End}{#1 End}
+    \strdcoord@{#2 StartCorner}{$(#2 Start)+(-\strdxunit,0)$}
+    \strdcoord@{#2 EndCorner}{{#2 StartCorner} |- {#2 End}}
+    \strdcoord@{#2 Mid}{$(#2 StartCorner)!.5!(#2 EndCorner)$}
+    \strdcoord@{#2}{#2 Mid}
+    \strddraw@{ (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End) }%
+}
+\newcommand*{\strdsqsupsettoC}{\Compose\strdflipC\strdsqsubsettoC}
+
+\newcommand*{\strdsqsubset}{\strdcomposeC\strdsqsubsetC}
+\newcommand*{\strdsqsubsetC}[2]{% {newid}{previd}
+    \strdjumpC{#1 0}{#2}
+    \strdsqsubsettoC{#1 0}{#1}{#2}%
+}
+\newcommand*{\strdsqsupset}{\strdcomposeC\strdsqsupsetC}
+\newcommand*{\strdsqsupsetC}{\strdflipC\strdsqsubsetC}
+
+% square
+\newcommand*{\strdsquare}{\strdcomposeC\strdsquareC}
+\newcommand*{\strdsquareC}[2]{% {newid}{previd}
+    \strdsqsubsetC{#1 Left}{#2}
+    \strdsqsupsetC{#1 Right}{#2}
+    \strdjumpC{#1}{#2}%
+}
+
+% cap/cup
+\newcommand*{\strdcap}{\strdcomposeC\strdcapC}
+\newcommand*{\strdcapC}[2]{% {newid}{previd}
+    \strdleftC{#1 Left}{#2}
+    \strdrightC{#1 Right}{#2}
+    \strdjumpC{#1}{#2}%
+}
+\newcommand*{\strdcup}{\strdcomposeC\strdcupC}
+\newcommand*{\strdcupC}[2]{% {newid}{previd}
+    \strdxscale@{2}{ \strddupC{#1 0}{#2} }
+    \strdunleftC{#1 Left}{#1 0 Left}
+    \strdunrightC{#1 Right}{#1 0 Right}
+    \strdjumpC{#1}{#2}%
+}
+
+% circle
+\newcommand*{\strdcircle}{\strdcomposeC\strdcircleC}
+\newcommand*{\strdcircleC}[2]{% {newid}{previd}
+    \strdsubsetC{#1 Left}{#2}
+    \strdsupsetC{#1 Right}{#2}
+    \strdjumpC{#1}{#2}%
+}
+
+
+% Symbols
+%
+
+\tikzset{strd symbolbase/.style={sharp corners,draw=black,fill=white,minimum size=2pt,inner sep=0pt}}
+\tikzset{strd circ/.style={strd symbolbase,circle,minimum size=1.5pt}}
+\tikzset{strd cdot/.style={circ,fill=black}}
+\tikzset{strd circle/.style={strd symbolbase,circle}}
+\tikzset{strd square/.style={strd symbolbase,rectangle}}
+\tikzset{strd triangle/.style={strd symbolbase,regular polygon,regular polygon sides=3,minimum size=4pt}}
+\tikzset{strd triangledown/.style={strd triangle,shape border rotate=180}}
+
+\newcommand*{\strdputsymbol}[2]{% {style}{node}
+    \strdcell@{
+        \node[#1] at (#2) {};
+    }%
+}
+
+
+% Cells
+%
+
+\tikzset{strd cellbase/.style={font=\normalsize,line width=0.3pt,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=1pt,inner ysep=1.2pt}}
+\tikzset{strd cell/.style={strd cellbase}}
+\tikzset{strd mapcell/.style={strd cellbase}}
+\tikzset{strd bijcell/.style={strd cellbase,sharp corners}}
+\tikzset{strd natcell/.style={strd cellbase,rounded rectangle,sharp corners}}
+
+\newcommand*{\strdcell@}[1]{\strdonlayer@{strd celllayer}{#1}}
+
+\newcommand*{\strdputcellof}[3]{% {style}{text}{node}
+    \strdcell@{
+        \node[#1] at (#3) {#2};
+    }% 
+}
+\newcommand*{\strdputcell}{\strdputcellof{strd cell}}
+
+% widecell
+\tikzset{strd widecellbase/.style={strd cellbase}}
+\tikzset{strd widecell/.style={strd widecellbase}}
+\newcommand*{\strdwidecell}[3]{\strdwith{\strdputwidecell{#1}{#2}{#3}}}
+\newcommand*{\strdwidecellof}[4]{\strdwith{\strdputwidecellof{#1}{#2}{#3}{#4}}}
+\newcommand*{\strdputwidecell}{\strdputwidecellof{strd widecell}}
+\newcommand*{\strdputwidecellof}[5]{% {style}{lscale}{rscale}{text}{id}
+    \strdcell@{
+        \node[#1,minimum width=\the\dimexpr (#2cm + #3cm - 0.2cm)/2\relax,xshift=\the\dimexpr (#3cm - #2cm)/4\relax] at (#5 End) {#4};
+    }% 
+}
+
+\tikzset{strd cone/.style={strd widecellbase,trapezium,trapezium stretches body,trapezium left angle=110,trapezium right angle=110}}
+
+% Frames
+%
+
+\tikzset{strd framebase/.style={solid,thin}}
+\tikzset{strd frame/.style={strd framebase,rounded corners=2pt}}
+
+\newcommand*{\strdframe}{\Compose\strdseqin\strdframeone}
+\newcommand*{\strdframeone}{\Compose{\strdonlayer{strd framelayer}}{\strdscope{strd frame}}}
+
+
+% Boxes
+%
+
+\tikzset{strd box/.style={strd framebase,rounded corners=2pt}}
+\tikzset{strd bijbox/.style={strd framebase,sharp corners}}
+\tikzset{strd idbox/.style={strd framebase,thin}}
+
+\newcommand*{\strdboxof}[3]{\strdseqin{\strdboxofone{#1}{#2}{#3}}}
+\newcommand*{\strdboxofone}[7]{% {style}{xl}{xr}{stm}{sc}{newid}{previd}
+    \strduse{#5}{#6 Prev}{#7}
+    \strduse{#4}{\strdcopyC}{#6 Unframe}{#6 Prev}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{#1}{
+            \strdxscale@{#2}{ \strdsqsubsettoC{#6 Unframe}{#6 Left}{#6 Prev} }
+            \strdxscale@{#3}{ \strdsqsupsettoC{#6 Unframe}{#6 Right}{#6 Prev} }
+            \strdjumpto@{#6 Unframe End}{#6}{#6 Prev End}
+         }
+     }%
+}
+\newcommand*{\strdbox}{\strdboxof{strd box}}
+\newcommand*{\strdbijbox}{\strdboxof{strd bijbox}}
+\newcommand*{\strdidbox}{\strdboxof{strd idbox}}
+
+
+% Tubes
+%
+
+\tikzset{strd tube/.style={solid,semithick}}
+
+% Constants
+\newcommand*{\strdtubexunit}{0.75}
+\newcommand*{\strdtubeyunit}{0.8}
+\newcommand*{\strdtubexhalfunit}{0.375}
+\newcommand*{\strdtubexmagic}{0.125}
+
+% tube
+\newcommand*{\strdtube}{\strdtubeof{strd tube}}
+\newcommand*{\strdtubeof}{\Compose\strdseqin\strdtubeofone}
+\newcommand*{\strdtubeofone}[2]{
+    \strdonlayer{strd tubelayer}{
+        \strdpathis{#1}{
+            #2
+        }
+    }%
+}
+
+% start
+\newcommand*{\strdtubestart}{\strdcomposeC\strdtubestartC}
+\newcommand*{\strdtubestartC}[2]{% {newid}{previd}
+    \strdempty@{#1 Left}{$(#2 End)+(-\strdtubexhalfunit,0)$}
+    \strdempty@{#1}{#2 End}
+    \strdempty@{#1 Right}{$(#2 End)+(\strdtubexhalfunit,0)$}
+}
+
+\newcommand*{\strdtubezero}{\strdcomposeC\strdtubezeroC}
+\newcommand*{\strdtubezeroC}[2]{% {newid}{previd}
+    \strdempty@{#1 Left}{#2 End}
+    \strdempty@{#1}{#2 End}
+    \strdempty@{#1 Right}{#2 End}
+}
+
+% helpers
+\newcommand*{\strdtubeundoC@}[3]{% {sc}{newid}{previd}
+    \strdtubejumpC{#2 Jump}{#3}
+    \strdinv@{ \strduse{#1}{#2 Inv}{#2 Jump} }%
+    \strdstring@{#2 Left}{#2 Inv Left End}{#2 Inv}{#2 Inv Left Start}
+    \strdstring@{#2}{#2 Inv End}{#2 Inv}{#2 Inv Start}
+    \strdstring@{#2 Right}{#2 Inv Right End}{#2 Inv}{#2 Inv Right Start}%
+    \strdcopyundo@{#2 Left}{#2 Inv Left}
+    \strdcopyundo@{#2}{#2 Inv}
+    \strdcopyundo@{#2 Right}{#2 Inv Right}%
+}
+\newcommand*{\strdtubeC@}[6]{% {lC}{rC}{lscale}{rscale}{newid}{previd}
+    \If{\DimEq{#3pt}{0pt}}{
+        \strdmidC{#5 Left}{#6 Left}
+    }{
+        \strdxscale@{#3}{\strduse{#1}{#5 Left}{#6 Left}}
+    }
+    \strdjumpC{#5}{#6}
+    \If{\DimEq{#4pt}{0pt}}{
+        \strdmidC{#5 Right}{#6 Right}
+    }{
+        \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
+    }%
+}
+\newcommand*{\strdtubesymC@}[1]{\strdtubeC@{#1}{\strdflipC{#1}}}
+% yscale{0} doesn't work, so we define...
+\newcommand*{\strdtubezeroC@}[6]{% {lC}{rC}{lscale}{rscale}{newid}{previd}
+    \If{\DimEq{#3pt}{0pt}}{
+        \strdemptyC{#5 Left}{#6 Left}
+    }{
+        \strdxscale@{#3}{\strduse{#1}{#5 Left}{#6 Left}}
+    }
+    \strdemptyC{#5}{#6}
+    \If{\DimEq{#4pt}{0pt}}{
+        \strdemptyC{#5 Right}{#6 Right}
+    }{
+        \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
+    }%
+}
+\newcommand*{\strdtubezerosymC@}[1]{\strdtubezeroC@{#1}{\strdflipC{#1}}}
+
+% tubemid
+\newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
+\newcommand*{\strdtubemidC}[2]{% {newid}{previd}
+    \strdmidC{#1 Left}{#2 Left}
+    \strdjumpC{#1}{#2}
+    \strdmidC{#1 Right}{#2 Right}%
+    % \strdonlayer@{background}{
+    %     \fill[orange,sharp corners,draw]{ (#1 Left Start) -- (#1 Left End) -- (#1 Right End) -- (#1 Right Start) };
+    % }
+}
+
+% tubeemptyat
+\newcommand*{\strdtubeemptyat}{\Compose\strdcomposeC\strdtubeemptyatC}
+\newcommand*{\strdtubeemptyatC}[3]{% {at}{newid}{previd}
+    \strdemptyatC{#1}{#2 Left}{#3 Left}
+    \strdemptyatC{#1}{#2}{#3}
+    \strdemptyatC{#1}{#2 Right}{#3 Right}%
+}
+
+% tubeempty
+\newcommand*{\strdtubeempty}{\strdcomposeC\strdtubeemptyatC}
+\newcommand*{\strdtubeemptyC}{\strdtubeemptyat{End}}
+
+% tubejump
+\newcommand*{\strdtubejump}{\strdcomposeC\strdtubejumpC}
+\newcommand*{\strdtubejumpC}[2]{% {newid}{previd}
+    \strdjumpC{#1 Left}{#2 Left}
+    \strdjumpC{#1}{#2}
+    \strdjumpC{#1 Right}{#2 Right}%
+}
+
+% tubeljump/tuberjump
+\newcommand*{\strdtubeljump}{\strdcomposeC\strdtubeljumpC}
+\newcommand*{\strdtubeljumpC}[2]{% {newid}{previd}
+    \strdljumpC{#1 Left}{#2 Left}
+    \strdljumpC{#1}{#2}
+    \strdljumpC{#1 Right}{#2 Right}%
+}
+\newcommand*{\strdtuberjump}{\strdcomposeC\strdtuberjumpC}
+\newcommand*{\strdtuberjumpC}{\strdflipC\strdtubeljumpC}
+
+% tubepartleft
+\newcommand*{\strdtubepartleft}[1]{\strdcomposeC{\strdtubepartleftC{#1}}}
+\newcommand*{\strdtubepartleftC}[3]{% {xscale}{newid}{previd}
+    \strdmidC{#2 Left}{#3 Left}
+    \strdjumpC{#2}{#3}
+    \strdtubepartleftrightC{#1}{#2 Right}{#3 Left}%
+}
+\newcommand*{\strdtubepartleftrightC}[3]{% {xscale}{newid}{previd}
+    \strdcoord@{#2 StartOrigin}{$(#3 End)+(0.25,0)$}
+    \strdxscale@{#1}{
+        \strdcoord@{#2 EndCorner}{$(#2 StartOrigin)+(\strdxunit,-\strdyunit)$}
+    }
+    \strdcoord@{#2 StartCorner}{$(#2 EndCorner)+(\strdtubexmagic,0)$}
+    \strdcoord@{#2 Start}{$(#2 StartCorner)+(0,\strdyunit)$}
+    \strdcoord@{#2 End}{$(#2 EndCorner)+(0,-\strdyunit)$}
+    \strdcoord@{#2 Mid}{$(#2 EndCorner)!.5!(#2 End)$}
+    \strdcoord@{#2}{#2 Mid}
+    \strddraw@{ (#2 StartCorner) -- (#2 EndCorner) -- (#2 End) }%
+}
+\newcommand*{\strdtubepartunleft}[1]{\strdcomposeC{\strdtubepartunleftC{#1}}}
+\newcommand*{\strdtubepartunleftC}[1]{\strdtubeundoC@{\strdtubepartleftC{#1}}}
+
+% tubepartright
+\newcommand*{\strdtubepartright}[1]{\strdcomposeC{\strdtubepartrightC{#1}}}
+\newcommand*{\strdtubepartrightC}[3]{% {xscale}{newid}{previd}
+    \strdflip@{
+        \strdmidC{#2 Right}{#3 Right}
+        \strdjumpC{#2}{#3}
+        \strdtubepartleftrightC{#1}{#2 Left}{#3 Right}
+    }%
+}
+\newcommand*{\strdtubepartunright}[1]{\strdcomposeC{\strdtubepartunrightC{#1}}}
+\newcommand*{\strdtubepartunrightC}[1]{\strdtubeundoC@{\strdtubepartrightC{#1}}}
+
+% tubepartmid
+\newcommand*{\strdtubepartmid}[2]{\strdcomposeC{\strdtubepartmidC{#1}{#2}}}
+\newcommand*{\strdtubepartmidC}[4]{% {lscale}{rscale}{newid}{previd}
+    \strdflip@{ \strdtubepartmidrightC{#1}{#3 Left}{#4} }
+    \strdjumpC{#3}{#4}
+    \strdtubepartmidrightC{#2}{#3 Right}{#4}%
+}
+\newcommand*{\strdtubepartmidrightC}[3]{% {xscale}{newid}{previd}
+    \strdxscale@{#1}{
+        \strdcoord@{#2 StartCorner}{$(#3 End)+(\strdxunit,-\strdyunit)$}
+    }
+    \strdcoord@{#2 Start}{$(#2 StartCorner)+(0,\strdyunit)$}
+    \strdcoord@{#2 EndCorner}{$(#2 StartCorner)+(-\strdtubexmagic,0)$}
+    \strdcoord@{#2 End}{$(#2 EndCorner)+(0,-\strdyunit)$}
+    \strdcoord@{#2 Mid}{$(#2 EndCorner)!.5!(#2 End)$}
+    \strdcoord@{#2}{#2 Mid}
+    \strddraw@{ (#2 StartCorner) -- (#2 EndCorner) -- (#2 End) }%
+}
+\newcommand*{\strdtubepartunmid}[2]{\strdcomposeC{\strdtubepartunmidC{#1}{#2}}}
+\newcommand*{\strdtubepartunmidC}[2]{\strdtubeundoC@{\strdtubepartmidC{#1}{#2}}}
+
+% tubepartclose
+\newcommand*{\strdtubepartclose}[2]{\strdcomposeC{\strdtubepartcloseC{#1}{#2}}}
+\newcommand*{\strdtubepartcloseC}[4]{% {lscale}{rscale}{newid}{previd}
+    \strdflip@{ \strdtubepartcloserightC{#1}{#3 Left}{#4} }
+    \strdjumpC{#3}{#4}
+    \strdtubepartcloserightC{#2}{#3 Right}{#4}%
+}
+\newcommand*{\strdtubepartcloserightC}[3]{% {xscale}{newid}{previd}
+    \strdxscale@{#1}{
+        \strdcoord@{#2 StartCorner}{$(#3 End)+(\strdxunit,-\strdyunit)$}
+    }
+    \strdcoord@{#2 Start}{$(#2 StartCorner)+(0,\strdyunit)$}
+    \strdcoord@{#2 EndCorner}{$(#3 End)+(0,-\strdyunit)$}
+    \strdcoord@{#2 End}{$(#2 EndCorner)+(0,-\strdyunit)$}
+    \strdcoord@{#2 Mid}{$(#2 EndCorner)!.5!(#2 End)$}
+    \strdcoord@{#2}{#2 Mid}
+    \strddraw@{ (#2 StartCorner) -- (#2 EndCorner) }%
+}
+\newcommand*{\strdtubepartunclose}[2]{\strdcomposeC{\strdtubepartuncloseC{#1}{#2}}}
+\newcommand*{\strdtubepartuncloseC}[2]{\strdtubeundoC@{\strdtubepartcloseC{#1}{#2}}}
+
+% tubeextend{lscale}{rscale} = yscale{0}{dilate{lscale}{rscale}}
+\newcommand*{\strdtubeextend}[2]{\strdcomposeC{\strdtubeextendC{#1}{#2}}}
+\newcommand*{\strdtubeextendC}{\strdtubezerosymC@\strdljumpC}
+
+% tubeunextend{lscale}{rscale} = yscale{0}{undilate{lscale}{rscale}}
+\newcommand*{\strdtubeunextend}[2]{\strdcomposeC{\strdtubeunextendC{#1}{#2}}}
+\newcommand*{\strdtubeunextendC}[4]{% {lscale}{rscale}{newid}{previd}
+    \strdflip@{
+        \strdtubeextendC{#1}{#2}{#3}{#4}
+    }%
+}
+
+% tubedilate{lscale}{rscale}
+\newcommand*{\strdtubedilate}[2]{\strdcomposeC{\strdtubedilateC{#1}{#2}}}
+\newcommand*{\strdtubedilateC}{\strdtubesymC@\strdtubedilateleftC}
+\newcommand*{\strdtubedilateleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdyunit)$}
+    \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(-\strdxunit,0)$}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdyunit)$}
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
+}
+
+% tubecap{lscale}{rscale}
+\newcommand*{\strdtubecap}[2]{\strdcomposeC{\strdtubecapC{#1}{#2}}}
+\newcommand*{\strdtubecapC}{\strdtubesymC@\strdtubecapleftC}
+\newcommand*{\strdtubecapleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdxunit,-\strdyunit)$}
+    \strdcoord@{#1 EndCorner}{#1 StartCorner}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdyunit)$}
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 End) }%
+}
+
+% tubeunvee{lscale}{rscale}
+\newcommand*{\strdtubeunvee}[2]{\strdcomposeC{\strdtubeunveeC{#1}{#2}}}
+\newcommand*{\strdtubeunveeC}{\strdtubesymC@\strdtubeunveeleftC}
+\newcommand*{\strdtubeunveeleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdyunit)$}
+    \strdcoord@{#1 EndCorner}{#1 StartCorner}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(-\strdxunit,-\strdyunit)$}
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 End) }%
+}
+
+% tubecup{lscale}{rscale}
+\newcommand*{\strdtubecup}[2]{\strdcomposeC{\strdtubecupC{#1}{#2}}}
+\newcommand*{\strdtubecupC}{\strdtubesymC@\strdtubecupleftC}
+\newcommand*{\strdtubecupleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdyunit)$}
+    \strdcoord@{#1 EndCorner}{#1 StartCorner}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(\strdxunit,-\strdyunit)$}
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 End) }%
+}
+
+% tubesqcap{lscale}{rscale}
+\newcommand*{\strdtubesqcap}[2]{\strdcomposeC{\strdtubesqcapC{#1}{#2}}}
+\newcommand*{\strdtubesqcapC}{\strdtubesymC@\strdtubesqcapleftC}
+\newcommand*{\strdtubesqcapleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 Corner}{$(#1 Start)+(-\strdxunit,0)$}
+    \strdcoord@{#1 Mid}{$(#1 Corner)+(0,-\strdyunit)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 Mid)+(0,-\strdyunit)$}
+    \strddraw@{ (#1 Start) -- (#1 Corner) -- (#1 End) }%
+}
+
+% tubesqcup{lscale}{rscale}
+\newcommand*{\strdtubesqcup}[2]{\strdcomposeC{\strdtubesqcupC{#1}{#2}}}
+\newcommand*{\strdtubesqcupC}{\strdtubesymC@\strdtubesqcupleftC}
+\newcommand*{\strdtubesqcupleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 Mid}{$(#1 Start)+(0,-\strdyunit)$}
+    \strdcoord@{#1 Corner}{$(#1 Mid)+(0,-\strdyunit)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 Corner)+(\strdxunit,0)$}
+    \strddraw@{ (#1 Start) -- (#1 Corner) -- (#1 End) }%
+}
+
+% undilate{lscale}{rscale}
+\newcommand*{\strdtubeundilate}[2]{\strdcomposeC{\strdtubeundilateC{#1}{#2}}}
+\newcommand*{\strdtubeundilateC}{\strdtubesymC@\strdtubeundilateleftC}
+\newcommand*{\strdtubeundilateleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdyunit)$}
+    \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(\strdxunit,0)$}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdyunit)$}
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
+}
+
+% tubejoin
+\newcommand*{\strdtubejoin}{\strdcomposeC\strdtubejoinC}
+\newcommand*{\strdtubejoinC}[2]{% {newid}{previd}
+    \strdtubejumpC{#1}{#2}
+    \strddraw@{ (#1 Left Start) -- (#1 Left) -- (#1 Right) -- (#1 Right Start) }%
+}
+
+% tubeend
+\newcommand*{\strdtubeend}{\strdcomposeC\strdtubeendC}
+\newcommand*{\strdtubeendC}[2]{% {newid}{previd}
+    \strdemptyC{#1}{$(#2 Left End)!.5!(#2 Right End)$}%
+}
+
+% tubebound
+\tikzset{strd cutoff/.style={strd default,dash pattern=on 2pt off 2pt}}
+\newcommand*{\strdcutoff}{\strdpathis{strd cutoff}}
+\newcommand*{\strdtubebound}{\strdwith\strdputtubebound}
+\newcommand*{\strdputtubebound}[1]{%
+    \draw[strd draw]{ (#1 Left End) -- (#1 Right End) };%
+}
+
+% tubebackground
+\newcommand*{\strdbackground}{\Compose\strdwith\strdputbackground}
+\newcommand*{\strdputbackground}[2]{%
+    \strdonlayer@{background}{
+        \fill[sharp corners,draw,#1]{
+            ($(#2 Left Start)+(0,\strdnoiseunit)$)
+            -- ($(#2 Left End)-(0,\strdnoiseunit)$)
+            -- ($(#2 Right End)-(0,\strdnoiseunit)$)
+            -- ($(#2 Right Start)+(0,\strdnoiseunit)$)
+        };
+    }%
+}
+
+% tubestartline/endline
+\newcommand*{\strdtubestartline}{\Then\strdtubestart{\strdcutoff\strdtubebound}}
+\newcommand*{\strdtubeendline}{\Then{\strdcutoff\strdtubebound}\strdtubeend}
+
+% twincell
+\tikzset{strd twincellbase/.style={strd cellbase,sharp corners,rounded rectangle}}
+\tikzset{strd twincellleft/.style={strd twincellbase,rounded rectangle east arc=none}}
+\tikzset{strd twincellright/.style={strd twincellbase,rounded rectangle west arc=none}}
+\newcommand*{\strdtwincell}{\strdtwincellat{End}}
+\newcommand*{\strdtwincellat}[2]{\strdwith{\strdputtwincellat{#1}{#2}}}
+\newcommand*{\strdputtwincellat}[3]{% {at}{text}{id}
+    \strdcell@{
+        \node[strd twincellleft] at (#3 Left #1) {#2};
+        \node[strd twincellright] at (#3 Right #1) {\vphantom{#2}};% has some width for some reason. 
+    }% 
+}
+
+% twinsymbol
+\tikzset{strd circ left/.style={strd twincellleft,minimum size=4pt}}
+\tikzset{strd circ right/.style={strd twincellright,minimum size=4pt}}
+\tikzset{strd cdot left/.style={strd circ left,fill=black}}
+\tikzset{strd cdot right/.style={strd circ right,fill=black}}
+\newcommand*{\strdtwinsymbol}{\strdtwinsymbolat{End}}
+\newcommand*{\strdtwinsymbolat}[2]{\strdwith{\strdputtwinsymbolat{#1}{#2}}}
+\newcommand*{\strdputtwinsymbolat}[3]{% {at}{opt}{id}
+    \strdcell@{
+        \node[#2 left] at (#3 Left #1) {};
+        \node[#2 right] at (#3 Right #1) {};
+    }% 
+}
+
+% right-angled triangles
+\tikzset{strd righttrianglebase/.style={strd symbolbase,strd default,isosceles triangle,isosceles triangle stretches=false,isosceles triangle apex angle=90,shape border uses incircle}}
+\tikzset{strd righttriangle/.style={strd righttrianglebase,shape border rotate=90}}
+\tikzset{strd righttriangledown/.style={strd righttrianglebase,shape border rotate=-90}}
+\tikzset{strd righttriangle right/.style={strd righttrianglebase,shape border rotate=-45,xshift=-0.82pt}}
+\tikzset{strd righttriangle left/.style={strd righttriangle right,shape border rotate=-135,xshift=1.65pt}}
+\tikzset{strd righttriangledown right/.style={strd righttriangle right,shape border rotate=45}}
+\tikzset{strd righttriangledown left/.style={strd righttriangle left,shape border rotate=135}}
+
+
+% Frame-arounds
+%
+
+\tikzset{strd framearound/.style={circle,draw=white,fill=white,minimum size=4pt,inner sep=0pt}}
+\tikzset{strd roadframearound/.style={rectangle,sharp corners,draw=white,fill=white,minimum width=4pt,minimum height=3pt,inner sep=0pt}}
+\newcommand*{\strdputframearound}[1]{
+    \strdonlayer@{strd framearoundlayer}{
+        \node[strd framearound] at (#1) {};
+    }%
+}
+\newcommand*{\strdputroadframearound}[1]{
+    \strdonlayer@{strd framearoundlayer}{
+        \node[strd roadframearound] at (#1) {};
+    }%
+}
+\newcommand*{\strdputtubeframearound}[1]{
+    \strdonlayer@{strd tubeframearoundlayer}{
+        \node[strd framearound] at (#1 Left End) {};
+        \node[strd framearound] at (#1 Right End) {};
+    }% 
+}
+
+\newcommand*{\strdframearound}{\strdhere\strdputframearound}
+\newcommand*{\strdroadframearound}{\strdhere\strdputroadframearound}
+\newcommand*{\strdtubeframearound}{\strdwith\strdputtubeframearound}
+
+
+% Labels
+%
+
+\tikzset{strd sidelabel/.style={font=\scriptsize,inner sep=0.2pt,strd scripttextvaligned}}
+\tikzset{strd familylabel/.style={font=\scriptsize,inner xsep=0.2pt,inner ysep=-0.4pt,strd scripttextvaligned}}
+\tikzset{strd overlabel/.style={font=\scriptsize,fill=white,inner sep=0.4pt,inner ysep=0.8pt}}
+\tikzset{strd edgelabel/.style={font=\normalsize,inner sep=1.2pt}}%,strd normaltextvaligned}}
+
+\newcommand*{\strdlabel@}[1]{\strdonlayer@{strd labellayer}{#1}}
+\newcommand*{\strdputllabel}[2]{\strdlabel@{\node[strd sidelabel,left] at (#2) {#1};}}
+\newcommand*{\strdputrlabel}[2]{\strdlabel@{\node[strd sidelabel,right] at (#2) {#1};}}
+\newcommand*{\strdputoverlabel}[2]{\strdlabel@{\node[strd overlabel] at (#2) {#1};}}
+\newcommand*{\strdputfamilylabel}[2]{\strdlabel@{\node[strd familylabel,above right] at (#2 Right EndCorner) {#1};}}
+\newcommand*{\strdputunfamilylabel}[2]{\strdlabel@{\node[strd familylabel,above right] at (#2 Left EndCorner) {#1};}}
+\newcommand*{\strdputregionlabel}[2]{\strdlabel@{\node[strd familylabel,below left] at (#2 Right StartCorner) {#1};}}
+\newcommand*{\strdputedgelabelat}[3]{\strdlabel@{\node[strd edgelabel,#1] at (#3) {#2};}}
+\newcommand*{\strdputstartlabel}[2]{\strdputedgelabelat{above}{#1}{#2 Start}}
+\newcommand*{\strdputendlabel}[2]{\strdputedgelabelat{below}{#1}{#2 End}}
+
+
+% WHATFOR
+% White strings
+%
+
+\tikzset{strd edgenoise/.style={shorten >= -\strdnoiseunit,shorten <= -\strdnoiseunit}}
+\tikzset{strd white/.style={draw=white,line width=3pt,strd edgenoise}}
+
+\newcommand*{\strdwhite}[3]{%
+    \strdonlayer@{strd whitelayer}{
+        \strdscope@{strd white}{\strduse{#1}{#2}{#3}}
+    }%
+}
+
+
+% Graded strings; order depends
+%   You must wrap each string because of layers-reset-line-width bug.
+%   BTW, tikz/double doesn't work with scopes.
+
+\newcommand*{\strdgradedC}[3]{% {sc}{newid}{previd}
+    \strdonlayer@{strd gradedlayer}{
+        \strdscope@{strd white}{\strduse{#1}{#2 Graded}{#3}}
+        \strdscope@{strd edgenoise}{\strduse{#1}{#2}{#3}}
+    }%
+}
+\newcommand*{\strdgraded}[4]{% {stm}{sc}{newid}{previd}
+    \strduse{#2}{#3 Prev}{#4}
+    \strdonlayer@{strd gradedlayer}{
+        \strdscope@{strd white}{
+            \strduse{#1}{\strdcopyC}{#3 Graded}{#3 Prev}
+        }
+        \strdscope@{strd edgenoise}{
+            \strduse{#1}{\strdcopyC}{#3}{#3 Prev}
+        }
+    }%
+}
+
+\newcommand*{\strdroadgradedC}[3]{% {sc}{newid}{previd}
+    \strdonlayer@{strd gradedlayer}{
+        \strdscope@{strd roadbase}{\strduse{#1}{#2}{#3}}
+        \strdscope@{strd roadpave}{\strduse{#1}{#2 Paved}{#3}}
+    }%
+}
+\newcommand*{\strdroadgraded}[4]{% {stm}{sc}{newid}{previd}
+    \strduse{#2}{#3 Prev}{#4}
+    \strdonlayer@{strd gradedlayer}{
+        \strdscope@{strd roadbase}{
+            \strduse{#1}{\strcopyC}{#3}{#3 Prev}
+        }
+        \strdscope@{strd roadpave}{
+            \strduse{#1}{\strdcopy}{#3 Paved}{#3 Prev}
+        }
+    }%
+}
+
+
+% Roads
+%   Keep scaling away by '--'.
+%
+
+\tikzset{strd roadcolor/.style={gray!18,text=black}}
+\tikzset{strd roadbase/.style={line width=3.05pt}}
+\tikzset{strd roadpave/.style={line width=2.65pt,strd edgenoise,strd roadcolor}}
+
+\newcommand*{\strdroadC}[3]{% {sc}{newid}{previd}
+    \strdscope@{strd roadbase}{\strduse{#1}{#2}{#3}}
+    \strdonlayer@{strd pavelayer}{
+        \strdscope@{strd roadpave}{\strduse{#1}{#2 Paved}{#3}}
+    }%
+}
+\newcommand*{\strdroad}[4]{% {stm}{sc}{newid}{previd}
+    \strduse{#2}{#3 Prev}{#4}
+    \strdscope@{strd roadbase}{
+        \strduse{#1}{\strdcopyC}{#3}{#3 Prev}
+    }
+    \strdonlayer@{strd pavelayer}{
+        \strdscope@{strd roadpave}{
+            \strduse{#1}{\strdcopyC}{#3 Paved}{#3 Prev}
+        }
+    }%
+}
+
+% Crossable road; order depends
+\newcommand*{\strdroadxC}[3]{% {sc}{newid}{previd}
+    \strdscope@{strd roadbase}{\strduse{#1}{#2}{#3}}
+    \strdscope@{strd roadpave}{\strduse{#1}{#2 Paved}{#3}}%
+}
+\newcommand*{\strdroadx}[4]{% {stm}{sc}{newid}{previd}
+    \strduse{#2}{#3 Prev}{#4}
+    \strdscope@{strd roadbase}{
+        \strduse{#1}{\strdcopyC}{#3}{#3 Prev}
+    }
+    \strdscope@{strd roadpave}{
+        \strduse{#1}{\strdcopyC}{#3 Paved}{#3 Prev}
+    }%
+}
+
+% Slightly noisy around anti-aliasing
+\newcommand*{\strdputdeadend}[1]{% {node}
+    \strdonlayer@{strd whitelayer}{
+        \draw[strd draw,white,line width=4pt,shorten >=-1pt] {
+            ($(#1)+(0,10.16pt)$) -- (#1)
+        };
+        \draw[strd draw,strd roadbase]{
+            ($(#1)+(0,10.16pt)$) -- ($(#1)+(0,10.36pt)$)
+        };
+    }%
+}
+
+\newcommand*{\strdputroadlabel}[3]{% {ltext}{rtext}{node}
+    \strdonlayer@{strd labellayer}{
+        \node[strd sidelabel,left,xshift=-1.5pt] at (#3) {#1};
+        \node[strd sidelabel,right,xshift=1.5pt] at (#3) {#2};
+    }%
+}
+
+\newcommand*{\strdroadlaside}{\strdcomposeC\strdroadlasideC}
+\newcommand*{\strdroadlasideC}[2]{\strdempty@{#1}{$(#2 End)+(-0.05,0)$}}
+\newcommand*{\strdroadraside}{\strdcomposeC\strdroadrasideC}
+\newcommand*{\strdroadrasideC}{\strdflipC\strdroadlasideC}
+
+
+% Scoped transformations
+%
+
+\tikzset{strd implicit/.style={strd default,densely dotted}}
+
+\newcommand*{\strdscope@}[2]{\begin{scope}[#1]#2\end{scope}}
+\newcommand*{\strdflip@}{\strdscope@{xscale=-1}}
+\newcommand*{\strdinv@}{\strdscope@{yscale=-1}}
+\newcommand*{\strdxscale@}[1]{\strdscope@{xscale=#1}}
+\newcommand*{\strdyscale@}[1]{\strdscope@{yscale=#1}}
+\newcommand*{\strdscale@}[2]{\strdscope@{xscale=#1,yscale=#2}}
+\newcommand*{\strdnone@}{\strdscope@{every path/.style=strd none,every node/.style=strd none}}
+\newcommand*{\strdnolabels@}{\strdscope@{every node/.style=strd none}}
+\newcommand*{\strdpathis@}[1]{\strdscope@{every path/.style=#1}}
+\newcommand*{\strdnodeis@}[1]{\strdscope@{every node/.append style=#1}}
+\newcommand*{\strdimplicit@}{\strdpathis@{strd implicit}}
+
+\newcommand*{\strdtoC@}[4]{\strduse{#1}{\strduse{#2}{#3}{#4}}}
+\newcommand*{\strdonlayerC}{\Compose\strdtoC@\strdonlayer@}
+\newcommand*{\strdscopeC}{\Compose\strdtoC@\strdscope@}
+\newcommand*{\strdflipC}{\strdtoC@\strdflip@}
+\newcommand*{\strdinvC}{\strdtoC@\strdinv@}
+\newcommand*{\strdnoneC}{\strdtoC@\strdnone@}
+\newcommand*{\strdpathisC}{\Compose\strdtoC@\strdpathis@}
+\newcommand*{\strdscaleC}[2]{\strdtoC@{\strdscale@{#1}{#2}}}
+\newcommand*{\strdxscaleC}{\Compose\strdtoC@\strdxscale@}
+\newcommand*{\strdyscaleC}{\Compose\strdtoC@\strdyscale@}
+\newcommand*{\strdxhalfC}{\strdxscaleC{0.5}}
+\newcommand*{\strdyhalfC}{\strdyscaleC{0.5}}
+\newcommand*{\strdxdoubleC}{\strdxscaleC{2}}
+\newcommand*{\strdydoubleC}{\strdyscaleC{2}}
+\newcommand*{\strdimplicitC}{\strdtoC@\strdimplicit@}
+
+\newcommand*{\strdtoT@}[5]{% {opt}{stm}{sc}{newid}{previd}
+    \strduse{#3}{#4 Prev}{#5}
+    \strduse{#1}{\strduse{#2}{\strdcopyC}{#4}{#4 Prev}}
+}
+\newcommand*{\strdonlayer}{\Compose\strdseqin\strdonlayer@@}
+\newcommand*{\strdonlayer@@}{\Compose\strdtoT@\strdonlayer@}
+\newcommand*{\strdscope}{\Compose\strdseqin\strdscope@@}
+\newcommand*{\strdscope@@}{\Compose\strdtoT@\strdscope@}
+\newcommand*{\strdflip}{\strdseqin\strdflip@@}
+\newcommand*{\strdflip@@}{\strdtoT@\strdflip@}
+\newcommand*{\strdinv}{\strdseqin\strdinv@@}
+\newcommand*{\strdinv@@}{\strdtoT@\strdinv@}
+\newcommand*{\strdnone}{\strdseqin\strdnone@@}
+\newcommand*{\strdnone@@}{\strdtoT@\strdnone@}
+\newcommand*{\strdpathis}{\Compose\strdseqin\strdpathis@@}
+\newcommand*{\strdpathis@@}{\Compose\strdtoT@\strdpathis@}
+\newcommand*{\strdscale}[2]{\strdseqin{\strdscale@@{#1}{#2}}}
+\newcommand*{\strdscale@@}[2]{\strdtoT@{\strdscale@{#1}{#2}}}
+\newcommand*{\strdxscale}{\Compose\strdseqin\strdxscale@@}
+\newcommand*{\strdxscale@@}{\Compose\strdtoT@\strdxscale@}
+\newcommand*{\strdyscale}{\Compose\strdseqin\strdyscale@@}
+\newcommand*{\strdyscale@@}{\Compose\strdtoT@\strdyscale@}
+\newcommand*{\strdxhalf}{\strdxscale{0.5}}
+\newcommand*{\strdyhalf}{\strdyscale{0.5}}
+\newcommand*{\strdxdouble}{\strdxscale{2}}
+\newcommand*{\strdydouble}{\strdyscale{2}}
+\newcommand*{\strdimplicit}{\strdseqin\strdimplicit@@}
+\newcommand*{\strdimplicit@@}{\strdtoT@\strdimplicit@}
+
+
+% Sequence-style construction
+%
+
+\newcommand*{\strdseq}{\ThenList}
+\newcommand*{\strdseqin}[2]{\strduse{#1}{\strdseq{#2}}}
+
+\newcommand*{\strdgathered}[1]{% {sa1,sa2,..,saN}
+    \strdin{gathered}{
+        \strdseq{#1}{\strdcopyC}{TheStrd}{\strdorigin}
+    }%
+}
+
+\newcommand*{\strdassign}[5]{% {name}{stm}{sc}{newid}{previd}
+    \strduse{#2}{#3}{#4}{#5}
+    \strdnone{\strduse{#2}}{#3}{#1}{#5}%
+}
+
+
+% String transformations
+%
+
+\newcommand*{\strdat}[2]{% {at}{stm}
+    \strdfork@{\Then{\strdemptyat{#1}}{#2}}%
+}
+\newcommand*{\strdtubeat}[2]{% {at}{stm}
+    \strdfork@{\Then{\strdtubeemptyat{#1}}{#2}}%
+}
+
+\newcommand*{\strdwith}[4]{% {h}{sc}{newid}{previd}
+    \strduse{#2}{#3}{#4}
+    \strduse{#1}{#3}%
+}
+\newcommand*{\strdwithat}[5]{% {at}{h}{sc}{newid}{previd}
+    \strduse{#3}{#4}{#5}
+    \strduse{#2}{#4 #1}%
+}
+\newcommand*{\strdhere}{\strdwithat{End}}
+\newcommand*{\strddo}[1]{\Compose\strdwith{\Proc{#1}}}
+
+\newcommand*{\strdsymbol}{\Compose\strdhere\strdputsymbol}
+\newcommand*{\strdcell}{\Compose\strdhere\strdputcell}
+\newcommand*{\strdcellof}[2]{\strdhere{\strdputcellof{#1}{#2}}}
+\newcommand*{\strddeadend}{\strdhere\strdputdeadend}
+
+\newcommand*{\strdllabel}{\Compose\strdwith\strdputllabel}
+\newcommand*{\strdrlabel}{\Compose\strdwith\strdputrlabel}
+\newcommand*{\strdoverlabel}{\Compose\strdwith\strdputoverlabel}
+\newcommand*{\strdregionlabel}{\Compose\strdwith\strdputregionlabel}
+\newcommand*{\strdfamilylabel}{\Compose\strdwith\strdputfamilylabel}
+\newcommand*{\strdunfamilylabel}{\Compose\strdwith\strdputunfamilylabel}
+\newcommand*{\strdstartlabel}{\Compose\strdwith\strdputstartlabel}
+\newcommand*{\strdendlabel}{\Compose\strdwith\strdputendlabel}
+
+\newcommand*{\strdroadlabel}[2]{\strdwith{\strdputroadlabel{#1}{#2}}}
+
+\newcommand*{\strdfork}{\strdseqin\strdfork@}
+\newcommand*{\strdfork@}[4]{% {stm}{sc}{newid}{previd}
+    \strduse{#2}{#3}{#4}
+    \strduse{#1}{\strdcopyC}{#3 Fork}{#3}%
+}
+
+\newcommand*{\strdsym}[4]{% {stml}{sc}{newid}{previd}
+    \strduse{#2}{#3 Prev}{#4}
+    \strduse{#1}{\strdcopyC}{#3 Left}{#3 Prev}
+    \strdflip@{ \strduse{#1}{\strdcopyC}{#3 Right}{#3 Prev} }
+    \strdstringmid@{#3}{#3 Prev End}{#3 Left End}
+}
+
+\newcommand*{\strdsymlr}[4]{% {stml}{sc}{newid}{previd}
+    \strduse{#2}{#3 Prev}{#4}
+    \strduse{#1}{\strdcopyC}{#3 Left}{#3 Prev Left}
+    \strdflip@{ \strduse{#1}{\strdcopyC}{#3 Right}{#3 Prev Right} }
+    \strdstringmid@{#3}{#3 Prev End}{$(#3 Left End)!.5!(#3 Right End)$}
+}
+
+
+% right-biased
+\newcommand*{\strdparallel}{\strdparallelwith\Identity}
+\newcommand*{\strdparallelwith}[2]{% {fstm}{s1,s2,...}
+    \FoldrOne{\strdparallelwith@{#1}}{\List{#2}}
+}
+\newcommand*{\strdparallelwith@}[6]{% {fstm}{lstm}{rstm}{sc}{newid}{previd}
+    \strduse{#4}{#5 Prev}{#6}
+    \strduse{#2}{\strdcopyC}{#5 Parallel}{#5 Prev}
+    \Then{\strduse{#1}}{\strduse{#3}}{\strdcopyC}{#5}{#5 Prev}
+}
+
+\newcommand*{\strdrestart}[4]{% {stm}{sc}{newid}{previd}
+    \strduse{#2}{#3}{#4}
+    \strduse{#1}{\strdcopyC}{#3 Restart}{\strdorigin}%
+}
+
+
+% Utilities
+%
+
+\newcommand*{\strduse}{\Identity}
+\newcommand*{\strdrlap}{\Compose\mathrlap\smash}
+\newcommand*{\strdllap}{\Compose\mathllap\smash}
+\newcommand*{\strdlvert}[1]{\rotatebox[origin=c]{90}{\ensuremath{#1}}}
+\newcommand*{\strdrvert}[1]{\rotatebox[origin=c]{-90}{\ensuremath{#1}}}
+\newcommand*{\strdupsidedown}[1]{\rotatebox[origin=c]{180}{\ensuremath{#1}}}
+\newcommand*{\strdunraise}[1]{\mathstrut\raisebox{-\depth}{\ensuremath{#1}}}
+\newcommand*{\strdhspaced}[2]{\hspace{#1}#2\hspace{#1}}
+

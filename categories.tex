@@ -1,0 +1,126 @@
+
+\section{Categories}
+
+\subsection{Definition}
+
+A \textit{category} $\mathcal{C}$ is an algebraic structure consisting of
+\In{enumerate}{
+\item \textit{Objects}: a class:
+    \In{align*}{
+        \operatorname{Ob}\mathcal{C}
+    }
+\item \textit{Morphisms}: a family of sets:
+    \In{align*}{
+        (\mathcal{C}(A,B)) _ {A, B \in \operatorname{Ob}\mathcal{C}}
+    }
+\item \textit{Compositions}: a family of functions:
+    \In{align*}{
+        (\circ : \mathcal{C}(B,C) \times \mathcal{C}(A,B) \to \mathcal{C}(A,C) )_{A,B,C \in \operatorname{Ob}\mathcal{C}}
+    }
+\item \textit{Idenitities} or \textit{units}: a family of morphisms:
+    \In{align*}{
+        (\operatorname{id} _A : \mathcal{C}(A,A))_{A \in \operatorname{Ob}\mathcal{C}}
+    }
+}
+with the coherence condition:
+\In{enumerate}{
+\item \textit{Associativity}: for any $f \in \mathcal{C}(A,B)$, $g \in \mathcal{C}(B,C)$, and $h \in \mathcal{C}(C,D)$,
+    \In{align*}{
+        h \circ (g \circ f) = (h \circ g) \circ f
+    }
+\item \textit{Unitality}: for any $f \in \mathcal{C}(A,B)$,
+    \In{align*}{
+        \operatorname{id}_B \circ f = f = f \circ \operatorname{id}_A
+    }
+}
+A morphism $f \in \mathcal{C}(A,B)$ will often be denoted by $f : A \to B$.
+
+\subsection{String Diagrams}
+
+In this document, \textit{commutative diagrams} are never used. Instead, %
+we denote an object $A$ by a tagged string:
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+        ,\strdstartlabel{\mathcal{C}}
+    }
+}
+and a morphism $f \in \mathcal{C}(A,B)$ by a node:
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    }
+}
+A composition joins two strings:
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{C}
+        ,\strdcell{g}
+        ,\strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    } \,\mydefeq g \circ f
+}
+An idenity is indistinguishable from an object:
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+    } \,\mydefeq \operatorname{id}_A
+}
+Check this notation creates no ambiguity; thanks to the coherence.
+
+\subsection{Functional Boxes}
+
+Given categories $\mathcal{C}$ and $\mathcal{C}'$, a function:
+\In{align*}{
+    h : \mathcal{C}(A,B) \to \mathcal{C}'(A',B')
+}
+is denoted by:
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{B'}
+        ,\strdbox{1}{1}{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{?}
+            ,\strdmid,\strdrlabel{A}
+        },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{h}}
+        ,\strdmid,\strdrlabel{A'}
+    }
+}
+
+
+\subsection{Opposite Categories}
+
+Given a category $\mathcal{C}$ and a morphism:
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    }
+}
+You can build a category with strings upsidedown:
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+        ,\strdcell{\strdupsidedown{f}}
+        ,\strdmid,\strdrlabel{B}
+    }
+}
+, which is denoted by $\mathcal{C}^{\operatorname{op}}$, the \textit{opposite category} of $\mathcal{C}$.
+
+\subsection{Discrete Categories}
+
+A category $\mathcal{C}$ such that
+\In{align*}{
+    A \neq B \implies \mathcal{C}(A,B) = \emptyset
+}
+is called a \textit{discrete} category.
+A set is equivalent to a discrete category.
+
+
+\subsection{Product Categories}
+TODO 
+

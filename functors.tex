@@ -1,0 +1,187 @@
+\section{Functors}
+
+\subsection{Definition}
+Given categories $\mathcal{C}$ and $\mathcal{D}$, a \textit{functor}:
+\In{align*}{
+    F : \mathcal{C} \to \mathcal{D}
+}
+is an algebraic structure consisting of:
+\In{enumerate}{
+\item a family of objects:
+\In{align*}{
+    (FA \in \operatorname{Ob}\mathcal{D}) _ {A \in \operatorname{Ob}\mathcal{C}}
+}
+\item a family of morphisms:
+\In{align*}{
+    (F(f) \in \mathcal{D}(FA,FB)) _ {f \in \mathcal{C}(A,B)}
+}
+}
+with the coherence(\textit{functoriality}):
+\In{enumerate}{
+\item \textit{Composition-compatibility}: for any $f \in \mathcal{C}(A,B)$ and $g \in \mathcal{C}(B,C)$,
+    \In{align*}{
+        F(g \circ f) = F(g) \circ F(f)
+    }
+\item \textit{Unit-compatibility}: for any $A \in \operatorname{Ob}\mathcal{C}$,
+    \In{align*}{
+        F(\operatorname{id}_A) = \operatorname{id}_{FA}
+    }
+}
+An \textit{infrafunctor} is a structure without functoriality.
+
+\subsection{Functorial Boxes}
+
+In string diagrams, a functor is represented by an open box:
+
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdydouble\strdtubemid
+            ,\strdat{Left}{\strdoverlabel{F}} 
+            ,\strdtubeendline
+        }
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{FB}
+        ,\strdbox{1}{1}{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdat{Left}{\strdoverlabel{F}}
+        ,\strdmid,\strdrlabel{FA}
+    }
+}
+With placeholders, it is simply:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+            ,\strdcell{?}
+            ,\strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdydouble\strdtubemid
+            ,\strdat{Left}{\strdoverlabel{F}} 
+            ,\strdtubeendline
+        }
+    } 
+}
+One can check the functoriality guarantees strings like:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{C}
+            ,\strdcell{g}
+            ,\strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdyscale{3}\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+}
+are not umbiguous; "Join then box" equals to "Box then join".
+
+
+\subsection{Composite Functors}
+
+For any two functors $F : \mathcal{A} \to \mathcal{B}$ and $G : \mathcal{B} \to \mathcal{C}$, %
+the \textit{composite functor} of $F$ and $G$:
+\In{align*}{
+    G \circ F : \mathcal{A} \to \mathcal{C}
+}
+is defined by:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{\Identity{?}}
+            ,\strdmid
+        }
+        ,\strdtubestart
+        ,\strdfork{
+            \strdtube{
+                \strdtubemid
+                ,\strdat{Left End}{\strdoverlabel{F}} 
+                ,\strdtubemid
+            }
+        }
+        ,\strdtubeextend{1}{1}
+        ,\strdtube{
+            \strdcutoff\strdtubebound
+            ,\strdtubemid
+            ,\strdat{Left End}{\strdoverlabel{G}} 
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+}
+One can easily check the functoriality.
+
+
+\subsection{Identity Functors}
+
+An idenity functor $\operatorname{Id}_{\mathcal{C}} : \mathcal{C} \to \mathcal{C}$ is a transparent box:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+            ,\strdcell{?}
+            ,\strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdydouble\strdtubemid
+            ,\strdat{Left}{\strdoverlabel{\operatorname{Id}}} 
+            ,\strdtubeendline
+        }
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{}
+        ,\strdcell{?}
+        ,\strdmid,\strdrlabel{}
+    }
+}
+The functoriality is trivial.
+
+
+\subsection{Binary Functors}
+
+A functor $F : \mathcal{A} \times \mathcal{B} \to \mathcal{C}$ is called \textit{binary}, while
+a functor $F : \mathcal{A} \to \mathcal{C}$ is \textit{unary}.
+Binary functoriality is in detail:
+
+\subsection{Contravariant Functors}
+
+A functor $F : \mathcal{C}^{\operatorname{op}} \to \mathcal{D}$ is called \textit{contravariant}, while
+a functor $F : \mathcal{C} \to \mathcal{D}$ is \textit{covariant}. A contravariant functor $F$ is denoted by:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{\strdupsidedown{?}}
+            ,\strdmid
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdat{Left End}{\strdoverlabel{F}} 
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+}
+
+\subsection{Hom Functors}
+TODO

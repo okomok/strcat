@@ -1,0 +1,105 @@
+\section{Preliminary}
+
+\subsection{Vacuous Truth}
+todo
+
+\subsection{Uniqueness Quantification}
+
+For a boolean-valued function $P$, define:
+\In{align*}{
+    !aP(a) & \mydefeq P(a) \wedge \forall a' (P(a') \implies a = a')
+}
+You can state "there exists a unique $a$ such that $P$" using:
+\In{align*}{
+    \exists!aP(a) & \mydefeq \exists a ! a P(a) 
+}
+On the other hand,
+\In{align*}{
+    \exists a \big((!a P(a)) \wedge Q(a)\big)
+}
+means "there exists a unique $a$ such that $P$, moreover the $a$ is $Q$".
+
+\subsection{Universality}
+
+Category theory introduces many \textit{universal properties} like that 
+\In{align*}{
+    (\forall x \in X)(\exists!a\in A)(P(x,a))
+}
+, which is equivalent to an easier one:
+\In{align*}{
+    (\exists f : X \to A)(\forall x \in X)(\forall a \in A)(P(x,a) \iff a = f(x))
+}
+Find such a function $f$, that's the category theory.
+
+
+\subsection{Lambda Expressions}
+
+Following famous symbols like $\Sigma$, define:
+\In{align*}{
+    \Lambda_x y \mydefeq x \mapsto y 
+}
+for anonymous functions.
+
+\subsubsection{Placeholder expressions}
+
+For simple lambda expressions, you may use \textit{placeholders}:
+\In{align*}{
+    \texttt{?}{+}1 \mydefeq \Lambda_n n{+}1
+}
+Placeholder symbols can vary: $\texttt{?}$, $\texttt{-}$, $\texttt{=}$, etc.
+
+
+\subsection{Family expressions}
+
+Syntax of function-calls is world-standard and fixed:
+\In{align*}{
+    f(x) \text{ or } fx
+}
+, but sometimes you might want cuter syntax like that
+\In{align*}{
+    \strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}}
+}
+\textit{Family expressions} enable us to define a function with arbitary call syntax:
+\In{align*}{
+    (\strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}} \in Y) _ {x \in X}
+}
+
+\subsubsection{Dependent Functions}
+
+Family expressions can do more. Let $F$ a set-valued function.
+\In{align*}{
+    (f (x) \in F(x)) _ {x \in X}
+}
+defines a function:
+\In{align*}{
+    f : X \to \textstyle\bigcup _ {x \in X} F(x)
+}
+such that
+\In{align*}{
+    (\forall x \in X)(f(x) \in F(x))
+}
+Such $f$ is called a \textit{dependent function}, for the $F(x)$ depends on a $x$. 
+In case $F$ is a constant function which ignores $x$:
+\In{align*}{
+    (f(x) \in Y)_{x \in X}
+}
+, $f$ is a normal function $X \to Y$. 
+
+
+\subsection{Coherence}
+
+You write:
+\In{align*}{
+    3+1+2
+}
+rather than
+\In{align*}{
+    (3+(0+1))+2
+}
+, because you know the arithmetic laws:
+\In{align*}{
+    x+(y+z) = (x+y)+z \\
+    0+x = x = x+0
+}
+Informally a set of laws which offers simpler syntax without ambiguity is called \textit{coherence condition} or \textit{coherence}.
+

@@ -1,0 +1,168 @@
+\section{Natural Transformations}
+
+\subsection{Definition}
+
+Given two infrafunctors:
+\In{align*}{
+    (F(f) \in \mathcal{D}(FA,FB)) _ {f \in \mathcal{C}(A,B)}\\
+    (G(f) \in \mathcal{D}(GA,GB)) _ {f \in \mathcal{C}(A,B)}
+}
+, a family of morphisms:
+\In{align*}{
+    (\tau_A \in \catMor{D}(FA,GA)) _ {A \in \catOb{C}}
+}
+is \textit{natural} if for any $f \in \mathcal{C}(A,B)$,
+\In{align*}{
+    \tau_B \circ F(f) = G(f) \circ \tau_A
+}
+In particular case $F$ and $G$ are functorial(then they are functors), $\tau$ is called a \textit{natural transformation}:
+\In{align*}{
+    \tau : F \to G
+}
+
+\subsection{Natural Boxes}
+
+A natural transformation $\tau : F \to G$ is represented by a connected box:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+            ,\strdtwincell{\tau}
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            ,\strdtubeendline
+        }
+    }
+}
+The naturality states:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{B}
+            ,\strdmid,\strdrlabel{}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubemid
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+}
+You can freely move a node up and down. So you can define them as:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid%,\strdat{Left}{\strdoverlabel{G}}
+            ,\strdtwincell{\tau}
+            ,\strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
+            ,\strdtubeendline
+        }
+    }
+}
+
+
+
+\subsection{Vertical Composition}
+
+Given three \textit{parallel} functors:
+\In{align*}{
+    F : \mathcal{C} \to \mathcal{D}\\
+    G : \mathcal{C} \to \mathcal{D}\\
+    H : \mathcal{C} \to \mathcal{D}
+}
+and two natural transformations:
+\In{align*}{
+    \tau &: F \to G\\
+    \sigma &: G \to H
+}
+, the \textit{vertical composition} of $\tau$ and $\sigma$ is defined by:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{H}}
+            ,\strdtwincell{\sigma}
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+            ,\strdtwincell{\tau}
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            ,\strdtubeendline
+        }
+    }
+}
+The naturality is trivial; You can travel by bus and train.
+
+\subsection{Horizontal Composition}
+
+Given four functors:
+\In{align*}{
+    F &: \mathcal{A} \to \mathcal{B}\\
+    G &: \mathcal{A} \to \mathcal{B}\\
+    H &: \mathcal{B} \to \mathcal{C}\\
+    K &: \mathcal{B} \to \mathcal{C}
+}
+and two natural transformations:
+\In{align*}{
+    \tau &: F \to G\\
+    \sigma &: H \to K
+}
+, the \textit{horizontal composition} of $\tau$ and $\sigma$ is defined by:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{}
+            ,\strdmid,\strdrlabel{}
+        }
+        ,\strdtube{
+            \strdtubestart
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+                ,\strdtwincell{\tau}
+                ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            }
+            ,\strdtubeextend{1}{1}
+            ,\strdcutoff\strdtubebound
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{K}}
+            ,\strdtwincell{\sigma}
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{H}}
+            ,\strdcutoff\strdtubebound
+        }
+    }
+}
+You can easily check the naturality; Travel by car ferry.
+

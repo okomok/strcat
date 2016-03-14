@@ -1,0 +1,280 @@
+\ProvidesPackage{lambdax}
+
+\usepackage{lambda,etoolbox}
+
+
+% References
+%   https://www.ctan.org/tex-archive/macros/generic/lambda-lists?lang=en
+%   https://en.wikipedia.org/wiki/Church_encoding
+%   http://d.hatena.ne.jp/melpon/20111005/1317799929
+%   http://0-chromosome.hatenablog.jp/entry/2015/12/02/000000
+%   http://tex.stackexchange.com/questions/24922/comparing-an-argument-to-a-string-when-argument-is-a-result-of-a-command-with-et
+%   http://basking-cat.blogspot.jp/2013/04/scalachurch-encoding.html
+%   https://hackage.haskell.org/package/base/docs/Data-List.html
+%   https://hackage.haskell.org/package/base/docs/Data-Function.html
+%   https://hackage.haskell.org/package/base/docs/Data-Maybe.html
+%   http://stackoverflow.com/questions/24118741/implementation-of-inits-using-foldr
+%   http://stackoverflow.com/questions/24129119/implementing-tails-using-foldr-in-haskell
+
+
+% Workarounds
+%
+
+% "\And" conflicts somewhere?
+\def\And{\Undefined}
+\newcommand*{\BoolAnd}[2]{#1{#2}\False}
+\newcommand*{\BoolOr}{\Or}
+\newcommand*{\BoolNot}{\Not}
+\def\All#1{\Foldr{\Compose\BoolAnd{#1}}\True}
+
+
+% Note
+%   For structural equality, don't use braces nor \relax, which aren't expandable.
+
+\newcommand*{\CatToken}[2]{#1#2}
+
+
+% Bool
+%
+
+\newcommand*{\Bool}{\TeXif}
+\newcommand*{\If}{\Identity}
+\newcommand*{\Iftex}{\TeXif}
+\newcommand*{\BoolToNum}[1]{\If{#1}{1}{0}}
+\newcommand*{\NumToBool}[1]{\If{\NumEq{#1}{0}}\False\True}
+
+
+% Function
+%
+
+\newcommand*{\Id}{\Identity}
+\newcommand*{\Const}{\True}
+\newcommand*{\Flip}{\Twiddle}
+\newcommand*{\Apply}[2]{#1{#2}}
+\newcommand*{\Then}{\Flip\Compose}
+\newcommand*{\Fix}[1]{#1{\Fix{#1}}}
+\newcommand*{\ComposeList}[1]{\Foldr\Compose\Identity{\List{#1}}}
+\newcommand*{\ThenList}[1]{\Foldr\Then\Identity{\List{#1}}}
+
+% Prelude
+%
+
+\newcommand*{\ErrorMsg}[1]{\errmessage{error: #1}}
+\newcommand*{\Assert}[2]{\If{#1}{#2}{\ErrorMsg{assertion failed}}}
+\newcommand*{\Undefined}{\errmessage{undefined}}
+
+
+% Test
+%
+
+\newcommand*{\AssertTrue}[1]{\Assert{#1}{}}
+\newcommand*{\AssertFalse}[1]{\Assert{\Not{#1}}{}}
+
+
+% List
+%   \Null is linear.
+
+\newcommand*{\Unlist}[1]{#1\Unlist@{}}
+\newcommand*{\Unlist@}[1]{#1\Foldr\PrependComma{}}
+\newcommand*{\ShowList}[1]{[\Unlist{#1}]}
+\newcommand*{\ShowLists}[1]{\ShowList{\Map\ShowList{#1}}}
+
+\newcommand*{\List}[1]{\List@#1,\Listend@\@eolst}
+\newcommand*{\Listend@}{}
+\def\List@#1,#2\@eolst{%
+    \Iftex{\ifx\Listend@#2}{\Singleton{#1}}{\Cons{#1}{\List@#2\@eolst}}%
+}
+
+% Basic functions
+\newcommand*{\Append}{\Cat}
+\newcommand*{\Last}{\FoldrOne{\Flip\Const}}
+\newcommand*{\Init}[1]{\Foldr\Init@{\Const\Nil}{\Tail{#1}}{\Head{#1}}}
+\newcommand*{\Init@}[2]{\Flip\Cons{#2{#1}}}
+\newcommand*{\Null}{\Isempty}
+\newcommand*{\Length}{\Foldr\Length@{0}}
+\newcommand*{\Length@}[2]{\NumInc{#2}}
+
+% Reducing lists
+\newcommand*{\FoldlOne}[2]{\Foldl{#1}{\Head{#2}}{\Tail{#2}}}
+\newcommand*{\FoldrOne}[2]{\Foldr{\FoldrOne@{#1}}{\Id}{\Tail{#2}}{\Head{#2}}}
+\newcommand*{\FoldrOne@}[3]{\Flip{#1}{#3{#2}}}
+
+% Special folds
+\newcommand*{\Concat}{\Foldr\Append\Nil}
+\newcommand*{\ConcatMap}[1]{\Foldr{\Compose\Append{#1}}\Nil}
+\newcommand*{\ListAnd}{\Foldr\BoolAnd\False}
+\newcommand*{\ListOr}{\Foldr\BoolOr\False}
+\newcommand*{\ListAny}{\Some}
+\newcommand*{\ListAll}{\All}
+
+% Building lists 
+\newcommand*{\Scanl}[3]{\Foldr{\Scanl@{#1}}\Singleton{#3}{#2}}
+\newcommand*{\Scanl@}[4]{\Cons{#4}{#3{#1{#4}{#2}}}}
+\newcommand*{\ScanlOne}[2]{\If{\Null{#2}}\Nil{\Scanl{#1}{\Head{#2}}{\Tail{#2}}}}
+\newcommand*{\Scanr}[2]{\Foldr{\Scanr@{#1}}{\Singleton{#2}}}
+\newcommand*{\Scanr@}[3]{\Cons{#1{#2}{\Head{#3}}}{#3}}
+\newcommand*{\ScanrOne}[2]{\If{\Null{#2}}\Nil{\Foldr{\ScanrOne@{#1}}\Singleton{\Tail{#2}}{\Head{#2}}}}
+\newcommand*{\ScanrOne@}[4]{\Cons{#1{#4}{\Head{#3{#2}}}}{#3{#2}}}
+
+% Infinite lists
+\newcommand*{\Iterate}[2]{\Cons{#2}{\Iterate{#1}{#1{#2}}}}
+\newcommand*{\Repeat}{\Stream}
+\newcommand*{\Replicate}[2]{\Take{#1}{\Repeat{#2}}}
+\newcommand*{\Cycle}{\Compose\Concat\Repeat}
+
+% Unfolding
+\newcommand*{\Unfoldr}[2]{\Unfoldr@{#1}{#1{#2}}}
+\newcommand*{\Unfoldr@}[2]{\If{\IsNothing{#2}}\Nil{\Unfoldr@@{#1}{\FromJust{#2}}}}
+\newcommand*{\Unfoldr@@}[2]{\Cons{\Fst{#2}}{\Unfoldr{#1}{\Snd{#2}}}}
+
+% Sublists
+\newcommand*{\Take}[2]{\Foldr\Take@{\Const\Nil}{#2}{#1}}
+\newcommand*{\Take@}[3]{\Iftex{\ifnum#3=0 }{\Nil}{\Cons{#1}{#2{\numexpr#3-1}}}}
+\newcommand*{\Drop}[2]{\Foldr\Drop@{\Const\Nil}{#2}{#1}}
+\newcommand*{\Drop@}[3]{\Iftex{\ifnum#3=0 }{\Cons{#1}{#2{0}}}{#2{\numexpr#3-1}}}
+\newcommand*{\SplitAt}[2]{\ConsPair{\Take{#1}{#2}}{\Drop{#1}{#2}}}
+\newcommand*{\TakeWhile}[2]{\Foldr{\TakeWhile@{#1}}\Nil{#2}}
+\newcommand*{\TakeWhile@}[3]{\If{#1{#2}}{\Cons{#2}{#3}}\Nil}
+\newcommand*{\DropWhile}[2]{\Foldr{\DropWhile@{#1}}{\Const\Nil}{#2}\True}
+\newcommand*{\DropWhile@}[4]{%
+    \If{#4}{%
+        \If{#1{#2}}{%
+            #3\True%
+        }{%
+            \Cons{#2}{#3\False}%
+        }%
+    }{%
+        \Cons{#2}{#3\False}%
+    }%
+}
+\newcommand*{\Span}[2]{\ConsPair{\TakeWhile{#1}{#2}}{\DropWhile{#1}{#2}}}
+\newcommand*{\Break}[1]{\Span{\Compose\Not{#1}}}
+\newcommand*{\Inits}{\Foldr\Inits@{\Singleton\Nil}}
+\newcommand*{\Inits@}[2]{\Cons\Nil{\Map{\Cons{#1}}{#2}}}
+\newcommand*{\Tails}{\Foldr\Tails@{\Singleton\Nil}}
+\newcommand*{\Tails@}[2]{\Cons{\Cons{#1}{\Head{#2}}}{#2}}
+
+
+% Predicates
+% TODO
+
+% Indexing lists
+\newcommand*{\Nth}[2]{\Head{\Drop{#1}{#2}}}
+
+% Zipping and unzipping lists
+\newcommand*{\Zip}{\ZipWith{\ConsPair}}
+\newcommand*{\ZipWith}[1]{\Foldr{\ZipWith@{#1}}{\Const\Nil}}
+\newcommand*{\ZipWith@}[4]{\If{\Null{#4}}{\Nil}{\Cons{#1{#2}{\Head{#4}}}{#3{\Tail{#4}}}}}
+\newcommand*{\Unzip}{\Foldr\Unzip@{\ConsPair\Nil\Nil}}
+\newcommand*{\Unzip@}[2]{\ConsPair{\Cons{\Fst{#1}}{\Fst{#2}}}{\Cons{\Snd{#1}}{\Snd{#2}}}}
+
+% Functions on strings
+% TODO
+
+% Set operations
+% TODO
+
+% List equality
+\newcommand*{\EqualWith}[1]{\Foldr{\EqualWith@{#1}}\Null}
+\newcommand*{\EqualWith@}[4]{%
+    \If{\Null{#4}}{%
+        \False%
+    }{%
+        \If{#1{#2}{\Head{#4}}}{%
+            #3{\Tail{#4}}%
+        }{%
+            \False%
+        }%
+    }%
+}
+
+% Foreach
+\newcommand*{\Foreach}[2]{\ForeachImpl{\Proc{#2}}{#1}}
+\newcommand*{\ForeachImpl}[1]{\Foldr{\ForeachImpl@{#1}}{}}
+\newcommand*{\ForeachImpl@}[3]{#1{#2}#3}
+
+
+% Pair
+%
+
+\newcommand*{\ConsPair}[3]{#3{#1}{#2}}
+\newcommand*{\Fst}[1]{#1\True}
+\newcommand*{\Snd}[1]{#1\False}
+\newcommand*{\Curry}[3]{#1{\ConsPair{#2}{#3}}}
+\newcommand*{\Uncurry}[2]{#1{\Fst{#2}}{\Snd{#2}}}
+\newcommand*{\Swap}[1]{\ConsPair{\Snd{#1}}{\Fst{#1}}}
+\newcommand*{\Pair}[1]{\Pair@#1}
+\def\Pair@#1,#2{\ConsPair{#1}{#2}}
+\newcommand*{\Unpair}[1]{\Fst{#1},\Snd{#1}}
+\newcommand*{\ShowPair}[1]{(\Unpair{#1})}
+\newcommand*{\PairToList}[1]{\Cons{\Fst{#1}}{\Cons{\Snd{#1}}\Nil}}
+
+
+% Maybe
+%
+
+\newcommand*{\Nothing}{\False}
+\newcommand*{\Just}[3]{#2{#1}}
+\newcommand*{\IsJust}[1]{#1{\Const\True}\False}
+\newcommand*{\IsNothing}{\Compose\Not\IsJust}
+\newcommand*{\FromJust}[1]{#1\Id{\ErrorMsg{FromJust Nothing}}}
+\newcommand*{\MaybeToList}[1]{#1\Singleton\Nil}
+\newcommand*{\ListToMaybe}{\Foldr\ListToMaybe@\Nothing}
+\newcommand*{\ListToMaybe@}[2]{\Just{#1}}
+
+
+% Anonymous procedures
+%
+
+\newcounter{ProcCounter}
+\newcommand*{\Proc}{%
+    \stepcounter{ProcCounter}%
+    \ProcNamed@{Proc\the\value{ProcCounter}}%
+}
+\newcommand*{\ProcNamed@}[2]{%
+    \expandafter\newcommand\csname#1\endcsname[1]{#2}\csuse{#1}%
+}
+
+
+% Misc
+%
+
+\newcommand*{\Unuse}[1]{}
+\newcommand*{\PrependComma}[2]{,#1#2}% no spaces
+
+\newcommand*{\In}[2]{\Foldr\In@{#2}{\List{#1}}}
+\newcommand*{\In@}[2]{\begin{#1}#2\end{#1}}
+
+% Arithmetic
+\newcommand*{\NumInc}[1]{\ifcase#1 %
+    1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or%
+    11\or12\or13\or14\or15\or16\or17\or18\or19\or20\or%
+    21\or22\or23\or24\or25\or26\or27\or28\or29\or30\or%
+    31\or32\or33\or34\or35\or36\or37\or38\or39\or40\or%
+    41\or42\or43\or44\or45\or46\or47\or48\or49\or50\or%
+    51\or52\or53\or54\or55\or56\or57\or58\or59\or60\or%
+    61\or62\or63\or64\or65\or66\or67\or68\or69\or70\or%
+    71\or72\or73\or74\or75\or76\or77\or78\or79\or80\or%
+    81\or82\or83\or84\or85\or86\or87\or88\or89\or90\or%
+    91\or92\or93\or94\or95\or96\or97\or98\or99\or100\else\Undefined\fi%
+}
+\newcommand*{\NumDec}[1]{\ifcase#1\Undefined\or0\or%
+    1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or%
+    11\or12\or13\or14\or15\or16\or17\or18\or19\or20\or%
+    21\or22\or23\or24\or25\or26\or27\or28\or29\or30\or%
+    31\or32\or33\or34\or35\or36\or37\or38\or39\or40\or%
+    41\or42\or43\or44\or45\or46\or47\or48\or49\or50\or%
+    51\or52\or53\or54\or55\or56\or57\or58\or59\or60\or%
+    61\or62\or63\or64\or65\or66\or67\or68\or69\or70\or%
+    71\or72\or73\or74\or75\or76\or77\or78\or79\or80\or%
+    81\or82\or83\or84\or85\or86\or87\or88\or89\or90\or%
+    91\or92\or93\or94\or95\or96\or97\or98\or99\or100\else\Undefined\fi%
+}
+\newcommand*{\NumPlus}[2]{\Nth{#2}{\Iterate\NumInc{#1}}}
+\newcommand*{\NumMinus}[2]{\Nth{#2}{\Iterate\NumDec{#1}}}
+\newcommand*{\NumMult}[2]{\Nth{#2}{\Iterate{\NumPlus{#1}}{0}}}
+\newcommand*{\NumLess}{\Lessthan}
+\newcommand*{\NumGtr}[2]{\Iftex{\ifnum#1>#2 }}
+\newcommand*{\NumEq}[2]{\Iftex{\ifnum#1=#2 }}
+\newcommand*{\DimEq}[2]{\Iftex{\ifdim#1=#2 }}
+
