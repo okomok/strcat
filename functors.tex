@@ -32,9 +32,9 @@ satisfying the \textit{functoriality}:
 An \textit{infrafunctor} is a functor without the requirement of functoriality.
 
 
-\subsection{Functorial Boxes}
+\subsection{Functorial Tubes}
 
-In string diagrams, a functor is represented as an open box
+In string diagrams, a functor is represented as a tube
 
 \In{align*}{
     \strdgathered{
@@ -77,7 +77,7 @@ Placeholders make it simple:
         }
     } 
 }
-One can check the functoriality ensures any string like
+One can check the functoriality ensures any tube like
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -94,7 +94,7 @@ One can check the functoriality ensures any string like
         }
     }
 }
-be unambiguous. "Join then box" is the same as "Box then join".
+be unambiguous. "Join then tube" is the same as "Tube then join".
 
 
 \subsection{Composite Functors}
@@ -143,7 +143,7 @@ An \textit{idenity functor}
 \In{align*}{
     \operatorname{Id}_{\cat{C}} : \cat{C} \to \cat{C}
 }
-is depicted as a transparent box
+is depicted as
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -200,7 +200,33 @@ A functor whose domain is a product category
 \In{align*}{
     F : \cat{A} \times \cat{B} \to \cat{C}
 }
-is called a \textit{binary functor} or \textit{bifunctor}.
+is called a \textit{binary functor} or \textit{bifunctor}:
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdfork{
+                \strdxscale{0.7}\strdljump
+                ,\strdmid
+                ,\strdcell{?}
+                ,\strdmid
+            }
+            ,\strdfork{
+                \strdxscale{0.7}\strdrjump
+                ,\strdmid
+                ,\strdcell{?}
+                ,\strdmid
+            }
+        }
+        ,\strdfork{
+            \strdtube{
+                \strdtubestart
+                ,\strdtubeextend{1}{1},\strdcutoff\strdtubebound
+                ,\strdydouble\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+                ,\strdcutoff\strdtubebound
+            }
+        }
+    }
+}
 Spelling out the definition of functoriality, one can check a diagram like
 \In{align*}{
     \strdgathered{
@@ -225,7 +251,7 @@ Spelling out the definition of functoriality, one can check a diagram like
                 \strdtubestart
                 ,\strdtubeextend{1}{1}
                 ,\strdcutoff\strdtubebound
-                ,\strdyscale{1.5}\strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
+                ,\strdyscale{1.5}\strdtubemid,\strdat{Left End}{\strdoverlabel{F}}
                 ,\strdyscale{1.5}\strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
                 ,\strdcutoff\strdtubebound
             }
@@ -233,6 +259,43 @@ Spelling out the definition of functoriality, one can check a diagram like
     }
 }
 is unambiguous.
+
+\subsection{Partial Applications}
+
+Given a binary functor $F : \cat{A} \times \cat{B} \to \cat{C}$, a \textit{partially applied} functor
+\In{align*}{
+    \Lambda_B F(A,B) &: \cat{B} \to \cat{C} \text{ or briefly }\\
+    F(A,?) &: \cat{B} \to \cat{C}
+}
+is defined by
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdfork{
+                \strdxscale{0.7}\strdljump
+                ,\strdydouble\strdmid,\strdrlabel{A}
+            }
+            ,\strdfork{
+                \strdxscale{0.7}\strdrjump
+                ,\strdmid
+                ,\strdcell{?}
+                ,\strdmid
+            }
+        }
+        ,\strdfork{
+            \strdtube{
+                \strdtubestart
+                ,\strdtubeextend{1}{1},\strdcutoff\strdtubebound
+                ,\strdydouble\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+                ,\strdcutoff\strdtubebound
+            }
+        }
+    }
+}
+The definition of $F(?,B)$ is an exercise. 
+
+
+
 % One can spell out the functoriality:
 % \In{align*}{
 %     \strdgathered{

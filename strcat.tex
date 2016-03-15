@@ -2,27 +2,22 @@
 \title{Category Theory with Strings}
 \author{Shunsuke Sogame}
 
-%\includeonly{categories}
+%\includeonly{category_of_sets}
 
 \usepackage{my,cat,lambdax,strd}
-\usepackage{amsmath}
-\usepackage{theorem}
+%\usepackage{theorem}
 
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=false,
-    pdfborder={0 0 0},
-}
+\include{hypersetup}
 
-\theoremstyle{break}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{counter}[theorem]{Counterexample}
-\numberwithin{theorem}{section}
+% \theoremstyle{break}
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{definition}[theorem]{Definition}
+% \newtheorem{example}[theorem]{Example}
+% \newtheorem{counter}[theorem]{Counterexample}
+% \numberwithin{theorem}{section}
 
 \begin{document}
 
@@ -34,24 +29,8 @@
 \include{categories}
 \include{functors}
 \include{natural_transformations}
+\include{category_of_sets}
 \include{yoneda_lemma}
-
-
-
-
-\section{Monoidal Category of Sets}
-
-TODO
-\subsection{Currying}
-
-TODO
-\subsection{Naming}
-
-TODO
-\subsection{Naturality Preservation}
-
-TODO
-
 
 
 \section{Representations}
@@ -60,19 +39,12 @@ TODO
 \section{Limits}
 TODO
 
-\subsection{Monicality}
-todo
-
 \subsection{Products}
 TODO
 
 \subsection{Equalizers}
 TODO
-
-\begin{definition}[Fork]
-    TODO
-\end{definition}
-
+\subsubsection{Fork}
 
 \section{Adjunctions}
 

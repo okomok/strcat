@@ -779,9 +779,9 @@
     \draw[strd draw]{ (#1 Left End) -- (#1 Right End) };%
 }
 
-% tubebackground
+% background
 \newcommand*{\strdbackground}{\Compose\strdwith\strdputbackground}
-\newcommand*{\strdputbackground}[2]{%
+\newcommand*{\strdputbackground}[2]{% {color}{node}
     \strdonlayer@{background}{
         \fill[sharp corners,draw,#1]{
             ($(#2 Left Start)+(0,\strdnoiseunit)$)

@@ -77,6 +77,39 @@ An idenity is indistinguishable from an object:
 Check these diagrams create no ambiguity thanks to the coherence.
 
 
+\subsection{Isomorphisms}
+
+An isomorphism is a pair of morphisms
+\In{align*}{
+    f : A \to B\\
+    g : B \to A
+}
+satisfying the \textit{invertibility}
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+        ,\strdcell{g}
+        ,\strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    } =\
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+    } \ \ \text{and}\ \
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+        ,\strdcell{g}
+        ,\strdmid,\strdrlabel{B}
+    } =\
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+    }
+}
+
+
+
 \subsection{Functional Boxes}
 
 Given categories $\cat{C}$ and $\cat{C}'$, a function
