@@ -1,11 +1,222 @@
 \section{Yoneda Lemma}
-TODO
 
 \subsection{Yoneda Bijection}
-TODO
+
+Given a functor $F : \cat{C}\catop \to \catSet$ and an object $A$ in $\cat{C}$, %
+a natural tranformation of the form
+\In{align*}{
+    (\tau_X &: \cat{C}(X,A) \to FX)_ X \text{ or briefly}\\
+    \tau &: \cat{C}(\catph{-},A) \to F
+}
+can be depicted as
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{\strdupsidedown{\catph{?}}}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdcutoff\strdtubebound
+        ,\strdtube{
+            \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+        }
+        ,\strdtwincell{\tau}
+        ,\strdtubeof{strd frame}\strdtubeclose
+    } \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestart
+        ,\strdcutoff\strdtubebound
+        ,\strdtube{
+            \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+        }
+        ,\strdbox{1}{1}{
+            \strdmid
+            ,\strdcell{\strdupsidedown{\catph{?}}}
+            ,\strdmid,\strdrlabel{A}
+        },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{\tau}}
+    }
+}
+owing to the naturality. The \textit{Yoneda bijection} is defined as 
+\In{align*}{
+    \operatorname{Nat}_X(\cat{C}(X,A),FX) &\cong FA\\
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{\strdupsidedown{\catph{?}}}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdcutoff\strdtubebound
+        ,\strdtube{
+            \strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
+        }
+        ,\strdtwincell{\tau}
+        ,\strdtubeof{strd frame}\strdtubeclose
+    } &\mapsto
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdcutoff\strdtubebound
+        ,\strdtube{
+            \strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
+        }
+        ,\strdtwincell{\tau}
+        ,\strdtubeof{strd frame}\strdtubeclose
+    }\\
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{\strdupsidedown{\catph{?}}}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdnone{\strdtwincell{\tau}}
+            ,\strdtubemid
+            ,\strdwidecell{1}{1}{a}
+        }
+    } &\mymapsfrom
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdnone{\strdtwincell{\tau}}
+            ,\strdwidecell{1}{1}{a}
+        }
+    }
+}
+The Yoneda lemma states that the bijection is actually bijective and natural in $F$ and $A$. %
+But now the proof is (on my soul) trivial.
+
 
 \subsection{Yoneda Embedding}
-TODO
+
+The \textit{Yoneda embedding} is defined as
+\In{align*}{
+    \Lambda_A \Lambda_X \cat{C}(X,A) : \cat{C} &\to [\cat{C}\catop,\catSet]\\
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    } &\mapsto\,
+    \strdgathered{
+        \strdtubeof{}{
+            \strdtubestart%line
+            ,\strdtubemid,\strdbackground{strd roadcolor}
+            ,\strdat{Left}{\strdrlabel{B}}
+            ,\strdat{Left End}{\strdcell{\Identity{f}}}
+            ,\strdtubemid,\strdbackground{strd roadcolor}
+            ,\strdat{Left}{\strdrlabel{A}}
+        }
+    } \,=\,
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+        ,\strdcell{\catph{?}}
+        ,\strdmid
+    } 
+}
+using the diagram of hom functors. In short,
+\In{align*}{
+    \strdgathered{
+        \strdtubeof{}{
+            \strdtubestart%line
+            ,\strdtubemid,\strdbackground{strd roadcolor}
+            ,\strdat{Left End}{\strdcell{\texttt{?}}}
+            ,\strdtubemid,\strdbackground{strd roadcolor}
+        }
+    }
+}
+
 
 \subsection{Yoneda Principle}
-TODO
+
+A natural transformation of the form
+\In{align*}{
+    (\tau_X : \cat{C}(X,A) \to \cat{C}(X,B))_X
+}
+can be depicted as
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdfork{
+            \strdmid,\strdrlabel{A}
+            ,\strdcell{\catph{?}}
+            ,\strdmid
+        }
+        ,\strdtubeof{strd frame}{
+            \strdtubestart
+            ,\strdtubeunclose
+            ,\strdtwincell{\tau}
+        }
+    }
+}
+In case $F = \Lambda_X\cat{C}(X,B)$, the Yoneda bijection is expanded to
+\In{align*}{
+    \catNat_X(\cat{C}(X,A),\cat{C}(X,B)) &\cong \cat{C}(A,B)\\
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdfork{
+            \strdmid,\strdrlabel{A}
+            ,\strdcell{\catph{?}}
+            ,\strdmid
+        }
+        ,\strdtubeof{strd frame}{
+            \strdtubestart
+            ,\strdtubeunclose
+            ,\strdtwincell{\tau}
+        }
+    } &\mapsto
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdfork{
+            \strdmid,\strdrlabel{A}
+            ,\strdmid
+        }
+        ,\strdtubeof{strd frame}{
+            \strdtubestart
+            ,\strdtubeunclose
+            ,\strdtwincell{\tau}
+        }
+    } \\
+    \strdgathered{
+        \strdnone{
+            \strdfork{
+                \strdtubestart
+                ,\strdtubemid
+                ,\strdtwincell{\tau}
+            }
+        }
+        ,\strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+        ,\strdcell{\catph{?}}
+        ,\strdmid
+    } & \mymapsfrom
+    \strdgathered{
+        \strdnone{
+            \strdfork{
+                \strdtubestart
+                ,\strdtubemid
+                ,\strdtwincell{\tau}
+            }
+        }
+        ,\strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    }
+}
+You will see the second mapping is the Yoneda embedding so that %
+it is full and faithful.

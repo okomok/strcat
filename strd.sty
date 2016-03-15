@@ -758,11 +758,18 @@
     \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
 }
 
-% tubejoin
-\newcommand*{\strdtubejoin}{\strdcomposeC\strdtubejoinC}
-\newcommand*{\strdtubejoinC}[2]{% {newid}{previd}
+% tubeclose
+\newcommand*{\strdtubeclose}{\strdcomposeC\strdtubecloseC}
+\newcommand*{\strdtubecloseC}[2]{% {newid}{previd}
     \strdtubejumpC{#1}{#2}
-    \strddraw@{ (#1 Left Start) -- (#1 Left) -- (#1 Right) -- (#1 Right Start) }%
+    \strddraw@{ (#1 Left Start) -- (#1 Left End) -- (#1 Right End) -- (#1 Right Start) }%
+}
+
+% tubeunclose
+\newcommand*{\strdtubeunclose}{\strdcomposeC\strdtubeuncloseC}
+\newcommand*{\strdtubeuncloseC}[2]{% {newid}{previd}
+    \strdtubejumpC{#1}{#2}
+    \strddraw@{ (#1 Left End) -- (#1 Left Start) -- (#1 Right Start) -- (#1 Right End) }%
 }
 
 % tubeend

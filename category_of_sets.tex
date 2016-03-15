@@ -121,14 +121,18 @@ We don't distinguish these two diagrams. In particular case $A$ is the singleton
         \strdmid,\strdrlabel{C}
         ,\strdcell{h}
         ,\strdmid,\strdrlabel{B}
-    } \sim\,
+    } \,\sim\,
     \strdgathered{
-        \strdtubestart%line
-        ,\strdtubemid,\strdbackground{strd roadcolor}
-        ,\strdwidecell{1}{1}{h}
-        ,\strdat{Left}{\strdrlabel{C}}
-        ,\strdat{Right}{\strdllabel{B}}
+        \strdroad\strdmid,\strdroadlabel{C}{B}
+        ,\strdcell{h}
     }
+    % \strdgathered{
+    %     \strdtubestart%line
+    %     ,\strdtubemid,\strdbackground{strd roadcolor}
+    %     ,\strdwidecell{1}{1}{h}
+    %     ,\strdat{Left}{\strdrlabel{C}}
+    %     ,\strdat{Right}{\strdllabel{B}}
+    % }
 }
 is called a \textit{naming}, which turns a function to an element of hom-sets.
 
@@ -170,7 +174,7 @@ defined by
         \strdmid,\strdrlabel{B\myprime}
         ,\strdcell{b}
         ,\strdmid,\strdrlabel{B}
-        ,\strdcell{?}
+        ,\strdcell{\texttt{?}}
         ,\strdmid,\strdrlabel{A}
         ,\strdcell{a}
         ,\strdmid,\strdrlabel{A\myprime}
@@ -183,8 +187,8 @@ This definition will inspire you to depict the hom functors as
         \strdtubeof{}{
             \strdtubestart%line
             ,\strdtubemid,\strdbackground{strd roadcolor}
-            ,\strdat{Left End}{\strdcell{?}}
-            ,\strdat{Right End}{\strdcell{\strdupsidedown{?}}}
+            ,\strdat{Left End}{\strdcell{\texttt{2}}}
+            ,\strdat{Right End}{\strdcell{\strdupsidedown{\texttt{1}}}}
             ,\strdtubemid,\strdbackground{strd roadcolor}
         }
     } \ \ \text{or}\ \
@@ -192,11 +196,11 @@ This definition will inspire you to depict the hom functors as
         \strdyhalf{\strdroad\strdmid}
         ,\strdfork{
             \strdroad\strdleft
-            ,\strdcell{?}
+            ,\strdcell{\texttt{2}}
         }
         ,\strdfork{
             \strdroad\strdright
-            ,\strdcell{?}
+            ,\strdcell{\texttt{1}}
         }
         ,\strdroad\strdmid
         ,\strdyhalf{\strdroad\strdmid}
@@ -214,7 +218,7 @@ are respectively
             \strdtubestart%line
             ,\strdtubemid,\strdbackground{strd roadcolor}
             ,\strdat{Right End}{\strdllabel{A}}
-            ,\strdat{Left End}{\strdcell{?}}
+            ,\strdat{Left End}{\strdcell{\texttt{?}}}
             ,\strdtubemid,\strdbackground{strd roadcolor}
         }
     } \ , \
@@ -222,7 +226,7 @@ are respectively
         \strdtubeof{}{
             \strdtubestart%line
             ,\strdtubemid,\strdbackground{strd roadcolor}
-            ,\strdat{Right End}{\strdcell{\strdupsidedown{?}}}
+            ,\strdat{Right End}{\strdcell{\strdupsidedown{\texttt{?}}}}
             ,\strdat{Left End}{\strdrlabel{B}}
             ,\strdtubemid,\strdbackground{strd roadcolor}
         }

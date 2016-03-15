@@ -66,7 +66,7 @@ Placeholders make it simple:
     \strdgathered{
         \strdfork{
             \strdmid,\strdrlabel{}
-            ,\strdcell{?}
+            ,\strdcell{\texttt{?}}
             ,\strdmid,\strdrlabel{}
         }
         ,\strdtube{
@@ -113,7 +113,7 @@ is depicted as
     \strdgathered{
         \strdfork{
             \strdmid
-            ,\strdcell{\Identity{?}}
+            ,\strdcell{\Identity{\texttt{?}}}
             ,\strdmid
         }
         ,\strdtubestart
@@ -148,7 +148,7 @@ is depicted as
     \strdgathered{
         \strdfork{
             \strdmid,\strdrlabel{}
-            ,\strdcell{?}
+            ,\strdcell{\texttt{?}}
             ,\strdmid,\strdrlabel{}
         }
         ,\strdtube{
@@ -160,7 +160,7 @@ is depicted as
     } \mydefeq
     \strdgathered{
         \strdmid,\strdrlabel{}
-        ,\strdcell{?}
+        ,\strdcell{\texttt{?}}
         ,\strdmid,\strdrlabel{}
     }
 }
@@ -180,7 +180,7 @@ A contravariant functor is depicted as
     \strdgathered{
         \strdfork{
             \strdmid
-            ,\strdcell{\strdupsidedown{?}}
+            ,\strdcell{\strdupsidedown{\texttt{?}}}
             ,\strdmid
         }
         ,\strdtube{
@@ -200,20 +200,20 @@ A functor whose domain is a product category
 \In{align*}{
     F : \cat{A} \times \cat{B} \to \cat{C}
 }
-is called a \textit{binary functor} or \textit{bifunctor}:
+is called a \textit{binary functor} or \textit{bifunctor}. With numbered placeholders, it is depicted as
 \In{align*}{
     \strdgathered{
         \strdfork{
             \strdfork{
                 \strdxscale{0.7}\strdljump
                 ,\strdmid
-                ,\strdcell{?}
+                ,\strdcell{\texttt{1}}
                 ,\strdmid
             }
             ,\strdfork{
                 \strdxscale{0.7}\strdrjump
                 ,\strdmid
-                ,\strdcell{?}
+                ,\strdcell{\texttt{2}}
                 ,\strdmid
             }
         }
@@ -265,7 +265,7 @@ is unambiguous.
 Given a binary functor $F : \cat{A} \times \cat{B} \to \cat{C}$, a \textit{partially applied} functor
 \In{align*}{
     \Lambda_B F(A,B) &: \cat{B} \to \cat{C} \text{ or briefly }\\
-    F(A,?) &: \cat{B} \to \cat{C}
+    F(A,\texttt{?}) &: \cat{B} \to \cat{C}
 }
 is defined by
 \In{align*}{
@@ -278,7 +278,7 @@ is defined by
             ,\strdfork{
                 \strdxscale{0.7}\strdrjump
                 ,\strdmid
-                ,\strdcell{?}
+                ,\strdcell{\texttt{?}}
                 ,\strdmid
             }
         }
@@ -292,7 +292,7 @@ is defined by
         }
     }
 }
-The definition of $F(?,B)$ is an exercise. 
+The definition of $F(\texttt{?},B)$ is an exercise. 
 
 
 
