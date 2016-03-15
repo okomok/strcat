@@ -385,7 +385,11 @@ all small categories and whose morphisms are functors:
 \subsection{Full and Faithful Functors}
 
 A functor $F : \cat{C} \to \cat{D}$ is called \textit{full and faithful} %
-if for each object $A$ and $B$ in $\cat{C}$, there is a functional box such that
+if for each object $A$ and $B$ in $\cat{C}$, the family 
+\In{align*}{
+    (F(f) : FA \to FB)_{f : A \to B}
+}
+has the inverse, that is, there is a functional box such that
 \In{align*}{
     \strdgathered{
         \strdfork{
