@@ -381,3 +381,186 @@ all small categories and whose morphisms are functors:
 }
 , where composite functors join the strings.
 
+
+\subsection{Full and Faithful Functors}
+
+A functor $F : \cat{C} \to \cat{D}$ is called \textit{full and faithful} %
+if for each object $A$ and $B$ in $\cat{C}$, there is a functional box such that
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{B}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdwidecell{1}{1}{g}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdnone{\strdwidecell{1}{1}{g}}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } \iff
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{
+                \strdmid,\strdrlabel{B}
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdtube{
+                \strdtubestart
+                ,\strdtubemid
+                ,\strdwidecell{1}{1}{g}
+                ,\strdtubemid
+            }
+        }
+        ,\strdmid,\strdrlabel{A}
+    } 
+}
+One can make the box better-looking:
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdfork{
+            \strdmid
+            ,\strdmid
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdfork{
+            \strdtube{
+                \strdtubestart
+                ,\strdtubemid
+                ,\strdwidecell{1}{1}{g}
+                ,\strdtubemid
+            }
+        }
+        ,\strdtubeof{strd frame}{
+            \strdtubestart
+            ,\strdtubesqcap{1}{1}
+            ,\strdtubesqcup{1}{1}
+        }
+    }
+}
+, which has a functoriality-like property:
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{C}
+        ,\strdfork{
+            \strdmid
+            ,\strdmid
+            ,\strdmid,\strdrlabel{B}
+            ,\strdfork{
+                \strdmid
+                ,\strdmid
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdfork{
+                \strdtube{
+                    \strdtubestart
+                    ,\strdtubemid
+                    ,\strdwidecell{1}{1}{g}
+                    ,\strdtubemid
+                }
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubesqcap{1}{1}
+                ,\strdtubesqcup{1}{1}
+            }
+        }
+        ,\strdfork{
+            \strdtube{
+                \strdtubestart
+                ,\strdtubemid
+                ,\strdwidecell{1}{1}{g\myprime}
+                ,\strdtubemid
+            }
+        }
+        ,\strdtubeof{strd frame}{
+            \strdtubestart
+            ,\strdtubesqcap{1}{1}
+            ,\strdtubesqcup{1}{1}
+        }
+    } \,=\,
+    \strdgathered{
+        \strdmid,\strdrlabel{C}
+        ,\strdfork{
+            \strdmid
+            ,\strdmid,\strdrlabel{B}
+            ,\strdmid
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdfork{
+            \strdtube{
+                \strdtubestart
+                ,\strdtubemid
+                ,\strdwidecell{1}{1}{g\myprime}
+                ,\strdtubemid
+                ,\strdwidecell{1}{1}{g}
+                ,\strdtubemid
+            }
+        }
+        ,\strdtubeof{strd frame}{
+            \strdtubestart
+            ,\strdtubesqcap{1}{1}
+            ,\strdtubemid
+            ,\strdtubesqcup{1}{1}
+        }
+    }
+}
+As a result,
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{B}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdwidecell{1}{1}{g}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } : \text{invertible} \iff
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdfork{
+            \strdmid
+            ,\strdmid
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdfork{
+            \strdtube{
+                \strdtubestart
+                ,\strdtubemid
+                ,\strdwidecell{1}{1}{g}
+                ,\strdtubemid
+            }
+        }
+        ,\strdtubeof{strd frame}{
+            \strdtubestart
+            ,\strdtubesqcap{1}{1}
+            ,\strdtubesqcup{1}{1}
+        }
+    } : \text{invertible}
+}

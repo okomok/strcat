@@ -5,8 +5,7 @@
 Given a functor $F : \cat{C}\catop \to \catSet$ and an object $A$ in $\cat{C}$, %
 a natural tranformation of the form
 \In{align*}{
-    (\tau_X &: \cat{C}(X,A) \to FX)_ X \text{ or briefly}\\
-    \tau &: \cat{C}(\catph{-},A) \to F
+    (\tau_X &: \cat{C}(X,A) \to FX)_ X
 }
 can be depicted as
 \In{align*}{
@@ -42,7 +41,7 @@ can be depicted as
 }
 owing to the naturality. The \textit{Yoneda bijection} is defined as 
 \In{align*}{
-    \operatorname{Nat}_X(\cat{C}(X,A),FX) &\cong FA\\
+    \mylhs{\catNat_X(\cat{C}(X,A),FX)} &\cong \myrhs{FA}\\
     \strdgathered{
         \strdfork{
             \strdmid
@@ -96,7 +95,7 @@ owing to the naturality. The \textit{Yoneda bijection} is defined as
         }
     }
 }
-The Yoneda lemma states that the bijection is actually bijective and natural in $F$ and $A$. %
+The Yoneda lemma states this is actually bijective and natural in $F$ and $A$. %
 But now the proof is (on my soul) trivial.
 
 
@@ -104,7 +103,7 @@ But now the proof is (on my soul) trivial.
 
 The \textit{Yoneda embedding} is defined as
 \In{align*}{
-    \Lambda_A \Lambda_X \cat{C}(X,A) : \cat{C} &\to [\cat{C}\catop,\catSet]\\
+    \mylhs{\Lambda_A \Lambda_X \cat{C}(X,A) : \cat{C}} &\to \myrhs{[\cat{C}\catop,\catSet]}\\
     \strdgathered{
         \strdmid,\strdrlabel{B}
         ,\strdcell{f}
@@ -165,7 +164,7 @@ can be depicted as
 }
 In case $F = \Lambda_X\cat{C}(X,B)$, the Yoneda bijection is expanded to
 \In{align*}{
-    \catNat_X(\cat{C}(X,A),\cat{C}(X,B)) &\cong \cat{C}(A,B)\\
+    \mylhs{\catNat_X(\cat{C}(X,A),\cat{C}(X,B))} &\cong \myrhs{\cat{C}(A,B)}\\
     \strdgathered{
         \strdmid,\strdrlabel{B}
         ,\strdfork{
@@ -218,5 +217,5 @@ In case $F = \Lambda_X\cat{C}(X,B)$, the Yoneda bijection is expanded to
         ,\strdmid,\strdrlabel{A}
     }
 }
-You will see the second mapping is the Yoneda embedding so that %
+You will notice the second mapping is the Yoneda embedding so that %
 it is full and faithful.
