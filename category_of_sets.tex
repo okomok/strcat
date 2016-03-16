@@ -93,7 +93,7 @@ A space-saving form is depicted as
 Note that the order of objects is flipped. %
 This is resulting from the unfortunate convention that we write $b = h(a)$ but not $h : B \leftarrow A$.
 \mynewline
-The function composition can be depicted as
+The composition of morphisms can be depicted as
 \In{align*}{
     \strdgathered{
         \strdtubestart
@@ -115,7 +115,7 @@ The function composition can be depicted as
     }
 }
 \mynewline
-Identity functions can be depicted as
+Identity morphisms can be depicted as
 \In{align*}{
     \strdgathered{
         \strdtubestart
@@ -126,13 +126,14 @@ Identity functions can be depicted as
         ,\strddeadend
     }
 }
-Write down the associativity and unitality with these diagrams. 
+As an exercise, write down the associativity and unitality using these diagrams. 
 
 
 \subsection{Currying}
 
-In particular case $\cat{C} = \catSet$, move the right-side leg up and down:
+In particular case $\cat{C} = \catSet$, there exists the \textit{curry bijection}
 \In{align*}{
+    \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))}\\
     \strdgathered{
         \strdmid,\strdrlabel{C}
         ,\strdwidecell{1}{1}{h}
@@ -140,18 +141,19 @@ In particular case $\cat{C} = \catSet$, move the right-side leg up and down:
         ,\strdtubemid
         ,\strdat{Left}{\strdrlabel{A}}
         ,\strdat{Right}{\strdrlabel{B}}
-    } \sim\,
+    } &\sim
     \strdgathered{
         \strdtubestart%line
         ,\strdtubemid,\strdbackground{strd roadcolor}
         ,\strdwidecell{1}{1}{h}
+        ,\strdnone{\strdat{Left}{\strdllabel{C}}}
         ,\strdat{Left}{\strdrlabel{C}}
         ,\strdat{Right}{\strdllabel{B}}
         ,\strdmid,\strdrlabel{A}
     }
 }
-This is the \textit{currying} in string diagrams. %
-We don't distinguish these two diagrams.
+We don't distinguish the two diagrams, for %
+the naturality of the bijection ensures "Move the right-side leg up and down" works correct.
 \mynewline
 In case $A$ is the singleton set,
 \In{align*}{

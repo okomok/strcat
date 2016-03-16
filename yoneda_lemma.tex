@@ -1,6 +1,6 @@
-\section{Yoneda Lemma}
+\section{The Yoneda Lemma}
 
-\subsection{Yoneda Bijection}
+\subsection{The Yoneda Bijection}
 
 Given a functor $F : \cat{C}\catop \to \catSet$ and an object $A$ in $\cat{C}$, %
 a natural tranformation of the form
@@ -39,7 +39,9 @@ can be depicted as
         },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{\tau}}
     }
 }
-owing to the naturality. The \textit{Yoneda bijection} is defined as 
+owing to the naturality.
+\mynewline
+The \textit{Yoneda bijection} is defined as 
 \In{align*}{
     \mylhs{\catNat_X(\cat{C}(X,A),FX)} &\cong \myrhs{FA}\\
     \strdgathered{
@@ -99,7 +101,7 @@ The \textit{Yoneda lemma} states this is actually bijective and natural in $F$ a
 But now the proof is (on my soul) trivial.
 
 
-\subsection{Yoneda Embedding}
+\subsection{The Yoneda Embedding}
 
 The \textit{Yoneda embedding} is defined as
 \In{align*}{
@@ -140,7 +142,7 @@ using the diagram of hom functors. In short,
 }
 
 
-\subsection{Yoneda Principle}
+\subsection{The Yoneda Principle}
 
 A natural transformation of the form
 \In{align*}{
@@ -162,7 +164,7 @@ can be depicted as
         }
     }
 }
-In case $F = \Lambda_X\cat{C}(X,B)$, the Yoneda bijection is expanded to
+In case $F \mydefeq \cat{C}(\catph{-},B)$, the Yoneda bijection is expanded to
 \In{align*}{
     \mylhs{\catNat_X(\cat{C}(X,A),\cat{C}(X,B))} &\cong \myrhs{\cat{C}(A,B)}\\
     \strdgathered{
@@ -219,3 +221,7 @@ In case $F = \Lambda_X\cat{C}(X,B)$, the Yoneda bijection is expanded to
 }
 You will notice the second mapping is the Yoneda embedding so that %
 it is full and faithful.
+
+\subsection{The Variant}
+TODO 
+

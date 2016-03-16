@@ -1123,10 +1123,12 @@
 % String transformations
 %
 
-\newcommand*{\strdat}[2]{% {at}{stm}
+\newcommand*{\strdat}[1]{\strdseqin{\strdat@{#1}}}
+\newcommand*{\strdat@}[2]{% {at}{stm}
     \strdfork@{\Then{\strdemptyat{#1}}{#2}}%
 }
-\newcommand*{\strdtubeat}[2]{% {at}{stm}
+\newcommand*{\strdtubeat}[1]{\strdseqin{\strdtubeat@{#1}}}
+\newcommand*{\strdtubeat@}[2]{% {at}{stm}
     \strdfork@{\Then{\strdtubeemptyat{#1}}{#2}}%
 }
 
@@ -1207,4 +1209,9 @@
 \newcommand*{\strdupsidedown}[1]{\rotatebox[origin=c]{180}{\ensuremath{#1}}}
 \newcommand*{\strdunraise}[1]{\mathstrut\raisebox{-\depth}{\ensuremath{#1}}}
 \newcommand*{\strdhspaced}[2]{\hspace{#1}#2\hspace{#1}}
+
+
+% Proof
+\tikzset{strd proof/.style={sharp corners,thick,solid,draw,fill=white,rectangle,minimum size=5pt,inner sep=0pt,outer sep=0pt}}
+\newenvironment{strdproof}{\emph{Proof.}}{\hfill\ensuremath{\strdgathered{\strdcellof{strd proof}{}}}}
 

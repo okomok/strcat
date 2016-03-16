@@ -1,2 +1,246 @@
 \section{Representations}
-TODO
+
+\subsection{Definition}
+
+Given a fucntor $F : \cat{C} \to \catSet$, a \emph{representation} of $F$ is a pair of 
+\In{enumerate}{
+    \item an object $A$ in \cat{C}
+    \item a natural bijection $(\tau_X : FX \cong \cat{C}(A,X)) _ X$
+}
+The bijectivity can be expressed using cute boxes
+\In{align*}{
+    \strdgathered{
+        \strdmid
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    } =\,
+    \strdgathered{
+        \strdmid
+        ,\strdfork{
+            \strdmid
+        }
+        ,\strdfork{
+            \strdtubestart
+            ,\strdtwincell{\tau}
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{a}
+        }
+        ,\strdfork{
+            \strdtubestart
+            ,\strdtubeof{strd frame}{
+                \strdtubesqcap{1}{1}
+                ,\strdyscale{0.7}\strdtubeclose
+            }
+            ,\strdmid,\strdrlabel{A}
+        }
+    } \iff
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdfork{
+            \strdtubestartline
+            ,\strdtube\strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubeof{strd frame}\strdtubeclose
+        }
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdfork{
+            \strdtubestartline
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{a}
+        }
+    }
+}
+owing to the naturality.
+
+\subsection{Uniqueness of Representations}
+
+Representations are unique up to unique isomorphism, meaning that %
+given another representation $(A\myprime,\tau\myprime)$, 
+\In{align*}{
+    &
+    \strdgathered{
+        \strdmid
+        ,\strdcell{\catph{?}}
+        ,\strdmid,\strdrlabel{A\myprime}
+        ,\strdcell{\varphi}
+        ,\strdmid,\strdrlabel{A}
+    } \,=\,
+    \strdgathered{
+        \strdmid
+        ,\strdfork{
+            \strdmid
+            ,\strdcell{\catph{?}}
+            ,\strdmid,\strdrlabel{A\myprime}
+        }
+        ,\strdtubestart
+        ,\strdfork{
+            \strdtwincell{\tau}
+            ,\strdtube\strdtubemid
+            ,\strdtwincell{\tau\strdrlap\myprime}
+            ,\strdtubeof{strd frame}\strdtubeclose
+        }
+        ,\strdfork{
+            \strdtubeof{strd frame}{
+                \strdtubesqcap{1}{1}
+                ,\strdtubemid
+                ,\strdyscale{0.7}\strdtubeclose
+            }
+            ,\strdmid,\strdrlabel{A}
+        }
+    } : \text{invertible} \\
+    \iff\, &
+    \strdgathered{
+        \strdmid,\strdrlabel{A\myprime}
+        ,\strdcell{\varphi}
+        ,\strdmid,\strdrlabel{A}
+    } \,=\,
+    \strdgathered{
+        \strdmid,\strdrlabel{A\myprime}
+        ,\strdfork{
+            \strdmid
+            ,\strdmid
+        }
+        ,\strdtubestart
+        ,\strdfork{
+            \strdtwincell{\tau}
+            ,\strdtube\strdtubemid
+            ,\strdtwincell{\tau\strdrlap\myprime}
+            ,\strdtubeof{strd frame}\strdtubeclose
+        }
+        ,\strdfork{
+            \strdtubeof{strd frame}{
+                \strdtubesqcap{1}{1}
+                ,\strdtubemid
+                ,\strdyscale{0.7}\strdtubeclose
+            }
+            ,\strdmid,\strdrlabel{A}
+        }
+    } : \text{invertible} \\
+}
+remembering full and faithful functors and the Yoneda embedding bijection.
+
+\subsection{Parameterized Representations}
+Given a functor $F : \cat{B}\catop \times \cat{A} \to \catSet$, %
+a natural bijection of the form
+\In{align*}{
+    (\tau_X : F(B,X) \cong \cat{A}(A,X)) _{X \in \cat{A}}
+}
+can be expressed by
+\In{align*}{
+    &
+    \strdgathered{
+        \strdmid
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    } = 
+    \strdgathered{
+        \strdfork{
+            \strdtubestart
+            ,\strdtubemid
+            ,\strdat{Left}{\strdrlabel{B}}
+            ,\strdat{Right Start}{ \strdinv\strdmid }
+            ,\strdat{Left Start}{ \strdhleft }
+        }
+        ,\strdfork{
+            \strdtubestart
+            ,\strdtubeextend{1}{1}
+            ,\strdfork{
+                \strdtubeof{strd frame}{
+                    \strdtubesqcap{1}{1}
+                    ,\strdyscale{0.7}\strdtubeclose
+                }
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdtwincell{\tau}
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{2}{2}{a}
+        }
+    }\\
+    \iff &
+    \strdgathered{
+        \strdtubestart
+        ,\strdfork{
+            \strdtubemid
+            ,\strdat{Left}{\strdrlabel{B}}
+            ,\strdat{Right End}{\strdcell{f},\strdmid,\strdrlabel{A}}
+            ,\strdat{Left End}{\strdhleft}
+        }
+        ,\strdfork{
+            \strdtubeextend{1}{1},\strdcutoff\strdtubebound
+            ,\strdtube\strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubeof{strd frame}\strdtubeclose
+        }
+    } =
+    \strdgathered{
+        \strdtubestart
+        ,\strdfork{
+            \strdtubemid
+            ,\strdat{Left}{\strdrlabel{B}}
+        }
+        ,\strdfork{
+            \strdtubeextend{1}{1},\strdcutoff\strdtubebound
+            ,\strdtubemid
+            ,\strdwidecell{2}{2}{a}
+        }
+    }
+}
+
+\begin{proposition}
+Given a functor $F : \cat{B}\catop \times \cat{A} \to \catSet$ and a family of representations
+\In{align*}{
+    ( ( \tau_X^B : F(B,X) \cong \cat{A}(S_B,X) )_X )_ B
+}
+, there exists a unique infrafunctor $S : \cat{B} \to \cat{A}$ such that
+\In{itemize}{
+    \item $SB = S_B$
+    \item $\tau$ is natural in $B$
+}
+Furthermore, $S$ is functorial.
+\end{proposition}
+\begin{strdproof} Define $S$ as
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdtubestart
+            ,\strdtubemid
+            ,\strdat{Left}{\strdrlabel{B}}
+            ,\strdat{Right Start}{ \strdinv\strdmid,\strdrlabel{S_{B\myprime} }}
+            ,\strdat{Left Start}{ \strdhleft }
+            ,\strdat{Left End}{\strdcell{\strdupsidedown{\catph{?}}}}
+            ,\strdtubemid
+            ,\strdat{Left}{\strdrlabel{B\myprime}}
+            ,\strdat{Left End}{\strdhleft}
+            ,\strdat{Right End}{\strdmid}
+        }
+        ,\strdfork{
+            \strdtubestart
+            ,\strdtubeextend{1}{1}
+            ,\strdfork{
+                \strdtubeof{strd frame}{
+                    \strdtubesqcap{1}{1}
+                    ,\strdtubemid
+                    ,\strdtubemid
+                    ,\strdyscale{0.7}\strdtubeclose
+                }
+                ,\strdmid,\strdrlabel{S_B}
+            }
+            ,\strdtwincell{\tau}
+            ,\strdtube\strdtubemid
+            ,\strdtube\strdtubemid
+            ,\strdtwincell{\tau\strdrlap\myprime}
+            ,\strdtubeof{strd frame}\strdtubeclose
+        }
+    }
+}
+\end{strdproof}
+
+
