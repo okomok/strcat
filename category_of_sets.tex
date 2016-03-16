@@ -68,7 +68,8 @@ One can check any string diagram built upon these definitions is unambiguous tha
 
 
 \subsection{Hom-set Bands}
-Given a category $\cat{C}$, a special string is introduced for hom-sets:
+
+Given a category $\cat{C}$, a special string, a \textit{band}, is introduced for hom-sets:
 \In{align*}{
     \strdgathered{
         \strdtubeof{}{
@@ -91,6 +92,41 @@ A space-saving form is depicted as
 }
 Note that the order of objects is flipped. %
 This is resulting from the unfortunate convention that we write $b = h(a)$ but not $h : B \leftarrow A$.
+\mynewline
+The function composition can be depicted as
+\In{align*}{
+    \strdgathered{
+        \strdtubestart
+        ,\strdtubeextend{1}{1}
+        ,\strdyhalf\strdtubemid,\strdbackground{strd roadcolor}
+        ,\strdsafefork{1}{
+            \strdtubepartleft{1},\strdbackground{strd roadcolor}
+        }
+        ,\strdsafefork{2}{
+            \strdtubepartright{1},\strdbackground{strd roadcolor}
+        }
+    }\ \ \text{or}\ \
+    \strdgathered{
+        \strdroad\strdmid
+        ,\strdfork{
+            \strdroad\strdleft
+        }
+        ,\strdroad\strdright
+    }
+}
+\mynewline
+Identity functions can be depicted as
+\In{align*}{
+    \strdgathered{
+        \strdtubestart
+        ,\strdtubeclose,\strdbackground{strd roadcolor}
+    }\ \ \text{or}\ \
+    \strdgathered{
+        \strdroad\strdmid
+        ,\strddeadend
+    }
+}
+Write down the associativity and unitality with these diagrams. 
 
 
 \subsection{Currying}
@@ -115,7 +151,9 @@ In particular case $\cat{C} = \catSet$, move the right-side leg up and down:
     }
 }
 This is the \textit{currying} in string diagrams. %
-We don't distinguish these two diagrams. In case $A$ is the singleton set,
+We don't distinguish these two diagrams.
+\mynewline
+In case $A$ is the singleton set,
 \In{align*}{
     \strdgathered{
         \strdmid,\strdrlabel{C}
@@ -180,7 +218,8 @@ defined by
         ,\strdmid,\strdrlabel{A\myprime}
     }
 }
-Notice that the world in the box is the product category $\cat{C}^{\operatorname{op}} \times \cat{C}$. %
+Notice that the world in the box is the product category $\cat{C}^{\operatorname{op}} \times \cat{C}$.
+\mynewline
 This definition will inspire you to depict the hom functors as
 \In{align*}{
     \strdgathered{

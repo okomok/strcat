@@ -8,12 +8,13 @@
 %
 
 \tikzset{strd normaltextvaligned/.style={text height=1.9ex,text depth=0.65ex}}
+\tikzset{strd rounded corners/.style={rounded corners=2pt}}
 \tikzset{strd scripttextvaligned/.style={text height=1.5ex,text depth=0.4ex}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
 \tikzset{strd picturevaligned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
-\tikzset{strd picture/.style={strd picturevaligned,strd mathnodes,strd default,rounded corners=2pt}}
+\tikzset{strd picture/.style={strd picturevaligned,strd mathnodes,strd default,strd rounded corners}}
 \tikzset{strd draw/.style={}}
 
 
@@ -193,9 +194,12 @@
     \pgfnodealias{#1}{#2}
     \strdcopyfield@{Start}{#1}{#2}
     \strdcopyfield@{StartCorner}{#1}{#2}
+    \strdcopyfield@{StartCornerIsSharp}{#1}{#2}
     \strdcopyfield@{Mid}{#1}{#2}
     \strdcopyfield@{Corner}{#1}{#2}
+    \strdcopyfield@{CornerIsSharp}{#1}{#2}
     \strdcopyfield@{EndCorner}{#1}{#2}
+    \strdcopyfield@{EndCornerIsSharp}{#1}{#2}
     \strdcopyfield@{End}{#1}{#2}%
 }
 \newcommand*{\strdcopyfield@}[3]{% {field}{newid}{previd}
@@ -432,7 +436,7 @@
 %
 
 \tikzset{strd framebase/.style={solid,thin}}
-\tikzset{strd frame/.style={strd framebase,rounded corners=2pt}}
+\tikzset{strd frame/.style={strd framebase,strd rounded corners}}
 
 \newcommand*{\strdframe}{\Compose\strdseqin\strdframeone}
 \newcommand*{\strdframeone}{\Compose{\strdonlayer{strd framelayer}}{\strdscope{strd frame}}}
@@ -441,7 +445,7 @@
 % Boxes
 %
 
-\tikzset{strd box/.style={strd framebase,rounded corners=2pt}}
+\tikzset{strd box/.style={strd framebase,strd rounded corners}}
 \tikzset{strd bijbox/.style={strd framebase,sharp corners}}
 \tikzset{strd idbox/.style={strd framebase,thin}}
 
@@ -594,6 +598,7 @@
         \strdcoord@{#2 EndCorner}{$(#2 StartOrigin)+(\strdxunit,-\strdyunit)$}
     }
     \strdcoord@{#2 StartCorner}{$(#2 EndCorner)+(\strdtubexmagic,0)$}
+    \strdsharpcorner@{#2 StartCorner}
     \strdcoord@{#2 Start}{$(#2 StartCorner)+(0,\strdyunit)$}
     \strdcoord@{#2 End}{$(#2 EndCorner)+(0,-\strdyunit)$}
     \strdcoord@{#2 Mid}{$(#2 EndCorner)!.5!(#2 End)$}
@@ -787,16 +792,40 @@
 }
 
 % background
+\newcommand*{\strdbk}{\Compose\strdwith\strdputbk}
+\newcommand*{\strdputbk}[2]{% {color}{node}
+    \strdonlayer@{background}{
+        \strdputcell{P}{#2 Left StartCorner}
+        \fill[draw,#1]{
+            ($(#2 Left Start)+(0,\strdnoiseunit)$)
+            \strdcornering@{#2 Left StartCorner}
+            \strdcornering@{#2 Left EndCorner}
+            [sharp corners]-- ($(#2 Left End)-(0,\strdnoiseunit)$)
+            [sharp corners]-- ($(#2 Right End)-(0,\strdnoiseunit)$)
+            \strdcornering@{#2 Right EndCorner}
+            \strdcornering@{#2 Right StartCorner}
+            [sharp corners]-- ($(#2 Right Start)+(0,\strdnoiseunit)$)
+        };
+    }%
+}
 \newcommand*{\strdbackground}{\Compose\strdwith\strdputbackground}
 \newcommand*{\strdputbackground}[2]{% {color}{node}
     \strdonlayer@{background}{
-        \fill[sharp corners,draw,#1]{
+        \fill[draw,#1]{
             ($(#2 Left Start)+(0,\strdnoiseunit)$)
-            -- ($(#2 Left End)-(0,\strdnoiseunit)$)
-            -- ($(#2 Right End)-(0,\strdnoiseunit)$)
-            -- ($(#2 Right Start)+(0,\strdnoiseunit)$)
+            \strdcornering@{#2 Left StartCorner}
+            \strdcornering@{#2 Left EndCorner}
+            [sharp corners]-- ($(#2 Left End)-(0,\strdnoiseunit)$)
+            [sharp corners]-- ($(#2 Right End)-(0,\strdnoiseunit)$)
+            \strdcornering@{#2 Right EndCorner}
+            \strdcornering@{#2 Right StartCorner}
+            [sharp corners]-- ($(#2 Right Start)+(0,\strdnoiseunit)$)
         };
     }%
+}
+\newcommand*{\strdsharpcorner@}[1]{\strdcoord@{#1IsSharp}{strdorigin}}
+\newcommand*{\strdcornering@}[1]{%
+    \ifnodedefined{#1}{\ifnodedefined{#1IsSharp}{[sharp corners]}{[strd rounded corners]}--(#1)}{}%
 }
 
 % tubestartline/endline
@@ -1077,9 +1106,11 @@
 \newcommand*{\strdseq}{\ThenList}
 \newcommand*{\strdseqin}[2]{\strduse{#1}{\strdseq{#2}}}
 
+\newcounter{strdcounter}% Node ids are global!
 \newcommand*{\strdgathered}[1]{% {sa1,sa2,..,saN}
+    \stepcounter{strdcounter}
     \strdin{gathered}{
-        \strdseq{#1}{\strdcopyC}{TheStrd}{\strdorigin}
+        \strdseq{#1}{\strdcopyC}{TheStrd\the\value{strdcounter}}{\strdorigin}
     }%
 }
 
@@ -1126,10 +1157,16 @@
 
 \newcommand*{\strdroadlabel}[2]{\strdwith{\strdputroadlabel{#1}{#2}}}
 
+% Deprecate me. Essentially broken.
 \newcommand*{\strdfork}{\strdseqin\strdfork@}
 \newcommand*{\strdfork@}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}
     \strduse{#1}{\strdcopyC}{#3 Fork}{#3}%
+}
+\newcommand*{\strdsafefork}[1]{\strdseqin{\strdsafefork@{#1}}}
+\newcommand*{\strdsafefork@}[5]{% {n}{stm}{sc}{newid}{previd}
+    \strduse{#3}{#4}{#5}
+    \strduse{#2}{\strdcopyC}{#4 Fork#1}{#4}%
 }
 
 \newcommand*{\strdsym}[4]{% {stml}{sc}{newid}{previd}
