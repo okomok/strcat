@@ -1157,16 +1157,11 @@
 
 \newcommand*{\strdroadlabel}[2]{\strdwith{\strdputroadlabel{#1}{#2}}}
 
-% Deprecate me. Essentially broken.
 \newcommand*{\strdfork}{\strdseqin\strdfork@}
 \newcommand*{\strdfork@}[4]{% {stm}{sc}{newid}{previd}
-    \strduse{#2}{#3}{#4}
-    \strduse{#1}{\strdcopyC}{#3 Fork}{#3}%
-}
-\newcommand*{\strdsafefork}[1]{\strdseqin{\strdsafefork@{#1}}}
-\newcommand*{\strdsafefork@}[5]{% {n}{stm}{sc}{newid}{previd}
-    \strduse{#3}{#4}{#5}
-    \strduse{#2}{\strdcopyC}{#4 Fork#1}{#4}%
+    \strduse{#2}{#3 Main}{#4}
+    \strduse{#1}{\strdcopyC}{#3 Fork}{#3 Main}
+    \strdcopyC{#3}{#3 Main}%
 }
 
 \newcommand*{\strdsym}[4]{% {stml}{sc}{newid}{previd}
