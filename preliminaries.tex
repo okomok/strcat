@@ -31,16 +31,21 @@ means "there exists a unique $a$ such that $P$, moreover the $a$ is $Q$".
 
 \subsection{Universality}
 
-Category theory introduces many \textit{universal properties} like 
+Category theory introduces many \textit{universal properties} or \textit{universality} like 
 \In{align*}{
-    (\forall x \in X)(\exists!a\in A)(P(x,a))
+    (\forall x \in X)(\exists!y\in Y)(P(x,y))
 }
 , which is equivalent to an easier form:
 \In{align*}{
-    (\exists f : X \to A)(\forall x \in X)(\forall a \in A)(P(x,a) \iff a = f(x))
+    (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(P(x,y) \iff y = f(x))
 }
 Category theory is the study to build such a function $f$.
-
+\mynewline
+In case $P(x,y)$ is $x = g(y)$ with a function $g : Y \to X$,
+\In{align*}{
+    (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(x = g(y) \iff y = f(x))
+}
+is known as \textit{bijectivity}.
 
 \subsection{Lambda Expressions}
 
@@ -50,7 +55,7 @@ Following famous symbols like $\Sigma$, define
 }
 for anonymous functions.
 
-\subsubsection{Placeholder expressions}
+\subsubsection{Placeholder Expressions}
 
 For simple lambda expressions, you may use \textit{placeholders}:
 \In{align*}{
@@ -59,7 +64,7 @@ For simple lambda expressions, you may use \textit{placeholders}:
 Placeholder symbols can vary: $\texttt{?}$, $\texttt{-}$, $\texttt{1}$, etc.
 
 
-\subsection{Family expressions}
+\subsection{Family Declarations}
 
 Syntax of the function application is world-standard and fixed:
 \In{align*}{
@@ -69,14 +74,20 @@ Syntax of the function application is world-standard and fixed:
 \In{align*}{
     \strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}}
 }
-\textit{Family expressions} enable us to define a function with arbitary application syntax:
+A \textit{family declaration} is an easy way to define arbitary application syntax:
 \In{align*}{
     (\strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}} \in Y) _ {x \in X}
 }
+If you place a function implementation into it:
+\In{align*}{
+    (\strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}} \mydefeq x^2 \in Y) _ {x \in X}
+}
+, it might be called a \textit{family definition}.
+
 
 \subsubsection{Dependent Functions}
 
-Family expressions can do more. Let $F$ a set-valued function.
+Family declarations can do more. Let $F$ a set-valued function.
 \In{align*}{
     (f (x) \in F(x)) _ {x \in X}
 }
@@ -88,12 +99,12 @@ such that
 \In{align*}{
     (\forall x \in X)(f(x) \in F(x))
 }
-Such $f$ is called a \textit{dependent function}, for the $F(x)$ depends on $x$. 
-In case $F$ is a constant function which ignores $x$:
+Such $f$ is called a \textit{dependent function}, for the $F(x)$ depends on $x$. %
+In case $F$ is a constant function,
 \In{align*}{
     (f(x) \in Y)_{x \in X}
 }
-, $f$ is a normal function $X \to Y$. 
+is a normal function $X \to Y$. 
 
 \subsection{Russell's Paradox}
 TODO
