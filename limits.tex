@@ -1,10 +1,230 @@
 
 \section{Limits}
-TODO
+
+\subsection{Cones}
+
+Given a functor $F : \cat A \to \cat B$, a natural transformation of the form
+\In{align*}{
+    (v _ X : B \to FX) _ X
+}
+is called a \emph{cone} of $F$. The naturality(\emph{conicality}) can be expressed as
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{f}
+            ,\strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtubemid
+        }
+        ,\strdwidecellof{strd widecellbase}{1}{1}{v}
+        ,\strdmid,\strdrlabel{B}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+        }
+        ,\strdwidecellof{strd widecellbase}{1}{1}{v}
+        ,\strdmid,\strdrlabel{B}
+    }
+}
+like a magical box any morphism can appear from.
+
+
+\subsection{The Definition}
+
+Given a functor $F : \cat A \to \cat B$, a limit of $F$ is a pair of
+\In{enumerate}{
+    \item an object in $\cat{B}$ denoted as $\text{lim} F$
+    \item a natural bijection $(\cat{B}(B, \text{lim}F) \cong \catNat _ X(B,FX))_B$
+}
+The naturality allows the bijectivity to be expressed as
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{\text{lim}F}
+        ,\strdcell{h}
+        ,\strdmid,\strdrlabel{B}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{\text{lim}F}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{v}
+        },\strdat{Left StartCorner}{\strdoverlabel{\text{lim}}}
+       ,\strdmid,\strdrlabel{B}
+    } \iff
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{\text{lim}}
+        ,\strdmid,\strdrlabel{\text{lim} F}
+        ,\strdcell{h}
+        ,\strdmid,\strdrlabel{B}
+    }
+    =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{v}
+        ,\strdmid,\strdrlabel{B}
+    }
+}
+, where \!\raisebox{0.25ex}{$\strdgathered{\strdwidecell{1}{1}{\text{lim}}}$} is called the \emph{limiting cone} of $F$.
+\mynewline
+A limit is nothing but a contravariant representation
+\In{align*}{
+    \text{rep} _ B \catNat_X(B,FX)
+}
+so that limits are unique up to isomorphism.
+\begin{proposition}\label{l.c.m}
+A limiting cone is \emph{monic} meaning that
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{\text{lim}}
+        ,\strdmid,\strdrlabel{\text{lim} F}
+        ,\strdcell{h}
+        ,\strdmid,\strdrlabel{B}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{\text{lim}}
+        ,\strdmid,\strdrlabel{\text{lim} F}
+        ,\strdcell{g}
+        ,\strdmid,\strdrlabel{B}
+    } \implies
+    \strdgathered{
+        \strdmid,\strdrlabel{\text{lim}F}
+        ,\strdcell{h}
+        ,\strdmid,\strdrlabel{B}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{\text{lim}F}
+        ,\strdcell{g}
+        ,\strdmid,\strdrlabel{B}
+    }
+}
+\end{proposition}
+
 
 \subsection{Products}
-TODO
 
-\subsection{Equalizers}
-TODO
-\subsubsection{Fork}
+In particular case the domain of a functor $F : \mathcal{A} \to \mathcal{B}$ is discrete, %
+the limit of $F$ is called the \emph{product }of $F$ denoted as $\textstyle\prod F$. Spelling out the bijectivity,
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{\prod F}
+        ,\strdcell{h}
+        ,\strdmid,\strdrlabel{B}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{\textstyle\prod F}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{v}
+        },\strdat{Left StartCorner}{\strdoverlabel{\textstyle\prod}}
+       ,\strdmid,\strdrlabel{B}
+    } \iff
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{\pi}
+        ,\strdmid,\strdrlabel{\textstyle\prod F}
+        ,\strdcell{h}
+        ,\strdmid,\strdrlabel{B}
+    }
+    =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{v}
+        ,\strdmid,\strdrlabel{B}
+    }
+}
+, where \!\raisebox{0.1ex}{$\strdgathered{\strdwidecell{1}{1}{\pi}}$} is called the \emph{projection} of $F$. %
+Note that the conicality has no concern, because any family of the form
+\In{align*}{
+    (v _ X : B \to FX) _ {X \in \catOb A}
+}
+is always natural in case $\cat A$ is discrete.
+
+\subsection{Duality}
+
+In string diagrams, the \emph{duality} is easily expressed by flipping diagrams upside down. 
+As an example, you can obtain the definition of \emph{coproducts} from that diagram flipped:
+\In{align*}{
+    \Compose\strdgathered\strdinv{
+        \strdmid,\strdrlabel{\coprod F}
+        ,\strdcell{h}
+        ,\strdmid,\strdrlabel{B}
+    } =
+    \Compose\strdgathered\strdinv{
+        \strdmid,\strdrlabel{\textstyle\coprod F}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{v}
+        },\strdat{Left StartCorner}{\strdoverlabel{\textstyle\coprod}}
+       ,\strdmid,\strdrlabel{B}
+    } \iff
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{\operatorname{in}}
+        ,\strdmid,\strdrlabel{\textstyle\coprod F}
+        ,\strdcell{h}
+        ,\strdmid,\strdrlabel{B}
+    }
+    =
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{v}
+        ,\strdmid,\strdrlabel{B}
+    }
+}
+Note that the variant makes a domain opposite, while the dual does for a codomain.

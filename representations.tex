@@ -1,13 +1,13 @@
 \section{Representations}
 
-\subsection{Definition}
+\subsection{The Definition}
 
-Given a fucntor $F : \cat{C} \to \catSet$, a \emph{representation} of $F$ is a pair of 
+Given a functor $H : \cat{C} \to \catSet$, a \emph{representation} of $H$ is a pair of 
 \In{enumerate}{
     \item an object $A$ in \cat{C}
-    \item a natural bijection $(\tau_X : FX \cong \cat{C}(A,X)) _ X$
+    \item a natural bijection $(\tau_X : HX \cong \cat{C}(A,X)) _ X$
 }
-The bijectivity can be expressed using cute boxes
+The bijectivity can be expressed using the cute boxes
 \In{align*}{
     \strdgathered{
         \strdmid
@@ -59,9 +59,11 @@ The bijectivity can be expressed using cute boxes
     }
 }
 thanks to the naturality.
+\mynewline
+The following section allows you to denote the represention of $H$ as %
+$\text{rep}_X HX$ or briefly $\text{rep}H$.
 
 \subsection{Uniqueness of Representations}
-
 Representations are unique up to unique isomorphism, meaning that %
 given another representation $(A\myprime,\tau\myprime)$, 
 \In{align*}{
@@ -128,10 +130,10 @@ given another representation $(A\myprime,\tau\myprime)$,
 according to the variant of \cref{y.p}.
 
 \subsection{Parameterized Representations}
-Given a functor $F : \cat{B}\catop \times \cat{A} \to \catSet$, %
+Given a functor $H : \cat{B}\catop \times \cat{A} \to \catSet$, %
 a natural bijection of the form
 \In{align*}{
-    (\tau_X : F(B,X) \cong \cat{A}(A,X)) _{X \in \cat{A}}
+    (\tau_X : H(B,X) \cong \cat{A}(A,X)) _{X}
 }
 can be expressed by
 \In{align*}{
@@ -195,9 +197,9 @@ can be expressed by
 }
 
 \begin{proposition}
-Given a functor $F : \cat{B}\catop \times \cat{A} \to \catSet$ and a family of representations
+Given a functor $H : \cat{B}\catop \times \cat{A} \to \catSet$ and a family of representations
 \In{align*}{
-    ( ( \tau_X^B : F(B,X) \cong \cat{A}(S_B,X) )_X )_ B
+    ( ( \tau_X^B : H(B,X) \cong \cat{A}(S_B,X) )_X )_ B
 }
 , there exists a unique infrafunctor $S : \cat{B} \to \cat{A}$ such that
 \In{itemize}{
@@ -206,6 +208,7 @@ Given a functor $F : \cat{B}\catop \times \cat{A} \to \catSet$ and a family of r
 }
 Furthermore, $S$ is functorial.
 \end{proposition}
+
 \begin{strdproof}
 Define $S$ as
 \In{align*}{
@@ -243,5 +246,4 @@ Define $S$ as
     }
 }
 \end{strdproof}
-
 
