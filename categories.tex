@@ -3,32 +3,32 @@
 
 \subsection{Definition}
 
-A \textit{category} $\cat{C}$ consists of:
+A \emph{category} $\cat{C}$ consists of:
 \In{enumerate}{
-\item \textit{objects}: a class
+\item \emph{objects}: a class
 $
     \catOb{C}
 $
-\item \textit{morphisms} or \textit{hom-sets}: a family of sets
+\item \emph{morphisms} or \emph{hom-sets}: a family of sets
 $
     (\cat{C}(A,B)) _ {A, B \in \catOb{C}}
 $
-\item \textit{compositions}: a family of functions
+\item \emph{compositions}: a family of functions
     \In{align*}{
         (\circ : \cat{C}(B,C) \times \cat{C}(A,B) \to \cat{C}(A,C) )_{A,B,C \in \catOb{C}}
     }
-\item \textit{idenitities} or \textit{units}: a family of morphisms
+\item \emph{idenitities} or \emph{units}: a family of morphisms
     \In{align*}{
         (\operatorname{id} _A \in \cat{C}(A,A))_{A \in \catOb{C}}
     }
 }
 satisfying the following coherence conditions:
 \In{enumerate}{
-\item \textit{associativity}: for any $f \in \cat{C}(A,B)$, $g \in \cat{C}(B,C)$, and $h \in \cat{C}(C,D)$,
+\item \emph{associativity}: for any $f \in \cat{C}(A,B)$, $g \in \cat{C}(B,C)$, and $h \in \cat{C}(C,D)$,
     \In{align*}{
         h \circ (g \circ f) = (h \circ g) \circ f
     }
-\item \textit{unitality}: for any $f \in \cat{C}(A,B)$,
+\item \emph{unitality}: for any $f \in \cat{C}(A,B)$,
     \In{align*}{
         \operatorname{id}_B \circ f = f = f \circ \operatorname{id}_A
     }
@@ -41,7 +41,7 @@ $.
 
 \subsection{String Diagrams}
 
-From now on, we will introduce \textit{string diagrams} %
+From now on, we will introduce \emph{string diagrams} %
 to complement(or hopefully replace) commutative diagrams, where an object $A$ %
 is depicted as an optionally-tagged string
 \In{align*}{
@@ -79,12 +79,12 @@ Check these diagrams create no ambiguity thanks to the coherence.
 
 \subsection{Isomorphisms}
 
-An \textit{isomorphism} is a pair of morphisms
+An \emph{isomorphism} is a pair of morphisms
 \In{align*}{
     f : A \to B\\
     g : B \to A
 }
-satisfying the \textit{invertibility}
+satisfying the \emph{invertibility}
 \In{align*}{
     \strdgathered{
         \strdmid,\strdrlabel{A}
@@ -148,7 +148,7 @@ You can build a category with strings upsidedown:
         ,\strdmid,\strdrlabel{B}
     }
 }
-, which is denoted as $\cat{C}^{\operatorname{op}}$, the \textit{opposite category} of $\cat{C}$.
+, which is denoted as $\cat{C}^{\operatorname{op}}$, the \emph{opposite category} of $\cat{C}$.
 
 \subsection{Discrete Categories}
 
@@ -157,13 +157,13 @@ A category $\cat{C}$ such that
     A = B &\implies \cat{C}(A,B) = \lbrace \operatorname{id}_A \rbrace\\
     A \neq B &\implies \cat{C}(A,B) = \emptyset
 }
-is called a \textit{discrete category}.
+is called a \emph{discrete category}.
 Any set can be represented as a discrete category.
 
 
 \subsection{Product Categories}
 
-Given two categories $\cat{A}$ and $\cat{B}$, the \textit{product category}:
+Given two categories $\cat{A}$ and $\cat{B}$, the \emph{product category}:
 \In{align*}{
     \cat{A} \times \cat{B}
 }

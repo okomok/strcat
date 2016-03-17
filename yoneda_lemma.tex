@@ -41,7 +41,7 @@ can be depicted as
 }
 owing to the naturality.
 \mynewline
-The \textit{Yoneda bijection} is defined as 
+The \emph{Yoneda bijection} is defined as 
 \In{align*}{
     \mylhs{\catNat_X(\cat{C}(X,A),FX)} &\cong \myrhs{FA}\\
     \strdgathered{
@@ -97,13 +97,19 @@ The \textit{Yoneda bijection} is defined as
         }
     }
 }
-The \textit{Yoneda lemma} states this is actually bijective and natural in $F$ and $A$. %
-But now the proof is (on my soul) trivial.
+
+\begin{lemma}[Yoneda]
+\label{y.l}
+The Yoneda bijection is actually bijective and natural in $F$ and $A$. 
+\end{lemma}
+\begin{strdproof}
+Now the proof is on my soul trivial!
+\end{strdproof}
 
 
 \subsection{The Yoneda Embedding}
 
-The \textit{Yoneda embedding} is defined as
+The \emph{Yoneda embedding} is defined as
 \In{align*}{
     \mylhs{\Lambda_A \Lambda_X \cat{C}(X,A) : \cat{C}} &\to \myrhs{[\cat{C}\catop,\catSet]}\\
     \strdgathered{
@@ -164,7 +170,7 @@ can be depicted as
         }
     }
 }
-In case $F \mydefeq \cat{C}(\catph{-},B)$, the Yoneda bijection is expanded to
+In special case $F \mydefeq \cat{C}(\catph{-},B)$, the Yoneda bijection is expanded to
 \In{align*}{
     \mylhs{\catNat_X(\cat{C}(X,A),\cat{C}(X,B))} &\cong \myrhs{\cat{C}(A,B)}\\
     \strdgathered{
@@ -220,8 +226,35 @@ In case $F \mydefeq \cat{C}(\catph{-},B)$, the Yoneda bijection is expanded to
     }
 }
 You will notice the second mapping is the Yoneda embedding so that %
-it is full and faithful.
-
-\subsection{The Variant}
-TODO 
+it is full and faithful. Combined with \cref{ff.pr.inv},
+\begin{proposition}[Yoneda Principle]
+\label{y.p}
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdfork{
+            \strdmid,\strdrlabel{A}
+            ,\strdcell{\catph{?}}
+            ,\strdmid
+        }
+        ,\strdtubeof{strd frame}{
+            \strdtubestart
+            ,\strdtubeunclose
+            ,\strdtwincell{\tau}
+        }
+    } : \text{invertible} \iff
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdfork{
+            \strdmid,\strdrlabel{A}
+            ,\strdmid
+        }
+        ,\strdtubeof{strd frame}{
+            \strdtubestart
+            ,\strdtubeunclose
+            ,\strdtwincell{\tau}
+        }
+    } : \text{invertible}
+}
+\end{proposition}
 

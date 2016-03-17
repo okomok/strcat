@@ -1,14 +1,14 @@
 \section{Functors}
 
 \subsection{Definition}
-A \textit{functor}
+A \emph{functor}
 $
     F : \cat{C} \to \cat{D}
 $
 consists of:
 \In{enumerate}{
-\item \textit{domain}: a category $\cat{C}$
-\item \textit{codomain}: a category $\cat{D}$
+\item \emph{domain}: a category $\cat{C}$
+\item \emph{codomain}: a category $\cat{D}$
 \item a family of objects
 $
     (FA \in \catOb{D}) _ {A \in \catOb{C}}
@@ -18,18 +18,18 @@ $
     \big( (F(f) \in \cat{D}(FA,FB)) _ {f \in \cat{C}(A,B)} \big)_{A,B \in \catOb{C}}
 }
 }
-satisfying the \textit{functoriality}:
+satisfying the \emph{functoriality}:
 \In{enumerate}{
-\item \textit{composition-compatibility}: for any $f \in \cat{C}(A,B)$ and $g \in \cat{C}(B,C)$,
+\item \emph{composition-compatibility}: for any $f \in \cat{C}(A,B)$ and $g \in \cat{C}(B,C)$,
     \In{align*}{
         F(g \circ f) = F(g) \circ F(f)
     }
-\item \textit{unit-compatibility}: for any $A \in \catOb{C}$,
+\item \emph{unit-compatibility}: for any $A \in \catOb{C}$,
     \In{align*}{
         F(\operatorname{id}_A) = \operatorname{id}_{FA}
     }
 }
-An \textit{infrafunctor} is a functor without the requirement of functoriality.
+An \emph{infrafunctor} is a functor without the requirement of functoriality.
 
 
 \subsection{Functorial Tubes}
@@ -96,6 +96,28 @@ One can check the functoriality ensures any tube like
 }
 be unambiguous. "Join then tube" is the same as "Tube then join".
 
+\begin{proposition}\label{f.p.inv}
+Any functor preserves the invertibility meaning that
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    } : \text{invertible} \implies
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdydouble\strdtubemid
+            ,\strdtubeendline
+        }
+    } : \text{invertible}
+}
+\end{proposition}
 
 \subsection{Composite Functors}
 
@@ -104,7 +126,7 @@ For any two functors
     F &: \cat{A} \to \cat{B}\\
     G &: \cat{B} \to \cat{C}
 }
-, the \textit{composite functor} of $F$ and $G$
+, the \emph{composite functor} of $F$ and $G$
 \In{align*}{
     G \circ F : \cat{A} \to \cat{C}
 }
@@ -139,7 +161,7 @@ One can easily check the functoriality.
 
 \subsection{Identity Functors}
 
-An \textit{idenity functor}
+An \emph{idenity functor}
 \In{align*}{
     \operatorname{Id}_{\cat{C}} : \cat{C} \to \cat{C}
 }
@@ -167,14 +189,13 @@ is depicted as
 The functoriality is trivial.
 
 
-
 \subsection{Contravariant Functors}
 
 A functor whose domain is an opposite category
 \In{align*}{
     F : \cat{C}^{\operatorname{op}} \to \cat{D}
 }
-is called \textit{contravariant}, while a normal functor is called \textit{covariant}.
+is called \emph{contravariant}, while a normal functor is called \emph{covariant}.
 A contravariant functor is depicted as
 \In{align*}{
     \strdgathered{
@@ -192,6 +213,8 @@ A contravariant functor is depicted as
         }
     }
 }
+Given a statement regarding functors, you can obtain a corresponding one regarding contravariant functors. %
+We call such a statement the \emph{variant} of the original one.
 
 
 \subsection{Binary Functors}
@@ -200,7 +223,7 @@ A functor whose domain is a product category
 \In{align*}{
     F : \cat{A} \times \cat{B} \to \cat{C}
 }
-is called a \textit{binary functor} or \textit{bifunctor}. With numbered placeholders, it is depicted as
+is called a \emph{binary functor} or \emph{bifunctor}. With numbered placeholders, it is depicted as
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -262,7 +285,7 @@ is unambiguous.
 
 \subsection{Partial Applications}
 
-Given a binary functor $F : \cat{A} \times \cat{B} \to \cat{C}$, a \textit{partially applied} functor
+Given a binary functor $F : \cat{A} \times \cat{B} \to \cat{C}$, a \emph{partially applied} functor
 \In{align*}{
     \Lambda_B F(A,B) &: \cat{B} \to \cat{C} \text{ or briefly }\\
     F(A,\texttt{?}) &: \cat{B} \to \cat{C}
@@ -365,8 +388,8 @@ The definition of $F(\texttt{?},B)$ is an exercise.
 
 \subsection{Category of Small Categories}
 
-A category $\cat{C}$ is \textit{small} when its $\catOb{C}$ is a set. %
-The \textit{category of small categories} $\catCat$ is the category whose objects are %
+A category $\cat{C}$ is \emph{small} when its $\catOb{C}$ is a set. %
+The \emph{category of small categories} $\catCat$ is the category whose objects are %
 all small categories and whose morphisms are functors:
 \In{align*}{
     \strdgathered{
@@ -384,7 +407,7 @@ all small categories and whose morphisms are functors:
 
 \subsection{Full and Faithful Functors}
 
-A functor $F : \cat{C} \to \cat{D}$ is called \textit{full and faithful} %
+A functor $F : \cat{C} \to \cat{D}$ is called \emph{full and faithful} %
 if for each object $A$ and $B$ in $\cat{C}$, the family 
 \In{align*}{
     (F(f) : FA \to FB)_{f : A \to B}
@@ -440,7 +463,7 @@ is bijective, that is, there is a functional box such that
         ,\strdmid,\strdrlabel{A}
     } 
 }
-One can make the box better-looking:
+One can make the box better-looking
 \In{align*}{
     \strdgathered{
         \strdmid,\strdrlabel{B}
@@ -464,7 +487,9 @@ One can make the box better-looking:
         }
     }
 }
-, which has a functoriality-like property:
+
+\begin{proposition}\label{ff.fun}
+This box has a functoriality-like property:
 \In{align*}{
     \strdgathered{
         \strdmid,\strdrlabel{C}
@@ -531,7 +556,10 @@ One can make the box better-looking:
         }
     }
 }
-As a result,
+\end{proposition}
+Combined with \cref{f.p.inv},
+\begin{corollary}
+\label{ff.pr.inv}
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -568,3 +596,4 @@ As a result,
         }
     } : \text{invertible}
 }
+\end{corollary}

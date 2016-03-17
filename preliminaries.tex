@@ -31,7 +31,7 @@ means "there exists a unique $a$ such that $P$, moreover the $a$ is $Q$".
 
 \subsection{Universality}
 
-Category theory introduces many \textit{universal properties} or \textit{universality} like 
+Category theory introduces many \emph{universal properties} or \emph{universality} like 
 \In{align*}{
     (\forall x \in X)(\exists!y\in Y)(P(x,y))
 }
@@ -45,7 +45,7 @@ In case $P(x,y)$ is $x = g(y)$ with a function $g : Y \to X$,
 \In{align*}{
     (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(x = g(y) \iff y = f(x))
 }
-is known as \textit{bijectivity}.
+is known as \emph{bijectivity}.
 
 \subsection{Lambda Expressions}
 
@@ -57,7 +57,7 @@ for anonymous functions.
 
 \subsubsection{Placeholder Expressions}
 
-For simple lambda expressions, you may use \textit{placeholders}:
+For simple lambda expressions, you may use \emph{placeholders}:
 \In{align*}{
     \texttt{?}{+}1 \mydefeq \Lambda_n n{+}1
 }
@@ -74,7 +74,7 @@ Syntax of the function application is world-standard and fixed:
 \In{align*}{
     \strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}}
 }
-A \textit{family declaration} is an easy way to define arbitary application syntax:
+A \emph{family declaration} is an easy way to define arbitary application syntax:
 \In{align*}{
     (\strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}} \in Y) _ {x \in X}
 }
@@ -82,7 +82,7 @@ If you place a function implementation into it:
 \In{align*}{
     (\strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}} \mydefeq x^2 \in Y) _ {x \in X}
 }
-, it might be called a \textit{family definition}.
+, it might be called a \emph{family definition}.
 
 
 \subsubsection{Dependent Functions}
@@ -99,7 +99,7 @@ such that
 \In{align*}{
     (\forall x \in X)(f(x) \in F(x))
 }
-Such $f$ is called a \textit{dependent function}, for the $F(x)$ depends on $x$. %
+Such $f$ is called a \emph{dependent function}, for the $F(x)$ depends on $x$. %
 In case $F$ is a constant function,
 \In{align*}{
     (f(x) \in Y)_{x \in X}
@@ -125,5 +125,5 @@ because you know the arithmetic laws
     0+x = x = x+0
 }
 disambiguate unparenthesized expressions.
-Informally a set of laws to introduce simpler syntax is called a \textit{coherence condition} or briefly \textit{coherence}.
+Informally a set of laws to introduce simpler syntax is called a \emph{coherence condition} or briefly \emph{coherence}.
 

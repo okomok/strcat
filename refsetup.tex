@@ -1,0 +1,18 @@
+\usepackage{ntheorem}
+\usepackage{hyperref}
+\usepackage{cleveref}% after hyperref
+\hypersetup{
+    colorlinks=false,
+    pdfborder={0 0 0},
+}
+\theorembodyfont{\normalfont}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{counter}[theorem]{Counterexample}
+\numberwithin{theorem}{section}
+
