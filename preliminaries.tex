@@ -38,11 +38,11 @@ means "there exists a unique $a$ such that $P$, moreover the $a$ is $Q$".
 \end{remark}
 
 \begin{definition}[Universality]
-We boldly call a statement of the form
+Given a binary boolean-valued function $P$, we boldly call a statement of the form
 \In{align*}{
     (\forall x \in X)(\exists!y\in Y)(P(x,y))
 }
-\emph{universality}.
+the \emph{universality} of $P$.
 \end{definition}
 
 \begin{proposition}[Functional Universality]
@@ -54,8 +54,6 @@ We boldly call a statement of the form
 \begin{strdproof}
 $(\implies)$ is from the Axiom of choice. $(\impliedby)$ is immediate.
 \end{strdproof}
-\mynewline
-Category theory is the study to build such a function $f$.
 
 \begin{definition}[Bijectivity]
 Given a a function $g : Y \to X$, a statement
@@ -64,7 +62,7 @@ Given a a function $g : Y \to X$, a statement
 }
 is known as the \emph{bijectivity} of $f$ and $g$.
 \end{definition}
-This is a special case of universality with $P(x,y)$ being $x = g(y)$.
+This is a special case of universality where $P(x,y)$ is $x = g(y)$.
 
 \subsection{Lambda Expressions}
 
@@ -135,11 +133,7 @@ such that
 }
 Such $f$ is called a \emph{dependent function}, for the $F(x)$ depends on $x$. 
 \end{definition}
-In case $F$ is a constant function,
-\In{align*}{
-    (f(x) \in Y)_{x \in X}
-}
-is a normal function $X \to Y$. 
+In case $F$ is a constant function, $f$ is a normal function $X \to Y$. 
 
 \subsection{Coherence}
 You will write
