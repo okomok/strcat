@@ -1,7 +1,7 @@
 \section{The Yoneda Lemma}
 
-\subsection{The Yoneda Bijection}
 
+\begin{definition}
 Given a functor $F : \cat{C}\catop \to \catSet$ and an object $A$ in $\cat{C}$, %
 a natural tranformation of the form
 \In{align*}{
@@ -39,7 +39,12 @@ can be depicted as
         },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{\tau}}
     }
 }
-owing to the naturality. Using this diagram, the \emph{Yoneda bijection} is defined as 
+owing to the naturality.
+\end{definition}
+
+\begin{definition}[Yoneda Bijection]
+\label{y.b}
+The \emph{Yoneda bijection} is defined as 
 \In{align*}{
     \mylhs{\catNat_X(\cat{C}(X,A),FX)} &\cong \myrhs{FA}\\
     \strdgathered{
@@ -95,8 +100,9 @@ owing to the naturality. Using this diagram, the \emph{Yoneda bijection} is defi
         }
     }
 }
+\end{definition}
 
-\begin{lemma}[Yoneda]
+\begin{lemma}[Yoneda Lemma]
 \label{y.l}
 The Yoneda bijection is actually bijective and natural in $F$ and $A$. 
 \end{lemma}
@@ -105,8 +111,7 @@ Now the proof is on my soul trivial!
 \end{strdproof}
 
 
-\subsection{The Yoneda Embedding}
-
+\begin{definition}[Yoneda Embedding]
 The \emph{Yoneda embedding} is defined as
 \In{align*}{
     \mylhs{\Lambda_A \Lambda_X \cat{C}(X,A) : \cat{C}} &\to \myrhs{[\cat{C}\catop,\catSet]}\\
@@ -144,10 +149,9 @@ using the diagram of hom functors. In short,
         }
     }
 }
+\end{definition}
 
-
-\subsection{The Yoneda Principle}
-
+\begin{definition}
 A natural transformation of the form
 \In{align*}{
     (\tau_X : \cat{C}(X,A) \to \cat{C}(X,B))_X
@@ -168,6 +172,9 @@ can be depicted as
         }
     }
 }
+\end{definition}
+
+\begin{definition}[Yoneda Embedding Bijection]
 In special case $F \mydefeq \cat{C}(\catph{-},B)$, the Yoneda bijection is expanded to
 \In{align*}{
     \mylhs{\catNat_X(\cat{C}(X,A),\cat{C}(X,B))} &\cong \myrhs{\cat{C}(A,B)}\\
@@ -223,6 +230,7 @@ In special case $F \mydefeq \cat{C}(\catph{-},B)$, the Yoneda bijection is expan
         ,\strdmid,\strdrlabel{A}
     }
 }
+\end{definition}
 You will notice the second mapping is the Yoneda embedding so that %
 it is full and faithful. Combined with \cref{ff.pr.inv},
 \begin{proposition}[Yoneda Principle]

@@ -1,19 +1,39 @@
 \section{Representations}
 
-\subsection{The Definition}
-
+\begin{definition}[Representation]
+\label{rep.def}
 Given a functor $H : \cat{C} \to \catSet$, a \emph{representation} of $H$ is a pair of 
 \In{enumerate}{
-    \item an object $A$ in \cat{C}
-    \item a natural bijection $(\tau_X : HX \cong \cat{C}(A,X)) _ X$
+    \item an object $R$ in \cat{C}
+    \item a natural bijection $(\tau_X : HX \cong \cat{C}(R,X)) _ X$
 }
+\end{definition}
 The bijectivity can be expressed using the cute boxes
 \In{align*}{
     \strdgathered{
-        \strdmid
-        ,\strdcell{f}
-        ,\strdmid,\strdrlabel{A}
-    } =\,
+        \strdfork{
+            \strdmid
+        }
+        ,\strdfork{
+            \strdtubestartline
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{a}
+        }
+    }
+    =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{R}
+        }
+        ,\strdfork{
+            \strdtubestartline
+            ,\strdtube\strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubeof{strd frame}\strdtubeclose
+        }
+    } \iff
     \strdgathered{
         \strdmid
         ,\strdfork{
@@ -31,56 +51,39 @@ The bijectivity can be expressed using the cute boxes
                 \strdtubesqcap{1}{1}
                 ,\strdyscale{0.7}\strdtubeclose
             }
-            ,\strdmid,\strdrlabel{A}
+            ,\strdmid,\strdrlabel{R}
         }
-    } \iff
+    }
+    =\,
     \strdgathered{
-        \strdfork{
-            \strdmid
-            ,\strdcell{f}
-            ,\strdmid,\strdrlabel{A}
-        }
-        ,\strdfork{
-            \strdtubestartline
-            ,\strdtube\strdtubemid
-            ,\strdtwincell{\tau}
-            ,\strdtubeof{strd frame}\strdtubeclose
-        }
-    } =
-    \strdgathered{
-        \strdfork{
-            \strdmid
-        }
-        ,\strdfork{
-            \strdtubestartline
-            ,\strdtube\strdtubemid
-            ,\strdwidecell{1}{1}{a}
-        }
+        \strdmid
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{R}
     }
 }
 thanks to the naturality.
 \mynewline
-The following section allows you to denote the represention of $H$ as %
+The following allows you to denote the represention of $H$ as %
 $\text{rep}_X HX$ or briefly $\text{rep}H$.
 
-\subsection{Uniqueness of Representations}
+\begin{proposition}
 Representations are unique up to unique isomorphism, meaning that %
-given another representation $(A\myprime,\tau\myprime)$, 
+given another representation $(R\myprime,\tau\myprime)$, 
 \In{align*}{
     &
     \strdgathered{
         \strdmid
         ,\strdcell{\catph{?}}
-        ,\strdmid,\strdrlabel{A\myprime}
+        ,\strdmid,\strdrlabel{R\myprime}
         ,\strdcell{\varphi}
-        ,\strdmid,\strdrlabel{A}
+        ,\strdmid,\strdrlabel{R}
     } \,=\,
     \strdgathered{
         \strdmid
         ,\strdfork{
             \strdmid
             ,\strdcell{\catph{?}}
-            ,\strdmid,\strdrlabel{A\myprime}
+            ,\strdmid,\strdrlabel{R\myprime}
         }
         ,\strdtubestart
         ,\strdfork{
@@ -95,17 +98,17 @@ given another representation $(A\myprime,\tau\myprime)$,
                 ,\strdtubemid
                 ,\strdyscale{0.7}\strdtubeclose
             }
-            ,\strdmid,\strdrlabel{A}
+            ,\strdmid,\strdrlabel{R}
         }
     } : \text{invertible} \\
     \iff\, &
     \strdgathered{
-        \strdmid,\strdrlabel{A\myprime}
+        \strdmid,\strdrlabel{R\myprime}
         ,\strdcell{\varphi}
-        ,\strdmid,\strdrlabel{A}
+        ,\strdmid,\strdrlabel{R}
     } \,=\,
     \strdgathered{
-        \strdmid,\strdrlabel{A\myprime}
+        \strdmid,\strdrlabel{R\myprime}
         ,\strdfork{
             \strdmid
             ,\strdmid
@@ -123,13 +126,16 @@ given another representation $(A\myprime,\tau\myprime)$,
                 ,\strdtubemid
                 ,\strdyscale{0.7}\strdtubeclose
             }
-            ,\strdmid,\strdrlabel{A}
+            ,\strdmid,\strdrlabel{R}
         }
     } : \text{invertible} \\
 }
-according to the variant of \cref{y.p}.
+\end{proposition}
+\begin{strdproof}
+Immediate by the variant of \cref{y.p}.
+\end{strdproof}
 
-\subsection{Parameterized Representations}
+\begin{definition}
 Given a functor $H : \cat{B}\catop \times \cat{A} \to \catSet$, %
 a natural bijection of the form
 \In{align*}{
@@ -195,8 +201,10 @@ can be expressed by
         }
     }
 }
+\end{definition}
 
 \begin{proposition}
+\label{p.rep.i.f}
 Given a functor $H : \cat{B}\catop \times \cat{A} \to \catSet$ and a family of representations
 \In{align*}{
     ( ( \tau_X^B : H(B,X) \cong \cat{A}(S_B,X) )_X )_ B

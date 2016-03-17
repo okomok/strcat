@@ -1,98 +1,127 @@
 \section{Preliminaries}
 
-\subsection{Vacuous Truth}
+% \begin{definition}[Vacuous Truth]
+% Given boolean expressions $P$ and $Q$, a boolean expression
+% \In{align*}{
+%     P \implies Q
+% } 
+% is true if $P$ is false.
+% As a consequence,
+% \In{align*}{
+%     (\forall x \in X)(Q(x)) \mydefeq (\forall x)(x \in X \implies Q(x))
+% }
+% is true in case $X$ is the empty set.
+% \end{definition}
 
-Given boolean expressions $P$ and $Q$, a boolean expression
-\In{align*}{
-    P \implies Q
-} 
-is true if $P$ is false.
-As a consequence,
-\In{align*}{
-    (\forall x \in X)(Q(x)) \mydefeq (\forall x)(x \in X \implies Q(x))
-}
-is true in case $X$ is the empty set.
 
-\subsection{Uniqueness Quantification}
+\subsection{Universality}
 
+\begin{definition}
 For a boolean-valued function $P$, define
 \In{align*}{
     !aP(a) & \mydefeq P(a) \wedge \forall a' (P(a') \implies a = a')
 }
-You can state "there exists a unique $a$ such that $P$" using
+\end{definition}
+\begin{definition}[Uniqueness Quantification]
+Define
 \In{align*}{
     \exists!aP(a) & \mydefeq \exists a ! a P(a) 
 }
+meaning that "there exists a unique $a$ such that $P$".
+\end{definition}
+\begin{remark}
 On the other hand,
 \In{align*}{
     \exists a \big((!a P(a)) \wedge Q(a)\big)
 }
 means "there exists a unique $a$ such that $P$, moreover the $a$ is $Q$".
+\end{remark}
 
-\subsection{Universality}
-
-Category theory introduces many \emph{universal properties} or \emph{universality} like 
+\begin{definition}[Universality]
+We boldly call a statement of the form
 \In{align*}{
     (\forall x \in X)(\exists!y\in Y)(P(x,y))
 }
-, which is equivalent to an easier form:
+\emph{universality}.
+\end{definition}
+
+\begin{proposition}[Functional Universality]
 \In{align*}{
-    (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(P(x,y) \iff y = f(x))
+    & (\forall x \in X)(\exists!y\in Y)(P(x,y)) \\
+    \iff & (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(P(x,y) \iff y = f(x))
 }
-Category theory is the study to build such a function $f$.
+\end{proposition}
+\begin{strdproof}
+$(\implies)$ is from the Axiom of choice. $(\impliedby)$ is immediate.
+\end{strdproof}
 \mynewline
-In case $P(x,y)$ is $x = g(y)$ with a function $g : Y \to X$,
+Category theory is the study to build such a function $f$.
+
+\begin{definition}[Bijectivity]
+Given a a function $g : Y \to X$, a statement
 \In{align*}{
     (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(x = g(y) \iff y = f(x))
 }
-is known as \emph{bijectivity}.
+is known as the \emph{bijectivity} of $f$ and $g$.
+\end{definition}
+This is a special case of universality with $P(x,y)$ being $x = g(y)$.
 
 \subsection{Lambda Expressions}
 
+\begin{definition}[Lambda Expression]
 Following famous symbols like $\Sigma$, define
 \In{align*}{
     \Lambda_x y \mydefeq x \mapsto y 
 }
 for anonymous functions.
-\mynewline
+\end{definition}
+\begin{definition}
 Given a function $H$ whose domain is a set of functions, define
 \In{align*}{
-    H_x f(x) \mydefeq H(\Lambda x f(x))
+    H_x y \mydefeq H(\Lambda_x y)
 }
+\end{definition}
 
-\subsubsection{Placeholder Expressions}
-
+\begin{definition}[Placeholder Expression]
 For simple lambda expressions, you may use \emph{placeholders}:
 \In{align*}{
     \texttt{?}{+}1 \mydefeq \Lambda_n n{+}1
 }
 Placeholder symbols can vary: $\texttt{?}$, $\texttt{-}$, $\texttt{1}$, etc.
+\end{definition}
 
 
-\subsection{Family Declarations}
-
+\subsection{Families}
 Syntax of the function application is world-standard and fixed:
 \In{align*}{
     f(x) \text{ or } fx
 }
 , but sometimes you might want cuter syntax like that
-\In{align*}{
-    \strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}}
+\newcommand*{\myxstar}{%
+    \raisebox{0.12ex}{\ensuremath{%
+        \strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}}%
+    }}%
 }
+\In{align*}{
+    \myxstar
+}
+In such case,
+\begin{definition}[Family Declaration]
 A \emph{family declaration} is an easy way to define arbitary application syntax:
 \In{align*}{
-    (\strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}} \in Y) _ {x \in X}
+    (\myxstar \in Y) _ {x \in X}
 }
-If you place a function implementation into it:
+\end{definition}
+\begin{definition}[Family Definition]
+If you place a function implementation into a family declaration:
 \In{align*}{
-    (\strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}} \mydefeq x^2 \in Y) _ {x \in X}
+    (\myxstar \mydefeq x^2 \in Y) _ {x \in X}
 }
 , it might be called a \emph{family definition}.
-
-
-\subsubsection{Dependent Functions}
-
-Family declarations can do more. Let $F$ a set-valued function.
+\end{definition}
+Family declarations can do more. 
+\begin{definition}[Dependent Function]
+Let $F$ a set-valued function.
 \In{align*}{
     (f (x) \in F(x)) _ {x \in X}
 }
@@ -104,18 +133,15 @@ such that
 \In{align*}{
     (\forall x \in X)(f(x) \in F(x))
 }
-Such $f$ is called a \emph{dependent function}, for the $F(x)$ depends on $x$. %
+Such $f$ is called a \emph{dependent function}, for the $F(x)$ depends on $x$. 
+\end{definition}
 In case $F$ is a constant function,
 \In{align*}{
     (f(x) \in Y)_{x \in X}
 }
 is a normal function $X \to Y$. 
 
-\subsection{Russell's Paradox}
-TODO
-
 \subsection{Coherence}
-
 You will write
 \In{align*}{
     3+1+2

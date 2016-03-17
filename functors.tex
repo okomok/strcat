@@ -1,6 +1,8 @@
 \section{Functors}
 
 \subsection{The Definition}
+
+\begin{definition}[Functor]
 A \emph{functor}
 $
     F : \cat{C} \to \cat{D}
@@ -29,7 +31,10 @@ satisfying the \emph{functoriality}:
         F(\operatorname{id}_A) = \operatorname{id}_{FA}
     }
 }
+\end{definition}
+\begin{definition}[Infrafunctor]
 An \emph{infrafunctor} is a functor without the requirement of functoriality.
+\end{definition}
 
 
 \subsection{Functorial Tubes}
@@ -119,8 +124,7 @@ Any functor preserves the invertibility meaning that
 }
 \end{proposition}
 
-\subsection{Composite Functors}
-
+\begin{definition}[Composite Functor]
 For any two functors 
 \In{align*}{
     F &: \cat{A} \to \cat{B}\\
@@ -156,11 +160,10 @@ is depicted as
         }
     }
 }
-One can easily check the functoriality.
+\end{definition}
 
 
-\subsection{Identity Functors}
-
+\begin{definition}[Identity Functor]
 An \emph{idenity functor}
 \In{align*}{
     \operatorname{Id}_{\cat{C}} : \cat{C} \to \cat{C}
@@ -186,16 +189,16 @@ is depicted as
         ,\strdmid,\strdrlabel{}
     }
 }
-The functoriality is trivial.
+\end{definition}
 
 
-\subsection{Contravariant Functors}
-
+\begin{definition}[Contravariant Functor]
 A functor whose domain is an opposite category
 \In{align*}{
     F : \cat{C}^{\operatorname{op}} \to \cat{D}
 }
 is called \emph{contravariant}, while a normal functor is called \emph{covariant}.
+\end{definition}
 A contravariant functor is depicted as
 \In{align*}{
     \strdgathered{
@@ -213,17 +216,21 @@ A contravariant functor is depicted as
         }
     }
 }
+
+\begin{definition}[Variant]
 Given a statement regarding functors, you can obtain a corresponding one regarding contravariant functors and vice versa. %
 We call such a statement the \emph{variant} of the original one.
+\end{definition}
 
 
-\subsection{Binary Functors}
-
+\begin{definition}[Binary Functor]
 A functor whose domain is a product category
 \In{align*}{
     F : \cat{A} \times \cat{B} \to \cat{C}
 }
-is called a \emph{binary functor} or \emph{bifunctor}. With numbered placeholders, it is depicted as
+is called a \emph{binary functor} or \emph{bifunctor}.
+\end{definition}
+With numbered placeholders, it is depicted as
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -283,8 +290,7 @@ Spelling out the definition of functoriality, one can check a diagram like
 }
 is unambiguous.
 
-\subsection{Partial Applications}
-
+\begin{definition}[Partial Application]
 Given a binary functor $F : \cat{A} \times \cat{B} \to \cat{C}$, a \emph{partially applied} functor
 \In{align*}{
     \Lambda_B F(A,B) &: \cat{B} \to \cat{C} \text{ or briefly }\\
@@ -315,8 +321,8 @@ is defined by
         }
     }
 }
+\end{definition}
 The definition of $F(\texttt{?},B)$ is an exercise. 
-
 
 
 % One can spell out the functoriality:
@@ -386,9 +392,10 @@ The definition of $F(\texttt{?},B)$ is an exercise.
 %     }
 % }
 
-\subsection{Category of Small Categories}
-
-A category $\cat{C}$ is \emph{small} when its $\catOb{C}$ is a set. %
+\begin{definition}[Small Category]
+A category $\cat{C}$ is called \emph{small} when its $\catOb{C}$ is a set. 
+\end{definition}
+\begin{definition}[Category of Small Categories]
 The \emph{category of small categories} $\catCat$ is the category whose objects are %
 all small categories and whose morphisms are functors:
 \In{align*}{
@@ -403,16 +410,18 @@ all small categories and whose morphisms are functors:
     }
 }
 , where composite functors join the strings.
+\end{definition}
 
 
-\subsection{Full and Faithful Functors}
-
+\begin{definition}[Full and Faithful Functor]
 A functor $F : \cat{C} \to \cat{D}$ is called \emph{full and faithful} %
 if for each object $A$ and $B$ in $\cat{C}$, the family 
 \In{align*}{
     (F(f) : FA \to FB)_{f : A \to B}
 }
-is bijective, that is, there is a functional box such that
+is bijective.
+\end{definition}
+In other words, there is a functional box such that
 \In{align*}{
     \strdgathered{
         \strdfork{

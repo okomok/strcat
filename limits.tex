@@ -1,13 +1,14 @@
 
 \section{Limits}
 
-\subsection{Cones}
-
+\begin{definition}[Cone]
 Given a functor $F : \cat A \to \cat B$, a natural transformation of the form
 \In{align*}{
     (v _ X : B \to FX) _ X
 }
-is called a \emph{cone} of $F$. The naturality(\emph{conicality}) can be expressed as
+is called a \emph{cone} of $F$.
+\end{definition}
+The naturality(\emph{conicality}) can be expressed as
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -38,13 +39,13 @@ is called a \emph{cone} of $F$. The naturality(\emph{conicality}) can be express
 like a magical box any morphism can appear from.
 
 
-\subsection{The Definition}
-
+\begin{definition}[Limit]
 Given a functor $F : \cat A \to \cat B$, a limit of $F$ is a pair of
 \In{enumerate}{
     \item an object in $\cat{B}$ denoted as $\text{lim} F$
     \item a natural bijection $(\cat{B}(B, \text{lim}F) \cong \catNat _ X(B,FX))_B$
 }
+\end{definition}
 The naturality allows the bijectivity to be expressed as
 \In{align*}{
     \strdgathered{
@@ -130,12 +131,16 @@ A limiting cone is \emph{monic} meaning that
     }
 }
 \end{proposition}
+\begin{strdproof}
+Immediate by the bijectivity of limits.
+\end{strdproof}
 
 
-\subsection{Products}
-
+\begin{definition}[Product]
 In particular case the domain of a functor $F : \mathcal{A} \to \mathcal{B}$ is discrete, %
-the limit of $F$ is called the \emph{product }of $F$ denoted as $\textstyle\prod F$. Spelling out the bijectivity,
+the limit of $F$ is called the \emph{product }of $F$ denoted as $\textstyle\prod F$. %
+\end{definition}
+Spelling out the bijectivity,
 \In{align*}{
     \strdgathered{
         \strdmid,\strdrlabel{\prod F}
@@ -176,17 +181,21 @@ the limit of $F$ is called the \emph{product }of $F$ denoted as $\textstyle\prod
         ,\strdmid,\strdrlabel{B}
     }
 }
-, where \!\raisebox{0.1ex}{$\strdgathered{\strdwidecell{1}{1}{\pi}}$} is called the \emph{projection} of $F$. %
+, where \!\raisebox{0.1ex}{$\strdgathered{\strdwidecell{1}{1}{\pi}}$} is called the \emph{projection} of $F$. 
+\mynewline
 Note that the conicality has no concern, because any family of the form
 \In{align*}{
     (v _ X : B \to FX) _ {X \in \catOb A}
 }
 is always natural in case $\cat A$ is discrete.
 
-\subsection{Duality}
+\begin{definition}[Dual]
+Given a statement containing string diagrams, by flipping it upside down, %
+a corresponding statement is obtained. It is called the \emph{dual} of the original one.
+\end{definition}
 
-In string diagrams, the \emph{duality} is easily expressed by flipping diagrams upside down. 
-As an example, you can obtain the definition of \emph{coproducts} from that diagram flipped:
+\begin{definition}[Coproduct]
+A \emph{coproduct} is a structure obtained from the bijectivity diagram of the products flipped.
 \In{align*}{
     \Compose\strdgathered\strdinv{
         \strdmid,\strdrlabel{\coprod F}
@@ -227,4 +236,8 @@ As an example, you can obtain the definition of \emph{coproducts} from that diag
         ,\strdmid,\strdrlabel{B}
     }
 }
+\end{definition}
+\begin{remark}
 Note that the variant makes a domain opposite, while the dual does for a codomain.
+\end{remark}
+

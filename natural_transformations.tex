@@ -2,6 +2,7 @@
 
 \subsection{The Definition}
 
+\begin{definition}[Naturality]
 Given two infrafunctors
 \In{align*}{
     (F(f) \in \cat{D}(FA,FB)) _ {f \in \cat{C}(A,B)}\\
@@ -19,10 +20,13 @@ In case parenthese are cumbersome, you can say
 \In{align*}{
     \tau _ A \text{ is natural in } A
 }
+\end{definition}
+\begin{definition}[Natural Transformation]
 In particular case $F$ and $G$ are functorial(then they are functors), $\tau$ is denoted as a \emph{natural transformation}
 \In{align*}{
     \tau : F \to G
 }
+\end{definition}
 
 \subsection{Natural Connectors}
 
@@ -97,8 +101,7 @@ because the naturality states a node can travel between tubes:
 
 
 
-\subsection{Vertical Composition}
-
+\begin{definition}[Vertical Composition]
 Given three functors
 \In{align*}{
     F,G,H : \cat{C} \to \cat{D}
@@ -131,10 +134,9 @@ is defined by
         }
     }
 }
-The naturality is trivial.
+\end{definition}
 
-\subsection{Horizontal Composition}
-
+\begin{definition}[Horizontal Composition]
 Given four functors
 \In{align*}{
     F,G &: \cat{A} \to \cat{B}\\
@@ -172,11 +174,11 @@ is defined by
         }
     }
 }
+\end{definition}
 You can easily check the naturality. Travel by car ferry.
 
 
-\subsection{Identity Natural Transformations}
-
+\begin{definition}[Identity Natural Transformation]
 Given a functor
 \In{align*}{
     F &: \cat{C} \to \cat{D}
@@ -209,6 +211,9 @@ is defined by
         }
     }
 }
+\end{definition}
+
+\begin{definition}[Whiskering]
 A \emph{whikering} is a horizontal composition with identity natural transformations:
 \In{align*}{
     \strdgathered{
@@ -250,10 +255,10 @@ A \emph{whikering} is a horizontal composition with identity natural transformat
         }
     }
 }
+\end{definition}
 
 
-\subsection{Natural Isomorphisms}
-
+\begin{definition}[Natural Isomorphism]
 A \emph{natural isomorphism} is a pair of natural transformations
 \In{align*}{
     \tau &: F \to G\\
@@ -314,16 +319,19 @@ satisfying the \emph{invertibilty}:
         }
     }
 }
+\end{definition}
 The same symbol is often used for the pair. %
-It is easy to see that for any natural transformation $\tau$,
+
+\begin{proposition}
+For any natural transformation $\tau$,
 \In{align*}{
     (\forall A)(\tau_A : \text{invertible})
 }
-is enough to build the other.
+is enough to build the other natural $\sigma$.
+\end{proposition}
 
 
-\subsection{Functor Categories}
-
+\begin{definition}[Functor Category]
 Given a small category $\cat{C}$ and a category $\cat{D}$, %
 the functor category
 $
@@ -343,8 +351,10 @@ whose morphisms are natural transformations:
     }
 }
 , where vertical compositions join the strings. 
-\mynewline
+\end{definition}
+\begin{definition}
 For the later use, define a lambda-tasted notation for a set of natural transformations:
 \In{align*}{
     \operatorname{Nat}_A(FA,GA) \mydefeq \operatorname{Nat}(F,G) \mydefeq [\cat{C},\cat{D}](F,G)
 }
+\end{definition}

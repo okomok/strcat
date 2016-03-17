@@ -2,6 +2,8 @@
 
 \subsection{The Definition}
 
+\begin{definition}[Category of Sets]
+\label{cat.set}
 The \emph{category of sets} $\catSet$ is a category whose objects are sets and whose morphisms are functions:
 \In{align*}{
     \strdgathered{
@@ -13,12 +15,11 @@ The \emph{category of sets} $\catSet$ is a category whose objects are sets and w
     }
 }
 , where nodes are joined by the function composition. 
-
-
-\subsection{Monoidal Category of Sets}
-
+\end{definition}
 A category is essentially one-dimensional so far: the vertical composition only. %
-Here we introduce the horizontal composition for functions. Parallel strings are defined by
+Here we introduce the horizontal composition for functions.
+\begin{definition}[Monoidal Category of Sets]
+Parallel strings are defined by
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -59,6 +60,7 @@ Strings for the singleton set $\lbrace \ast\rbrace$ is omitted so that an elemen
         ,\strdcell{x}
     }
 }
+\end{definition}
 One can check any string diagram built upon these definitions is unambiguous thanks to the trivial bijections:
 \In{align*}{
     X \times (X\myprime \times X\myprime\myprime) &\cong (X \times X\myprime) \times X\myprime\myprime\\
@@ -129,8 +131,7 @@ Identity morphisms can be depicted as
 As an exercise, write down the associativity and unitality using these diagrams. 
 
 
-\subsection{Currying}
-
+\begin{definition}[Currying]
 In particular case $\cat{C} = \catSet$, there exists the \emph{curry bijection}
 \In{align*}{
     \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))}\\
@@ -154,7 +155,8 @@ In particular case $\cat{C} = \catSet$, there exists the \emph{curry bijection}
 }
 We don't distinguish the two diagrams, for %
 the naturality of the bijection ensures "Move the right-side leg up and down" works correct.
-\mynewline
+\end{definition}
+\begin{definition}[Naming]
 In case $A$ is the singleton set,
 \In{align*}{
     \strdgathered{
@@ -175,10 +177,9 @@ In case $A$ is the singleton set,
     % }
 }
 is called a \emph{naming}, which turns a function to an element of function-sets.
+\end{definition}
 
-
-\subsection{Hom Functors}
-
+\begin{definition}[Hom Functor]
 Hom-sets can be extended to a binary functor
 \In{align*}{
     \Lambda_{A,B} \cat{C}(A,B) &: \cat{C}^{\operatorname{op}} \times \cat{C} \to \catSet \text{ or briefly}\\
@@ -220,6 +221,7 @@ defined by
         ,\strdmid,\strdrlabel{A\myprime}
     }
 }
+\end{definition}
 Notice that the world in the box is the product category $\cat{C}^{\operatorname{op}} \times \cat{C}$.
 \mynewline
 This definition will inspire you to depict the hom functors as
@@ -247,6 +249,8 @@ This definition will inspire you to depict the hom functors as
         ,\strdyhalf{\strdroad\strdmid}
     }
 }
+
+\begin{definition}[Unary Hom Functor]
 The partial applications
 \In{align*}{
     \cat{C}(A,\texttt{+}) &: \cat{C} \to \catSet\\
@@ -273,7 +277,5 @@ are respectively
         }
     }
 }
-
-
-
+\end{definition}
 
