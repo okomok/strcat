@@ -1,276 +1,279 @@
 
 \section{Limits}
 
-\begin{definition}[Cone]
-\label{cone}
-Given a functor $F : \cat A \to \cat B$, a cone of $F$ consists of
-\begin{enumerate}
-    \item an object $B$ in \cat B
-    \item a natural transformation $(v _ X : B \to FX) _ X$
-\end{enumerate}
-\end{definition}
-
-\begin{definition}[Conicality]
-\label{conicality}
-We may call the naturality of a cone explicitly the \emph{conicality}, which can be expressed as
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid
-            ,\strdcell{f}
-            ,\strdmid
-        }
-        ,\strdtubestartline
-        ,\strdtube{
-            \strdtubemid
-            ,\strdtubemid
-        }
-        ,\strdwidecellof{strd widecellbase}{1}{1}{v}
-        ,\strdmid,\strdrlabel{B}
-    } =
-    \strdgathered{
-        \strdfork{
-            \strdmid
-        }
-        ,\strdtubestartline
-        ,\strdtube{
-            \strdtubemid
-        }
-        ,\strdwidecellof{strd widecellbase}{1}{1}{v}
-        ,\strdmid,\strdrlabel{B}
-    }
+\definitionof{Cone}{
+    Given a functor $F : \cat A \to \cat B$, a cone of $F$ consists of
+    \begin{enumerate}
+        \item an object $B$ in \cat B
+        \item a natural transformation $(v _ X : B \to FX) _ X$
+    \end{enumerate}
 }
-like a magical box any morphism can appear from.
-\end{definition}
 
-\begin{definition}[Limit]
-\label{limit}
-Given a functor $F : \cat A \to \cat B$, a limit of $F$ is a pair of
-\In{enumerate}{
-    \item an object in $\cat{B}$ denoted as $\text{lim} F$
-    \item a natural bijection $(\cat{B}(B, \text{lim}F) \cong \catNat _ X(B,FX))_B$
-}
-\end{definition}
-
-\begin{definition}[Limiting Cone]
-\label{limiting.cone}
-The naturality allows the bijectivity to be expressed as
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{\text{lim}F}
-        ,\strdcell{h}
-        ,\strdmid,\strdrlabel{B}
-    } =
-    \strdgathered{
-        \strdmid,\strdrlabel{\text{lim}F}
-        ,\strdbox{1.7}{1.7}{
+\definitionof{Conicality}{
+    We may call the naturality of a cone explicitly the \emph{conicality}, which can be expressed as
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid
+                ,\strdcell{f}
+                ,\strdmid
+            }
+            ,\strdtubestartline
+            ,\strdtube{
+                \strdtubemid
+                ,\strdtubemid
+            }
+            ,\strdwidecellof{strd widecellbase}{1}{1}{v}
+            ,\strdmid,\strdrlabel{B}
+        } =
+        \strdgathered{
             \strdfork{
                 \strdmid
             }
-            ,\strdtubestart
-            ,\strdtube\strdtubemid
-            ,\strdwidecell{1}{1}{v}
-        },\strdat{Left StartCorner}{\strdoverlabel{\text{lim}}}
-       ,\strdmid,\strdrlabel{B}
-    } \iff
-    \strdgathered{
-        \strdfork{
-            \strdmid
+            ,\strdtubestartline
+            ,\strdtube{
+                \strdtubemid
+            }
+            ,\strdwidecellof{strd widecellbase}{1}{1}{v}
+            ,\strdmid,\strdrlabel{B}
         }
-        ,\strdtubestartline
-        ,\strdtube\strdtubemid
-        ,\strdwidecell{1}{1}{\text{lim}}
-        ,\strdmid,\strdrlabel{\text{lim} F}
-        ,\strdcell{h}
-        ,\strdmid,\strdrlabel{B}
     }
-    =
-    \strdgathered{
-        \strdfork{
-            \strdmid
-        }
-        ,\strdtubestartline
-        ,\strdtube\strdtubemid
-        ,\strdwidecell{1}{1}{v}
-        ,\strdmid,\strdrlabel{B}
+    like a magical box any morphism can appear from.
+}
+
+\In{remark}{
+    Vertical and horizontal composition preserve conicality, a special case of naturality.
+}
+
+\definitionof{Limit}{
+    Given a functor $F : \cat A \to \cat B$, a limit of $F$ is a pair of
+    \In{enumerate}{
+        \item an object in $\cat{B}$ denoted as $\text{lim} F$
+        \item a natural bijection $(\cat{B}(B, \text{lim}F) \cong \catNat _ X(B,FX))_B$
     }
 }
-where %
-\strdin{\strdpictureof{strd picture,baseline=(X.base)}}{\strdwidecellof{strd widecellbase,name=X}{1}{1}{\text{lim}}} %
-is a cone called the \emph{limiting cone} of $F$.
-\end{definition}
 
-\begin{proposition}
+\definitionof{Limiting Cone}{
+    The limit bijectivity, thanks to its naturality, can be expressed as
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{\text{lim}F}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{B}
+        } =
+        \strdgathered{
+            \strdmid,\strdrlabel{\text{lim}F}
+            ,\strdbox{1.7}{1.7}{
+                \strdfork{
+                    \strdmid
+                }
+                ,\strdtubestart
+                ,\strdtube\strdtubemid
+                ,\strdwidecell{1}{1}{v}
+            },\strdat{Left StartCorner}{\strdoverlabel{\text{lim}}}
+           ,\strdmid,\strdrlabel{B}
+        } \iff
+        \strdgathered{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestartline
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{\text{lim}}
+            ,\strdmid,\strdrlabel{\text{lim} F}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{B}
+        }
+        =
+        \strdgathered{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestartline
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{v}
+            ,\strdmid,\strdrlabel{B}
+        }
+    }
+    where %
+    \strdin{\strdpictureof{strd picture,baseline=(X.base)}}{\strdwidecellof{strd widecellbase,name=X}{1}{1}{\text{lim}}} %
+    is a cone called the \emph{limiting cone} of $F$.
+}
+
+\In{proposition}{
 Limits are unique up to isomorphism.
-\end{proposition}
-
-\begin{strdproof}
-Immediate by \cref{rep.unique}, because a limit is nothing but a contravariant representation
-\In{align*}{
-    \text{rep} _ B \catNat_X(B,FX)
 }
-\end{strdproof}
 
-\begin{proposition}\label{l.c.m}
-A limiting cone is \emph{monic} meaning that
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid
-        }
-        ,\strdtubestartline
-        ,\strdtube\strdtubemid
-        ,\strdwidecell{1}{1}{\text{lim}}
-        ,\strdmid,\strdrlabel{\text{lim} F}
-        ,\strdcell{h}
-        ,\strdmid,\strdrlabel{B}
-    } =
-    \strdgathered{
-        \strdfork{
-            \strdmid
-        }
-        ,\strdtubestartline
-        ,\strdtube\strdtubemid
-        ,\strdwidecell{1}{1}{\text{lim}}
-        ,\strdmid,\strdrlabel{\text{lim} F}
-        ,\strdcell{g}
-        ,\strdmid,\strdrlabel{B}
-    } \implies
-    \strdgathered{
-        \strdmid,\strdrlabel{\text{lim}F}
-        ,\strdcell{h}
-        ,\strdmid,\strdrlabel{B}
-    } =
-    \strdgathered{
-        \strdmid,\strdrlabel{\text{lim}F}
-        ,\strdcell{g}
-        ,\strdmid,\strdrlabel{B}
+\In{strdproof}{
+    Immediate by \cref{Uniqueness of Representations}, because a limit is nothing but a contravariant representation
+    \In{align*}{
+        \text{rep} _ B \catNat_X(B,FX)
     }
 }
-\end{proposition}
-\begin{strdproof}
-Immediate by the bijectivity of limits.
-\end{strdproof}
 
-
-\begin{definition}[Product]
-In particular case the domain of a functor $F : \mathcal{A} \to \mathcal{B}$ is discrete, %
-the limit of $F$ is called the \emph{product }of $F$ denoted as $\textstyle\prod F$. %
-\end{definition}
-
-\begin{definition}[Projection]
-\label{projection}
-Spelling out the bijectivity,
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{\prod F}
-        ,\strdcell{h}
-        ,\strdmid,\strdrlabel{B}
-    } =
-    \strdgathered{
-        \strdmid,\strdrlabel{\textstyle\prod F}
-        ,\strdbox{1.7}{1.7}{
+\In{proposition}{
+    A limiting cone is \emph{monic} meaning that
+    \In{align*}{
+        \strdgathered{
             \strdfork{
                 \strdmid
             }
-            ,\strdtubestart
+            ,\strdtubestartline
             ,\strdtube\strdtubemid
-            ,\strdwidecell{1}{1}{v}
-        },\strdat{Left StartCorner}{\strdoverlabel{\textstyle\prod}}
-       ,\strdmid,\strdrlabel{B}
-    } \iff
-    \strdgathered{
-        \strdfork{
-            \strdmid
-        }
-        ,\strdtubestartline
-        ,\strdtube\strdtubemid
-        ,\strdwidecell{1}{1}{\pi}
-        ,\strdmid,\strdrlabel{\textstyle\prod F}
-        ,\strdcell{h}
-        ,\strdmid,\strdrlabel{B}
-    }
-    =
-    \strdgathered{
-        \strdfork{
-            \strdmid
-        }
-        ,\strdtubestartline
-        ,\strdtube\strdtubemid
-        ,\strdwidecell{1}{1}{v}
-        ,\strdmid,\strdrlabel{B}
-    }
-}
-where %
-\strdin{\strdpictureof{strd picture,baseline=(X.base)}}{\strdwidecellof{strd widecellbase,name=X}{1}{1}{\pi}} %
-is called the \emph{projection} of $F$. 
-\end{definition}
-
-\begin{remark}
-The conicality has no concern here, because any family of the form
-\In{align*}{
-    (v _ X : B \to FX) _ {X \in \catOb A}
-}
-is always natural in case $\cat A$ is discrete.
-\end{remark}
-
-\begin{definition}[Dual]
-Given a statement containing string diagrams, by flipping it upside down, %
-a corresponding statement is obtained. It is called the \emph{dual} of the original one.
-\end{definition}
-
-\begin{definition}[Coproduct]
-A \emph{coproduct} is a structure obtained from the bijectivity diagram of the products flipped.
-\In{align*}{
-    \Compose\strdgathered\strdinv{
-        \strdmid,\strdrlabel{\coprod F}
-        ,\strdcell{h}
-        ,\strdmid,\strdrlabel{B}
-    } =
-    \Compose\strdgathered\strdinv{
-        \strdmid,\strdrlabel{\textstyle\coprod F}
-        ,\strdbox{1.7}{1.7}{
+            ,\strdwidecell{1}{1}{\text{lim}}
+            ,\strdmid,\strdrlabel{\text{lim} F}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{B}
+        } =
+        \strdgathered{
             \strdfork{
                 \strdmid
             }
-            ,\strdtubestart
+            ,\strdtubestartline
             ,\strdtube\strdtubemid
-            ,\strdwidecell{1}{1}{v}
-        },\strdat{Left StartCorner}{\strdoverlabel{\textstyle\coprod}}
-       ,\strdmid,\strdrlabel{B}
-    } \iff
-    \Compose\strdgathered\strdinv{
-        \strdfork{
-            \strdmid
+            ,\strdwidecell{1}{1}{\text{lim}}
+            ,\strdmid,\strdrlabel{\text{lim} F}
+            ,\strdcell{g}
+            ,\strdmid,\strdrlabel{B}
+        } \implies
+        \strdgathered{
+            \strdmid,\strdrlabel{\text{lim}F}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{B}
+        } =
+        \strdgathered{
+            \strdmid,\strdrlabel{\text{lim}F}
+            ,\strdcell{g}
+            ,\strdmid,\strdrlabel{B}
         }
-        ,\strdtubestartline
-        ,\strdtube\strdtubemid
-        ,\strdwidecell{1}{1}{\operatorname{in}}
-        ,\strdmid,\strdrlabel{\textstyle\coprod F}
-        ,\strdcell{h}
-        ,\strdmid,\strdrlabel{B}
-    }
-    =
-    \Compose\strdgathered\strdinv{
-        \strdfork{
-            \strdmid
-        }
-        ,\strdtubestartline
-        ,\strdtube\strdtubemid
-        ,\strdwidecell{1}{1}{v}
-        ,\strdmid,\strdrlabel{B}
     }
 }
-\end{definition}
+
+\In{strdproof}{
+    Immediate by the limit bijectivity.
+}
+
+\definitionof{Product}{
+    In particular case the domain of a functor $F : \mathcal{A} \to \mathcal{B}$ is discrete, %
+    the limit of $F$ is called the \emph{product }of $F$ denoted as $\textstyle\prod F$. %
+}
+
+\definitionof{Projection}{
+    Spelling out the product bijectivity,
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{\prod F}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{B}
+        } =
+        \strdgathered{
+            \strdmid,\strdrlabel{\textstyle\prod F}
+            ,\strdbox{1.7}{1.7}{
+                \strdfork{
+                    \strdmid
+                }
+                ,\strdtubestart
+                ,\strdtube\strdtubemid
+                ,\strdwidecell{1}{1}{v}
+            },\strdat{Left StartCorner}{\strdoverlabel{\textstyle\prod}}
+           ,\strdmid,\strdrlabel{B}
+        } \iff
+        \strdgathered{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestartline
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{\pi}
+            ,\strdmid,\strdrlabel{\textstyle\prod F}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{B}
+        }
+        =
+        \strdgathered{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestartline
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{v}
+            ,\strdmid,\strdrlabel{B}
+        }
+    }
+    where %
+    \strdin{\strdpictureof{strd picture,baseline=(X.base)}}{\strdwidecellof{strd widecellbase,name=X}{1}{1}{\pi}} %
+    is called the \emph{projection} of $F$. 
+}
+
+\In{remark}{
+    Conicality has no concern here, because any family of the form
+    \In{align*}{
+        (v _ X : B \to FX) _ {X \in \catOb A}
+    }
+    is always natural in case $\cat A$ is discrete.
+}
+
+\definitionof{Dual}{
+    Given a statement containing string diagrams, by flipping it upside down, %
+    a corresponding statement is obtained. It is called the \emph{dual} of the original one.
+}
+
+\definitionof{Coproduct}{
+    A \emph{coproduct} is a structure obtained from the bijectivity diagram of the products flipped.
+    \In{align*}{
+        \Compose\strdgathered\strdinv{
+            \strdmid,\strdrlabel{\coprod F}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{B}
+        } =
+        \Compose\strdgathered\strdinv{
+            \strdmid,\strdrlabel{\textstyle\coprod F}
+            ,\strdbox{1.7}{1.7}{
+                \strdfork{
+                    \strdmid
+                }
+                ,\strdtubestart
+                ,\strdtube\strdtubemid
+                ,\strdwidecell{1}{1}{v}
+            },\strdat{Left StartCorner}{\strdoverlabel{\textstyle\coprod}}
+           ,\strdmid,\strdrlabel{B}
+        } \iff
+        \Compose\strdgathered\strdinv{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestartline
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{\operatorname{in}}
+            ,\strdmid,\strdrlabel{\textstyle\coprod F}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{B}
+        }
+        =
+        \Compose\strdgathered\strdinv{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestartline
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{v}
+            ,\strdmid,\strdrlabel{B}
+        }
+    }
+}
+
 \begin{remark}
 The dual makes a codomain opposite, while the variant does for a domain.
 \end{remark}
 
-\begin{definition}[Preservation of Limits]
+\definitionof{Preservation of Limits}{
+    \cref{Limit}
+    sxxo
+    \ref{Limit}
 TODO
-\end{definition}
+}
 
-\begin{proposition}[HFPL]
+\In{proposition}{[HFPL]
     Hom functors preserve limits, meaning that TODO
-\end{proposition}
+}
 

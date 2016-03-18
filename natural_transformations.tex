@@ -2,31 +2,33 @@
 
 \subsection{The Definition}
 
-\begin{definition}[Naturality]
-Given two infrafunctors
-\In{align*}{
-    (F(f) \in \cat{D}(FA,FB)) _ {f \in \cat{C}(A,B)}\\
-    (G(f) \in \cat{D}(GA,GB)) _ {f \in \cat{C}(A,B)}
+\definitionof{Naturality}{
+    Given two infrafunctors
+    \In{align*}{
+        F, G : \cat C \to \cat D
+    }
+    a family of morphisms
+    \In{align*}{
+        (\tau_A \in \cat{D}(FA,GA)) _ {A \in \catOb{C}}
+    }
+    is called \emph{natural} when for any $f \in \cat{C}(A,B)$,
+    \In{align*}{
+        \tau_B \circ F(f) = G(f) \circ \tau_A
+    }
+    In case parenthese are cumbersome, you can say ``$\tau_A$ is \emph{natural in} $A$".
 }
-, a family of morphisms
-\In{align*}{
-    (\tau_A \in \cat{D}(FA,GA)) _ {A \in \catOb{C}}
+
+\definitionof{Natural Transformation}{
+    Furthermore, in particular case $F$ and $G$ are functorial(then they are functors), %
+    $\tau$ is denoted as a \emph{natural transformation}
+    \In{align*}{
+        \tau : F \to G
+    }
 }
-is called \emph{natural} if for any $f \in \cat{C}(A,B)$,
-\In{align*}{
-    \tau_B \circ F(f) = G(f) \circ \tau_A
+
+\In{remark}{
+    The orthogonality of functoriality and naturality is sometimes helpful.
 }
-In case parenthese are cumbersome, you can say
-\In{align*}{
-    \tau _ A \text{ is natural in } A
-}
-\end{definition}
-\begin{definition}[Natural Transformation]
-In particular case $F$ and $G$ are functorial(then they are functors), $\tau$ is denoted as a \emph{natural transformation}
-\In{align*}{
-    \tau : F \to G
-}
-\end{definition}
 
 \subsection{Natural Connectors}
 
@@ -81,7 +83,7 @@ because the naturality states a node can travel between tubes:
         }
     }
 }
-, which inspires you to assign
+which inspires you to assign
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -99,262 +101,260 @@ because the naturality states a node can travel between tubes:
     }
 }
 
-
-
-\begin{definition}[Vertical Composition]
-Given three functors
-\In{align*}{
-    F,G,H : \cat{C} \to \cat{D}
-}
-and two natural transformations
-\In{align*}{
-    \tau &: F \to G\\
-    \sigma &: G \to H
-}
-, the \emph{vertical composition} of $\tau$ and $\sigma$
-\In{align*}{
-    \sigma \circ \tau : F \to H
-}
-is defined by
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{}
-            ,\strdmid,\strdrlabel{}
-            ,\strdmid,\strdrlabel{}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdtubemid,\strdat{Left}{\strdoverlabel{H}}
-            ,\strdtwincell{\sigma}
-            ,\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
-            ,\strdtwincell{\tau}
-            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
-            ,\strdtubeendline
-        }
+\definitionof{Vertical Composition}{
+    Given three functors
+    \In{align*}{
+        F,G,H : \cat{C} \to \cat{D}
     }
-}
-\end{definition}
-
-\begin{definition}[Horizontal Composition]
-Given four functors
-\In{align*}{
-    F,G &: \cat{A} \to \cat{B}\\
-    H,K &: \cat{B} \to \cat{C}\\
-}
-and two natural transformations
-\In{align*}{
-    \tau &: F \to G\\
-    \sigma &: H \to K
-}
-, the \emph{horizontal composition} of $\tau$ and $\sigma$
-\In{align*}{
-    \sigma \tau : H \circ F \to K \circ G 
-}
-is defined by
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{}
-            ,\strdmid,\strdrlabel{}
-        }
-        ,\strdtube{
-            \strdtubestart
-            ,\strdfork{
-                \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+    and two natural transformations
+    \In{align*}{
+        \tau &: F \to G\\
+        \sigma &: G \to H
+    }
+    the \emph{vertical composition} of $\tau$ and $\sigma$
+    \In{align*}{
+        \sigma \circ \tau : F \to H
+    }
+    is defined by
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+                ,\strdmid,\strdrlabel{}
+                ,\strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid,\strdat{Left}{\strdoverlabel{H}}
+                ,\strdtwincell{\sigma}
+                ,\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
                 ,\strdtwincell{\tau}
                 ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+                ,\strdtubeendline
             }
-            ,\strdtubeextend{1}{1}
-            ,\strdcutoff\strdtubebound
-            ,\strdtubemid,\strdat{Left}{\strdoverlabel{K}}
-            ,\strdtwincell{\sigma}
-            ,\strdtubemid,\strdat{Left}{\strdoverlabel{H}}
-            ,\strdcutoff\strdtubebound
         }
     }
 }
-\end{definition}
+
+\definitionof{Horizontal Composition}{
+    Given four functors
+    \In{align*}{
+        F,G &: \cat{A} \to \cat{B}\\
+        H,K &: \cat{B} \to \cat{C}\\
+    }
+    and two natural transformations
+    \In{align*}{
+        \tau &: F \to G\\
+        \sigma &: H \to K
+    }
+    the \emph{horizontal composition} of $\tau$ and $\sigma$
+    \In{align*}{
+        \sigma \tau : H \circ F \to K \circ G 
+    }
+    is defined by
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+                ,\strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestart
+                ,\strdfork{
+                    \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+                    ,\strdtwincell{\tau}
+                    ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+                }
+                ,\strdtubeextend{1}{1}
+                ,\strdcutoff\strdtubebound
+                ,\strdtubemid,\strdat{Left}{\strdoverlabel{K}}
+                ,\strdtwincell{\sigma}
+                ,\strdtubemid,\strdat{Left}{\strdoverlabel{H}}
+                ,\strdcutoff\strdtubebound
+            }
+        }
+    }
+}
 You can easily check the naturality. Travel by car ferry.
 
 
-\begin{definition}[Identity Natural Transformation]
-Given a functor
-\In{align*}{
-    F &: \cat{C} \to \cat{D}
-}
-, the \emph{identity natural transformation}
-\In{align*}{
-    \operatorname{id} _F : F \to F
-}
-is defined by
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdtubemid
-            ,\strdtubeat{Mid}{\strdtwincell{\operatorname{id}}}
-            ,\strdtubeendline
-        }
-    } \mydefeq\,
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdtubemid
-            ,\strdtubeendline
+\definitionof{Identity Natural Transformation}{
+    Given a functor
+    \In{align*}{
+        F &: \cat{C} \to \cat{D}
+    }
+    the \emph{identity natural transformation}
+    \In{align*}{
+        \operatorname{id} _F : F \to F
+    }
+    is defined by
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdtubeat{Mid}{\strdtwincell{\operatorname{id}}}
+                ,\strdtubeendline
+            }
+        } \mydefeq\,
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
         }
     }
 }
-\end{definition}
 
-\begin{definition}[Whiskering]
-A \emph{whikering} is a horizontal composition with identity natural transformations:
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{}
-            ,\strdmid,\strdrlabel{}
+\definitionof{Whiskering}{
+    A \emph{whikering} is a horizontal composition with identity natural transformations:
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+                ,\strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestart
+                ,\strdfork{
+                    \strdtubemid
+                    ,\strdtwincell{\tau}
+                    ,\strdtubemid
+                }
+                ,\strdtubeextend{1}{1}
+                ,\strdcutoff\strdtubebound
+                ,\strdtubemid
+                ,\strdtubemid
+                ,\strdcutoff\strdtubebound
+            }
+        }\ \ 
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+                ,\strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestart
+                ,\strdfork{
+                    \strdtubemid
+                    ,\strdtubemid
+                }
+                ,\strdtubeextend{1}{1}
+                ,\strdcutoff\strdtubebound
+                ,\strdtubemid
+                ,\strdtwincell{\sigma}
+                ,\strdtubemid
+                ,\strdcutoff\strdtubebound
+            }
         }
-        ,\strdtube{
-            \strdtubestart
-            ,\strdfork{
-                \strdtubemid
+    }
+}
+
+\definitionof{Natural Isomorphism}{
+    A \emph{natural isomorphism} is a pair of natural transformations
+    \In{align*}{
+        \tau &: F \to G\\
+        \sigma &: G \to F
+    }
+    satisfying the \emph{invertibilty}:
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+                ,\strdmid,\strdrlabel{}
+                ,\strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdtwincell{\sigma}
+                ,\strdtubemid
                 ,\strdtwincell{\tau}
                 ,\strdtubemid
+                ,\strdtubeendline
             }
-            ,\strdtubeextend{1}{1}
-            ,\strdcutoff\strdtubebound
-            ,\strdtubemid
-            ,\strdtubemid
-            ,\strdcutoff\strdtubebound
-        }
-    }\ \ 
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{}
-            ,\strdmid,\strdrlabel{}
-        }
-        ,\strdtube{
-            \strdtubestart
-            ,\strdfork{
-                \strdtubemid
+        } & =\
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestartline
                 ,\strdtubemid
+                ,\strdtubeendline
             }
-            ,\strdtubeextend{1}{1}
-            ,\strdcutoff\strdtubebound
-            ,\strdtubemid
-            ,\strdtwincell{\sigma}
-            ,\strdtubemid
-            ,\strdcutoff\strdtubebound
+        } \\
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+                ,\strdmid,\strdrlabel{}
+                ,\strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdtwincell{\tau}
+                ,\strdtubemid
+                ,\strdtwincell{\sigma}
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
+        } & =\
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
         }
     }
 }
-\end{definition}
+The same symbol is often used for the pair. 
 
-
-\begin{definition}[Natural Isomorphism]
-A \emph{natural isomorphism} is a pair of natural transformations
-\In{align*}{
-    \tau &: F \to G\\
-    \sigma &: G \to F
+\In{proposition}{
+    For any natural transformation $\tau$,
+    \In{align*}{
+        (\forall A)(\tau_A : \text{invertible})
+    }
+    is enough to build the other natural $\sigma$.
 }
-satisfying the \emph{invertibilty}:
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{}
-            ,\strdmid,\strdrlabel{}
-            ,\strdmid,\strdrlabel{}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdtubemid
-            ,\strdtwincell{\sigma}
-            ,\strdtubemid
-            ,\strdtwincell{\tau}
-            ,\strdtubemid
-            ,\strdtubeendline
-        }
-    } & =\
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdtubemid
-            ,\strdtubeendline
-        }
-    } \\
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{}
-            ,\strdmid,\strdrlabel{}
-            ,\strdmid,\strdrlabel{}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdtubemid
-            ,\strdtwincell{\tau}
-            ,\strdtubemid
-            ,\strdtwincell{\sigma}
-            ,\strdtubemid
-            ,\strdtubeendline
-        }
-    } & =\
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdtubemid
-            ,\strdtubeendline
+
+\definitionof{Functor Category}{
+    Given a small category $\cat{C}$ and a category $\cat{D}$, %
+    the functor category
+    $
+        [\cat{C},\cat{D}]
+    $
+    is a category whose objects are functors from $\cat{C}$ to $\cat{D}$ and %
+    whose morphisms are natural transformations:
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{H}
+                ,\strdcell{\sigma}
+                ,\strdmid,\strdrlabel{G}
+                ,\strdcell{\tau}
+                ,\strdmid,\strdrlabel{F}
+            }
         }
     }
+    , where vertical compositions join the strings. 
 }
-\end{definition}
-The same symbol is often used for the pair. %
 
-\begin{proposition}
-For any natural transformation $\tau$,
-\In{align*}{
-    (\forall A)(\tau_A : \text{invertible})
-}
-is enough to build the other natural $\sigma$.
-\end{proposition}
-
-
-\begin{definition}[Functor Category]
-Given a small category $\cat{C}$ and a category $\cat{D}$, %
-the functor category
-$
-    [\cat{C},\cat{D}]
-$
-is a category whose objects are functors from $\cat{C}$ to $\cat{D}$ and %
-whose morphisms are natural transformations:
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{H}
-            ,\strdcell{\sigma}
-            ,\strdmid,\strdrlabel{G}
-            ,\strdcell{\tau}
-            ,\strdmid,\strdrlabel{F}
-        }
+\In{definition}{
+    For the later use, define a lambda-tasted notation for a set of natural transformations:
+    \In{align*}{
+        \operatorname{Nat}_A(FA,GA) \mydefeq \operatorname{Nat}(F,G) \mydefeq [\cat{C},\cat{D}](F,G)
     }
 }
-, where vertical compositions join the strings. 
-\end{definition}
-\begin{definition}
-For the later use, define a lambda-tasted notation for a set of natural transformations:
-\In{align*}{
-    \operatorname{Nat}_A(FA,GA) \mydefeq \operatorname{Nat}(F,G) \mydefeq [\cat{C},\cat{D}](F,G)
-}
-\end{definition}
+

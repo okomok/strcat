@@ -242,8 +242,8 @@
 \newcommand*{\Unuse}[1]{}
 \newcommand*{\PrependComma}[2]{,#1#2}% no spaces
 
-\newcommand*{\In}[2]{\Foldr\In@{#2}{\List{#1}}}
-\newcommand*{\In@}[2]{\begin{#1}#2\end{#1}}
+\newcommand*{\InList}[2]{\Foldr\In{#2}{\List{#1}}}
+\newcommand*{\In}[2]{\begin{#1}#2\end{#1}}
 
 % Arithmetic
 \newcommand*{\NumInc}[1]{\ifcase#1 %

@@ -1,266 +1,265 @@
 \section{The Yoneda Lemma}
 
 
-\begin{definition}
-Given a functor $F : \cat{C}\catop \to \catSet$ and an object $A$ in $\cat{C}$, %
-a natural tranformation of the form
-\In{align*}{
-    (\tau_X &: \cat{C}(X,A) \to FX)_ X
-}
-can be depicted as
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid
-            ,\strdcell{\strdupsidedown{\catph{?}}}
-            ,\strdmid,\strdrlabel{A}
-        }
-        ,\strdtubestart
-        ,\strdcutoff\strdtubebound
-        ,\strdtube{
-            \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
-        }
-        ,\strdtwincell{\tau}
-        ,\strdtubeof{strd frame}\strdtubeclose
-    } \mydefeq
-    \strdgathered{
-        \strdfork{
-            \strdmid
-        }
-        ,\strdtubestart
-        ,\strdcutoff\strdtubebound
-        ,\strdtube{
-            \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
-        }
-        ,\strdbox{1}{1}{
-            \strdmid
-            ,\strdcell{\strdupsidedown{\catph{?}}}
-            ,\strdmid,\strdrlabel{A}
-        },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{\tau}}
+\In{definition}{
+    Given a functor $F : \cat{C}\catop \to \catSet$ and an object $A$ in $\cat{C}$, %
+    a natural tranformation of the form
+    \In{align*}{
+        (\tau_X &: \cat{C}(X,A) \to FX)_ X
     }
-}
-owing to the naturality.
-\end{definition}
-
-\begin{definition}[Yoneda Bijection]
-\label{y.b}
-The \emph{Yoneda bijection} is defined as 
-\In{align*}{
-    \mylhs{\catNat_X(\cat{C}(X,A),FX)} &\cong \myrhs{FA}\\
-    \strdgathered{
-        \strdfork{
-            \strdmid
-            ,\strdcell{\strdupsidedown{\catph{?}}}
-            ,\strdmid,\strdrlabel{A}
-        }
-        ,\strdtubestart
-        ,\strdcutoff\strdtubebound
-        ,\strdtube{
-            \strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
-        }
-        ,\strdtwincell{\tau}
-        ,\strdtubeof{strd frame}\strdtubeclose
-    } &\mapsto
-    \strdgathered{
-        \strdfork{
-            \strdmid
-            ,\strdmid,\strdrlabel{A}
-        }
-        ,\strdtubestart
-        ,\strdcutoff\strdtubebound
-        ,\strdtube{
-            \strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
-        }
-        ,\strdtwincell{\tau}
-        ,\strdtubeof{strd frame}\strdtubeclose
-    }\\
-    \strdgathered{
-        \strdfork{
-            \strdmid
-            ,\strdcell{\strdupsidedown{\catph{?}}}
-            ,\strdmid,\strdrlabel{A}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdtubemid
-            ,\strdnone{\strdtwincell{\tau}}
-            ,\strdtubemid
-            ,\strdwidecell{1}{1}{a}
-        }
-    } &\mymapsfrom
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{A}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdtubemid
-            ,\strdnone{\strdtwincell{\tau}}
-            ,\strdwidecell{1}{1}{a}
-        }
-    }
-}
-\end{definition}
-
-\begin{lemma}[Yoneda Lemma]
-\label{y.l}
-The Yoneda bijection is actually bijective and natural in $F$ and $A$. 
-\end{lemma}
-\begin{strdproof}
-Now the proof is on my soul trivial!
-\end{strdproof}
-
-
-\begin{definition}[Yoneda Embedding]
-The \emph{Yoneda embedding} is defined as
-\In{align*}{
-    \mylhs{\Lambda_A \Lambda_X \cat{C}(X,A) : \cat{C}} &\to \myrhs{[\cat{C}\catop,\catSet]}\\
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdcell{f}
-        ,\strdmid,\strdrlabel{A}
-    } &\mapsto\,
-    \strdgathered{
-        \strdtubeof{}{
-            \strdtubestart%line
-            ,\strdtubemid,\strdbackground{strd roadcolor}
-            ,\strdat{Left}{\strdrlabel{B}}
-            ,\strdat{Left End}{\strdcell{\Identity{f}}}
-            ,\strdtubemid,\strdbackground{strd roadcolor}
-            ,\strdat{Left}{\strdrlabel{A}}
-        }
-    } \,=\,
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdcell{f}
-        ,\strdmid,\strdrlabel{A}
-        ,\strdcell{\catph{?}}
-        ,\strdmid
-    } 
-}
-using the diagram of hom functors. In short,
-\In{align*}{
-    \strdgathered{
-        \strdtubeof{}{
-            \strdtubestart%line
-            ,\strdtubemid,\strdbackground{strd roadcolor}
-            ,\strdat{Left End}{\strdcell{\texttt{?}}}
-            ,\strdtubemid,\strdbackground{strd roadcolor}
-        }
-    }
-}
-\end{definition}
-
-\begin{definition}
-A natural transformation of the form
-\In{align*}{
-    (\tau_X : \cat{C}(X,A) \to \cat{C}(X,B))_X
-}
-can be depicted as
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdfork{
-            \strdmid,\strdrlabel{A}
-            ,\strdcell{\catph{?}}
-            ,\strdmid
-        }
-        ,\strdtubeof{strd frame}{
-            \strdtubestart
-            ,\strdtubeunclose
-            ,\strdtwincell{\tau}
-        }
-    }
-}
-\end{definition}
-
-\begin{definition}[Yoneda Embedding Bijection]
-In special case $F \mydefeq \cat{C}(\catph{-},B)$, the Yoneda bijection is expanded to
-\In{align*}{
-    \mylhs{\catNat_X(\cat{C}(X,A),\cat{C}(X,B))} &\cong \myrhs{\cat{C}(A,B)}\\
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdfork{
-            \strdmid,\strdrlabel{A}
-            ,\strdcell{\catph{?}}
-            ,\strdmid
-        }
-        ,\strdtubeof{strd frame}{
-            \strdtubestart
-            ,\strdtubeunclose
-            ,\strdtwincell{\tau}
-        }
-    } &\mapsto
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdfork{
-            \strdmid,\strdrlabel{A}
-            ,\strdmid
-        }
-        ,\strdtubeof{strd frame}{
-            \strdtubestart
-            ,\strdtubeunclose
-            ,\strdtwincell{\tau}
-        }
-    } \\
-    \strdgathered{
-        \strdnone{
+    can be depicted as
+    \In{align*}{
+        \strdgathered{
             \strdfork{
-                \strdtubestart
+                \strdmid
+                ,\strdcell{\strdupsidedown{\catph{?}}}
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdtubestart
+            ,\strdcutoff\strdtubebound
+            ,\strdtube{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            }
+            ,\strdtwincell{\tau}
+            ,\strdtubeof{strd frame}\strdtubeclose
+        } \mydefeq
+        \strdgathered{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestart
+            ,\strdcutoff\strdtubebound
+            ,\strdtube{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            }
+            ,\strdbox{1}{1}{
+                \strdmid
+                ,\strdcell{\strdupsidedown{\catph{?}}}
+                ,\strdmid,\strdrlabel{A}
+            },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{\tau}}
+        }
+    }
+    owing to the naturality.
+}
+
+\definitionof{Yoneda Bijection}{
+    The \emph{Yoneda bijection} is defined as 
+    \In{align*}{
+        \mylhs{\catNat_X(\cat{C}(X,A),FX)} &\cong \myrhs{FA}\\
+        \strdgathered{
+            \strdfork{
+                \strdmid
+                ,\strdcell{\strdupsidedown{\catph{?}}}
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdtubestart
+            ,\strdcutoff\strdtubebound
+            ,\strdtube{
+                \strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
+            }
+            ,\strdtwincell{\tau}
+            ,\strdtubeof{strd frame}\strdtubeclose
+        } &\mapsto
+        \strdgathered{
+            \strdfork{
+                \strdmid
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdtubestart
+            ,\strdcutoff\strdtubebound
+            ,\strdtube{
+                \strdtubemid%,\strdat{Left}{\strdoverlabel{F}}
+            }
+            ,\strdtwincell{\tau}
+            ,\strdtubeof{strd frame}\strdtubeclose
+        }\\
+        \strdgathered{
+            \strdfork{
+                \strdmid
+                ,\strdcell{\strdupsidedown{\catph{?}}}
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdtube{
+                \strdtubestartline
                 ,\strdtubemid
+                ,\strdnone{\strdtwincell{\tau}}
+                ,\strdtubemid
+                ,\strdwidecell{1}{1}{a}
+            }
+        } &\mymapsfrom
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{A}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdnone{\strdtwincell{\tau}}
+                ,\strdwidecell{1}{1}{a}
+            }
+        }
+    }
+}
+
+\In{lemma}{[Yoneda Lemma]
+    The Yoneda bijection is actually bijective and natural in $F$ and $A$. 
+}
+
+\In{strdproof}{
+    Now the proof is on my soul trivial!
+}
+
+\definitionof{Yoneda Embedding}{
+    The \emph{Yoneda embedding} is defined as
+    \In{align*}{
+        \mylhs{\Lambda_A \Lambda_X \cat{C}(X,A) : \cat{C}} &\to \myrhs{[\cat{C}\catop,\catSet]}\\
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        } &\mapsto\,
+        \strdgathered{
+            \strdtubeof{}{
+                \strdtubestart%line
+                ,\strdtubemid,\strdbackground{strd roadcolor}
+                ,\strdat{Left}{\strdrlabel{B}}
+                ,\strdat{Left End}{\strdcell{\Identity{f}}}
+                ,\strdtubemid,\strdbackground{strd roadcolor}
+                ,\strdat{Left}{\strdrlabel{A}}
+            }
+        } \,=\,
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+            ,\strdcell{\catph{?}}
+            ,\strdmid
+        } 
+    }
+    using the diagram of hom functors. In short,
+    \In{align*}{
+        \strdgathered{
+            \strdtubeof{}{
+                \strdtubestart%line
+                ,\strdtubemid,\strdbackground{strd roadcolor}
+                ,\strdat{Left End}{\strdcell{\texttt{?}}}
+                ,\strdtubemid,\strdbackground{strd roadcolor}
+            }
+        }
+    }
+}
+
+\In{definition}{
+    A natural transformation of the form
+    \In{align*}{
+        (\tau_X : \cat{C}(X,A) \to \cat{C}(X,B))_X
+    }
+    can be depicted as
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdfork{
+                \strdmid,\strdrlabel{A}
+                ,\strdcell{\catph{?}}
+                ,\strdmid
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubeunclose
                 ,\strdtwincell{\tau}
             }
         }
-        ,\strdmid,\strdrlabel{B}
-        ,\strdcell{f}
-        ,\strdmid,\strdrlabel{A}
-        ,\strdcell{\catph{?}}
-        ,\strdmid
-    } & \mymapsfrom
-    \strdgathered{
-        \strdnone{
-            \strdfork{
-                \strdtubestart
-                ,\strdtubemid
-                ,\strdtwincell{\tau}
-            }
-        }
-        ,\strdmid,\strdrlabel{B}
-        ,\strdcell{f}
-        ,\strdmid,\strdrlabel{A}
     }
 }
-\end{definition}
+
+\definitionof{Yoneda Embedding Bijection}{
+    In special case $F \mydefeq \cat{C}(\catph{-},B)$, the Yoneda bijection is expanded to
+    \In{align*}{
+        \mylhs{\catNat_X(\cat{C}(X,A),\cat{C}(X,B))} &\cong \myrhs{\cat{C}(A,B)}\\
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdfork{
+                \strdmid,\strdrlabel{A}
+                ,\strdcell{\catph{?}}
+                ,\strdmid
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubeunclose
+                ,\strdtwincell{\tau}
+            }
+        } &\mapsto
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdfork{
+                \strdmid,\strdrlabel{A}
+                ,\strdmid
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubeunclose
+                ,\strdtwincell{\tau}
+            }
+        } \\
+        \strdgathered{
+            \strdnone{
+                \strdfork{
+                    \strdtubestart
+                    ,\strdtubemid
+                    ,\strdtwincell{\tau}
+                }
+            }
+            ,\strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+            ,\strdcell{\catph{?}}
+            ,\strdmid
+        } & \mymapsfrom
+        \strdgathered{
+            \strdnone{
+                \strdfork{
+                    \strdtubestart
+                    ,\strdtubemid
+                    ,\strdtwincell{\tau}
+                }
+            }
+            ,\strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        }
+    }
+}
+
 You will notice the second mapping is the Yoneda embedding so that %
 it is full and faithful. Combined with \cref{ff.pr.inv},
-\begin{proposition}[Yoneda Principle]
-\label{y.p}
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdfork{
-            \strdmid,\strdrlabel{A}
-            ,\strdcell{\catph{?}}
-            ,\strdmid
-        }
-        ,\strdtubeof{strd frame}{
-            \strdtubestart
-            ,\strdtubeunclose
-            ,\strdtwincell{\tau}
-        }
-    } : \text{invertible} \iff
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdfork{
-            \strdmid,\strdrlabel{A}
-            ,\strdmid
-        }
-        ,\strdtubeof{strd frame}{
-            \strdtubestart
-            ,\strdtubeunclose
-            ,\strdtwincell{\tau}
-        }
-    } : \text{invertible}
+
+\propositionof{Yoneda Principle}{
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdfork{
+                \strdmid,\strdrlabel{A}
+                ,\strdcell{\catph{?}}
+                ,\strdmid
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubeunclose
+                ,\strdtwincell{\tau}
+            }
+        } : \text{invertible} \iff
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdfork{
+                \strdmid,\strdrlabel{A}
+                ,\strdmid
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubeunclose
+                ,\strdtwincell{\tau}
+            }
+        } : \text{invertible}
+    }
 }
-\end{proposition}
 

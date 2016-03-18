@@ -2,40 +2,40 @@
 
 \subsection{The Definition}
 
-\begin{definition}[Functor]
-A \emph{functor}
-$
-    F : \cat{C} \to \cat{D}
-$
-consists of:
-\In{enumerate}{
-\item \emph{domain}: a category $\cat{C}$
-\item \emph{codomain}: a category $\cat{D}$
-\item a family of objects
-$
-    (FA \in \catOb{D}) _ {A \in \catOb{C}}
-$
-\item families of morphisms
-\In{align*}{
-    \big( (F(f) \in \cat{D}(FA,FB)) _ {f \in \cat{C}(A,B)} \big)_{A,B \in \catOb{C}}
-}
-}
-satisfying the \emph{functoriality}:
-\In{enumerate}{
-\item \emph{composition-compatibility}: for any $f \in \cat{C}(A,B)$ and $g \in \cat{C}(B,C)$,
-    \In{align*}{
-        F(g \circ f) = F(g) \circ F(f)
+\definitionof{Functor}{
+    A \emph{functor}
+    $
+        F : \cat{C} \to \cat{D}
+    $
+    consists of:
+    \In{enumerate}{
+        \item \emph{domain}: a category $\cat{C}$
+        \item \emph{codomain}: a category $\cat{D}$
+        \item a family of objects
+        $
+            (FA \in \catOb{D}) _ {A \in \catOb{C}}
+        $
+        \item families of morphisms
+        \In{align*}{
+            \big( (F(f) \in \cat{D}(FA,FB)) _ {f \in \cat{C}(A,B)} \big)_{A,B \in \catOb{C}}
+        }
     }
-\item \emph{unit-compatibility}: for any $A \in \catOb{C}$,
-    \In{align*}{
-        F(\operatorname{id}_A) = \operatorname{id}_{FA}
+    satisfying the \emph{functoriality}:
+    \In{enumerate}{
+        \item \emph{composition-compatibility}: for any $f \in \cat{C}(A,B)$ and $g \in \cat{C}(B,C)$,
+        \In{align*}{
+            F(g \circ f) = F(g) \circ F(f)
+        }
+        \item \emph{unit-compatibility}: for any $A \in \catOb{C}$,
+        \In{align*}{
+            F(\operatorname{id}_A) = \operatorname{id}_{FA}
+        }
     }
 }
-\end{definition}
-\begin{definition}[Infrafunctor]
-An \emph{infrafunctor} is a functor without the requirement of functoriality.
-\end{definition}
 
+\definitionof{Infrafunctor}{
+    An \emph{infrafunctor} is a functor without the requirement of functoriality.
+}
 
 \subsection{Functorial Tubes}
 
@@ -101,104 +101,104 @@ One can check the functoriality ensures any tube like
 }
 be unambiguous. "Join then tube" is the same as "Tube then join".
 
-\begin{proposition}\label{f.p.inv}
-Any functor preserves the invertibility meaning that
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdcell{f}
-        ,\strdmid,\strdrlabel{A}
-    } : \text{invertible} \implies
-    \strdgathered{
-        \strdfork{
+\In{proposition}{
+    \label{f.p.inv}
+    Any functor preserves the invertibility meaning that
+    \In{align*}{
+        \strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdydouble\strdtubemid
-            ,\strdtubeendline
-        }
-    } : \text{invertible}
-}
-\end{proposition}
-
-\begin{definition}[Composite Functor]
-For any two functors 
-\In{align*}{
-    F &: \cat{A} \to \cat{B}\\
-    G &: \cat{B} \to \cat{C}
-}
-, the \emph{composite functor} of $F$ and $G$
-\In{align*}{
-    G \circ F : \cat{A} \to \cat{C}
-}
-is depicted as 
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid
-            ,\strdcell{\Identity{\texttt{?}}}
-            ,\strdmid
-        }
-        ,\strdtubestart
-        ,\strdfork{
-            \strdtube{
-                \strdtubemid
-                ,\strdat{Left End}{\strdoverlabel{F}} 
-                ,\strdtubemid
+        } : \text{invertible} \implies
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{B}
+                ,\strdcell{f}
+                ,\strdmid,\strdrlabel{A}
             }
-        }
-        ,\strdtubeextend{1}{1}
-        ,\strdtube{
-            \strdcutoff\strdtubebound
-            ,\strdtubemid
-            ,\strdat{Left End}{\strdoverlabel{G}} 
-            ,\strdtubemid
-            ,\strdtubeendline
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdydouble\strdtubemid
+                ,\strdtubeendline
+            }
+        } : \text{invertible}
+    }
+}
+
+\definitionof{Composite Functor}{
+    For any two functors 
+    \In{align*}{
+        F &: \cat{A} \to \cat{B}\\
+        G &: \cat{B} \to \cat{C}
+    }
+    , the \emph{composite functor} of $F$ and $G$
+    \In{align*}{
+        G \circ F : \cat{A} \to \cat{C}
+    }
+    is depicted as 
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid
+                ,\strdcell{\Identity{\texttt{?}}}
+                ,\strdmid
+            }
+            ,\strdtubestart
+            ,\strdfork{
+                \strdtube{
+                    \strdtubemid
+                    ,\strdat{Left End}{\strdoverlabel{F}} 
+                    ,\strdtubemid
+                }
+            }
+            ,\strdtubeextend{1}{1}
+            ,\strdtube{
+                \strdcutoff\strdtubebound
+                ,\strdtubemid
+                ,\strdat{Left End}{\strdoverlabel{G}} 
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
         }
     }
 }
-\end{definition}
 
-
-\begin{definition}[Identity Functor]
-An \emph{idenity functor}
-\In{align*}{
-    \operatorname{Id}_{\cat{C}} : \cat{C} \to \cat{C}
-}
-is depicted as
-\In{align*}{
-    \strdgathered{
-        \strdfork{
+\definitionof{Identity Functor}{
+    An \emph{idenity functor}
+    \In{align*}{
+        \operatorname{Id}_{\cat{C}} : \cat{C} \to \cat{C}
+    }
+    is depicted as
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{}
+                ,\strdcell{\texttt{?}}
+                ,\strdmid,\strdrlabel{}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdydouble\strdtubemid
+                ,\strdat{Left}{\strdoverlabel{\operatorname{Id}}} 
+                ,\strdtubeendline
+            }
+        } \mydefeq
+        \strdgathered{
             \strdmid,\strdrlabel{}
             ,\strdcell{\texttt{?}}
             ,\strdmid,\strdrlabel{}
         }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdydouble\strdtubemid
-            ,\strdat{Left}{\strdoverlabel{\operatorname{Id}}} 
-            ,\strdtubeendline
-        }
-    } \mydefeq
-    \strdgathered{
-        \strdmid,\strdrlabel{}
-        ,\strdcell{\texttt{?}}
-        ,\strdmid,\strdrlabel{}
     }
 }
-\end{definition}
 
 
-\begin{definition}[Contravariant Functor]
-A functor whose domain is an opposite category
-\In{align*}{
-    F : \cat{C}^{\operatorname{op}} \to \cat{D}
+\definitionof{Contravariant Functor}{
+    A functor whose domain is an opposite category
+    \In{align*}{
+        F : \cat{C}^{\operatorname{op}} \to \cat{D}
+    }
+    is called \emph{contravariant}, while a normal functor is called \emph{covariant}.
 }
-is called \emph{contravariant}, while a normal functor is called \emph{covariant}.
-\end{definition}
 A contravariant functor is depicted as
 \In{align*}{
     \strdgathered{
@@ -217,19 +217,18 @@ A contravariant functor is depicted as
     }
 }
 
-\begin{definition}[Variant]
-Given a statement regarding functors, you can obtain a corresponding one regarding contravariant functors and vice versa. %
-We call such a statement the \emph{variant} of the original one.
-\end{definition}
-
-
-\begin{definition}[Binary Functor]
-A functor whose domain is a product category
-\In{align*}{
-    F : \cat{A} \times \cat{B} \to \cat{C}
+\definitionof{Variant}{
+    Given a statement regarding functors, you can obtain a corresponding one regarding contravariant functors and vice versa. %
+    We call such a statement the \emph{variant} of the original one.
 }
-is called a \emph{binary functor} or \emph{bifunctor}.
-\end{definition}
+
+\definitionof{Binary Functor}{
+    A functor whose domain is a product category
+    \In{align*}{
+        F : \cat{A} \times \cat{B} \to \cat{C}
+    }
+    is called a \emph{binary functor} or \emph{bifunctor}.
+}
 With numbered placeholders, it is depicted as
 \In{align*}{
     \strdgathered{
@@ -290,38 +289,38 @@ Spelling out the definition of functoriality, one can check a diagram like
 }
 is unambiguous.
 
-\begin{definition}[Partial Application]
-Given a binary functor $F : \cat{A} \times \cat{B} \to \cat{C}$, a \emph{partially applied} functor
-\In{align*}{
-    \Lambda_B F(A,B) &: \cat{B} \to \cat{C} \text{ or briefly }\\
-    F(A,\texttt{?}) &: \cat{B} \to \cat{C}
-}
-is defined by
-\In{align*}{
-    \strdgathered{
-        \strdfork{
+\definitionof{Partial Application}{
+    Given a binary functor $F : \cat{A} \times \cat{B} \to \cat{C}$, a \emph{partially applied} functor
+    \In{align*}{
+        \Lambda_B F(A,B) &: \cat{B} \to \cat{C} \text{ or briefly }\\
+        F(A,\texttt{?}) &: \cat{B} \to \cat{C}
+    }
+    is defined by
+    \In{align*}{
+        \strdgathered{
             \strdfork{
-                \strdxscale{0.7}\strdljump
-                ,\strdydouble\strdmid,\strdrlabel{A}
+                \strdfork{
+                    \strdxscale{0.7}\strdljump
+                    ,\strdydouble\strdmid,\strdrlabel{A}
+                }
+                ,\strdfork{
+                    \strdxscale{0.7}\strdrjump
+                    ,\strdmid
+                    ,\strdcell{\texttt{?}}
+                    ,\strdmid
+                }
             }
             ,\strdfork{
-                \strdxscale{0.7}\strdrjump
-                ,\strdmid
-                ,\strdcell{\texttt{?}}
-                ,\strdmid
-            }
-        }
-        ,\strdfork{
-            \strdtube{
-                \strdtubestart
-                ,\strdtubeextend{1}{1},\strdcutoff\strdtubebound
-                ,\strdydouble\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
-                ,\strdcutoff\strdtubebound
+                \strdtube{
+                    \strdtubestart
+                    ,\strdtubeextend{1}{1},\strdcutoff\strdtubebound
+                    ,\strdydouble\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+                    ,\strdcutoff\strdtubebound
+                }
             }
         }
     }
 }
-\end{definition}
 The definition of $F(\texttt{?},B)$ is an exercise. 
 
 
@@ -392,35 +391,35 @@ The definition of $F(\texttt{?},B)$ is an exercise.
 %     }
 % }
 
-\begin{definition}[Small Category]
-A category $\cat{C}$ is called \emph{small} when its $\catOb{C}$ is a set. 
-\end{definition}
-\begin{definition}[Category of Small Categories]
-The \emph{category of small categories} $\catCat$ is the category whose objects are %
-all small categories and whose morphisms are functors:
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{\cat{C}}
-            ,\strdcell{G}
-            ,\strdmid,\strdrlabel{\cat{B}}
-            ,\strdcell{F}
-            ,\strdmid,\strdrlabel{\cat{A}}
+\definitionof{Small Category}{
+    A category $\cat{C}$ is called \emph{small} when its $\catOb{C}$ is a set. 
+}
+
+\definitionof{Category of Small Categories}{
+    The \emph{category of small categories} $\catCat$ is the category whose objects are %
+    all small categories and whose morphisms are functors:
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{\cat{C}}
+                ,\strdcell{G}
+                ,\strdmid,\strdrlabel{\cat{B}}
+                ,\strdcell{F}
+                ,\strdmid,\strdrlabel{\cat{A}}
+            }
         }
     }
+    , where composite functors join the strings.
 }
-, where composite functors join the strings.
-\end{definition}
 
-
-\begin{definition}[Full and Faithful Functor]
-A functor $F : \cat{C} \to \cat{D}$ is called \emph{full and faithful} %
-if for each object $A$ and $B$ in $\cat{C}$, the family 
-\In{align*}{
-    (F(f) : FA \to FB)_{f : A \to B}
+\definitionof{Full and Faithful Functor}{
+    A functor $F : \cat{C} \to \cat{D}$ is called \emph{full and faithful} %
+    if for each object $A$ and $B$ in $\cat{C}$, the family 
+    \In{align*}{
+        (F(f) : FA \to FB)_{f : A \to B}
+    }
+    is bijective.
 }
-is bijective.
-\end{definition}
 In other words, there is a functional box such that
 \In{align*}{
     \strdgathered{
@@ -497,15 +496,95 @@ One can make the box better-looking
     }
 }
 
-\begin{proposition}\label{ff.fun}
-This box has a functoriality-like property:
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{C}
-        ,\strdfork{
-            \strdmid
-            ,\strdmid
-            ,\strdmid,\strdrlabel{B}
+\In{proposition}{
+    \label{ff.fun}
+    This box has a functoriality-like property:
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{C}
+            ,\strdfork{
+                \strdmid
+                ,\strdmid
+                ,\strdmid,\strdrlabel{B}
+                ,\strdfork{
+                    \strdmid
+                    ,\strdmid
+                    ,\strdmid,\strdrlabel{A}
+                }
+                ,\strdfork{
+                    \strdtube{
+                        \strdtubestart
+                        ,\strdtubemid
+                        ,\strdwidecell{1}{1}{g}
+                        ,\strdtubemid
+                    }
+                }
+                ,\strdtubeof{strd frame}{
+                    \strdtubestart
+                    ,\strdtubesqcap{1}{1}
+                    ,\strdtubesqcup{1}{1}
+                }
+            }
+            ,\strdfork{
+                \strdtube{
+                    \strdtubestart
+                    ,\strdtubemid
+                    ,\strdwidecell{1}{1}{g\myprime}
+                    ,\strdtubemid
+                }
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubesqcap{1}{1}
+                ,\strdtubesqcup{1}{1}
+            }
+        } \,=\,
+        \strdgathered{
+            \strdmid,\strdrlabel{C}
+            ,\strdfork{
+                \strdmid
+                ,\strdmid,\strdrlabel{B}
+                ,\strdmid
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdfork{
+                \strdtube{
+                    \strdtubestart
+                    ,\strdtubemid
+                    ,\strdwidecell{1}{1}{g\myprime}
+                    ,\strdtubemid
+                    ,\strdwidecell{1}{1}{g}
+                    ,\strdtubemid
+                }
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubesqcap{1}{1}
+                ,\strdtubemid
+                ,\strdtubesqcup{1}{1}
+            }
+        }
+    }
+}
+Combined with \cref{f.p.inv},
+\In{proposition}{
+    \label{ff.pr.inv}
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{B}
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdwidecell{1}{1}{g}
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
+        } : \text{invertible} \iff
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
             ,\strdfork{
                 \strdmid
                 ,\strdmid
@@ -524,85 +603,7 @@ This box has a functoriality-like property:
                 ,\strdtubesqcap{1}{1}
                 ,\strdtubesqcup{1}{1}
             }
-        }
-        ,\strdfork{
-            \strdtube{
-                \strdtubestart
-                ,\strdtubemid
-                ,\strdwidecell{1}{1}{g\myprime}
-                ,\strdtubemid
-            }
-        }
-        ,\strdtubeof{strd frame}{
-            \strdtubestart
-            ,\strdtubesqcap{1}{1}
-            ,\strdtubesqcup{1}{1}
-        }
-    } \,=\,
-    \strdgathered{
-        \strdmid,\strdrlabel{C}
-        ,\strdfork{
-            \strdmid
-            ,\strdmid,\strdrlabel{B}
-            ,\strdmid
-            ,\strdmid,\strdrlabel{A}
-        }
-        ,\strdfork{
-            \strdtube{
-                \strdtubestart
-                ,\strdtubemid
-                ,\strdwidecell{1}{1}{g\myprime}
-                ,\strdtubemid
-                ,\strdwidecell{1}{1}{g}
-                ,\strdtubemid
-            }
-        }
-        ,\strdtubeof{strd frame}{
-            \strdtubestart
-            ,\strdtubesqcap{1}{1}
-            ,\strdtubemid
-            ,\strdtubesqcup{1}{1}
-        }
+        } : \text{invertible}
     }
 }
-\end{proposition}
-Combined with \cref{f.p.inv},
-\begin{proposition}
-\label{ff.pr.inv}
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdmid,\strdrlabel{B}
-            ,\strdmid,\strdrlabel{A}
-        }
-        ,\strdtube{
-            \strdtubestartline
-            ,\strdtubemid
-            ,\strdwidecell{1}{1}{g}
-            ,\strdtubemid
-            ,\strdtubeendline
-        }
-    } : \text{invertible} \iff
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdfork{
-            \strdmid
-            ,\strdmid
-            ,\strdmid,\strdrlabel{A}
-        }
-        ,\strdfork{
-            \strdtube{
-                \strdtubestart
-                ,\strdtubemid
-                ,\strdwidecell{1}{1}{g}
-                ,\strdtubemid
-            }
-        }
-        ,\strdtubeof{strd frame}{
-            \strdtubestart
-            ,\strdtubesqcap{1}{1}
-            ,\strdtubesqcup{1}{1}
-        }
-    } : \text{invertible}
-}
-\end{proposition}
+

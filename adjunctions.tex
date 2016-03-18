@@ -1,22 +1,21 @@
 
 \section{Adjunctions}
 
-\begin{definition}[Adjunction]
-\label{adj}
-Given two categories $\cat C$ and $\cat D$, an \emph{adjunction}
-\In{align*}{
-    F \dashv G
-}
-consists of
-\In{enumerate}{
-    \item \emph{left adjoint}: a functor $F : \cat C \to \cat D$ 
-    \item \emph{right adjoint}: a functor $G : \cat D \to \cat C$ 
-    \item \emph{adjunct}: a natural bijection 
+\definitionof{Adjunction}{
+    Given two categories $\cat C$ and $\cat D$, an \emph{adjunction}
     \In{align*}{
-        (\cat D(FC, D) \cong \cat C(C,GD))_{C,D}
+        F \dashv G
+    }
+    consists of
+    \In{enumerate}{
+        \item \emph{left adjoint}: a functor $F : \cat C \to \cat D$ 
+        \item \emph{right adjoint}: a functor $G : \cat D \to \cat C$ 
+        \item \emph{adjunct}: a natural bijection 
+        \In{align*}{
+            (\cat D(FC, D) \cong \cat C(C,GD))_{C,D}
+        }
     }
 }
-\end{definition}
 
 A nice consequence is that the bijectivity needs no boxes, expressed by natural transformations only.
 \In{align*}{
@@ -153,29 +152,29 @@ where
     }
 }
 
-\begin{proposition}
-Given a functor $G: \cat D \to \cat C$, a family of natural bijections
-\In{align*}{
-    ( (\cat C(C, GD) \cong \cat D(F_c, D) )_D )_C
+\In{proposition}{
+    Given a functor $G: \cat D \to \cat C$, a family of natural bijections
+    \In{align*}{
+        ( (\cat C(C, GD) \cong \cat D(F_c, D) )_D )_C
+    }
+    is enough to construct the adjunction $F \dashv G$.
 }
-is enough to construct the adjunction $F \dashv G$.
-\end{proposition}
 
-\begin{strdproof}
-Immediate by $H(C,D) \mydefeq \cat C(C,GD)$ in \cref{rep.family}.
-\end{strdproof}
-
-\begin{proposition}[RAPL]
-Right adjoints preserve limits, meaning that given an adjunction %
-$F \dashv (G : \cat D \to \cat C)$ and a functor $T : \cat B \to \cat D$,
-\In{align*}{
-    & (\textstyle\lim_X : \text{lim}T \to TX)_X : \text{limiting cone} \\
-    \implies & (G(\textstyle\lim_X) : G(\text{lim}T) \to G(TX))_X : \text{limiting cone}
+\In{strdproof}{
+    Immediate by $H(C,D) \mydefeq \cat C(C,GD)$ in \cref{Parameterized Representations}.
 }
-\end{proposition}
 
-\begin{strdproof}
-\In{align*}{
+\In{proposition}{[RAPL]
+    \label{RAPL}
+    Right adjoints preserve limits, meaning that given an adjunction %
+    $F \dashv (G : \cat D \to \cat C)$ and a functor $T : \cat B \to \cat D$,
+    \In{align*}{
+        & (\textstyle\lim_X : \text{lim}T \to TX)_X : \text{limiting cone} \\
+        \implies & (G(\textstyle\lim_X) : G(\text{lim}T) \to G(TX))_X : \text{limiting cone}
+    }
+}
+
+\InList{strdproof,align*}{
     &
     \strdgathered{
        \strdfork{
@@ -354,9 +353,4 @@ $F \dashv (G : \cat D \to \cat C)$ and a functor $T : \cat B \to \cat D$,
         }
     }
 }
-
-
-\end{strdproof}
-
-
 

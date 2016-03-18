@@ -3,42 +3,39 @@
 
 \subsection{The Definition}
 
-\begin{definition}[Category]
-A \emph{category} $\cat{C}$ consists of:
-\In{enumerate}{
-\item \emph{objects}: a class
-$
-    \catOb{C}
-$
-\item \emph{morphisms} or \emph{hom-sets}: a family of sets
-$
-    (\cat{C}(A,B)) _ {A, B \in \catOb{C}}
-$
-\item \emph{compositions}: a family of functions
-    \In{align*}{
-        (\circ : \cat{C}(B,C) \times \cat{C}(A,B) \to \cat{C}(A,C) )_{A,B,C \in \catOb{C}}
+\definitionof{Category}{
+    A \emph{category} \cat{C} consists of
+    \In{enumerate}{
+        \item \emph{objects}: a class \catOb{C}
+        \item \emph{morphisms} or \emph{hom-sets}: a family of sets
+        \In{math}{
+            (\cat{C}(A,B)) _ {A, B \in \catOb{C}}
+        }
+        \item \emph{compositions}: a family of functions
+        \In{align*}{
+            (\circ : \cat{C}(B,C) \times \cat{C}(A,B) \to \cat{C}(A,C) )_{A,B,C \in \catOb{C}}
+        }
+        \item \emph{idenitities} or \emph{units}: a family of morphisms
+        \In{align*}{
+            (\operatorname{id} _A \in \cat{C}(A,A))_{A \in \catOb{C}}
+        }
     }
-\item \emph{idenitities} or \emph{units}: a family of morphisms
-    \In{align*}{
-        (\operatorname{id} _A \in \cat{C}(A,A))_{A \in \catOb{C}}
+    satisfying the following coherence condition
+    \In{enumerate}{
+        \item \emph{associativity}: for any $f \in \cat{C}(A,B)$, $g \in \cat{C}(B,C)$, and $h \in \cat{C}(C,D)$,
+        \In{align*}{
+            h \circ (g \circ f) = (h \circ g) \circ f
+        }
+        \item \emph{unitality}: for any $f \in \cat{C}(A,B)$,
+        \In{align*}{
+            \operatorname{id}_B \circ f = f = f \circ \operatorname{id}_A
+        }
     }
+    A morphism $f \in \cat{C}(A,B)$ is often denoted as
+    \In{math}{
+        f : A \to B
+    }.
 }
-satisfying the following coherence conditions:
-\In{enumerate}{
-\item \emph{associativity}: for any $f \in \cat{C}(A,B)$, $g \in \cat{C}(B,C)$, and $h \in \cat{C}(C,D)$,
-    \In{align*}{
-        h \circ (g \circ f) = (h \circ g) \circ f
-    }
-\item \emph{unitality}: for any $f \in \cat{C}(A,B)$,
-    \In{align*}{
-        \operatorname{id}_B \circ f = f = f \circ \operatorname{id}_A
-    }
-}
-A morphism $f \in \cat{C}(A,B)$ is often denoted as
-$
-    f : A \to B
-$.
-\end{definition}
 
 \subsection{String Diagrams}
 
@@ -78,107 +75,105 @@ An idenity is indistinguishable from an object:
 Check these diagrams create no ambiguity thanks to the coherence.
 
 
-\begin{definition}[Isomorphism]
-An \emph{isomorphism} is a pair of morphisms
-\In{align*}{
-    f : A \to B\\
-    g : B \to A
-}
-satisfying the \emph{invertibility}
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{A}
-        ,\strdcell{g}
-        ,\strdmid,\strdrlabel{B}
-        ,\strdcell{f}
-        ,\strdmid,\strdrlabel{A}
-    } =\
-    \strdgathered{
-        \strdmid,\strdrlabel{A}
-    } \ \ \text{and}\ \
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdcell{f}
-        ,\strdmid,\strdrlabel{A}
-        ,\strdcell{g}
-        ,\strdmid,\strdrlabel{B}
-    } =\
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
+\definitionof{Isomorphism}{
+    An \emph{isomorphism} is a pair of morphisms
+    \In{align*}{
+        f : A \to B\\
+        g : B \to A
     }
-}
-\end{definition}
-
-
-\begin{definition}[Functional Box]
-Given categories $\cat{C}$ and $\cat{C}'$, a function
-\In{align*}{
-    h : \cat{C}(A,B) \to \cat{C}'(A',B')
-}
-is depicted as
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{B'}
-        ,\strdbox{1}{1}{
-            \strdmid,\strdrlabel{B}
-            ,\strdcell{?}
+    satisfying the \emph{invertibility}
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{A}
+            ,\strdcell{g}
+            ,\strdmid,\strdrlabel{B}
+            ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
-        },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{h}}
-        ,\strdmid,\strdrlabel{A'}
+        } =\
+        \strdgathered{
+            \strdmid,\strdrlabel{A}
+        } \ \ \text{and}\ \
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+            ,\strdcell{g}
+            ,\strdmid,\strdrlabel{B}
+        } =\
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+        }
     }
 }
-\end{definition}
 
-
-\begin{definition}[Opposite Category]
-Given a category $\cat{C}$ and a morphism
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{B}
-        ,\strdcell{f}
-        ,\strdmid,\strdrlabel{A}
+\definitionof{Functorial Box}{
+    Given categories $\cat{C}$ and $\cat{C}\myprime$, a function
+    \In{align*}{
+        h : \cat{C}(A,B) \to \cat{C}\myprime(A\myprime,B\myprime)
+    }
+    is depicted as
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{B\myprime}
+            ,\strdbox{1}{1}{
+                \strdmid,\strdrlabel{B}
+                ,\strdcell{?}
+                ,\strdmid,\strdrlabel{A}
+            },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{h}}
+            ,\strdmid,\strdrlabel{A\myprime}
+        }
     }
 }
-You can build a category with strings upsidedown:
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{A}
-        ,\strdcell{\strdupsidedown{f}}
-        ,\strdmid,\strdrlabel{B}
-    }
-}
-, which is denoted as $\cat{C}^{\operatorname{op}}$, the \emph{opposite category} of $\cat{C}$.
-\end{definition}
 
-\begin{definition}[Discrete Category]
-A category $\cat{C}$ such that
-\In{align*}{
-    A = B &\implies \cat{C}(A,B) = \lbrace \operatorname{id}_A \rbrace\\
-    A \neq B &\implies \cat{C}(A,B) = \emptyset
-}
-is called a \emph{discrete category}.
-Any set can be represented as a discrete category.
-\end{definition}
-
-
-\begin{definition}[Product Category]
-Given two categories $\cat{A}$ and $\cat{B}$, the \emph{product category}:
-\In{align*}{
-    \cat{A} \times \cat{B}
-}
-is depicted as parallel strings
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdxscale{1.5}\strdljump
-            ,\strdmid,\strdrlabel{A\myprime},\strdstartlabel{\cat{A}}
-            ,\strdcell{a}
+\definitionof{Opposite Category}{
+    Given a category $\cat{C}$ and a morphism
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
         }
-        ,\strdfork{
-            \strdmid,\strdrlabel{B\myprime},\strdstartlabel{\cat{B}}
-            ,\strdcell{b}
+    }
+    you can build a category with strings upsidedown:
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{A}
+            ,\strdcell{\strdupsidedown{f}}
             ,\strdmid,\strdrlabel{B}
+        }
+    }
+    , which is denoted as $\cat{C}^{\operatorname{op}}$, the \emph{opposite category} of $\cat{C}$.
+}
+
+\definitionof{Discrete Category}{
+    A category $\cat{C}$ such that
+    \In{align*}{
+        A = B &\implies \cat{C}(A,B) = \lbrace \operatorname{id}_A \rbrace\\
+        A \neq B &\implies \cat{C}(A,B) = \emptyset
+    }
+    is called a \emph{discrete category}.
+    Any set can be represented as a discrete category.
+}
+
+\definitionof{Product Category}{
+    Given two categories $\cat{A}$ and $\cat{B}$, the \emph{product category}
+    \In{align*}{
+        \cat{A} \times \cat{B}
+    }
+    is depicted as parallel strings
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdxscale{1.5}\strdljump
+                ,\strdmid,\strdrlabel{A\myprime},\strdstartlabel{\cat{A}}
+                ,\strdcell{a}
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdfork{
+                \strdmid,\strdrlabel{B\myprime},\strdstartlabel{\cat{B}}
+                ,\strdcell{b}
+                ,\strdmid,\strdrlabel{B}
+            }
         }
     }
 }
@@ -245,7 +240,6 @@ An identity is trivially
         }
     }
 }
-\end{definition}
 By these definitions,
 \In{align*}{
     \strdgathered{
@@ -281,7 +275,4 @@ By these definitions,
         }
     }
 }
-
-
-
 

@@ -17,6 +17,13 @@
 \newtheorem{counter}[theorem]{Counterexample}
 \numberwithin{theorem}{section}
 
+% [] syntax is not modular.
+%\newcommand*{\labeled}[3]{\begin{#1}[#2]#3\end{#1}}
+%\newcommand*{\definitionof}{\labeled{definition}}
+%\newcommand*{\propositionof}{\labeled{proposition}}
+\newcommand*{\definitionof}[2]{\begin{definition}[#1]\label{#1}#2\end{definition}}
+\newcommand*{\propositionof}[2]{\begin{proposition}[#1]\label{#1}#2\end{proposition}}
+
 % \theoremheaderfont{\sc}\theorembodyfont{\upshape}
 % \theoremstyle{nonumberplain}
 % \theoremseparator{.}

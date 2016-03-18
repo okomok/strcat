@@ -2,65 +2,67 @@
 
 \subsection{The Definition}
 
-\begin{definition}[Category of Sets]
-\label{cat.set}
-The \emph{category of sets} $\catSet$ is a category whose objects are sets and whose morphisms are functions:
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{Z}
-        ,\strdcell{g}
-        ,\strdmid,\strdrlabel{Y}
-        ,\strdcell{f}
-        ,\strdmid,\strdrlabel{X}
-    }
-}
-, where nodes are joined by the function composition. 
-\end{definition}
-A category is essentially one-dimensional so far: the vertical composition only. %
-Here we introduce the horizontal composition for functions.
-\begin{definition}[Monoidal Category of Sets]
-Parallel strings are defined by
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdxscale{0.7}\strdljump
-            ,\strdmid,\strdrlabel{X}
-        }
-        ,\strdfork{
-            \strdxscale{0.7}\strdrjump
-            ,\strdmid,\strdrlabel{X\myprime}
-        }
-    } \mydefeq\,
-    \strdgathered{
-        \strdmid,\strdrlabel{X {\times} X\myprime}
-    }
-}
-The horizontal composition is defined by
-\In{align*}{
-    \strdgathered{
-        \strdfork{
-            \strdxscale{0.7}\strdljump
+\definitionof{Category of Sets}{
+    The \emph{category of sets} $\catSet$ is a category whose objects are sets and whose morphisms are functions:
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{Z}
+            ,\strdcell{g}
             ,\strdmid,\strdrlabel{Y}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{X}
         }
-        ,\strdfork{
-            \strdxscale{0.7}\strdrjump
-            ,\strdmid,\strdrlabel{Y\myprime}
-            ,\strdcell{f\myprime}
-            ,\strdmid,\strdrlabel{X\myprime}
-        }
-    } \mydefeq\,
-    \Lambda _{x,x\myprime} (f(x),f\myprime(x\myprime))
+    }
+    , where nodes are joined by the function composition. 
 }
-Strings for the singleton set $\lbrace \ast\rbrace$ is omitted so that an element of a set is represented as
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{X}
-        ,\strdcell{x}
+
+A category is essentially one-dimensional so far: the vertical composition only. %
+Here we introduce the horizontal composition for functions.
+
+\definitionof{Monoidal Category of Sets}{
+    Parallel strings are defined by
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdxscale{0.7}\strdljump
+                ,\strdmid,\strdrlabel{X}
+            }
+            ,\strdfork{
+                \strdxscale{0.7}\strdrjump
+                ,\strdmid,\strdrlabel{X\myprime}
+            }
+        } \mydefeq\,
+        \strdgathered{
+            \strdmid,\strdrlabel{X {\times} X\myprime}
+        }
+    }
+    The horizontal composition is defined by
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdxscale{0.7}\strdljump
+                ,\strdmid,\strdrlabel{Y}
+                ,\strdcell{f}
+                ,\strdmid,\strdrlabel{X}
+            }
+            ,\strdfork{
+                \strdxscale{0.7}\strdrjump
+                ,\strdmid,\strdrlabel{Y\myprime}
+                ,\strdcell{f\myprime}
+                ,\strdmid,\strdrlabel{X\myprime}
+            }
+        } \mydefeq\,
+        \Lambda _{x,x\myprime} (f(x),f\myprime(x\myprime))
+    }
+    Strings for the singleton set $\lbrace \ast\rbrace$ is omitted so that an element of a set is represented as
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{X}
+            ,\strdcell{x}
+        }
     }
 }
-\end{definition}
+
 One can check any string diagram built upon these definitions is unambiguous thanks to the trivial bijections:
 \In{align*}{
     X \times (X\myprime \times X\myprime\myprime) &\cong (X \times X\myprime) \times X\myprime\myprime\\
@@ -131,99 +133,104 @@ Identity morphisms can be depicted as
 As an exercise, write down the associativity and unitality using these diagrams. 
 
 
-\begin{definition}[Currying]
-In particular case $\cat{C} = \catSet$, there exists the \emph{curry bijection}
-\In{align*}{
-    \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))}\\
-    \strdgathered{
-        \strdmid,\strdrlabel{C}
-        ,\strdwidecell{1}{1}{h}
-        ,\strdtubestart
-        ,\strdtubemid
-        ,\strdat{Left}{\strdrlabel{A}}
-        ,\strdat{Right}{\strdrlabel{B}}
-    } &\sim
-    \strdgathered{
-        \strdtubestart%line
-        ,\strdtubemid,\strdbackground{strd roadcolor}
-        ,\strdwidecell{1}{1}{h}
-        ,\strdnone{\strdat{Left}{\strdllabel{C}}}
-        ,\strdat{Left}{\strdrlabel{C}}
-        ,\strdat{Right}{\strdllabel{B}}
-        ,\strdmid,\strdrlabel{A}
+\definitionof{Currying}{
+    In particular case $\cat{C} = \catSet$, there exists the \emph{curry bijection}
+    \In{align*}{
+        \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))}\\
+        \strdgathered{
+            \strdmid,\strdrlabel{C}
+            ,\strdwidecell{1}{1}{h}
+            ,\strdtubestart
+            ,\strdtubemid
+            ,\strdat{Left}{\strdrlabel{A}}
+            ,\strdat{Right}{\strdrlabel{B}}
+        } &\sim
+        \strdgathered{
+            \strdtubestart%line
+            ,\strdtubemid,\strdbackground{strd roadcolor}
+            ,\strdwidecell{1}{1}{h}
+            ,\strdnone{\strdat{Left}{\strdllabel{C}}}
+            ,\strdat{Left}{\strdrlabel{C}}
+            ,\strdat{Right}{\strdllabel{B}}
+            ,\strdmid,\strdrlabel{A}
+        }
     }
 }
+
 We don't distinguish the two diagrams, for %
 the naturality of the bijection ensures "Move the right-side leg up and down" works correct.
-\end{definition}
-\begin{definition}[Naming]
-In case $A$ is the singleton set,
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdrlabel{C}
-        ,\strdcell{h}
-        ,\strdmid,\strdrlabel{B}
-    } \,\sim\,
-    \strdgathered{
-        \strdroad\strdmid,\strdroadlabel{C}{B}
-        ,\strdcell{h}
-    }
-    % \strdgathered{
-    %     \strdtubestart%line
-    %     ,\strdtubemid,\strdbackground{strd roadcolor}
-    %     ,\strdwidecell{1}{1}{h}
-    %     ,\strdat{Left}{\strdrlabel{C}}
-    %     ,\strdat{Right}{\strdllabel{B}}
-    % }
-}
-is called a \emph{naming}, which turns a function to an element of function-sets.
-\end{definition}
 
-\begin{definition}[Hom Functor]
-Hom-sets can be extended to a binary functor
-\In{align*}{
-    \Lambda_{A,B} \cat{C}(A,B) &: \cat{C}^{\operatorname{op}} \times \cat{C} \to \catSet \text{ or briefly}\\
-    \cat{C}(\texttt{-},\texttt{+}) &: \cat{C}^{\operatorname{op}} \times \cat{C} \to \catSet \text{ or briefly}\\
-    \operatorname{Hom}_{\cat{C}} &: \cat{C}^{\operatorname{op}} \times \cat{C} \to \catSet 
+\definitionof{Naming}{
+    In case $A$ is the singleton set,
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{C}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{B}
+        } \,\sim\,
+        \strdgathered{
+            \strdroad\strdmid,\strdroadlabel{C}{B}
+            ,\strdcell{h}
+        }
+        % \strdgathered{
+        %     \strdtubestart%line
+        %     ,\strdtubemid,\strdbackground{strd roadcolor}
+        %     ,\strdwidecell{1}{1}{h}
+        %     ,\strdat{Left}{\strdrlabel{C}}
+        %     ,\strdat{Right}{\strdllabel{B}}
+        % }
+    }
+    is called a \emph{naming}, which turns a function to an element of function-sets.
 }
-defined by
-\In{align*}{
-    \strdgathered{
-        \strdtubestart%line
-        ,\strdtubemid,\strdbackground{strd roadcolor}
-        ,\strdat{Right}{\strdllabel{A\myprime}}
-        ,\strdat{Left}{\strdrlabel{B\myprime}}
-        ,\strdbox{2}{2}{
-            \strdtubeof{}{
-                \strdtubestart
-                ,\strdtubemid
-                ,\strdat{Right}{\strdrlabel{B\myprime}}
-                ,\strdat{Left}{\strdrlabel{A\myprime}}
-                ,\strdat{Right End}{\strdcell{b}}
-                ,\strdat{Left End}{\strdcell{\strdupsidedown{a}}}
-                ,\strdtubemid
-                ,\strdat{Right}{\strdrlabel{B}}
-                ,\strdat{Left}{\strdrlabel{A}}
-            }
-        },\strdat{Left}{\strdoverlabel{\strdlvert{\operatorname{Hom}}}}
-        ,\strdtubestart
-        ,\strdtubemid,\strdbackground{strd roadcolor}
-        ,\strdat{Right}{\strdllabel{A}}
-        ,\strdat{Left}{\strdrlabel{B}}
-    } \mydefeq\,
-    \strdgathered{
-        \strdmid,\strdrlabel{B\myprime}
-        ,\strdcell{b}
-        ,\strdmid,\strdrlabel{B}
-        ,\strdcell{\texttt{?}}
-        ,\strdmid,\strdrlabel{A}
-        ,\strdcell{a}
-        ,\strdmid,\strdrlabel{A\myprime}
+
+\definitionof{Hom Functor}{
+    Hom-sets can be extended to a binary functor
+    \In{align*}{
+        \Lambda_{A,B} \cat{C}(A,B) &: \cat{C}^{\operatorname{op}} \times \cat{C} \to \catSet \text{ or briefly}\\
+        \cat{C}(\texttt{-},\texttt{+}) &: \cat{C}^{\operatorname{op}} \times \cat{C} \to \catSet \text{ or briefly}\\
+        \operatorname{Hom}_{\cat{C}} &: \cat{C}^{\operatorname{op}} \times \cat{C} \to \catSet 
+    }
+    defined by
+    \In{align*}{
+        \strdgathered{
+            \strdtubestart%line
+            ,\strdtubemid,\strdbackground{strd roadcolor}
+            ,\strdat{Right}{\strdllabel{A\myprime}}
+            ,\strdat{Left}{\strdrlabel{B\myprime}}
+            ,\strdbox{2}{2}{
+                \strdtubeof{}{
+                    \strdtubestart
+                    ,\strdtubemid
+                    ,\strdat{Right}{\strdrlabel{B\myprime}}
+                    ,\strdat{Left}{\strdrlabel{A\myprime}}
+                    ,\strdat{Right End}{\strdcell{b}}
+                    ,\strdat{Left End}{\strdcell{\strdupsidedown{a}}}
+                    ,\strdtubemid
+                    ,\strdat{Right}{\strdrlabel{B}}
+                    ,\strdat{Left}{\strdrlabel{A}}
+                }
+            },\strdat{Left}{\strdoverlabel{\strdlvert{\operatorname{Hom}}}}
+            ,\strdtubestart
+            ,\strdtubemid,\strdbackground{strd roadcolor}
+            ,\strdat{Right}{\strdllabel{A}}
+            ,\strdat{Left}{\strdrlabel{B}}
+        } \mydefeq\,
+        \strdgathered{
+            \strdmid,\strdrlabel{B\myprime}
+            ,\strdcell{b}
+            ,\strdmid,\strdrlabel{B}
+            ,\strdcell{\texttt{?}}
+            ,\strdmid,\strdrlabel{A}
+            ,\strdcell{a}
+            ,\strdmid,\strdrlabel{A\myprime}
+        }
     }
 }
-\end{definition}
-Notice that the world in the box is the product category $\cat{C}^{\operatorname{op}} \times \cat{C}$.
-\mynewline
+
+\In{remark}{
+    The world in the box is the product category $\cat{C}^{\operatorname{op}} \times \cat{C}$.
+}
+
 This definition will inspire you to depict the hom functors as
 \In{align*}{
     \strdgathered{
@@ -249,33 +256,34 @@ This definition will inspire you to depict the hom functors as
         ,\strdyhalf{\strdroad\strdmid}
     }
 }
+which looks topologically equivalent.
 
-\begin{definition}[Unary Hom Functor]
-The partial applications
-\In{align*}{
-    \cat{C}(A,\texttt{+}) &: \cat{C} \to \catSet\\
-    \cat{C}(\texttt{-},B) &: \cat{C}^{\operatorname{op}} \to \catSet
-}
-are respectively
-\In{align*}{
-    \strdgathered{
-        \strdtubeof{}{
-            \strdtubestart%line
-            ,\strdtubemid,\strdbackground{strd roadcolor}
-            ,\strdat{Right End}{\strdllabel{A}}
-            ,\strdat{Left End}{\strdcell{\texttt{?}}}
-            ,\strdtubemid,\strdbackground{strd roadcolor}
-        }
-    } \ , \
-    \strdgathered{
-        \strdtubeof{}{
-            \strdtubestart%line
-            ,\strdtubemid,\strdbackground{strd roadcolor}
-            ,\strdat{Right End}{\strdcell{\strdupsidedown{\texttt{?}}}}
-            ,\strdat{Left End}{\strdrlabel{B}}
-            ,\strdtubemid,\strdbackground{strd roadcolor}
+\definitionof{Unary Hom Functor}{
+    According to \cref{Partial Application},
+    \In{align*}{
+        \cat{C}(A,\texttt{+}) &: \cat{C} \to \catSet\\
+        \cat{C}(\texttt{-},B) &: \cat{C}^{\operatorname{op}} \to \catSet
+    }
+    are respectively depicted as
+    \In{align*}{
+        \strdgathered{
+            \strdtubeof{}{
+                \strdtubestart%line
+                ,\strdtubemid,\strdbackground{strd roadcolor}
+                ,\strdat{Right End}{\strdllabel{A}}
+                ,\strdat{Left End}{\strdcell{\texttt{?}}}
+                ,\strdtubemid,\strdbackground{strd roadcolor}
+            }
+        } \ , \
+        \strdgathered{
+            \strdtubeof{}{
+                \strdtubestart%line
+                ,\strdtubemid,\strdbackground{strd roadcolor}
+                ,\strdat{Right End}{\strdcell{\strdupsidedown{\texttt{?}}}}
+                ,\strdat{Left End}{\strdrlabel{B}}
+                ,\strdtubemid,\strdbackground{strd roadcolor}
+            }
         }
     }
 }
-\end{definition}
 
