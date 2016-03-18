@@ -16,7 +16,7 @@
 \tikzset{strd picturevaligned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}% for the equal symbol
 \tikzset{strd picture/.style={strd picturevaligned,strd mathnodes,strd default,strd rounded corners}}
 \tikzset{strd draw/.style={}}
-
+\tikzset{strd nosep/.style={inner sep=0pt,outer set=0pt}}
 
 % Layers
 %
@@ -48,14 +48,26 @@
 % Environments 
 %
 
-\newcommand*{\strd}[1]{%
-    \begin{tikzpicture}[strd picture]
+\newcommand*{\strdpicture}{\strdpictureof{strd picture}}
+\newcommand*{\strdpictureof}[2]{% {style}{tikzexpr}
+    \begin{tikzpicture}[#1]
         \strddeclorigin
-        #1;
+        #2;
     \end{tikzpicture}%
 }
-\newcommand*{\strdin}[2]{\Foldr{\strdin@}{#2}{\List{#1}}}
-\newcommand*{\strdin@}[2]{\begin{#1}\strd{#2}\end{#1}}
+
+\newcommand*{\strdseq}{\ThenList}
+\newcommand*{\strdseqin}[2]{\strduse{#1}{\strdseq{#2}}}
+
+\newcommand*{\strdgathered}{\strdin{\In{gathered},\strdpicture}}
+\newcommand*{\strdin}[1]{\strdin@{\ComposeList{#1}}}
+\newcounter{strdcounter}% Node ids are global!
+\newcommand*{\strdin@}[2]{% {env}{stm1,stm2,.,saN}
+    \stepcounter{strdcounter}% <- removes unneeded space
+    \strduse{#1}{%
+        \strdseq{#2}{\strdcopyC}{TheStrd\the\value{strdcounter}}{\strdorigin}%
+    }%
+}
 
 
 % Constants
@@ -158,7 +170,7 @@
 % origin
 \newcommand*{\strdorigin}{strdorigin}
 \newcommand*{\strddeclorigin}{%
-    \strdempty@{strdorigin}{0,0}
+    \strdempty@{strdorigin}{0,0}%
 }
 
 % empty
@@ -1102,19 +1114,7 @@
 \newcommand*{\strdimplicit@@}{\strdtoT@\strdimplicit@}
 
 
-% Sequence-style construction
-%
 
-\newcommand*{\strdseq}{\ThenList}
-\newcommand*{\strdseqin}[2]{\strduse{#1}{\strdseq{#2}}}
-
-\newcounter{strdcounter}% Node ids are global!
-\newcommand*{\strdgathered}[1]{% {sa1,sa2,..,saN}
-    \stepcounter{strdcounter}
-    \strdin{gathered}{
-        \strdseq{#1}{\strdcopyC}{TheStrd\the\value{strdcounter}}{\strdorigin}
-    }%
-}
 
 \newcommand*{\strdassign}[5]{% {name}{stm}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}{#5}

@@ -52,7 +52,7 @@ the \emph{universality} of $P$.
 }
 \end{proposition}
 \begin{strdproof}
-$(\implies)$ is from the Axiom of choice. $(\impliedby)$ is immediate.
+$(\implies)$ by the Axiom of choice. $(\impliedby)$ immediate.
 \end{strdproof}
 
 \begin{definition}[Bijectivity]
@@ -96,9 +96,9 @@ Syntax of the function application is world-standard and fixed:
 }
 , but sometimes you might want cuter syntax like that
 \newcommand*{\myxstar}{%
-    \raisebox{0.12ex}{\ensuremath{%
-        \strdgathered{\strdcellof{strd cellbase,sharp corners,regular polygon,regular polygon sides=5}{x}}%
-    }}%
+    \strdin{\strdpictureof{strd picture,baseline=(X.base)}}{%
+        \strdcellof{strd cellbase,name=X,sharp corners,regular polygon,regular polygon sides=5}{x}
+    }
 }
 \In{align*}{
     \myxstar
