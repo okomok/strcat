@@ -4,12 +4,15 @@
 
 \tikzset{strd proof/.style={sharp corners,thick,solid,draw,fill=white,rectangle,minimum size=5pt,inner sep=0pt,outer sep=0pt}}
 
-\newenvironment{strdproof}{\noindent\strdproofstart\ }{\hfill\strdproofend}
+\newenvironment{strdproof}{\noindent\strdproofstart}{\hfill\strdproofend}
 
 \newcommand*{\strdproofstart}{%
-   \raisebox{0.25ex}{%
-       \ensuremath{\strdproofP@\strdproofR@\strdproofO@\strdproofO@\strdproofF@\strdproofperiod@}%
-   }%
+    {\sc Proof.}%
+}
+\newcommand*{\strdproofstartold}{%
+    \raisebox{0.25ex}{%
+        \ensuremath{\strdproofP@\strdproofR@\strdproofO@\strdproofO@\strdproofF@\strdproofperiod@}%
+    }%
 }
 \newcommand*{\strdproofend}{\ensuremath{\strdproofsq@}}
 
