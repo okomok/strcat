@@ -219,7 +219,7 @@ Limits are unique up to isomorphism.
 }
 
 \definitionof{Coproduct}{
-    A \emph{coproduct} is a structure obtained from the bijectivity diagram of the products flipped.
+    A \emph{coproduct} is a structure obtained from the bijectivity diagram of products flipped.
     \In{align*}{
         \Compose\strdgathered\strdinv{
             \strdmid,\strdrlabel{\coprod F}
@@ -267,13 +267,175 @@ The dual makes a codomain opposite, while the variant does for a domain.
 \end{remark}
 
 \definitionof{Preservation of Limits}{
-    \cref{Limit}
-    sxxo
-    \ref{Limit}
-TODO
+    Given a functor $F : \cat A \to \cat B$ and a limiting cone of $F$
+    \In{align*}{
+        (\text{lim}_X : \text{lim}F \to FX) _ X
+    }
+    a functor $G : \cat B \to \cat C$ \emph{preserves limits} of $F$ when
+    \In{align*}{
+        (G(\text{lim}_X) : G\text{lim}F \to GFX)_X
+    } is a limiting cone of $G \circ F$.
+}
+
+In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
+\In{align*}{
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+        ,\strdwidecell{1}{1}{g}
+    }
+    =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdmid
+        }
+        ,\strdtubestart
+        ,\strdtubeextend{1}{1},\strdcutoff\strdtubebound
+        ,\strdtube\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+        ,\strdbox{2.4}{2.4}{
+            \strdtube{
+                \strdfork{
+                    \strdtubemid
+                    ,\strdwidecell{2}{2}{v}
+                }
+                ,\strdtubeunextend{1}{1}
+                ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            }
+        },\strdat{Left StartCorner}{\strdoverlabel{\texttt{!}}}
+        ,\strdmid
+    } 
+    \iff
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdmid
+            ,\strdmid
+        }
+        ,\strdtubestart
+        ,\strdtube{
+            \strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+                ,\strdwidecell{1}{1}{\lim}
+            }
+            ,\strdtubeextend{1}{1},\strdcutoff\strdtubebound
+            ,\strdtubemid,\strdat{Left End}{\strdoverlabel{G}}
+            ,\strdtubemid
+            ,\strdwidecell{2}{2}{g}
+        }
+    }
+    =
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid}
+        ,\strdtubestart
+        ,\strdtube{
+            \strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            }
+            ,\strdtubeextend{1}{1},\strdcutoff\strdtubebound
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+            ,\strdwidecell{2}{2}{v}
+        }
+    }
 }
 
 \In{proposition}{[HFPL]
-    Hom functors preserve limits, meaning that TODO
+    Hom-functors preserve limits, meaning that given a functor $F : \cat A \to \cat B$ %
+    and an object $B$ in \cat B, the covariant hom-functor %
+    $\cat B(B,\catph{+}) : \cat B \to \catSet$ preserves limits of $F$.
+}
+
+\InList{strdproof,align*}{
+    &
+    \strdgathered{
+        \strdtubestart
+        ,\strdtubemid,\strdat{Left End}{\strdcell{\scriptstyle\lim}},\strdbackground{strd roadcolor}
+        ,\strdtubemid,\strdbackground{strd roadcolor},\strdat{Right Start}{\strdllabel{B}}
+        ,\strdwidecell{1}{1}{g}
+        ,\strdmid
+    } =
+    \strdgathered{
+        \strdtubestart
+        ,\strdtubemid,\strdbackground{strd roadcolor},\strdat{Right}{\strdllabel{B}}
+        ,\strdwidecell{1}{1}{v}
+        ,\strdmid
+    } \\
+    \underset{\myreason{curry}}{\iff} &
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{\lim}
+        ,\strdmid
+        ,\strdwidecell{1}{1}{g}
+        ,\strdtubestart
+        ,\strdtubemid,\strdat{Right}{\strdrlabel{B}}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{v}
+        ,\strdtubemid,\strdat{Right}{\strdrlabel{B}}
+    } \\
+    \underset{\myreason{limit}}{\iff} &
+    \strdgathered{
+        \strdmid
+        ,\strdwidecell{1}{1}{g}
+        ,\strdtubestart
+        ,\strdtubemid,\strdat{Right}{\strdrlabel{B}}
+    } =
+    \strdgathered{
+        \strdmid
+        ,\strdbox{2}{2}{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{v}
+        },\strdat{Left StartCorner}{\strdoverlabel{\lim}}
+        ,\strdtubestart
+        ,\strdtubemid,\strdat{Right}{\strdrlabel{B}}
+    }\\
+    \underset{\myreason{curry}}{\iff} &
+    \strdgathered{
+        \strdtubestart
+        ,\strdtubemid,\strdbackground{strd roadcolor},\strdat{Right}{\strdllabel{B}}
+        ,\strdwidecell{1}{1}{g}
+        ,\strdmid
+    } =
+    \strdgathered{
+        \strdbox{3}{3}{
+            \strdmid
+            ,\strdat{Start}{
+                \strdtubestart
+                ,\strdinv{
+                    \strdxscale{0.75}\strdtuberjump
+                    ,\strdtubemid,\strdbackground{strd roadcolor}
+                    ,\strdat{Right}{\strdllabel{B}}
+                }
+            }
+            ,\strdbox{2}{2}{
+                \strdfork{
+                    \strdmid
+                }
+                ,\strdtubestart
+                ,\strdtube\strdtubemid
+                ,\strdwidecell{1}{1}{v}
+            },\strdat{Left StartCorner}{\strdoverlabel{\lim}}
+            ,\strdtubestart
+            ,\strdtubemid,\strdat{Right}{\strdrlabel{B}}
+            ,\strdat{Left End}{\strdmid}
+        }%,\strdat{Left}{\strdoverlabel{\strdlvert{\operatorname{curry}}}}
+    }
 }
 
