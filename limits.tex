@@ -2,13 +2,17 @@
 \section{Limits}
 
 \begin{definition}[Cone]
-Given a functor $F : \cat A \to \cat B$, a natural transformation of the form
-\In{align*}{
-    (v _ X : B \to FX) _ X
-}
-is called a \emph{cone} of $F$.
+\label{cone}
+Given a functor $F : \cat A \to \cat B$, a cone of $F$ consists of
+\begin{enumerate}
+    \item an object $B$ in \cat B
+    \item a natural transformation $(v _ X : B \to FX) _ X$
+\end{enumerate}
 \end{definition}
-The naturality(\emph{conicality}) can be expressed as
+
+\begin{definition}[Conicality]
+\label{conicality}
+We may call the naturality of a cone explicitly the \emph{conicality}, which can be expressed as
 \In{align*}{
     \strdgathered{
         \strdfork{
@@ -37,15 +41,19 @@ The naturality(\emph{conicality}) can be expressed as
     }
 }
 like a magical box any morphism can appear from.
-
+\end{definition}
 
 \begin{definition}[Limit]
+\label{limit}
 Given a functor $F : \cat A \to \cat B$, a limit of $F$ is a pair of
 \In{enumerate}{
     \item an object in $\cat{B}$ denoted as $\text{lim} F$
     \item a natural bijection $(\cat{B}(B, \text{lim}F) \cong \catNat _ X(B,FX))_B$
 }
 \end{definition}
+
+\begin{definition}[Limiting Cone]
+\label{limiting.cone}
 The naturality allows the bijectivity to be expressed as
 \In{align*}{
     \strdgathered{
@@ -87,15 +95,22 @@ The naturality allows the bijectivity to be expressed as
         ,\strdmid,\strdrlabel{B}
     }
 }
-, where %
+where %
 \strdin{\strdpictureof{strd picture,baseline=(X.base)}}{\strdwidecellof{strd widecellbase,name=X}{1}{1}{\text{lim}}} %
-is called the \emph{limiting cone} of $F$.
-\mynewline
-A limit is nothing but a contravariant representation
+is a cone called the \emph{limiting cone} of $F$.
+\end{definition}
+
+\begin{proposition}
+Limits are unique up to isomorphism.
+\end{proposition}
+
+\begin{strdproof}
+Immediate by \cref{rep.unique}, because a limit is nothing but a contravariant representation
 \In{align*}{
     \text{rep} _ B \catNat_X(B,FX)
 }
-so that limits are unique up to isomorphism.
+\end{strdproof}
+
 \begin{proposition}\label{l.c.m}
 A limiting cone is \emph{monic} meaning that
 \In{align*}{
@@ -142,6 +157,9 @@ Immediate by the bijectivity of limits.
 In particular case the domain of a functor $F : \mathcal{A} \to \mathcal{B}$ is discrete, %
 the limit of $F$ is called the \emph{product }of $F$ denoted as $\textstyle\prod F$. %
 \end{definition}
+
+\begin{definition}[Projection]
+\label{projection}
 Spelling out the bijectivity,
 \In{align*}{
     \strdgathered{
@@ -183,15 +201,18 @@ Spelling out the bijectivity,
         ,\strdmid,\strdrlabel{B}
     }
 }
-, where %
+where %
 \strdin{\strdpictureof{strd picture,baseline=(X.base)}}{\strdwidecellof{strd widecellbase,name=X}{1}{1}{\pi}} %
 is called the \emph{projection} of $F$. 
-\mynewline
-Note that the conicality has no concern, because any family of the form
+\end{definition}
+
+\begin{remark}
+The conicality has no concern here, because any family of the form
 \In{align*}{
     (v _ X : B \to FX) _ {X \in \catOb A}
 }
 is always natural in case $\cat A$ is discrete.
+\end{remark}
 
 \begin{definition}[Dual]
 Given a statement containing string diagrams, by flipping it upside down, %
@@ -242,6 +263,14 @@ A \emph{coproduct} is a structure obtained from the bijectivity diagram of the p
 }
 \end{definition}
 \begin{remark}
-Note that the variant makes a domain opposite, while the dual does for a codomain.
+The dual makes a codomain opposite, while the variant does for a domain.
 \end{remark}
+
+\begin{definition}[Preservation of Limits]
+TODO
+\end{definition}
+
+\begin{proposition}[HFPL]
+    Hom functors preserve limits, meaning that TODO
+\end{proposition}
 

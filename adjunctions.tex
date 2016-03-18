@@ -1,7 +1,362 @@
 
 \section{Adjunctions}
 
+\begin{definition}[Adjunction]
+\label{adj}
+Given two categories $\cat C$ and $\cat D$, an \emph{adjunction}
+\In{align*}{
+    F \dashv G
+}
+consists of
+\In{enumerate}{
+    \item \emph{left adjoint}: a functor $F : \cat C \to \cat D$ 
+    \item \emph{right adjoint}: a functor $G : \cat D \to \cat C$ 
+    \item \emph{adjunct}: a natural bijection 
+    \In{align*}{
+        (\cat D(FC, D) \cong \cat C(C,GD))_{C,D}
+    }
+}
+\end{definition}
 
-\subsection{Hom-set Adjunctions}
+A nice consequence is that the bijectivity needs no boxes, expressed by natural transformations only.
+\In{align*}{
+    \strdgathered{
+        \strdmid
+        ,\strdwidecell{1}{1}{f}
+        ,\strdfork{
+            \strdmid
+        }
+        ,\strdtubestart
+        ,\strdtube\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+        ,\strdtubeendline
+    } =
+    \strdgathered{
+        \strdmid
+        ,\strdfork{
+            \strdmid
+            ,\strdmid
+        }
+        ,\strdtube{
+            \strdtubestart
+            ,\strdtwincell{\epsilon}
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+                ,\strdwidecell{1}{1}{g}
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            ,\strdtubeendline
+        }
+    }
+    \iff
+    \Compose\strdgathered\strdinv{
+        \strdmid
+        ,\strdfork{
+            \strdmid
+            ,\strdmid
+        }
+        ,\strdtube{
+            \strdtubestart
+            ,\strdtwincell{\eta}
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+                ,\strdwidecell{1}{1}{f}
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+            ,\strdtubeendline
+        }
+    }
+    =
+    \Compose\strdgathered\strdinv{
+        \strdmid
+        ,\strdwidecell{1}{1}{g}
+        ,\strdfork{
+            \strdmid
+        }
+        ,\strdtubestart
+        ,\strdtube\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+        ,\strdtubeendline
+    }
+}
+where
+\In{align*}{
+    \strdgathered{
+        \strdmid
+        ,\strdfork{
+            \strdmid
+        }
+        ,\strdtube{
+            \strdtubestart
+            ,\strdtwincell{\epsilon}
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+            }
+            ,\strdtubecap{1}{1},\strdat{Left}{\strdoverlabel{F}}
+            ,\strdtubeendline
+        }
+    } &\mydefeq
+    \strdgathered{
+        \strdmid
+        ,\strdfork{
+            \strdmid
+            ,\strdmid
+        }
+        ,\strdbox{2}{2}{
+            \strdtubestart
+            ,\strdtube\strdtubemid
+        },\strdat{Left}{\strdoverlabel{\cong}}
+        ,\strdtube{
+            \strdtubestart
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+            }
+            ,\strdtubeextend{1}{1}
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            ,\strdtubeendline
+        }
+    }\\
+    \Compose\strdgathered\strdinv{
+        \strdmid
+        ,\strdfork{
+            \strdmid
+        }
+        ,\strdtube{
+            \strdtubestart
+            ,\strdtwincell{\eta}
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            }
+            ,\strdtubecap{1}{1},\strdat{Left}{\strdoverlabel{G}}
+            ,\strdtubeendline
+        }
+    } &\mydefeq
+    \Compose\strdgathered\strdinv{
+        \strdmid
+        ,\strdfork{
+            \strdmid
+            ,\strdmid
+        }
+        ,\strdbox{2}{2}{
+            \strdtubestart
+            ,\strdtube\strdtubemid
+        },\strdat{Left}{\strdoverlabel{\cong}}
+        ,\strdtube{
+            \strdtubestart
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            }
+            ,\strdtubeextend{1}{1}
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+            ,\strdtubeendline
+        }
+    }
+}
+
+\begin{proposition}
+Given a functor $G: \cat D \to \cat C$, a family of natural bijections
+\In{align*}{
+    ( (\cat C(C, GD) \cong \cat D(F_c, D) )_D )_C
+}
+is enough to construct the adjunction $F \dashv G$.
+\end{proposition}
+
+\begin{strdproof}
+Immediate by $H(C,D) \mydefeq \cat C(C,GD)$ in \cref{rep.family}.
+\end{strdproof}
+
+\begin{proposition}[RAPL]
+Right adjoints preserve limits, meaning that given an adjunction %
+$F \dashv (G : \cat D \to \cat C)$ and a functor $T : \cat B \to \cat D$,
+\In{align*}{
+    & (\textstyle\lim_X : \text{lim}T \to TX)_X : \text{limiting cone} \\
+    \implies & (G(\textstyle\lim_X) : G(\text{lim}T) \to G(TX))_X : \text{limiting cone}
+}
+\end{proposition}
+
+\begin{strdproof}
+\In{align*}{
+    &
+    \strdgathered{
+       \strdfork{
+           \strdmid
+           ,\strdmid
+           ,\strdmid
+       }
+       ,\strdtube{
+           \strdtubestart
+           ,\strdfork{
+               \strdtubemid
+               ,\strdwidecell{1}{1}{\lim}
+           }
+           ,\strdfork{
+               \strdtubeextend{1}{1},\strdcutoff\strdtubebound
+               ,\strdtubemid
+               ,\strdtubemid
+               ,\strdwidecell{2}{2}{g}
+           }
+       }
+    }
+    =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestart
+        ,\strdfork{
+            \strdtube\strdtubemid
+        }
+        ,\strdfork{
+            \strdtubeextend{1}{1},\strdcutoff\strdtubebound
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{2}{2}{v}
+            ,\strdmid
+        }
+    }
+    \\
+    \iff &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid,\strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{\lim}
+        ,\strdtubeextend{1}{1}
+        ,\strdtwincell{\epsilon}
+        ,\strdfork{
+            \strdtube\strdtubemid
+            ,\strdwidecell{2}{2}{g}
+        }
+        ,\strdtube{
+            \strdtubecap{1}{1}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+    =
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid,\strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdfork{
+            \strdtube\strdtubemid
+        }
+        ,\strdtubeextend{1}{1}
+        ,\strdtwincell{\epsilon}
+        ,\strdfork{
+            \strdtube\strdtubemid
+            ,\strdwidecell{2}{2}{v}
+        }
+        ,\strdtube{
+            \strdtubecap{1}{1}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+    \\
+    \iff &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid,\strdmid
+        }
+        ,\strdtubestart
+        ,\strdtubejump
+        ,\strdtubeextend{0}{0}
+        ,\strdtwincell{\epsilon}
+        ,\strdfork{
+            \strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{g}
+        }
+        ,\strdtube{
+            \strdtubecap{1}{1}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+    =
+    \strdgathered{
+        \strdmid
+        ,\strdfork{
+            \strdtubeof{strd frame}{
+                \strdtubestart,\strdtubebound
+                ,\strdtubesqcap{3}{3},\strdat{Left Corner}{\strdoverlabel{\lim}}
+                ,\strdtubesqcup{3}{3}
+            }
+        }
+        ,\strdfork{
+            \strdmid,\strdmid,\strdmid
+        }
+        ,\strdtubestart
+        ,\strdtube\strdtubemid
+        ,\strdfork{
+            \strdtube\strdtubemid
+        }
+        ,\strdtubeextend{1}{1}
+        ,\strdtwincell{\epsilon}
+        ,\strdfork{
+            \strdtube\strdtubemid
+            ,\strdwidecell{2}{2}{v}
+        }
+        ,\strdtube{
+            \strdtubecap{1}{1}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+    \\
+    \iff &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid
+        }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdwidecell{1}{1}{g}
+    }
+    =
+    \strdgathered{
+        \strdmid
+        ,\strdfork{
+            \strdtubeof{strd frame}{
+                \strdtubestart,\strdtubebound
+                ,\strdtubesqcap{3}{3},\strdat{Left Corner}{\strdoverlabel{\lim}}
+                ,\strdtubesqcup{3}{3}
+            }
+        }
+        ,\strdfork{
+            \strdmid,\strdmid,\strdmid,\strdmid
+        }
+        ,\strdtubestart
+        ,\strdtube\strdtubemid
+        ,\strdfork{
+            \strdtube\strdtubemid
+        }
+        ,\strdtubeextend{1}{1}
+        ,\strdtwincell{\epsilon}
+        ,\strdfork{
+            \strdtube\strdtubemid
+            ,\strdwidecell{2}{2}{v}
+        }
+        ,\strdtube{
+            \strdtubecap{1}{1}
+            ,\strdtubemid
+            ,\strdtwincell{\eta}
+            ,\strdinv{
+                \strdtubecap{2}{2}
+                ,\strdtubemid
+                ,\strdtubemid
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
+        }
+    }
+}
+
+
+\end{strdproof}
+
 
 
