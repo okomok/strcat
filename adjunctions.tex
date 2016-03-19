@@ -80,41 +80,6 @@ A nice consequence is that this bijectivity needs no boxes, expressed by natural
 }
 where
 \In{align*}{
-    \strdgathered{
-        \strdmid
-        ,\strdfork{
-            \strdmid
-        }
-        ,\strdtube{
-            \strdtubestart
-            ,\strdtwincell{\epsilon}
-            ,\strdfork{
-                \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
-            }
-            ,\strdtubecap{1}{1},\strdat{Left}{\strdoverlabel{F}}
-            ,\strdtubeendline
-        }
-    } &\mydefeq
-    \strdgathered{
-        \strdmid
-        ,\strdfork{
-            \strdmid
-            ,\strdmid
-        }
-        ,\strdbox{2}{2}{
-            \strdtubestart
-            ,\strdtube\strdtubemid
-        },\strdat{Left}{\strdoverlabel{\cong}}
-        ,\strdtube{
-            \strdtubestart
-            ,\strdfork{
-                \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
-            }
-            ,\strdtubeextend{1}{1}
-            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
-            ,\strdtubeendline
-        }
-    }\\
     \Compose\strdgathered\strdinv{
         \strdmid
         ,\strdfork{
@@ -149,8 +114,44 @@ where
             ,\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
             ,\strdtubeendline
         }
+    } \\
+    \strdgathered{
+        \strdmid
+        ,\strdfork{
+            \strdmid
+        }
+        ,\strdtube{
+            \strdtubestart
+            ,\strdtwincell{\epsilon}
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+            }
+            ,\strdtubecap{1}{1},\strdat{Left}{\strdoverlabel{F}}
+            ,\strdtubeendline
+        }
+    } &\mydefeq
+    \strdgathered{
+        \strdmid
+        ,\strdfork{
+            \strdmid
+            ,\strdmid
+        }
+        ,\strdbox{2}{2}{
+            \strdtubestart
+            ,\strdtube\strdtubemid
+        },\strdat{Left}{\strdoverlabel{\cong}}
+        ,\strdtube{
+            \strdtubestart
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+            }
+            ,\strdtubeextend{1}{1}
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            ,\strdtubeendline
+        }
     }
 }
+called respectively the \emph{unit} and \emph{counit}.
 
 \In{proposition}{
     Given a functor $G: \cat D \to \cat C$, a family of natural bijections
@@ -169,8 +170,8 @@ where
     Right adjoints preserve limits, meaning that given an adjunction %
     $F \dashv (G : \cat D \to \cat C)$ and a functor $T : \cat B \to \cat D$,
     \In{align*}{
-        & (\textstyle\lim_X : \text{lim}T \to TX)_X : \text{limiting cone} \\
-        \implies & (G(\textstyle\lim_X) : G(\text{lim}T) \to G(TX))_X : \text{limiting cone}
+        & (\text{lim}_X : \text{lim}T \to TX)_X : \text{limiting cone} \\
+        \implies & (G(\text{lim}_X) : G\text{lim}T \to GTX)_X : \text{limiting cone}
     }
 }
 

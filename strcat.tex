@@ -2,22 +2,20 @@
 \title{Category Theory with Strings}
 \author{Shunsuke Sogame}
 
-%\includeonly{limits,refsetup}
+%\includeonly{monads,references,refsetup}
 %\overfullrule=2cm
 \usepackage{my,cat,lambdax,strd,strdproof}
 
 \allowdisplaybreaks
+\renewcommand{\abstractname}{\vspace{-\baselineskip}}
 
 \include{refsetup}
 
 \begin{document}
 
 \maketitle
-
-\input{abstract}
 \input{introduction}
-
-\include{preliminaries}
+\input{preliminaries}
 \include{categories}
 \include{functors}
 \include{natural_transformations}
@@ -26,7 +24,7 @@
 \include{representations}
 \include{limits}
 \include{adjunctions}
-
+\include{monads}
 \include{references}
 
 \end{document}
