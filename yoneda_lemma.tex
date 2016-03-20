@@ -235,6 +235,8 @@ it is full and faithful. Combined with \cref{ff.pr.inv},
 
 \propositionof{Yoneda Principle}{
     \In{align*}{
+        &
+        (
         \strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdfork{
@@ -247,7 +249,25 @@ it is full and faithful. Combined with \cref{ff.pr.inv},
                 ,\strdtubeunclose
                 ,\strdtwincell{\tau}
             }
-        } : \text{invertible} \iff
+        }
+        ,
+        \strdgathered{
+            \strdmid,\strdrlabel{A}
+            ,\strdfork{
+                \strdmid,\strdrlabel{B}
+                ,\strdcell{\catph{?}}
+                ,\strdmid
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubeunclose
+                ,\strdtwincell{\sigma}
+            }
+        }
+        ) : \text{isomorphism}
+        \\
+        \iff &
+        (
         \strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdfork{
@@ -259,7 +279,21 @@ it is full and faithful. Combined with \cref{ff.pr.inv},
                 ,\strdtubeunclose
                 ,\strdtwincell{\tau}
             }
-        } : \text{invertible}
+        }
+        ,
+        \strdgathered{
+            \strdmid,\strdrlabel{A}
+            ,\strdfork{
+                \strdmid,\strdrlabel{B}
+                ,\strdmid
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubeunclose
+                ,\strdtwincell{\sigma}
+            }
+        }
+        ) : \text{isomorphism}
     }
 }
 

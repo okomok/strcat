@@ -36,7 +36,7 @@
     \In{align*}{
         \exists a \big((!a P(a)) \wedge Q(a)\big)
     }
-    means ``there exists a unique $a$ such that $P$, moreover the $a$ is $Q$".
+    means ``there exists a unique $a$ such that $P$, furthermore the $a$ is $Q$".
 }
 
 \definitionof{Universality}{
@@ -58,14 +58,13 @@
     $(\implies)$ by the Axiom of choice. $(\impliedby)$ immediate.
 }
 
-\definitionof{Bijectivity}{
+\definitionof{Functional Bijectivity}{
     Given a a function $g : Y \to X$, a statement
     \In{align*}{
         (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(x = g(y) \iff y = f(x))
     }
-    is known as the \emph{bijectivity} of $f$ and $g$.
+    is known as the \emph{bijectivity} of $f$ and $g$. This is a special case of universality where $P(x,y)$ is $x = g(y)$.
 }
-This is a special case of universality where $P(x,y)$ is $x = g(y)$.
 
 
 \subsection{Lambda Expressions}
@@ -110,22 +109,24 @@ but sometimes you might want cuter syntax like that
     \myxstar
 }
 
-\definitionof{Family Declaration}{
-    A \emph{family declaration} is an easy way to define arbitary application syntax:
+\definitionof{Family}{
+    A \emph{family declaration} is a way to provide a function with arbitary application syntax. %
+    The usage is clear from an example
     \In{align*}{
         (\myxstar \in Y) _ {x \in X}
     }
-}
-
-\definitionof{Family Definition}{
-    If you place a function implementation into a family declaration:
+    We call such a function a \emph{family}. Furthermore, a function body can be placed like that
     \In{align*}{
         (\myxstar \mydefeq x^2 \in Y) _ {x \in X}
     }
-    it might be called a \emph{family definition}.
 }
 
-Family declarations can do more. 
+\In{example}{
+    The most-used family declaration is the subscript style \In{math}{ (a_i)_i }. %
+    You can view a tuple $(a_1,a_2,\ldots,a_n)$ to be an abbreviation of $(a_i)_{i\in \lbrace 1,2,\ldots,n\rbrace}$.
+}
+
+Families can do more. 
 \definitionof{Dependent Function}{
     Let $F$ a set-valued function.
     \In{align*}{
@@ -139,14 +140,14 @@ Family declarations can do more.
     \In{align*}{
         (\forall x \in X)(f(x) \in F(x))
     }
-    Such $f$ is called a \emph{dependent function}, for the $F(x)$ depends on $x$. 
+    Such $f$ is called a \emph{dependent function}, for the $F(x)$ depends on $x$. %
+    In case $F$ is a constant function, $f$ is a normal function $X \to Y$. 
 }
-In case $F$ is a constant function, $f$ is a normal function $X \to Y$. 
 
 
 \subsection{Coherence}
 
-You will write
+It is sure you write
 \In{align*}{
     3+1+2
 }

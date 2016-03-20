@@ -103,13 +103,23 @@ be unambiguous. "Join then tube" is the same as "Tube then join".
 
 \In{proposition}{
     \label{f.p.inv}
-    Any functor preserves the invertibility meaning that
+    Any functor preserves isomorphisms meaning that
     \In{align*}{
+        (
         \strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
-        } : \text{invertible} \implies
+        }
+        ,
+        \strdgathered{
+            \strdmid,\strdrlabel{A}
+            ,\strdcell{g}
+            ,\strdmid,\strdrlabel{B}
+        }
+        ) : \text{isomorphism}
+        \implies
+        (
         \strdgathered{
             \strdfork{
                 \strdmid,\strdrlabel{B}
@@ -121,8 +131,26 @@ be unambiguous. "Join then tube" is the same as "Tube then join".
                 ,\strdydouble\strdtubemid
                 ,\strdtubeendline
             }
-        } : \text{invertible}
+        }
+        ,
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{A}
+                ,\strdcell{g}
+                ,\strdmid,\strdrlabel{B}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdydouble\strdtubemid
+                ,\strdtubeendline
+            }
+        }
+        ) : \text{isomorphism}
     }
+}
+
+\In{strdproof}{
+    Immediate by functoriality that inheres in tubes.
 }
 
 \definitionof{Composite Functor}{
@@ -229,6 +257,7 @@ A contravariant functor is depicted as
     }
     is called a \emph{binary functor} or \emph{bifunctor}.
 }
+
 With numbered placeholders, it is depicted as
 \In{align*}{
     \strdgathered{
@@ -570,6 +599,8 @@ Combined with \cref{f.p.inv},
 \In{proposition}{
     \label{ff.pr.inv}
     \In{align*}{
+        &
+        (
         \strdgathered{
             \strdfork{
                 \strdmid,\strdrlabel{B}
@@ -582,7 +613,25 @@ Combined with \cref{f.p.inv},
                 ,\strdtubemid
                 ,\strdtubeendline
             }
-        } : \text{invertible} \iff
+        }
+        ,
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{A}
+                ,\strdmid,\strdrlabel{B}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdwidecell{1}{1}{h}
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
+        }
+        ) : \text{isomorphism}
+        \\
+        \iff &
+        (
         \strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdfork{
@@ -603,7 +652,30 @@ Combined with \cref{f.p.inv},
                 ,\strdtubesqcap{1}{1}
                 ,\strdtubesqcup{1}{1}
             }
-        } : \text{invertible}
+        }
+        ,
+        \strdgathered{
+            \strdmid,\strdrlabel{A}
+            ,\strdfork{
+                \strdmid
+                ,\strdmid
+                ,\strdmid,\strdrlabel{B}
+            }
+            ,\strdfork{
+                \strdtube{
+                    \strdtubestart
+                    ,\strdtubemid
+                    ,\strdwidecell{1}{1}{h}
+                    ,\strdtubemid
+                }
+            }
+            ,\strdtubeof{strd frame}{
+                \strdtubestart
+                ,\strdtubesqcap{1}{1}
+                ,\strdtubesqcup{1}{1}
+            }
+        }
+        ) : \text{isomorphism}
     }
 }
 

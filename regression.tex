@@ -1,16 +1,23 @@
-\documentclass{article}
-\title{Category Theory with Strings}
-\author{Shunsuke Sogame}
 
 
-\usepackage{my,cat,lambdax,strd}
 
-
-\begin{document}
-\In{align*}{
-    \strdgathered{
-        \strdmid,\strdcellof{strd cellbase,name=A}{W}
+\In{strdproof}{
+    \In{align*}{
+        \strdgathered{
+            \strdbox{1}{1}{
+                \strdmid
+            } 
+        } =
+        \strdgathered{
+            \strdbox{1}{1}{
+                \strdmid
+            }
+        }
     }
+}
+
+\In{strdproof}{
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAq.
 }
 
 % \section{Yoneda Lemma}
@@ -40,4 +47,3 @@
 %         }
 %     }
 % }
-\end{document}

@@ -97,8 +97,10 @@
     }
     where %
     \strdin{\strdpictureof{strd picture,baseline=(X.base)}}{\strdwidecellof{strd widecellbase,name=X}{1}{1}{\text{lim}}} %
-    is a cone called the \emph{limiting cone} of $F$.
+    is a cone called a \emph{limiting cone} of F.
 }
+
+The following proposition allows us to call a limit \emph{the} limit.
 
 \In{proposition}{
 Limits are unique up to isomorphism.
@@ -211,6 +213,14 @@ Limits are unique up to isomorphism.
         (v _ X : B \to FX) _ {X \in \catOb A}
     }
     is always natural in case $\cat A$ is discrete.
+}
+
+\In{example}{
+    In case $F$ is a functor $X \to \cat Set$ with a set $X$(as a discrete category), %
+    the product of $F$ is a set of dependent functions
+    \In{align*}{
+        \textstyle\prod _{x} F(x) \cong \lbrace f \mid (f(x) \in F(x))_{x} \rbrace
+    }
 }
 
 \definitionof{Dual}{

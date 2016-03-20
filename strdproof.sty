@@ -2,111 +2,24 @@
 
 \usepackage{strd}
 
-\tikzset{strd proof/.style={sharp corners,thick,solid,draw,fill=white,rectangle,minimum size=5pt,inner sep=0pt,outer sep=0pt}}
-
 \newenvironment{strdproof}{\noindent\strdproofstart}{\hfill\strdproofend}
 
 \newcommand*{\strdproofstart}{%
-    {\sc Proof.}%
+    \textsc{Proof.}%
 }
-\newcommand*{\strdproofstartold}{%
-    \raisebox{0.25ex}{%
-        \ensuremath{\strdproofP@\strdproofR@\strdproofO@\strdproofO@\strdproofF@\strdproofperiod@}%
+
+\newcommand*{\strdproofend}{%
+    \strdin{\strdpictureof{strd picture,baseline=(\strdorigin.base)}}{
+        \strdscale{0.32}{0.2}{
+            \strdinv{
+                \strdproofdot@
+                ,\strdfork{ \strdmid }
+                ,\strdhright,\strdproofdot@
+                ,\strdmid,\strdproofdot@
+                ,\strdhleft,\strdproofdot@
+            }
+        }
     }%
 }
-\newcommand*{\strdproofend}{\ensuremath{\strdproofsq@}}
-
 \newcommand*{\strdproofdot@}{\strdsymbol{strd symbolbase,circle,fill=black,minimum size=1.2pt}}
-\newcommand*{\strdproof@}[1]{\strdgathered{\strdscale{0.28}{0.12}{#1}}}
-\newcommand*{\strdproofsymbol@}[1]{\strdgathered{\strdscale{0.32}{0.2}{#1}}}
-
-\newcommand*{\strdproofP@}{
-    \strdproof@{
-        \strdproofdot@
-        ,\strdfork{
-            \strdmid,\strdproofdot@
-            ,\strdmid,\strdproofdot@
-        }
-        ,\strdfork{
-            \strdhright,\strdproofdot@
-            ,\strdmid,\strdproofdot@
-            ,\strdhleft
-        }
-    }
-}
-
-\newcommand*{\strdproofR@}{
-    \strdproof@{
-        \strdproofdot@
-        ,\strdfork{
-            \strdmid,\strdproofdot@
-            ,\strdfork{\strdproofrslash,\strdproofdot@}
-            ,\strdmid,\strdproofdot@
-        }
-        ,\strdfork{
-            \strdhright,\strdproofdot@
-            ,\strdmid,\strdproofdot@
-            ,\strdfork{ \strdhleft }
-%            ,\strdmid,\strdproofdot@
-        }
-    }
-}
-\newcommand*{\strdproofrslash}{\strdcomposeC\strdproofrslashC}
-\newcommand*{\strdproofrslashC}[2]{% {newid}{previd}
-    \strdcoord@{#1 Start}{#2 End}
-    \strdcoord@{#1 Mid}{$(#1 Start)+(\strdxhalfunit,-\strdyunit)$}
-    \strdcoord@{#1 End}{$(#1 Mid)+(\strdxhalfunit,-\strdyunit)$}
-    \strdcoord@{#1}{#1 Mid}
-    \strddraw@{ (#1 Start) -- (#1 End) }%
-}
-
-\newcommand*{\strdproofO@}{
-    \strdproof@{
-        \strdproofdot@
-        ,\strdfork{
-            \strdmid
-            ,\strdmid,\strdproofdot@
-        }
-        ,\strdfork{
-            \strdhright,\strdproofdot@
-            ,\strdmid
-            ,\strdmid,\strdproofdot@
-            ,\strdhleft 
-        }
-    }
-}
-
-\newcommand*{\strdproofF@}{
-    \strdproof@{
-        \strdproofdot@
-        ,\strdfork{
-            \strdmid,\strdproofdot@
-            ,\strdfork{\strdhright,\strdproofdot@}
-            ,\strdmid,\strdproofdot@
-        }
-        ,\strdfork{
-            \strdhright,\strdproofdot@
-        }
-    }
-}
-
-\newcommand*{\strdproofperiod@}{
-    \strdproof@{
-        \strdnone{\strdproofdot@,\strdmid,\strdmid}
-        ,\strdproofdot@
-        %,\strdnone{\strdhright}
-    }
-}
-
-\newcommand*{\strdproofsq@}{
-    \strdproofsymbol@{
-        \strdproofdot@
-        ,\strdfork{ \strdmid }
-        ,\strdhright,\strdproofdot@
-        ,\strdmid,\strdproofdot@
-        ,\strdhleft,\strdproofdot@
-    }
-}
-
-
 

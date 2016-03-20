@@ -7,6 +7,7 @@
 % Styles
 %
 
+\tikzset{strd noop/.style={}}
 \tikzset{strd normaltextvaligned/.style={text height=1.9ex,text depth=0.65ex}}
 \tikzset{strd rounded corners/.style={rounded corners=2pt}}
 \tikzset{strd scripttextvaligned/.style={text height=1.5ex,text depth=0.4ex}}
@@ -14,9 +15,10 @@
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
 \tikzset{strd picturevaligned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}% for the equal symbol
-\tikzset{strd picture/.style={strd picturevaligned,strd mathnodes,strd default,strd rounded corners}}
+\tikzset{strd picture/.style={strd noop,strd mathnodes,strd default,strd rounded corners}}
 \tikzset{strd draw/.style={}}
 \tikzset{strd nosep/.style={inner sep=0pt,outer set=0pt}}
+
 
 % Layers
 %

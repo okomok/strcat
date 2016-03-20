@@ -1,7 +1,9 @@
 \section{Monads}
 
+\subsection{The Definition}
+
 \definitionof{Monad}{
-    Given a category \cat C, a monad consists of
+    Given a category \cat C, a \emph{monad} on \cat C consists of
     \In{enumerate}{
         \item a functor $T : \mathcal{C} \to \mathcal{C}$
         \item \emph{unit}: a natural transformation $\eta : \operatorname{Id}_T \to T$
@@ -82,7 +84,7 @@ The associativity is depicted as
         }
     }
 }
-which inspires you to assign
+This inspires you to assign
 \In{align*}{
     \strdgathered{
         \strdfork{\strdmid,\strdmid}
@@ -144,5 +146,223 @@ The unitality is
             ,\strdtwincell{\eta}
         }
     }
+}
+
+
+\definitionof{Monad Morphism}{
+    Given a category $\cat C$, a \emph{monad morphism} consists of
+    \In{enumerate}{
+        \item \emph{domain}: a monad $(T, \eta, \mu)$ on \cat C
+        \item \emph{codomain}: a monad $(T\myprime, \eta\myprime, \mu\myprime)$ on \cat C 
+        \item a natural transformation $\tau : T \to T\myprime$
+    }
+    satisfying the coherence conditions
+    \In{enumerate}{
+        \item \emph{multiplication-compatibility}:
+        \In{math}{
+            \tau \circ \eta = \eta\myprime
+        }
+        \item \emph{unit-compatibility}:
+        \In{math}{
+            \tau \circ \mu = \mu\myprime \circ \tau\tau
+        }
+    }
+}
+
+The coherence is depicated as
+\In{align*}{
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\mu\strdrlap\myprime}
+            ,\strdfork{
+                \strdtubemid
+                ,\strdtwincell{\tau}
+                ,\strdtubemid
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtwincell{\tau}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } &=
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubemid
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtubeendline
+        }
+    } \\
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubemid
+            ,\strdtwincell{\eta}
+        }
+    } &=
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\eta\strdrlap\myprime}
+        }
+    } 
+}
+
+\definitionof{Categoy of Monads}{
+    Given a category \cat C, the \emph{category of monads} \catMnd C is a category whose objects are %
+    monads and whose morphisms are monad morphisms.
+}
+
+\subsection{Kleisli Categories}
+
+\definitionof{Kleisli Category}{
+    Given a monad $(T,\eta,\mu)$ on \cat C, the \emph{Kleisli category} of $T$, %
+    denoted as $\cat C_T$ is a category consisting of
+    \In{enumerate}{
+        \item $\text{Ob}(\cat C_T) \mydefeq \catOb C$
+        \item $\cat C_T(A,B) \mydefeq \cat C(A, TB)$
+        \item $l \circ k \mydefeq \mu \circ T(l) \circ k$
+        \item $\operatorname{id}_A \mydefeq \eta_A$
+    }
+}
+
+In diagrams, a morphism in $\cat C_T$ is depicted as a \emph{Kleisli box}
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{B},\strdstartlabel{\cat C_T}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{\strdmid}
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{k}
+            ,\strdmid
+        }
+        ,\strdmid,\strdrlabel{A}
+    }
+}
+The composition is defined as
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{C}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{\strdmid}
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{l}
+            ,\strdmid
+        }
+        ,\strdmid,\strdrlabel{B}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{\strdmid}
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{k}
+            ,\strdmid
+        }
+        ,\strdmid,\strdrlabel{A}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{C}
+        ,\strdbox{2.5}{2.5}{
+            \strdfork{
+                \strdmid,\strdmid,\strdmid,\strdrlabel{B}
+            }
+            ,\strdtubestart
+            ,\strdtube{
+                \strdtubemid
+                ,\strdtwincell{\mu}
+                ,\strdfork{
+                    \strdtubemid
+                    ,\strdwidecell{1}{1}{l}
+                }
+                ,\strdtubecap{1}{1}
+                ,\strdtubemid
+                ,\strdwidecell{2}{2}{k}
+            }
+            ,\strdmid
+        }
+        ,\strdmid,\strdrlabel{A}
+    }
+}
+An identity morphism is defined as
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{\strdmid}
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdtwincell{\eta}
+            ,\strdmid
+        }
+        ,\strdmid,\strdrlabel{A}
+    }
+}
+
+
+
+\definitionof{Kleisli Adjunction}{
+    Define a functor $L : \cat C \to \cat C_T$ as
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{}
+            ,\strdbox{1.7}{1.7}{
+                \strdfork{\strdmid,\strdcell{\catph{?}}}
+                ,\strdtubestart
+                ,\strdtube\strdtubemid
+                ,\strdtwincell{\eta}
+                ,\strdmid
+            }
+            ,\strdmid,\strdrlabel{}
+        }
+    }
+    $K : \cat C_T \to \cat C$ as
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{}
+            ,\strdbox{1.7}{1.7}{
+                \strdfork{\strdmid}
+                ,\strdtubestart
+                ,\strdtube\strdtubemid
+                ,\strdwidecell{1}{1}{k}
+                ,\strdmid
+            }
+            ,\strdmid,\strdrlabel{}
+        } \mapsto
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdmid,\strdmid
+            }
+            ,\strdtubestartline
+            ,\strdtube{
+                \strdtubemid
+                ,\strdtwincell{\mu}
+                ,\strdfork{
+                    \strdtubemid
+                    ,\strdwidecell{1}{1}{k}
+                }
+                ,\strdtubecap{1}{1}
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
+        }
+    }
+    then they consitute the \emph{Kleisli adjunction} $L \dashv K$ whose adjunct is %
+    the Kleisli boxing.
 }
 
