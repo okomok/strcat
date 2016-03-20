@@ -580,8 +580,8 @@
 }
 
 % tubeempty
-\newcommand*{\strdtubeempty}{\strdcomposeC\strdtubeemptyatC}
-\newcommand*{\strdtubeemptyC}{\strdtubeemptyat{End}}
+\newcommand*{\strdtubeempty}{\strdcomposeC\strdtubeemptyC}
+\newcommand*{\strdtubeemptyC}{\strdtubeemptyatC{End}}
 
 % tubejump
 \newcommand*{\strdtubejump}{\strdcomposeC\strdtubejumpC}
@@ -594,12 +594,22 @@
 % tubeljump/tuberjump
 \newcommand*{\strdtubeljump}{\strdcomposeC\strdtubeljumpC}
 \newcommand*{\strdtubeljumpC}[2]{% {newid}{previd}
-    \strdljumpC{#1 Left}{#2 Left}
-    \strdljumpC{#1}{#2}
-    \strdljumpC{#1 Right}{#2 Right}%
+    \strdljumpC{#1 LeftImpl}{#2 Left}
+    \strdempty@{#1 Left}{#1 LeftImpl}
+    \strdljumpC{#1 Impl}{#2}
+    \strdempty@{#1}{#1 Impl}
+    \strdljumpC{#1 RightImpl}{#2 Right}
+    \strdempty@{#1 Right}{#1 RightImpl}
 }
 \newcommand*{\strdtuberjump}{\strdcomposeC\strdtuberjumpC}
-\newcommand*{\strdtuberjumpC}{\strdflipC\strdtubeljumpC}
+\newcommand*{\strdtuberjumpC}[2]{% {newid}{previd}
+    \strdrjumpC{#1 LeftImpl}{#2 Left}
+    \strdempty@{#1 Left}{#1 LeftImpl}
+    \strdrjumpC{#1 Impl}{#2}
+    \strdempty@{#1}{#1 Impl}
+    \strdrjumpC{#1 RightImpl}{#2 Right}
+    \strdempty@{#1 Right}{#1 RightImpl}
+}
 
 % tubepartleft
 \newcommand*{\strdtubepartleft}[1]{\strdcomposeC{\strdtubepartleftC{#1}}}
@@ -849,15 +859,28 @@
 \newcommand*{\strdtubeendline}{\Then{\strdcutoff\strdtubebound}\strdtubeend}
 
 % twincell
-\tikzset{strd twincellbase/.style={strd cellbase,sharp corners,rounded rectangle}}
-\tikzset{strd twincellleft/.style={strd twincellbase,rounded rectangle east arc=none}}
-\tikzset{strd twincellright/.style={strd twincellbase,rounded rectangle west arc=none}}
-\newcommand*{\strdtwincell}{\strdtwincellat{End}}
-\newcommand*{\strdtwincellat}[2]{\strdwith{\strdputtwincellat{#1}{#2}}}
-\newcommand*{\strdputtwincellat}[3]{% {at}{text}{id}
+% \tikzset{strd twincellbase/.style={strd cellbase,sharp corners,rounded rectangle}}
+% \tikzset{strd twincellleft/.style={strd twincellbase,rounded rectangle east arc=none}}
+% \tikzset{strd twincellright/.style={strd twincellbase,rounded rectangle west arc=none}}
+% \newcommand*{\strdtwincell}{\strdtwincellat{End}}
+% \newcommand*{\strdtwincellat}[2]{\strdwith{\strdputtwincellat{#1}{#2}}}
+% \newcommand*{\strdputtwincellat}[3]{% {at}{text}{id}
+%     \strdcell@{
+%         \node[strd twincellleft] at (#3 Left #1) {#2};
+%         \node[strd twincellright] at (#3 Right #1) {\vphantom{#2}};% has some width for some reason. 
+%     }% 
+% }
+\newcommand*{\strdtwincell}[1]{\strdtubecell{#1}{\vphantom{#1}}}
+
+% tubecell
+\tikzset{strd tubecellbase/.style={strd cellbase,sharp corners,rounded rectangle}}
+\tikzset{strd tubecellleft/.style={strd tubecellbase,rounded rectangle east arc=none}}
+\tikzset{strd tubecellright/.style={strd tubecellbase,rounded rectangle west arc=none}}
+\newcommand*{\strdtubecell}[2]{\strdwith{\strdputtubecell{#1}{#2}}}
+\newcommand*{\strdputtubecell}[3]{% {ltext}{rtext}{id}
     \strdcell@{
-        \node[strd twincellleft] at (#3 Left #1) {#2};
-        \node[strd twincellright] at (#3 Right #1) {\vphantom{#2}};% has some width for some reason. 
+        \node[strd tubecellleft] at (#3 Left End) {#1};
+        \node[strd tubecellright] at (#3 Right End) {#2};
     }% 
 }
 

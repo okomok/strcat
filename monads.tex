@@ -228,6 +228,54 @@ The coherence is depicated as
     monads and whose morphisms are monad morphisms.
 }
 
+
+\definitionof{Monad-Associated Adjunction}{
+    Given a monad $(T,\eta,\mu)$, we call an adjunction $F \dashv G$ \emph{$T$-associated} when
+    \In{enumerate}{
+        \item $T = G \circ F$
+        \item $\mu = G \epsilon F$
+    }
+}
+
+This condition can be depicted as
+\In{align*}{
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid}
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{T}}
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{T}}
+            }
+            ,\strdtubecap{1}{1},\strdat{Left}{\strdoverlabel{T}}
+            ,\strdtubeendline
+        }
+    } =
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid}
+        ,\strdtube{
+            \strdtubestart
+            ,\strdfork{
+                \strdtubemid
+                ,\strdfork{
+                    \strdtubemid,\strdat{Left Start}{\strdoverlabel{F}}
+                }
+                ,\strdtubeextend{1}{1}
+                ,\strdtwincell{\epsilon}
+                ,\strdfork{
+                    \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+                }
+                ,\strdtubecap{1}{1},\strdat{Left}{\strdoverlabel{F}}
+            }
+            ,\strdtubeextend{3}{3},\strdcutoff\strdtubebound
+            ,\strdtubemid,\strdat{Left End}{\strdoverlabel{G}}
+            ,\strdtubemid,\strdcutoff\strdtubebound
+        }
+    }
+}
+
+
 \subsection{Kleisli Categories}
 
 \definitionof{Kleisli Category}{
@@ -363,6 +411,279 @@ An identity morphism is defined as
         }
     }
     then they consitute the \emph{Kleisli adjunction} $L \dashv K$ whose adjunct is %
-    the Kleisli boxing.
+    the Kleisli boxing. This adjunction is $T$-associated.
 }
 
+
+\subsection{Eilenberg-Moore Categories}
+
+\definitionof{Monad Algebra}{
+    Given a monad $(T,\eta,\mu)$ on \cat C, a \emph{monad algebra}, denoted as $T$-algebra, consists of
+    \In{enumerate}{
+        \item an object $A \in \cat C$
+        \item a morphism $\alpha : TA \to A$
+    }
+    satisfying the coherence
+    \In{enumerate}{
+        \item \emph{associativity}: $\alpha \circ T(\alpha) = \alpha \circ \mu$
+        \item \emph{unitialit}: $\alpha \circ \eta = \operatorname{id}$
+    }
+}
+
+A $T$-algebra is depicated as
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+        ,\strdwidecell{1}{1}{\alpha}
+        ,\strdfork{\strdmid,\strdrlabel{A}}
+        ,\strdtubestart
+        ,\strdtube\strdtubemid
+        ,\strdtubeendline
+    }
+}
+
+The coherence can be depicted as
+\In{align*}{
+    \strdgathered{
+        \strdmid
+        ,\strdwidecell{2}{2}{\alpha}
+        ,\strdfork{
+            \strdmid
+            ,\strdfork{
+                \strdmid
+            }
+            ,\strdwidecell{1}{1}{\alpha}
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+        }
+        ,\strdtube{
+            \strdtubestart
+            ,\strdtubeextend{1}{1}
+            ,\strdtubemid
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } &=
+    \strdgathered{
+        \strdmid
+        ,\strdfork{\strdmid,\strdmid}
+        ,\strdwidecell{1}{1}{\alpha}
+        ,\strdtubestart
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\mu}
+            ,\strdfork{\strdtubemid}
+            ,\strdtubecap{1}{1}
+            ,\strdtubeendline
+        }
+    } \\
+    \strdgathered{
+        \strdmid
+        ,\strdfork{\strdmid,\strdmid}
+        ,\strdwidecell{1}{1}{\alpha}
+        ,\strdtubestart
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\eta}
+        }
+    } &=
+    \strdgathered{
+        \strdmid
+        ,\strdat{Mid}{\strdnone{\strdcell{X}}}
+    }
+}
+
+
+TODO
+% \definitionof{EM Category}{
+%     Given a monad $(T,\eta,\mu)$, the \emph{Eilenberg-Moore(EM) category} of $T$, denoted as $\cat C^T$, %
+%     is a category whose objects $T$-algebras and whose morphisms are %
+%     those of the form $h : A \to B$ such that
+%     \In{align*}{
+%         h \circ \alpha = \beta \circ T(h)
+%     }
+%     where $(A,\alpha)$ and $(B,\beta)$ are $T$-algebras.
+% }
+%
+% This condition is depicted as
+% \In{align*}{
+%     \strdgathered{
+%         \strdmid
+%         ,\strdcell{h}
+%         ,\strdmid
+%         ,\strdwidecell{1}{1}{\alpha}
+%         ,\strdfork{\strdmid}
+%         ,\strdtubestart
+%         ,\strdtube\strdtubemid
+%         ,\strdtubeendline
+%     } =
+%     \strdgathered{
+%         \strdmid
+%         ,\strdfork{
+%             \strdmid
+%             ,\strdcell{h}
+%             ,\strdmid
+%         }
+%         ,\strdwidecell{1}{1}{\beta}
+%         ,\strdtubestart
+%         ,\strdtube{
+%             \strdtubemid
+%             ,\strdtubemid
+%             ,\strdtubeendline
+%         }
+%     }
+% }
+% which inspires you to define an \emph{EM box} as
+% \In{align*}{
+%     \strdgathered{
+%         \strdmid,\strdrlabel{B}
+%         ,\strdbox{1.7}{1.7}{
+%             \strdmid
+%             ,\strdcell{h}
+%             ,\strdfork{
+%                 \strdmid
+%             }
+%             ,\strdtubestart
+%             ,\strdat{Left End}{\strdcellof{strd tubecellleft}{\alpha}}
+%             ,\strdat{Right End}{\strdcellof{strd tubecellright}{\beta}}
+%             ,\strdtube\strdtubemid
+%         }
+%         ,\strdmid,\strdrlabel{A}
+%     }
+% }
+% so that the composition can be depicted as
+% \In{align*}{
+%     \strdgathered{
+%         \strdmid,\strdrlabel{C}
+%         ,\strdbox{1.7}{1.7}{
+%             \strdmid
+%             ,\strdcell{k}
+%             ,\strdfork{
+%                 \strdmid
+%             }
+%             ,\strdtubestart
+%             ,\strdat{Left End}{\strdcellof{strd tubecellleft}{\beta}}
+%             ,\strdat{Right End}{\strdcellof{strd tubecellright}{\gamma}}
+%             ,\strdtube\strdtubemid
+%         }
+%         ,\strdmid,\strdrlabel{B}
+%         ,\strdbox{1.7}{1.7}{
+%             \strdmid
+%             ,\strdcell{h}
+%             ,\strdfork{
+%                 \strdmid
+%             }
+%             ,\strdtubestart
+%             ,\strdat{Left End}{\strdcellof{strd tubecellleft}{\alpha}}
+%             ,\strdat{Right End}{\strdcellof{strd tubecellright}{\beta}}
+%             ,\strdtube\strdtubemid
+%         }
+%         ,\strdmid,\strdrlabel{A}
+%     } \mydefeq
+%     \strdgathered{
+%         \strdmid,\strdrlabel{C}
+%         ,\strdbox{1.7}{1.7}{
+%             \strdmid
+%             ,\strdcell{h}
+%             ,\strdmid,\strdrlabel{B}
+%             ,\strdcell{k}
+%             ,\strdfork{
+%                 \strdmid
+%             }
+%             ,\strdtubestart
+%             ,\strdat{Left End}{\strdcellof{strd tubecellleft}{\alpha}}
+%             ,\strdat{Right End}{\strdcellof{strd tubecellright}{\gamma}}
+%             ,\strdtube\strdtubemid
+%         }
+%         ,\strdmid,\strdrlabel{B}
+%     }
+% }
+% % \In{align*}{
+% %     \strdgathered{
+% %         \strdfork{
+% %             \strdmid
+% %             ,\strdcell{h}
+% %             ,\strdmid
+% %         }
+% %         ,\strdtubestartline
+% %         ,\strdfork{
+% %             \strdxscale{3}\strdtuberjump
+% %             ,\strdat{Right Start}{
+% %                 \strdtube\strdmid
+% %                 ,\strdcellof{strd tubecellright}{\gamma}
+% %                 ,\strdtube\strdmid
+% %             }
+% %             ,\strdat{Start}{
+% %                 \strdmid
+% %                 ,\strdcell{k}
+% %                 ,\strdmid
+% %             }
+% %             ,\strdcutoff\strdtubebound
+% %             ,\strdnone{\strdtubemid,\strdtubemid}
+% %             ,\strdtubeendline
+% %         }
+% %         ,\strdtube\strdtubemid
+% %         ,\strdat{Left End}{\strdcellof{strd tubecellleft}{\alpha}}
+% %         ,\strdat{Right End}{\strdcellof{strd cellbase,sharp corners}{\scriptstyle\beta}}
+% %         ,\strdtube\strdtubemid
+% %         ,\strdtubeendline
+% %     }
+% % }
+%
+% \definitionof{EM Adjunction}{
+%     Given a monad $(T,\eta,\mu)$ on \cat C, define a functor $M : \cat C \to \cat C^T$ as
+%     \In{align*}{
+%         \strdgathered{
+%             \strdfork{
+%                 \strdmid,\strdrlabel{B}
+%                 ,\strdmid
+%                 ,\strdcell{\catph{?}}
+%                 ,\strdmid
+%                 ,\strdmid,\strdrlabel{A}
+%             }
+%             ,\strdtubestartline
+%             ,\strdtube\strdtubemid
+%             ,\strdbox{2.7}{2.7}{
+%                 \strdtubestart
+%                 ,\strdtube{
+%                     \strdtubemid
+%                     ,\strdfork{
+%                         \strdtubemid
+%                         ,\strdtubemid
+%                         ,\strdtubeendline
+%                     }
+%                     ,\strdtubeextend{1}{1}
+%                     ,\strdat{Left End}{\strdcellof{strd tubecellleft}{\mu_A}}
+%                     ,\strdat{Right End}{\strdcellof{strd tubecellright}{\mu_B}}
+%                     ,\strdtubemid
+%                 }
+%             }
+%         }
+%     }
+%     as a functor $U : \cat C^T \to \cat C$ as
+%     \In{align*}{
+%         \strdgathered{
+%             \strdmid,\strdrlabel{B}
+%             ,\strdbox{1.7}{1.7}{
+%                 \strdmid
+%                 ,\strdcell{h}
+%                 ,\strdfork{
+%                     \strdmid
+%                 }
+%                 ,\strdtubestart
+%                 ,\strdat{Left End}{\strdcellof{strd tubecellleft}{\alpha}}
+%                 ,\strdat{Right End}{\strdcellof{strd tubecellright}{\beta}}
+%                 ,\strdtube\strdtubemid
+%             }
+%             ,\strdmid,\strdrlabel{A}
+%         } \mapsto
+%         \strdgathered{
+%             \strdmid,\strdrlabel{B}
+%             ,\strdcell{h}
+%             ,\strdmid,\strdrlabel{A}
+%         }
+%     }
+%     They consistute the \emph{EM adjunction} $M \dashv U$ whose adjunct is the EM boxing(wrong). %
+%     This adjunction is $T$-associated.
+% }
+%
