@@ -1,0 +1,139 @@
+
+\subsection{Kleisli Categories}
+
+\definitionof{Kleisli Category}{
+    Given a monad $(T,\eta,\mu)$ on \cat C, the \emph{Kleisli category} of $T$, %
+    denoted as $\cat C_T$, is a category consisting of
+    \In{enumerate}{
+        \item $\text{Ob}(\cat C_T) \mydefeq \catOb C$
+        \item $\cat C_T(A,B) \mydefeq \cat C(A, TB)$
+        \item $l \circ k \mydefeq \mu \circ T(l) \circ k$
+        \item $\operatorname{id}_A \mydefeq \eta_A$
+    }
+}
+
+In diagrams, a morphism in $\cat C_T$ is depicted as a \emph{Kleisli box}
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{B},\strdstartlabel{\cat C_T}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{\strdmid}
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{k}
+            ,\strdmid
+        }
+        ,\strdmid,\strdrlabel{A}
+    }
+}
+The composition is defined as
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{C}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{\strdmid}
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{l}
+            ,\strdmid
+        }
+        ,\strdmid,\strdrlabel{B}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{\strdmid}
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdwidecell{1}{1}{k}
+            ,\strdmid
+        }
+        ,\strdmid,\strdrlabel{A}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{C}
+        ,\strdbox{2.5}{2.5}{
+            \strdfork{
+                \strdmid,\strdmid,\strdmid,\strdrlabel{B}
+            }
+            ,\strdtubestart
+            ,\strdtube{
+                \strdtubemid
+                ,\strdtwincell{\mu}
+                ,\strdfork{
+                    \strdtubemid
+                    ,\strdwidecell{1}{1}{l}
+                }
+                ,\strdtubecap{1}{1}
+                ,\strdtubemid
+                ,\strdwidecell{2}{2}{k}
+            }
+            ,\strdmid
+        }
+        ,\strdmid,\strdrlabel{A}
+    }
+}
+An identity morphism is defined as
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+        ,\strdbox{1.7}{1.7}{
+            \strdfork{\strdmid}
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdtwincell{\eta}
+            ,\strdmid
+        }
+        ,\strdmid,\strdrlabel{A}
+    }
+}
+
+
+
+\definitionof{Kleisli Adjunction}{
+    Define a functor $L : \cat C \to \cat C_T$ as
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{}
+            ,\strdbox{1.7}{1.7}{
+                \strdfork{\strdmid,\strdcell{\catph{?}}}
+                ,\strdtubestart
+                ,\strdtube\strdtubemid
+                ,\strdtwincell{\eta}
+                ,\strdmid
+            }
+            ,\strdmid,\strdrlabel{}
+        }
+    }
+    $K : \cat C_T \to \cat C$ as
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{}
+            ,\strdbox{1.7}{1.7}{
+                \strdfork{\strdmid}
+                ,\strdtubestart
+                ,\strdtube\strdtubemid
+                ,\strdwidecell{1}{1}{k}
+                ,\strdmid
+            }
+            ,\strdmid,\strdrlabel{}
+        } \mapsto
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdmid,\strdmid
+            }
+            ,\strdtubestartline
+            ,\strdtube{
+                \strdtubemid
+                ,\strdtwincell{\mu}
+                ,\strdfork{
+                    \strdtubemid
+                    ,\strdwidecell{1}{1}{k}
+                }
+                ,\strdtubecap{1}{1}
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
+        }
+    }
+    then they consitute the \emph{Kleisli adjunction} $L \dashv K$ whose adjunct is %
+    the Kleisli boxing. This adjunction is $T$-associated.
+}
+

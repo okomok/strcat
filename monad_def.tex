@@ -1,0 +1,149 @@
+
+\subsection{The Definition}
+
+\definitionof{Monad}{
+    Given a category \cat C, a \emph{monad} on \cat C consists of
+    \In{enumerate}{
+        \item a functor $T : \mathcal{C} \to \mathcal{C}$
+        \item \emph{unit}: a natural transformation $\eta : \operatorname{Id}_T \to T$
+        \item \emph{multiplication}: a natural transformation $\mu : T \circ T \to T$
+    }
+    satisfying the coherence conditions
+    \In{enumerate}{
+        \item \emph{associativity}: %
+        \In{math}{
+            \mu \circ T\mu = \mu \circ \mu T
+        }
+        \item \emph{unitality}: %
+        \In{math}{
+            \mu \circ T\eta = \operatorname{Id}_T = \mu \circ \eta T 
+        }
+    }
+}
+
+A unit and multiplication are depicted respectively as
+\In{align*}{
+    \strdgathered{
+        \strdfork{ \strdmid,\strdmid }
+        ,\strdtubestartline
+        ,\strdtube\strdtubemid
+        ,\strdtwincell{\eta}
+        %,\strdnone{\strdtubesqcap{1}{1}}
+    }\ \
+    \strdgathered{
+        \strdfork{ \strdmid,\strdmid }
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtubeendline
+        }
+    }
+}
+The associativity is depicted as
+\In{align*}{
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid
+                ,\strdtwincell{\mu}
+                ,\strdfork{
+                    \strdtubemid
+                }
+                ,\strdtubecap{1}{1}
+            }
+            ,\strdscale{2}{2}{\strdtubecap{1}{1}}
+            ,\strdtubeendline
+        }
+    } =
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid,\strdtubemid
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtubeendline
+        }
+    }
+}
+This inspires you to assign
+\In{align*}{
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid
+            }
+            ,\strdfork{
+                \strdtubecap{1}{1}
+            }
+            ,\strdfork{
+                \strdtubecap{2}{2}
+                ,\strdtubeendline
+            }
+        }
+    }
+}
+The unitality is
+\In{align*}{
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid
+                ,\strdtwincell{\eta}
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtubemid
+            ,\strdnone{\strdtwincell{\eta}}
+            ,\strdtubeendline
+        }
+    } =
+    \strdgathered{
+        \strdfork{\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtubeendline
+        }
+    } =
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtwincell{\eta}
+        }
+    }
+}
+

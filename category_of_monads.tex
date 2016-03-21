@@ -1,0 +1,128 @@
+
+\definitionof{Monad Morphism}{
+    Given a category $\cat C$, a \emph{monad morphism} consists of
+    \In{enumerate}{
+        \item \emph{domain}: a monad $(T, \eta, \mu)$ on \cat C
+        \item \emph{codomain}: a monad $(T\myprime, \eta\myprime, \mu\myprime)$ on \cat C 
+        \item a natural transformation $\tau : T \to T\myprime$
+    }
+    satisfying the coherence conditions
+    \In{enumerate}{
+        \item \emph{multiplication-compatibility}:
+        \In{math}{
+            \tau \circ \mu = \mu\myprime \circ \tau\tau
+        }
+        \item \emph{unit-compatibility}:
+        \In{math}{
+            \tau \circ \eta = \eta\myprime
+        }
+    }
+}
+
+The coherence is depicated as
+\In{align*}{
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubemid
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtubeendline
+        }
+    } &= 
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\mu\strdrlap\myprime}
+            ,\strdfork{
+                \strdtubemid
+                ,\strdtwincell{\tau}
+                ,\strdtubemid
+            }
+            ,\strdtubecap{1}{1}
+            ,\strdtwincell{\tau}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } \\
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\tau}
+            ,\strdtubemid
+            ,\strdtwincell{\eta}
+        }
+    } &=
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid}
+        ,\strdtubestartline
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\eta\strdrlap\myprime}
+        }
+    } 
+}
+
+\definitionof{Categoy of Monads}{
+    Given a category \cat C, the \emph{category of monads} \catMnd C is a category whose objects are %
+    monads and whose morphisms are monad morphisms.
+}
+
+
+\definitionof{Monad-Associated Adjunction}{
+    Given a monad $(T,\eta,\mu)$, we call an adjunction $F \dashv G$ \emph{$T$-associated} when
+    \In{enumerate}{
+        \item $T = G \circ F$
+        \item $\mu = G \epsilon F$
+    }
+}
+
+This condition can be depicted as
+\In{align*}{
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid}
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{T}}
+            ,\strdtwincell{\mu}
+            ,\strdfork{
+                \strdtubemid,\strdat{Left}{\strdoverlabel{T}}
+            }
+            ,\strdtubecap{1}{1},\strdat{Left}{\strdoverlabel{T}}
+            ,\strdtubeendline
+        }
+    } =
+    \strdgathered{
+        \strdfork{\strdmid,\strdmid}
+        ,\strdtube{
+            \strdtubestart
+            ,\strdfork{
+                \strdtubemid
+                ,\strdfork{
+                    \strdtubemid,\strdat{Left Start}{\strdoverlabel{F}}
+                }
+                ,\strdtubeextend{1}{1}
+                ,\strdtwincell{\epsilon}
+                ,\strdfork{
+                    \strdtubemid,\strdat{Left}{\strdoverlabel{G}}
+                }
+                ,\strdtubecap{1}{1},\strdat{Left}{\strdoverlabel{F}}
+            }
+            ,\strdtubeextend{3}{3},\strdcutoff\strdtubebound
+            ,\strdtubemid,\strdat{Left End}{\strdoverlabel{G}}
+            ,\strdtubemid,\strdcutoff\strdtubebound
+        }
+    }
+}
+
+

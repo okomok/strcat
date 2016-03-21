@@ -1,0 +1,391 @@
+
+\subsection{Eilenberg-Moore Categories}
+
+\definitionof{Monad Algebra}{
+    Given a monad $(T,\eta,\mu)$ on \cat C, a \emph{monad algebra}, denoted as $T$-algebra, consists of
+    \In{enumerate}{
+        \item an object $A \in \cat C$
+        \item a morphism $\alpha : TA \to A$
+    }
+    satisfying the coherence
+    \In{enumerate}{
+        \item \emph{associativity}: $\alpha \circ \mu = \alpha \circ T(\alpha)$
+        \item \emph{unitality}: $\alpha \circ \eta = \operatorname{id}$
+    }
+}
+
+A $T$-algebra is depicated as
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+        ,\strdwidecell{1}{1}{\alpha}
+        ,\strdfork{\strdmid,\strdrlabel{A}}
+        ,\strdtubestart
+        ,\strdtube\strdtubemid
+        ,\strdtubeendline
+    }
+}
+
+The coherence can be depicted as
+\In{align*}{
+    \strdgathered{
+        \strdmid
+        ,\strdfork{\strdmid,\strdmid}
+        ,\strdwidecell{1}{1}{\alpha}
+        ,\strdtubestart
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\mu}
+            ,\strdfork{\strdtubemid}
+            ,\strdtubecap{1}{1}
+            ,\strdtubeendline
+        }
+    } &= 
+    \strdgathered{
+        \strdmid
+        ,\strdwidecell{2}{2}{\alpha}
+        ,\strdfork{
+            \strdmid
+            ,\strdfork{
+                \strdmid
+            }
+            ,\strdwidecell{1}{1}{\alpha}
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+        }
+        ,\strdtube{
+            \strdtubestart
+            ,\strdtubeextend{1}{1}
+            ,\strdtubemid
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } \\ 
+    \strdgathered{
+        \strdmid
+        ,\strdfork{\strdmid,\strdmid}
+        ,\strdwidecell{1}{1}{\alpha}
+        ,\strdtubestart
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtwincell{\eta}
+        }
+    } &= \,
+    \strdgathered{
+        \strdmid
+    }
+}
+
+
+\definitionof{EM Category}{
+    Given a monad $(T,\eta,\mu)$, the \emph{Eilenberg-Moore(EM) category} of $T$, denoted as $\cat C^T$, %
+    is a category whose objects are $T$-algebras and whose morphisms are %
+    those of the form $h : A \to B$ such that
+    \In{align*}{
+        h \circ \alpha = \beta \circ T(h)
+    }
+    where $(A,\alpha)$ and $(B,\beta)$ are $T$-algebras.
+}
+This condition is depicted as
+\In{align*}{
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{h}
+        ,\strdmid,\strdrlabel{A}
+        ,\strdwidecell{1}{1}{\alpha}
+        ,\strdfork{\strdmid,\strdrlabel{A}}
+        ,\strdtubestart
+        ,\strdtube\strdtubemid
+        ,\strdtubeendline
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdfork{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdwidecell{1}{1}{\beta}
+        ,\strdtubestart
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+}
+An \emph{EM box} is by compromise defined as
+\In{align*}{
+    \strdgathered{
+        \strdfork{\strdmid,\strdrlabel{}}
+        ,\strdtubestartline
+        ,\strdtubeof{strd frame}\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{(}}
+        ,\strdat{Right}{\strdoverlabel{,\beta)}}
+        ,\strdbox{1.3}{1.3}{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdfork{\strdmid,\strdrlabel{}}
+        ,\strdtubestart
+        ,\strdtubeof{strd frame}\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{(}}
+        ,\strdat{Right}{\strdoverlabel{,\alpha)}}
+        ,\strdtubeendline
+    }
+}
+so that the composition can be depicted as
+\In{align*}{
+    \strdgathered{
+        \strdfork{\strdmid,\strdrlabel{}}
+        ,\strdtubestartline
+        ,\strdtubeof{strd frame}\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{(}}
+        ,\strdat{Right}{\strdoverlabel{,\gamma)}}
+        ,\strdbox{1.3}{1.3}{
+            \strdmid,\strdrlabel{C}
+            ,\strdcell{k}
+            ,\strdmid,\strdrlabel{B}
+        }
+        ,\strdfork{\strdmid,\strdrlabel{}}
+        ,\strdtubestart
+        ,\strdtubeof{strd frame}\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{(}}
+        ,\strdat{Right}{\strdoverlabel{,\beta)}}
+        ,\strdbox{1.3}{1.3}{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdfork{\strdmid,\strdrlabel{}}
+        ,\strdtubestart
+        ,\strdtubeof{strd frame}\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{(}}
+        ,\strdat{Right}{\strdoverlabel{,\alpha)}}
+        ,\strdtubeendline
+    } =
+    \strdgathered{
+        \strdfork{\strdmid,\strdrlabel{}}
+        ,\strdtubestartline
+        ,\strdtubeof{strd frame}\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{(}}
+        ,\strdat{Right}{\strdoverlabel{,\gamma)}}
+        ,\strdbox{1.3}{1.3}{
+            \strdmid,\strdrlabel{C}
+            ,\strdcell{k}
+            ,\strdmid,\strdrlabel{B}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdfork{\strdmid,\strdrlabel{}}
+        ,\strdtubestart
+        ,\strdtubeof{strd frame}\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{(}}
+        ,\strdat{Right}{\strdoverlabel{,\alpha)}}
+        ,\strdtubeendline
+    }
+}
+A box for an identity is clear.
+
+\definitionof{EM Adjunction}{
+    Given a monad $(T,\eta,\mu)$ on \cat C, define a functor $M : \cat C \to \cat C^T$ as
+    \In{align*}{
+        \strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{B}
+            }
+            ,\strdtubestart
+            ,\strdfork{
+                \strdtube{
+                    \strdtubemid
+                    ,\strdtubemid
+                    ,\strdtubemid
+                }
+            }
+            ,\strdtubeextend{1}{1},\strdcutoff\strdtubebound
+            ,\strdtubeof{strd frame}\strdtubemid
+            ,\strdat{Left}{\strdoverlabel{(}}
+            ,\strdat{Right}{\strdoverlabel{,\mu_B)}}
+            ,\strdbox{2}{2}{
+                \strdmid
+                ,\strdcell{\catph{?}}
+                ,\strdmid
+            }
+            ,\strdfork{
+                \strdmid,\strdrlabel{A}
+            }
+            ,\strdtubestart
+            ,\strdfork{
+                \strdtube\strdtubemid
+            }
+            ,\strdtubeextend{1}{1},\strdcutoff\strdtubebound
+            ,\strdtubeof{strd frame}\strdtubemid
+            ,\strdat{Left}{\strdoverlabel{(}}
+            ,\strdat{Right}{\strdoverlabel{,\mu_A)}}
+            ,\strdtubeendline
+        }
+    }
+    a functor $U : \cat C^T \to \cat C$ as
+    \In{align*}{
+        \strdgathered{
+            \strdfork{\strdmid,\strdrlabel{}}
+            ,\strdtubestartline
+            ,\strdtubeof{strd frame}\strdtubemid
+            ,\strdat{Left}{\strdoverlabel{(}}
+            ,\strdat{Right}{\strdoverlabel{,\beta)}}
+            ,\strdbox{1.3}{1.3}{
+                \strdmid,\strdrlabel{B}
+                ,\strdcell{h}
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdfork{\strdmid,\strdrlabel{}}
+            ,\strdtubestart
+            ,\strdtubeof{strd frame}\strdtubemid
+            ,\strdat{Left}{\strdoverlabel{(}}
+            ,\strdat{Right}{\strdoverlabel{,\alpha)}}
+            ,\strdtubeendline
+        } \mapsto
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{A}
+        }
+    }
+    They consistute the \emph{EM adjunction} $M \dashv U$ whose adjunct is defined as %
+    \In{align*}{
+        \mylhs{\cat C^T(MA,(B,\beta))} &\cong \myrhs{\cat C(A,U(B,\beta))} \\
+        \strdgathered{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestartline
+            ,\strdfork{
+                \strdtubeof{strd frame}\strdtubemid
+                ,\strdat{Left}{\strdoverlabel{(}}
+                ,\strdat{Right}{\strdoverlabel{,\beta)}}
+                ,\strdbox{2}{2}{
+                    \strdmid,\strdrlabel{B}
+                    ,\strdwidecell{1}{1}{h}
+                    ,\strdfork{
+                        \strdmid,\strdrlabel{A}
+                        ,\strdmid
+                    }
+                    ,\strdtubestart
+                    ,\strdtube{
+                        \strdtubemid
+                    }
+                }
+                ,\strdtubestart
+                ,\strdfork{
+                    \strdtube\strdtubemid
+                    %,\strdat{Left}{\strdoverlabel{T}}
+                }
+                ,\strdtubeextend{1}{1}
+                ,\strdtubeof{strd frame}\strdtubemid
+                ,\strdat{Left}{\strdoverlabel{(}}
+                ,\strdat{Right}{\strdoverlabel{,\alpha)}}
+                ,\strdtubeendline
+            }
+        } &\mapsto
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdwidecell{1}{1}{h}
+            ,\strdfork{
+                \strdmid
+                ,\strdmid,\strdrlabel{A}
+            }
+            ,\strdtubestart
+            ,\strdtube\strdtubemid
+            ,\strdtwincell{\eta}
+        } \\
+        \strdgathered{
+            \strdfork{
+                \strdmid
+            }
+            ,\strdtubestartline
+            ,\strdfork{
+                \strdtubeof{strd frame}\strdtubemid
+                ,\strdat{Left}{\strdoverlabel{(}}
+                ,\strdat{Right}{\strdoverlabel{,\beta)}}
+                ,\strdbox{2}{2}{
+                    \strdmid,\strdrlabel{B}
+                    ,\strdwidecell{1}{1}{\beta}
+                    ,\strdfork{
+                        \strdmid,\strdrlabel{B}
+                        ,\strdcell{f}
+                        ,\strdmid,\strdrlabel{A}
+                    }
+                    ,\strdtubestart
+                    ,\strdtube{
+                        \strdyscale{2}\strdtubemid
+                    }
+                }
+                ,\strdtubestart
+                ,\strdfork{
+                    \strdtube\strdtubemid
+                    %,\strdat{Left}{\strdoverlabel{T}}
+                }
+                ,\strdtubeextend{1}{1}
+                ,\strdtubeof{strd frame}\strdtubemid
+                ,\strdat{Left}{\strdoverlabel{(}}
+                ,\strdat{Right}{\strdoverlabel{,\strdrlap{\mu_A)}\phantom{\alpha)}}}
+                ,\strdtubeendline
+            }
+        } &\mymapsfrom
+        \strdgathered{
+            \strdmid,\strdrlabel{B}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        }
+    }
+    This adjunction is $T$-associated.
+}
+
+    %     \strdgathered{
+    %         \strdmid,\strdrlabel{B}
+    %         ,\strdfork{
+    %             \strdmid
+    %         }
+    %         ,\strdtubestart
+    %         ,\strdat{Left}{\strdsymbol{strd cdot}}
+    %         ,\strdat{Right}{\strdsymbol{strd cdot}}
+    %         ,\strdfork{
+    %             \strdtubeof{strd frame}\strdtubemid
+    %             ,\strdat{Left}{\strdoverlabel{(}}
+    %             ,\strdat{Right}{\strdoverlabel{,\beta)}}
+    %             ,\strdbox{2}{2}{
+    %                 \strdmid
+    %                 ,\strdwidecell{1}{1}{h}
+    %                 ,\strdfork{
+    %                     \strdmid
+    %                     ,\strdmid
+    %                     ,\strdmid,\strdrlabel{A}
+    %                 }
+    %                 ,\strdtubestart
+    %                 ,\strdtube{
+    %                     \strdtubemid
+    %                 }
+    %             }
+    %             ,\strdtubestart
+    %             ,\strdfork{
+    %                 \strdtube\strdtubemid
+    %                 ,\strdat{Left}{\strdoverlabel{T}}
+    %             }
+    %             ,\strdtubeextend{1}{1}
+    %             ,\strdtubeof{strd frame}\strdtubemid
+    %             ,\strdat{Left}{\strdoverlabel{(}}
+    %             ,\strdat{Right}{\strdoverlabel{,\alpha)}}
+    %         }
+    %         ,\strdtube{
+    %             \strdscale{1}{1}{\strdtubecap{2}{2}}
+    %             ,\strdtubemid
+    %             ,\strdat{Left End}{\strdoverlabel{U}}
+    %             ,\strdtubemid
+    %             ,\strdscale{1}{1}{\strdtubecup{1}{1}}
+    %             ,\strdtubeunextend{1}{1}
+    %             ,\strdat{Left}{\strdcellof{strd tubecellleft,minimum width=0.8cm}{\eta}}
+    %             ,\strdat{Right}{\strdcellof{strd tubecellright,minimum width=0.8cm}{}}
+    %         }
+    %     }
+    % }
