@@ -63,7 +63,7 @@ Here we introduce the horizontal composition for functions.
     }
 }
 
-One can check any string diagram built upon these definitions is unambiguous thanks to the trivial bijections:
+One can check any string diagram built upon these definitions is unambiguous due to the trivial bijections
 \In{align*}{
     X \times (X\myprime \times X\myprime\myprime) &\cong (X \times X\myprime) \times X\myprime\myprime\\
     X \times \lbrace\ast\rbrace &\cong X
@@ -208,7 +208,7 @@ This definition will inspire you to depict the hom-functors as
 that looks topologically equivalent.
 
 \definitionof{Unary Hom-Functor}{
-    According to \cref{Partial Application},
+    Due to \cref{Partial Application},
     \In{align*}{
         \cat{C}(A,\texttt{+}) &: \cat{C} \to \catSet\\
         \cat{C}(\texttt{-},B) &: \cat{C}^{\operatorname{op}} \to \catSet
@@ -261,10 +261,10 @@ that looks topologically equivalent.
 }
 
 We don't distinguish the two diagrams, for %
-the naturality of this bijection ensures ``Move the right-side leg up and down" works correct.
+the naturality of this bijection ensures ``move the right-side leg up and down" works correct.
 
 \definitionof{Naming}{
-    In case $A$ is the singleton set,
+    In case $A$ is the singleton set, which is omitted in diagrams, a currying
     \In{align*}{
         \strdgathered{
             \strdmid,\strdrlabel{C}
@@ -283,11 +283,11 @@ the naturality of this bijection ensures ``Move the right-side leg up and down" 
         %     ,\strdat{Right}{\strdllabel{B}}
         % }
     }
-    is called a \emph{naming}, which turns a function to an element of hom-sets.
+    is trivial. We call it a \emph{naming}.
 }
 
 \In{proposition}{
-    Currying \emph{preserves naturality} meaning that given a function $f : GX \times B \to FX$,
+    Currying \emph{preserves naturality}, meaning that given a function $f : GX \times B \to FX$,
     $f$ is natural in $X$ if and only if $\operatorname{curry}(f)$ is. So does uncurrying.
 }
 
