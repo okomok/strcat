@@ -45,16 +45,16 @@
 \subsection{Universality}
 
 \definitionof{Predicate}{
-    We call a boolean-valued function a \emph{predicate}.
+    We call a Boolean-valued function a \emph{predicate}.
 }
 
 \definitionof{Universal Quantifier}{
-    Given a predicate $P$, we define a boolean value $\forall P$ as %
+    Given a predicate $P$, we define a Boolean value $\forall P$ as %
     ``anything satisfies $P$".
 }
 
 \definitionof{Existential Quantifier}{
-    Given a predicate $P$, we define a boolean value $\exists P$ as %
+    Given a predicate $P$, we define a Boolean value $\exists P$ as %
     ``something satisfies $P$".
 }
 
@@ -67,8 +67,8 @@
     ``$a$ is the unique thing that satisfies $P$".
 }
 
-\definitionof{Unique Existential Quantifer}{
-    The \emph{unique existential quantifer} $\exists!$ is defined as $\exists \circ !$, %
+\definitionof{Unique Existential Quantifier}{
+    The \emph{unique existential quantifier} $\exists!$ is defined as $\exists \circ !$, %
     where $\circ$ is the function composition. %
     Spelling out the detail,
     \In{align*}{
@@ -86,7 +86,7 @@
 }
 
 \In{definition}{
-    Given a prediate $P$ and a set $X$,
+    Given a predicate $P$ and a set $X$,
     \In{align*}{
         (\forall x \in X)(P(x)) &\mydefeq (\forall x)(x \in X \implies P(x)) \\
         (\exists x \in X)(P(x)) &\mydefeq (\exists x)(x \in X \wedge P(x))
@@ -139,7 +139,7 @@ but sometimes you might want cuter syntax like that
 }
 
 \definitionof{Family}{
-    A \emph{family declaration} is a way to provide a function with arbitary application syntax. %
+    A \emph{family declaration} is a way to provide a function with arbitrary application syntax. %
     Its usage is clear from an example
     \In{align*}{
         (\myxstar \in Y) _ {x \in X}
