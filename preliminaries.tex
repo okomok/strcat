@@ -48,17 +48,17 @@
     We call a boolean-valued function a \emph{predicate}.
 }
 
-\definitionof{Universal Quantification}{
+\definitionof{Universal Quantifier}{
     Given a predicate $P$, we define a boolean value $\forall P$ as %
     ``given any $a$, it satisfies $P$".
 }
 
-\definitionof{Existential Quantification}{
+\definitionof{Existential Quantifier}{
     Given a predicate $P$, we define a boolean value $\exists P$ as %
     ``there exists some $a$ that satisfies $P$".
 }
 
-\In{definition}{
+\definitionof{Uniqueness}{
     Given a predicate $P$, another predicate $!P$ is defined by
     \In{align*}{
         !P(a) \mydefeq P(a) \wedge (\forall a\myprime)(P(a\myprime) \implies a = a\myprime)
@@ -66,8 +66,8 @@
     using the third lambda-tasted form.
 }
 
-\definitionof{Uniqueness Quantification}{
-    The \emph{uniqueness quantification} $\exists!$ is defined as $\exists \circ !$, %
+\definitionof{Unique Existential Quantifer}{
+    The \emph{unique existential quantifer} $\exists!$ is defined as $\exists \circ !$, %
     where $\circ$ is the function composition. %
     Spelling out the detail,
     \In{align*}{
