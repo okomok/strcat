@@ -150,7 +150,7 @@ be unambiguous. "Join then tube" is the same as "Tube then join".
 }
 
 \In{strdproof}{
-    Immediate by functoriality that inheres in tubes.
+    Immediate by functoriality, which inheres in tubes.
 }
 
 \definitionof{Composite Functor}{
@@ -159,11 +159,11 @@ be unambiguous. "Join then tube" is the same as "Tube then join".
         F &: \cat{A} \to \cat{B}\\
         G &: \cat{B} \to \cat{C}
     }
-    , the \emph{composite functor} of $F$ and $G$
+    the \emph{composite functor} of $F$ and $G$
     \In{align*}{
         G \circ F : \cat{A} \to \cat{C}
     }
-    is depicted as 
+    is defined as 
     \In{align*}{
         \strdgathered{
             \strdfork{
@@ -196,7 +196,7 @@ be unambiguous. "Join then tube" is the same as "Tube then join".
     \In{align*}{
         \operatorname{Id}_{\cat{C}} : \cat{C} \to \cat{C}
     }
-    is depicted as
+    is defined by 
     \In{align*}{
         \strdgathered{
             \strdfork{
@@ -324,7 +324,7 @@ is unambiguous.
         \Lambda_B F(A,B) &: \cat{B} \to \cat{C} \text{ or shortly}\\
         F(A,\texttt{?}) &: \cat{B} \to \cat{C}
     }
-    is defined by
+    is defined as
     \In{align*}{
         \strdgathered{
             \strdfork{
@@ -421,7 +421,7 @@ The definition of $F(\texttt{?},B)$ is an exercise.
 % }
 
 \definitionof{Small Category}{
-    A category $\cat{C}$ is called \emph{small} when its $\catOb{C}$ is a set. 
+    A category $\cat{C}$ is called \emph{small} when $\catOb{C}$ is a set. 
 }
 
 \definitionof{Category of Small Categories}{
@@ -438,7 +438,7 @@ The definition of $F(\texttt{?},B)$ is an exercise.
             }
         }
     }
-    , where composite functors join the strings.
+    where composite functors join the strings.
 }
 
 \definitionof{Full and Faithful Functor}{
