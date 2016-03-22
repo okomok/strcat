@@ -14,33 +14,85 @@
 % \end{definition}
 
 
-\subsection{Universality}
+\subsection{Lambda Expressions}
 
-\In{definition}{
-    For a boolean-valued function $P$, define
-    \In{align*}{
-        !aP(a) & \mydefeq P(a) \wedge \forall a' (P(a') \implies a = a')
+\definitionof{Lambda Expression}{
+    Following famous symbols like $\Sigma$, define a \emph{lambda expression} $\Lambda_x y$ as an anonymous function $x \mapsto y$.
+}
+
+\definitionof{Lambda-Tasted Form}{
+    Given a function $\Gamma$ whose domain is a set of functions, %
+    you can choose a short form of $\Gamma(\Lambda_x y)$ from the following \emph{lambda-tasted forms}
+    \In{enumerate}{
+        \item $\Gamma_x y$
+        \item $\Gamma x.y$
+        \item $(\Gamma x)(y)$
+        \item $\Gamma x y$
     }
 }
 
-\definitionof{Uniqueness Quantification}{
-    Define
+
+\definitionof{Placeholder Expression}{
+    For simple lambda expressions, you may use \emph{placeholders} for example,
     \In{align*}{
-        \exists!aP(a) & \mydefeq \exists a ! a P(a) 
+        \texttt{?}{+}1 \mydefeq \Lambda_n n{+}1
     }
-    meaning that ``there exists a unique $a$ such that $P$".
+    Placeholder symbols can vary: $\texttt{?}$, $\texttt{-}$, $\texttt{1}$, etc.
+}
+
+
+\subsection{Universality}
+
+\definitionof{Predicate}{
+    We call a boolean-valued function a \emph{predicate}.
+}
+
+\definitionof{Universal Quantification}{
+    Given a predicate $P$, we define a boolean value $\forall P$ as %
+    ``given any $a$, it satisfies $P$".
+}
+
+\definitionof{Existential Quantification}{
+    Given a predicate $P$, we define a boolean value $\exists P$ as %
+    ``there exists some $a$ that satisfies $P$".
+}
+
+\In{definition}{
+    Given a predicate $P$, another predicate $!P$ is defined as
+    \In{align*}{
+        !P(a) \mydefeq P(a) \wedge (\forall a\myprime)(P(a\myprime) \implies a = a\myprime)
+    }
+    using the third lambda-tasted form.
+}
+
+\definitionof{Uniqueness Quantification}{
+    The \emph{uniqueness quantification} $\exists!$ is defined as $\exists \circ !$, %
+    where $\circ$ is the function composition. %
+    Spelling out the detail,
+    \In{align*}{
+        (\exists!a)(P(a)) = (\exists a)(!P(a))
+    }
+    meaning that ``there exists a unique $a$ that satisfies $P$".
 }
 
 \In{remark}{
     On the other hand,
-    \In{align*}{
-        \exists a \big((!a P(a)) \wedge Q(a)\big)
+    \In{math}{
+        (\exists a)(!P(a) \wedge Q(a))
     }
-    means ``there exists a unique $a$ such that $P$, furthermore the $a$ is $Q$".
+    states ``there exists a unique $a$ that satisfies $P$. Furthermore, the $a$ satisfies $Q$".
+}
+
+\In{definition}{
+    Given a prediate $P$ and a set $X$,
+    \In{align*}{
+        (\forall x \in X)(P(x)) &\mydefeq (\forall x)(x \in X \implies P(x)) \\
+        (\exists x \in X)(P(x)) &\mydefeq (\exists x)(x \in X \wedge P(x))
+    }
 }
 
 \definitionof{Universality}{
-    Given a binary boolean-valued function $P$, we boldly call a statement of the form
+    Given a binary predicate $P$, we boldly call a statement of the form
     \In{align*}{
         (\forall x \in X)(\exists!y\in Y)(P(x,y))
     }
@@ -48,6 +100,7 @@
 }
 
 \propositionof{Functional Universality}{
+    Given a binary predicate $P$,
     \In{align*}{
         & (\forall x \in X)(\exists!y\in Y)(P(x,y)) \\
         \iff & (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(P(x,y) \iff y = f(x))
@@ -59,7 +112,7 @@
 }
 
 \definitionof{Functional Bijectivity}{
-    Given a a function $g : Y \to X$, a statement
+    Given a a function $g : Y \to X$, the statement
     \In{align*}{
         (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(x = g(y) \iff y = f(x))
     }
@@ -67,37 +120,11 @@
 }
 
 
-\subsection{Lambda Expressions}
-
-\definitionof{Lambda Expression}{
-    Following famous symbols like $\Sigma$, define
-    \In{align*}{
-        \Lambda_x y \mydefeq x \mapsto y 
-    }
-    for anonymous functions.
-}
-
-\In{definition}{
-    Given a function $H$ whose domain is a set of functions, define
-    \In{align*}{
-        H_x y \mydefeq H(\Lambda_x y)
-    }
-}
-
-\definitionof{Placeholder Expression}{
-    For simple lambda expressions, you may use \emph{placeholders}:
-    \In{align*}{
-        \texttt{?}{+}1 \mydefeq \Lambda_n n{+}1
-    }
-    Placeholder symbols can vary: $\texttt{?}$, $\texttt{-}$, $\texttt{1}$, etc.
-}
-
-
 \subsection{Families}
 
-Syntax of the function application is world-standard and fixed:
+Syntax of function applications is world-standard:
 \In{align*}{
-    f(x) \text{ or } fx
+    f(x)
 }
 but sometimes you might want cuter syntax like that
 \newcommand*{\myxstar}{%
@@ -115,10 +142,14 @@ but sometimes you might want cuter syntax like that
     \In{align*}{
         (\myxstar \in Y) _ {x \in X}
     }
-    We call such a function a \emph{family}. Furthermore, a function body can be placed like that
+    We call it a \emph{family} of $Y$. Furthermore, a function body can be placed like that
     \In{align*}{
         (\myxstar \mydefeq x^2 \in Y) _ {x \in X}
     }
+}
+
+\In{example}{
+    By definition any function $f : X \to Y$ is also a family $(f(x) \in Y)_{x \in X}$.
 }
 
 \In{example}{
@@ -145,6 +176,7 @@ Families can do more.
 }
 
 
+
 \subsection{Coherence}
 
 It is sure you write
@@ -161,5 +193,5 @@ because you know the arithmetic laws
     0+x = x = x+0
 }
 disambiguate unparenthesized expressions.
-Informally laws to introduce natural syntax are called \emph{coherence conditions} or briefly \emph{coherence}.
+Informally laws to introduce natural syntax are called \emph{coherence conditions} or shortly \emph{coherence}.
 

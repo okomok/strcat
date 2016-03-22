@@ -99,6 +99,7 @@ A space-saving form is depicted as
     Note that the order of objects is flipped. %
     This is resulting from the unfortunate convention that we write $b = h(a)$ but not $h : B \leftarrow A$.
 }
+
 The composition of morphisms can be depicted as
 \In{align*}{
     \strdgathered{
@@ -133,56 +134,6 @@ Identity morphisms can be depicted as
     }
 }
 As an exercise, write down the associativity and unitality using these diagrams. 
-
-\definitionof{Currying}{
-    In particular case $\cat{C} = \catSet$, there exists the \emph{curry bijection}
-    \In{align*}{
-        \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))}\\
-        \strdgathered{
-            \strdmid,\strdrlabel{C}
-            ,\strdwidecell{1}{1}{h}
-            ,\strdtubestart
-            ,\strdtubemid
-            ,\strdat{Left}{\strdrlabel{A}}
-            ,\strdat{Right}{\strdrlabel{B}}
-        } &\sim
-        \strdgathered{
-            \strdtubestart%line
-            ,\strdtubemid,\strdbackground{strd roadcolor}
-            ,\strdwidecell{1}{1}{h}
-            ,\strdnone{\strdat{Left}{\strdllabel{C}}}
-            ,\strdat{Left}{\strdrlabel{C}}
-            ,\strdat{Right}{\strdllabel{B}}
-            ,\strdmid,\strdrlabel{A}
-        }
-    }
-}
-
-We don't distinguish the two diagrams, for %
-the naturality of the bijection ensures ``Move the right-side leg up and down" works correct.
-
-\definitionof{Naming}{
-    In case $A$ is the singleton set,
-    \In{align*}{
-        \strdgathered{
-            \strdmid,\strdrlabel{C}
-            ,\strdcell{h}
-            ,\strdmid,\strdrlabel{B}
-        } \,\sim\,
-        \strdgathered{
-            \strdroad\strdmid,\strdroadlabel{C}{B}
-            ,\strdcell{h}
-        }
-        % \strdgathered{
-        %     \strdtubestart%line
-        %     ,\strdtubemid,\strdbackground{strd roadcolor}
-        %     ,\strdwidecell{1}{1}{h}
-        %     ,\strdat{Left}{\strdrlabel{C}}
-        %     ,\strdat{Right}{\strdllabel{B}}
-        % }
-    }
-    is called a \emph{naming}, which turns a function to an element of function-sets.
-}
 
 \definitionof{Hom-Functor}{
     Hom-sets can be extended to a binary functor
@@ -283,5 +234,65 @@ that looks topologically equivalent.
             }
         }
     }
+}
+
+\definitionof{Currying}{
+    In particular case $\cat{C} = \catSet$, there exists the \emph{curry bijection}
+    \In{align*}{
+        \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))}\\
+        \strdgathered{
+            \strdmid,\strdrlabel{C}
+            ,\strdwidecell{1}{1}{h}
+            ,\strdtubestart
+            ,\strdtubemid
+            ,\strdat{Left}{\strdrlabel{A}}
+            ,\strdat{Right}{\strdrlabel{B}}
+        } &\sim
+        \strdgathered{
+            \strdtubestart%line
+            ,\strdtubemid,\strdbackground{strd roadcolor}
+            ,\strdwidecell{1}{1}{h}
+            ,\strdnone{\strdat{Left}{\strdllabel{C}}}
+            ,\strdat{Left}{\strdrlabel{C}}
+            ,\strdat{Right}{\strdllabel{B}}
+            ,\strdmid,\strdrlabel{A}
+        }
+    }
+}
+
+We don't distinguish the two diagrams, for %
+the naturality of the bijection ensures ``Move the right-side leg up and down" works correct.
+
+\definitionof{Naming}{
+    In case $A$ is the singleton set,
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{C}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{B}
+        } \,\sim\,
+        \strdgathered{
+            \strdroad\strdmid,\strdroadlabel{C}{B}
+            ,\strdcell{h}
+        }
+        % \strdgathered{
+        %     \strdtubestart%line
+        %     ,\strdtubemid,\strdbackground{strd roadcolor}
+        %     ,\strdwidecell{1}{1}{h}
+        %     ,\strdat{Left}{\strdrlabel{C}}
+        %     ,\strdat{Right}{\strdllabel{B}}
+        % }
+    }
+    is called a \emph{naming}, which turns a function to an element of function-sets.
+}
+
+\In{proposition}{
+    Currying \emph{preserves naturality} meaning that given a function $f : GX \times B \to FX$,
+    $f$ is natural in $X$ if and only if $\operatorname{curry}(f)$ is. So does uncurrying.
+}
+
+\In{remark}{
+    Any functional box should preserve naturality so that %
+    you don't bother with proof of naturality.
 }
 
