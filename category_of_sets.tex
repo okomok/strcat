@@ -238,7 +238,8 @@ that looks topologically equivalent.
 }
 
 \definitionof{Currying}{
-    In particular case $\cat{C} = \catSet$, the \emph{curry bijection} is defined by
+    In particular case $\cat{C} = \catSet$, the \emph{curry bijection} %
+    or shortly \emph{currying} is defined by
     \In{align*}{
         \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))} \\
         h &\mapsto (a \mapsto b \mapsto h(a,b)) \\
@@ -263,12 +264,66 @@ that looks topologically equivalent.
     }
 }
 
-We don't distinguish these two diagrams, for %
-the naturality of this bijection ensures ``move the right-side leg up and down" works correct.
+We don't distinguish these two diagrams because %
+the following two propositions ensure ``move the right-side leg up and down" works correct.
 
 \In{proposition}{
-    The curry bijection is natural in all three variables.
+    Currying is natural in all three variables.
 }
+
+\In{proposition}{
+    Currying merges:
+    \In{align*}{
+        \strdgathered{
+            \strdyhalf{\strdroad\strdmid}
+            ,\strdfork{
+                \strdxscale{1.7}{\strdroad\strdleft}
+                ,\strdroadlaside
+                ,\strdbox{1.5}{1.5}{
+                    \strdmid
+                    ,\strdcell{g}
+                    ,\strdfork{
+                        \strdright
+                    }
+                    ,\strdleft
+                }
+                ,\strdyhalf\strdmid
+            }
+            ,\strdfork{
+                \strdxscale{1.7}{\strdroad\strdright}
+                ,\strdroadlaside
+                ,\strdbox{1.5}{1.5}{
+                    \strdmid
+                    ,\strdcell{f}
+                    ,\strdfork{
+                        \strdright
+                    }
+                    ,\strdleft
+                }
+                ,\strdyhalf\strdmid
+            }
+        } =
+        \strdgathered{
+            \strdyhalf{\strdroad\strdmid}
+            ,\strdroadlaside
+            ,\strdbox{2}{3}{
+                \strdmid
+                ,\strdcell{g}
+                ,\strdfork{
+                    \strdleft
+                    ,\strdmid
+                    ,\strdyhalf\strdmid
+                }
+                ,\strdright
+                ,\strdcell{f}
+                ,\strdfork{\strdright}
+                ,\strdleft
+            }
+            ,\strdyhalf\strdmid
+        }
+    }
+}
+
 
 \definitionof{Naming}{
     In case $A$ is the singleton set, which is omitted in diagrams, a currying
@@ -290,7 +345,7 @@ the naturality of this bijection ensures ``move the right-side leg up and down" 
         %     ,\strdat{Right}{\strdllabel{B}}
         % }
     }
-    is trivial. We call it a \emph{naming}.
+    is trivial. We call it a \emph{naming} (\cite{f06week05b}).
 }
 
 \In{proposition}{
