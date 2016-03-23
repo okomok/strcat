@@ -57,7 +57,7 @@ A morphism $f : A \to B$ is depicted as a node
         ,\strdmid,\strdrlabel{A}
     }
 }
-A composition joins two strings:
+The composition joins two strings:
 \In{align*}{
     \strdgathered{
         \strdmid,\strdrlabel{C}
@@ -67,7 +67,7 @@ A composition joins two strings:
         ,\strdmid,\strdrlabel{A}
     } \,\mydefeq g \circ f
 }
-An identity is indistinguishable from an object:
+Identity morphisms are indistinguishable from objects:
 \In{align*}{
     \strdgathered{
         \strdmid,\strdrlabel{A}
@@ -77,12 +77,13 @@ Check these diagrams create no ambiguity thanks to the coherence.
 
 
 \definitionof{Isomorphism}{
-    An \emph{isomorphism} is a pair of morphisms
+    Given objects $A$ and $B$, we call a pair of morphisms
     \In{align*}{
-        f : A \to B\\
-        g : B \to A
+        f &: A \to B\\
+        g &: B \to A
     }
-    satisfying the \emph{invertibility}
+    an \emph{isomorphism} or shortly \emph{iso} %
+    provided that the following \emph{invertibility} is satisfied.
     \In{align*}{
         \strdgathered{
             \strdmid,\strdrlabel{A}
@@ -105,6 +106,7 @@ Check these diagrams create no ambiguity thanks to the coherence.
             \strdmid,\strdrlabel{B}
         }
     }
+    Each morphism of the pair is also called an \emph{isomorphism}.
 }
 
 \definitionof{Functional Box}{
@@ -112,7 +114,7 @@ Check these diagrams create no ambiguity thanks to the coherence.
     \In{align*}{
         h : \cat{C}(A,B) \to \cat{C}\myprime(A\myprime,B\myprime)
     }
-    is depicted as a box
+    is depicted as a \emph{functional box}
     \In{align*}{
         \strdgathered{
             \strdmid,\strdrlabel{B\myprime}
@@ -143,7 +145,7 @@ Check these diagrams create no ambiguity thanks to the coherence.
             ,\strdmid,\strdrlabel{B}
         }
     }
-    which is denoted as $\cat{C}^{\operatorname{op}}$ the \emph{opposite category} of $\cat{C}$.
+    which is denoted as $\cat{C}^{\operatorname{op}}$, the \emph{opposite category} of $\cat{C}$.
 }
 
 \definitionof{Discrete Category}{
