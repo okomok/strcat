@@ -17,7 +17,7 @@
 }
 
 A category is essentially one-dimensional so far: the vertical composition only. %
-Here we introduce the horizontal composition for functions.
+Here we introduce the horizontal composition for \catSet.
 
 \definitionof{Monoidal Category of Sets}{
     Parallel strings are defined by
@@ -238,7 +238,7 @@ that looks topologically equivalent.
 }
 
 \definitionof{Currying}{
-    In particular case $\cat{C} = \catSet$, there exists the \emph{curry bijection}
+    In particular case $\cat{C} = \catSet$, the \emph{curry bijection} is defined by
     \In{align*}{
         \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))} \\
         h &\mapsto (a \mapsto b \mapsto h(a,b)) \\
