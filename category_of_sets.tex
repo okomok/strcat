@@ -13,7 +13,7 @@
             ,\strdmid,\strdrlabel{X}
         }
     }
-    where nodes are joined by the function composition. 
+    where strings are joined by the function composition. 
 }
 
 A category is essentially one-dimensional so far: the vertical composition only. %
@@ -36,7 +36,7 @@ Here we introduce the horizontal composition for functions.
             \strdmid,\strdrlabel{X {\times} X\myprime}
         }
     }
-    The horizontal composition is defined by
+    The \emph{horizontal composition} of functions is defined by
     \In{align*}{
         \strdgathered{
             \strdfork{
@@ -68,10 +68,10 @@ One can check any string diagram built upon these definitions is unambiguous due
     X \times (X\myprime \times X\myprime\myprime) &\cong (X \times X\myprime) \times X\myprime\myprime\\
     X \times \lbrace\ast\rbrace &\cong X
 }
-Informally such two-dimensional diagrams are called \emph{monoidal}.
+Informally such two-dimensional categories are called \emph{monoidal}.
 
 
-\subsection{Hom-set Bands}
+\subsection{Hom-Set Bands}
 
 Given a category $\cat{C}$, a special string, a \emph{band}, is introduced for hom-sets:
 \In{align*}{
@@ -97,7 +97,8 @@ A space-saving form is depicted as
 
 \In{remark}{
     Note that the order of objects is flipped. %
-    This is resulting from the unfortunate convention that we write $b = h(a)$ but not $h : B \leftarrow A$.
+    This is resulting from an unfortunate convention that one write ``$b = h(a)$" %
+    but not ``$h : B \leftarrow A$". By the way, ``$B^A$" is fine.
 }
 
 The composition of morphisms can be depicted as
@@ -136,7 +137,7 @@ Identity morphisms can be depicted as
 As an exercise, write down the associativity and unitality using these diagrams. 
 
 \definitionof{Hom-Functor}{
-    Hom-sets can be extended to a binary functor
+    Hom-sets can be extended to the \emph{Hom-functor}
     \In{align*}{
         \Lambda_{A,B} \cat{C}(A,B) &: \cat{C}^{\operatorname{op}} \times \cat{C} \to \catSet \text{ or shortly}\\
         \cat{C}(\texttt{-},\texttt{+}) &: \cat{C}^{\operatorname{op}} \times \cat{C} \to \catSet \text{ or shortly}\\
@@ -177,10 +178,10 @@ As an exercise, write down the associativity and unitality using these diagrams.
             ,\strdmid,\strdrlabel{A\myprime}
         }
     }
-    where the world in the box is the product category $\cat{C}^{\operatorname{op}} \times \cat{C}$.
+    where the world in the box is product category $\cat{C}^{\operatorname{op}} \times \cat{C}$.
 }
 
-This definition will inspire you to depict the hom-functors as
+This definition inspires us to depict hom-functors as
 \In{align*}{
     \strdgathered{
         \strdtubeof{}{
@@ -239,7 +240,9 @@ that looks topologically equivalent.
 \definitionof{Currying}{
     In particular case $\cat{C} = \catSet$, there exists the \emph{curry bijection}
     \In{align*}{
-        \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))}\\
+        \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))} \\
+        h &\mapsto (a \mapsto b \mapsto h(a,b)) \\
+        ((a,b) \mapsto h(a)(b)) &\mymapsfrom h \\
         \strdgathered{
             \strdmid,\strdrlabel{C}
             ,\strdwidecell{1}{1}{h}
@@ -260,8 +263,12 @@ that looks topologically equivalent.
     }
 }
 
-We don't distinguish the two diagrams, for %
+We don't distinguish these two diagrams, for %
 the naturality of this bijection ensures ``move the right-side leg up and down" works correct.
+
+\In{proposition}{
+    The curry bijection is natural in all three variables.
+}
 
 \definitionof{Naming}{
     In case $A$ is the singleton set, which is omitted in diagrams, a currying
@@ -287,12 +294,13 @@ the naturality of this bijection ensures ``move the right-side leg up and down" 
 }
 
 \In{proposition}{
-    Currying \emph{preserves naturality}, meaning that given a function $f : GX \times B \to FX$,
-    $f$ is natural in $X$ if and only if $\operatorname{curry}(f)$ is. So does uncurrying.
+    Currying \emph{preserves naturality}, meaning that given a family of functions %
+    $(f_X : FX \times B \to GX)_X$ with infrafunctors $F$ and $G$,
+    $f_X$ is natural in $X$ if and only if $\operatorname{curry}(f_X)$ is. So does uncurrying.
 }
 
 \In{remark}{
-    Any functional box should preserve naturality so that %
-    you don't bother with proof of naturality.
+    In general, natural bijections have similar properties so that %
+    you don't bother with proof of naturality (\cite{Kelly198204}). 
 }
 
