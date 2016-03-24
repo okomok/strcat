@@ -1237,3 +1237,13 @@
 \newcommand*{\strdunraise}[1]{\mathstrut\raisebox{-\depth}{\ensuremath{#1}}}
 \newcommand*{\strdhspaced}[2]{\hspace{#1}#2\hspace{#1}}
 
+
+% Externalization
+%
+
+\newcommand*{\strdexternal}[2]{% {id}{tikz}
+    \tikzsetnextfilename{#1}
+    #2
+}
+
+\newcommand*{\strdgatheredx}[2]{\strdexternal{#1}{\strdgathered{#2}}}

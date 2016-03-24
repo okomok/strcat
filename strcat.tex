@@ -2,7 +2,7 @@
 \title{Category Theory with Strings}
 \author{Shunsuke Sogame}
 
-%\includeonly{category_of_sets,refsetup}
+%\includeonly{categories,refsetup}
 %\overfullrule=2cm
 \usepackage{my,cat,lambdax,strd,strdproof}
 
@@ -10,6 +10,12 @@
 \renewcommand{\abstractname}{\vspace{-\baselineskip}}
 
 \include{refsetup}
+
+\usetikzlibrary{external}
+\tikzexternalize[prefix=out/]
+%\graphicspath{ {out/} }
+%\tikzexternaldisable
+
 
 \begin{document}
 

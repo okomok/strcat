@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-$pdflatex         = 'texfot --quiet pdflatex -synctex=1 -halt-on-error';
+$pdflatex         = 'texfot --quiet pdflatex -synctex=1 -halt-on-error -shell-escape';
 $latex_silent     = 'texfot --quiet latex -synctex=1 -halt-on-error -interaction=batchmode';
 $bibtex           = 'pbibtex';
 $makeindex        = 'mendex %O -o %D %S';
