@@ -1,24 +1,30 @@
 \ProvidesPackage{strdexternal}
 
-\usepackage{lambda}% Compose
+\usepackage{lambdax}
 
-
-% tikzsetnextfile makes an intermediate pdf has duplicated pages,
-% which doesn't affect the release pdf fortunately.
+% \tikzsetnextfilename makes an external pdf with duplicated pages.
+% Fortunately the release pdf isn't affected.
 
 \newcounter{strdexternalcounter}
+\newcommand*{\strdexternalcount}{\the\value{strdexternalcounter}}
 
 \newcommand*{\strdexternalname}[1]{
     \setcounter{strdexternalcounter}{0}
     \def\strdexternalname@{#1}
 }
 
+\newcommand*{\strdexternalfilename@}[1]{strd-\strdexternalname@-figure#1}
 
-\newcommand*{\strdexternalized}[1]{
-    \tikzsetnextfilename{strd-\strdexternalname@-figure\the\value{strdexternalcounter}}
+\newcommand*{\strdexternalize}[1]{%
+    \tikzsetnextfilename{\strdexternalfilename@{\strdexternalcount}}
     #1
     \stepcounter{strdexternalcounter}
 }
+\newcommand*{\strdexternal}{\Compose\strdexternalize}
 
-\newcommand*{\strdexternal}{\Compose\strdexternalized}
-
+\newcommand*{\strdexternalfile}[1]{%
+    \includegraphics{\strdexternalfilenameat@{#1}}%
+}
+\newcommand*{\strdexternalfileprev}{%
+    \strdexternalfile{\NumDec{\strdexternalcount}}%
+}
