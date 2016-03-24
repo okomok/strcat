@@ -1,0 +1,24 @@
+\ProvidesPackage{strdexternal}
+
+\usepackage{lambda}% Compose
+
+
+% tikzsetnextfile makes an intermediate pdf has duplicated pages,
+% which doesn't affect the release pdf fortunately.
+
+\newcounter{strdexternalcounter}
+
+\newcommand*{\strdexternalname}[1]{
+    \setcounter{strdexternalcounter}{0}
+    \def\strdexternalname@{#1}
+}
+
+
+\newcommand*{\strdexternalized}[1]{
+    \tikzsetnextfilename{strd-\strdexternalname@-figure\the\value{strdexternalcounter}}
+    #1
+    \stepcounter{strdexternalcounter}
+}
+
+\newcommand*{\strdexternal}{\Compose\strdexternalized}
+

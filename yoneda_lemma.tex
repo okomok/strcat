@@ -1,5 +1,7 @@
 \section{The Yoneda Lemma}
 
+\strdexternalname{yoneda_lemma}
+
 
 \In{definition}{
     Given a functor $F : \cat{C}\catop \to \catSet$ and an object $A$ in $\cat{C}$, %
@@ -9,7 +11,7 @@
     }
     can be depicted as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
                 ,\strdcell{\strdupsidedown{\catph{?}}}
@@ -23,7 +25,7 @@
             ,\strdtwincell{\tau}
             ,\strdtubeof{strd frame}\strdtubeclose
         } \mydefeq
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
             }
@@ -46,7 +48,7 @@
     The \emph{Yoneda bijection} is defined by 
     \In{align*}{
         \mylhs{\catNat_X(\cat{C}(X,A),FX)} &\cong \myrhs{FA}\\
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
                 ,\strdcell{\strdupsidedown{\catph{?}}}
@@ -60,7 +62,7 @@
             ,\strdtwincell{\tau}
             ,\strdtubeof{strd frame}\strdtubeclose
         } &\mapsto
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
                 ,\strdmid,\strdrlabel{A}
@@ -73,7 +75,7 @@
             ,\strdtwincell{\tau}
             ,\strdtubeof{strd frame}\strdtubeclose
         }\\
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
                 ,\strdcell{\strdupsidedown{\catph{?}}}
@@ -87,7 +89,7 @@
                 ,\strdwidecell{1}{1}{a}
             }
         } &\mymapsfrom
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid,\strdrlabel{A}
             }
@@ -113,12 +115,12 @@
     The \emph{Yoneda embedding} is defined by
     \In{align*}{
         \mylhs{\Lambda_A \Lambda_X \cat{C}(X,A) : \cat{C}} &\to \myrhs{[\cat{C}\catop,\catSet]}\\
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
         } &\mapsto\,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdtubeof{}{
                 \strdtubestart%line
                 ,\strdtubemid,\strdbackground{strd roadcolor}
@@ -128,7 +130,7 @@
                 ,\strdat{Left}{\strdrlabel{A}}
             }
         } \,=\,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
@@ -138,7 +140,7 @@
     }
     using the diagram of hom-functors. In short,
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdtubeof{}{
                 \strdtubestart%line
                 ,\strdtubemid,\strdbackground{strd roadcolor}
@@ -156,7 +158,7 @@
     }
     can be depicted as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdfork{
                 \strdmid,\strdrlabel{A}
@@ -176,7 +178,7 @@
     In special case $F \mydefeq \cat{C}(\catph{-},B)$, the Yoneda bijection is expanded to
     \In{align*}{
         \mylhs{\catNat_X(\cat{C}(X,A),\cat{C}(X,B))} &\cong \myrhs{\cat{C}(A,B)}\\
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdfork{
                 \strdmid,\strdrlabel{A}
@@ -189,7 +191,7 @@
                 ,\strdtwincell{\tau}
             }
         } &\mapsto
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdfork{
                 \strdmid,\strdrlabel{A}
@@ -201,7 +203,7 @@
                 ,\strdtwincell{\tau}
             }
         } \\
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdnone{
                 \strdfork{
                     \strdtubestart
@@ -215,7 +217,7 @@
             ,\strdcell{\catph{?}}
             ,\strdmid
         } & \mymapsfrom
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdnone{
                 \strdfork{
                     \strdtubestart
@@ -236,7 +238,7 @@ it is full and faithful. Combined with \cref{ff.pr.inv},
     \In{align*}{
         &
         (
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdfork{
                 \strdmid,\strdrlabel{A}
@@ -250,7 +252,7 @@ it is full and faithful. Combined with \cref{ff.pr.inv},
             }
         }
         ,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{A}
             ,\strdfork{
                 \strdmid,\strdrlabel{B}
@@ -267,7 +269,7 @@ it is full and faithful. Combined with \cref{ff.pr.inv},
         \\
         \iff &
         (
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdfork{
                 \strdmid,\strdrlabel{A}
@@ -280,7 +282,7 @@ it is full and faithful. Combined with \cref{ff.pr.inv},
             }
         }
         ,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{A}
             ,\strdfork{
                 \strdmid,\strdrlabel{B}

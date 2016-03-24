@@ -1,5 +1,7 @@
-
 \subsection{EM Categories}
+
+\strdexternalname{em}
+
 
 \definitionof{Monad Algebra}{
     Given a monad $(T,\eta,\mu)$ on \cat C, a \emph{monad algebra}, denoted as $T$-algebra, consists of
@@ -16,7 +18,7 @@
 
 A $T$-algebra is depicted as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{A}
         ,\strdwidecell{1}{1}{\alpha}
         ,\strdfork{\strdmid,\strdrlabel{A}}
@@ -28,7 +30,7 @@ A $T$-algebra is depicted as
 
 The coherence can be depicted as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdfork{\strdmid,\strdmid}
         ,\strdwidecell{1}{1}{\alpha}
@@ -41,7 +43,7 @@ The coherence can be depicted as
             ,\strdtubeendline
         }
     } &= 
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdwidecell{2}{2}{\alpha}
         ,\strdfork{
@@ -61,7 +63,7 @@ The coherence can be depicted as
             ,\strdtubeendline
         }
     } \\ 
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdfork{\strdmid,\strdmid}
         ,\strdwidecell{1}{1}{\alpha}
@@ -71,7 +73,7 @@ The coherence can be depicted as
             ,\strdtwincell{\eta}
         }
     } &= \,
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
     }
 }
@@ -88,7 +90,7 @@ The coherence can be depicted as
 }
 This condition is depicted as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{B}
         ,\strdcell{h}
         ,\strdmid,\strdrlabel{A}
@@ -98,7 +100,7 @@ This condition is depicted as
         ,\strdtube\strdtubemid
         ,\strdtubeendline
     } =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{B}
         ,\strdfork{
             \strdmid,\strdrlabel{B}
@@ -116,7 +118,7 @@ This condition is depicted as
 }
 A morphism in $\cat C^T$ is by compromise depicted as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdbox{1.5}{1.5}{
             \strdmid,\strdrlabel{B}
             ,\strdfork{\strdmid,\strdrlabel{B}}
@@ -138,7 +140,7 @@ A morphism in $\cat C^T$ is by compromise depicted as
 }
 Boxes are objects. The composition can be depicted as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdbox{1.5}{1.5}{
             \strdmid,\strdrlabel{C}
             ,\strdfork{\strdmid,\strdrlabel{C}}
@@ -167,7 +169,7 @@ Boxes are objects. The composition can be depicted as
             ,\strdtube\strdtubemid
         }
     } =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdbox{1.5}{1.5}{
             \strdmid,\strdrlabel{C}
             ,\strdfork{\strdmid,\strdrlabel{C}}
@@ -191,10 +193,13 @@ Boxes are objects. The composition can be depicted as
 }
 A diagram for an identity morphism is left as an exercise.
 
+
+
+
 \definitionof{EM Adjunction}{
     Given a monad $(T,\eta,\mu)$ on \cat C, define a functor $M : \cat C \to \cat C^T$ as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdbox{2.3}{2.3}{
                 \strdfork{\strdmid,\strdrlabel{B},\strdmid}
                 ,\strdtube{
@@ -229,7 +234,7 @@ A diagram for an identity morphism is left as an exercise.
     }
     a functor $U : \cat C^T \to \cat C$ as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdbox{1.5}{1.5}{
                 \strdmid,\strdrlabel{B}
                 ,\strdfork{\strdmid,\strdrlabel{B}}
@@ -248,7 +253,7 @@ A diagram for an identity morphism is left as an exercise.
                 ,\strdtube\strdtubemid
             }
         } \mapsto
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdcell{h}
             ,\strdmid,\strdrlabel{A}
@@ -257,7 +262,7 @@ A diagram for an identity morphism is left as an exercise.
     They constitute the \emph{EM adjunction} $M \dashv U$ whose adjunct is defined by %
     \In{align*}{
         \mylhs{\cat C^T(MA,(B,\beta))} &\cong \myrhs{\cat C(A,U(B,\beta))} \\
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdbox{1.5}{1.5}{
                 \strdmid,\strdrlabel{B}
                 ,\strdfork{\strdmid,\strdrlabel{B}}
@@ -285,7 +290,7 @@ A diagram for an identity morphism is left as an exercise.
                 }
             }
         } & \mapsto
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdwidecell{1}{1}{h}
             ,\strdfork{\strdmid,\strdmid,\strdrlabel{A}}
@@ -293,7 +298,7 @@ A diagram for an identity morphism is left as an exercise.
             ,\strdtube\strdtubemid
             ,\strdtwincell{\eta}
         } \\
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdbox{1.5}{1.5}{
                 \strdmid,\strdrlabel{B}
                 ,\strdfork{\strdmid,\strdrlabel{B}}
@@ -323,7 +328,7 @@ A diagram for an identity morphism is left as an exercise.
                 }
             }
         } &\mymapsfrom
-        \strdgathered{
+        \strdexternalz\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}

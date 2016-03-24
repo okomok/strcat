@@ -1,5 +1,6 @@
-
 \section{Categories}
+
+\strdexternalname{categories}
 
 
 \subsection{The Definition}
@@ -45,14 +46,14 @@ to complement(or hopefully replace) commutative diagrams.
 \mynewline
 \indent Given a category \cat C, an object $A$ is depicted as an optionally-tagged string
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{A}
         ,\strdstartlabel{\cat{C}}
     }
 }
 A morphism $f : A \to B$ is depicted as a node
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{B}
         ,\strdcell{f}
         ,\strdmid,\strdrlabel{A}
@@ -60,7 +61,7 @@ A morphism $f : A \to B$ is depicted as a node
 }
 The composition joins two strings.
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{C}
         ,\strdcell{g}
         ,\strdmid,\strdrlabel{B}
@@ -70,7 +71,7 @@ The composition joins two strings.
 }
 Identity morphisms are indistinguishable from objects.
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{A}
     } \,\mydefeq \operatorname{id}_A
 }
@@ -86,24 +87,24 @@ Check these diagrams create no ambiguity thanks to the coherence.
     an \emph{isomorphism} or shortly \emph{iso} %
     provided that the \emph{invertibility}
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{A}
             ,\strdcell{g}
             ,\strdmid,\strdrlabel{B}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
         } =\
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{A}
         } \ \ \text{and}\ \
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
             ,\strdcell{g}
             ,\strdmid,\strdrlabel{B}
         } =\
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
         }
     }
@@ -121,7 +122,7 @@ Check these diagrams create no ambiguity thanks to the coherence.
     }
     is depicted as a \emph{functional box}
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B\myprime}
             ,\strdbox{1}{1}{
                 \strdmid,\strdrlabel{B}
@@ -136,7 +137,7 @@ Check these diagrams create no ambiguity thanks to the coherence.
 \definitionof{Opposite Category}{
     Given a category $\cat{C}$ and a morphism
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
@@ -144,7 +145,7 @@ Check these diagrams create no ambiguity thanks to the coherence.
     }
     you can construct a category with strings upside down:
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{A}
             ,\strdcell{\strdupsidedown{f}}
             ,\strdmid,\strdrlabel{B}
@@ -170,7 +171,7 @@ Check these diagrams create no ambiguity thanks to the coherence.
     }
     is depicted as parallel strings
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdxscale{1.5}\strdljump
                 ,\strdmid,\strdrlabel{A\myprime},\strdstartlabel{\cat{A}}
@@ -187,7 +188,7 @@ Check these diagrams create no ambiguity thanks to the coherence.
 }
 The composition, which joins parallel strings, is defined by
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdxscale{0.7}\strdljump
             ,\strdmid
@@ -211,7 +212,7 @@ The composition, which joins parallel strings, is defined by
             ,\strdxscale{2.7}{\strdcutoff\strdminus}
         }
     } \mydefeq 
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdxscale{0.7}\strdljump
             ,\strdmid
@@ -237,7 +238,7 @@ The composition, which joins parallel strings, is defined by
 }
 Identity morphisms are trivially
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdxscale{0.7}\strdljump
             ,\strdmid
@@ -250,7 +251,7 @@ Identity morphisms are trivially
 }
 By these definitions,
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdxscale{0.7}\strdljump
             ,\strdmid
@@ -266,7 +267,7 @@ By these definitions,
             ,\strdmid
         }
     } \,=\,
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdxscale{0.7}\strdljump
             ,\strdmid

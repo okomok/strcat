@@ -1,5 +1,7 @@
-
 \section{Limits}
+
+\strdexternalname{limits}
+
 
 \definitionof{Cone}{
     Given a functor $F : \cat A \to \cat B$, a cone of $F$ consists of
@@ -12,7 +14,7 @@
 \definitionof{Conicality}{
     We may explicitly call naturality of cones \emph{conicality}, which can be expressed as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
                 ,\strdcell{f}
@@ -26,7 +28,7 @@
             ,\strdwidecellof{strd widecellbase}{1}{1}{v}
             ,\strdmid,\strdrlabel{B}
         } =
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
             }
@@ -56,12 +58,12 @@
 \definitionof{Limiting Cone}{
     The limit bijectivity, thanks to its naturality, can be expressed as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{\text{lim}F}
             ,\strdcell{h}
             ,\strdmid,\strdrlabel{B}
         } =
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{\text{lim}F}
             ,\strdbox{1.7}{1.7}{
                 \strdfork{
@@ -73,7 +75,7 @@
             },\strdat{Left StartCorner}{\strdoverlabel{\text{lim}}}
            ,\strdmid,\strdrlabel{B}
         } \iff
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
             }
@@ -85,7 +87,7 @@
             ,\strdmid,\strdrlabel{B}
         }
         =
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
             }
@@ -116,7 +118,7 @@ Limits are unique up to isomorphism.
 \In{proposition}{
     A limiting cone is \emph{monic} meaning that
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
             }
@@ -127,7 +129,7 @@ Limits are unique up to isomorphism.
             ,\strdcell{h}
             ,\strdmid,\strdrlabel{B}
         } =
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
             }
@@ -138,12 +140,12 @@ Limits are unique up to isomorphism.
             ,\strdcell{g}
             ,\strdmid,\strdrlabel{B}
         } \implies
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{\text{lim}F}
             ,\strdcell{h}
             ,\strdmid,\strdrlabel{B}
         } =
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{\text{lim}F}
             ,\strdcell{g}
             ,\strdmid,\strdrlabel{B}
@@ -163,12 +165,12 @@ Limits are unique up to isomorphism.
 \definitionof{Projection}{
     Spelling out the product bijectivity,
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{\prod F}
             ,\strdcell{h}
             ,\strdmid,\strdrlabel{B}
         } =
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{\textstyle\prod F}
             ,\strdbox{1.7}{1.7}{
                 \strdfork{
@@ -180,7 +182,7 @@ Limits are unique up to isomorphism.
             },\strdat{Left StartCorner}{\strdoverlabel{\textstyle\prod}}
            ,\strdmid,\strdrlabel{B}
         } \iff
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
             }
@@ -192,7 +194,7 @@ Limits are unique up to isomorphism.
             ,\strdmid,\strdrlabel{B}
         }
         =
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
             }
@@ -231,12 +233,12 @@ Limits are unique up to isomorphism.
 \definitionof{Coproduct}{
     A \emph{coproduct} is a structure obtained from the product bijectivity flipped.
     \In{align*}{
-        \Compose\strdgathered\strdinv{
+        \strdexternal\strdgathered{ \strdinv{
             \strdmid,\strdrlabel{\coprod F}
             ,\strdcell{h}
             ,\strdmid,\strdrlabel{B}
-        } =
-        \Compose\strdgathered\strdinv{
+        } } =
+        \strdexternal\strdgathered{ \strdinv{
             \strdmid,\strdrlabel{\textstyle\coprod F}
             ,\strdbox{1.7}{1.7}{
                 \strdfork{
@@ -247,8 +249,8 @@ Limits are unique up to isomorphism.
                 ,\strdwidecell{1}{1}{v}
             },\strdat{Left StartCorner}{\strdoverlabel{\textstyle\coprod}}
            ,\strdmid,\strdrlabel{B}
-        } \iff
-        \Compose\strdgathered\strdinv{
+       } } \iff
+       \strdexternal\strdgathered{ \strdinv{
             \strdfork{
                 \strdmid
             }
@@ -258,9 +260,9 @@ Limits are unique up to isomorphism.
             ,\strdmid,\strdrlabel{\textstyle\coprod F}
             ,\strdcell{h}
             ,\strdmid,\strdrlabel{B}
-        }
+        } }
         =
-        \Compose\strdgathered\strdinv{
+        \strdexternal\strdgathered{ \strdinv{
             \strdfork{
                 \strdmid
             }
@@ -268,7 +270,7 @@ Limits are unique up to isomorphism.
             ,\strdtube\strdtubemid
             ,\strdwidecell{1}{1}{v}
             ,\strdmid,\strdrlabel{B}
-        }
+        } }
     }
 }
 
@@ -289,7 +291,7 @@ Informally the dual makes a codomain opposite, while the variant does for a doma
 
 In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid
             ,\strdmid
@@ -299,7 +301,7 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
         ,\strdwidecell{1}{1}{g}
     }
     =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid
             ,\strdmid
@@ -320,7 +322,7 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
         ,\strdmid
     } 
     \iff
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid
             ,\strdmid
@@ -339,7 +341,7 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
         }
     }
     =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{\strdmid,\strdmid}
         ,\strdtubestart
         ,\strdtube{
@@ -361,21 +363,21 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
 
 \InList{strdproof,align*}{
     &
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdtubestart
         ,\strdtubemid,\strdat{Left End}{\strdcell{\scriptstyle\lim}},\strdbackground{strd roadcolor}
         ,\strdtubemid,\strdbackground{strd roadcolor},\strdat{Right Start}{\strdllabel{B}}
         ,\strdwidecell{1}{1}{g}
         ,\strdmid
     } =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdtubestart
         ,\strdtubemid,\strdbackground{strd roadcolor},\strdat{Right}{\strdllabel{B}}
         ,\strdwidecell{1}{1}{v}
         ,\strdmid
     } \\
     \iff &
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid
         }
@@ -386,7 +388,7 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
         ,\strdcell{g(x)}
         ,\strdmid,\strdrlabel{B}
     } \underset{\forall x}{=}
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid
         }
@@ -396,13 +398,13 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
         ,\strdmid,\strdrlabel{B}
     } \\
     \iff &
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdcell{g(x)}
         ,\strdtubestart
         ,\strdmid,\strdrlabel{B}
     } \,\underset{\forall x}{=}
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdbox{2}{2}{
             \strdfork{
@@ -415,13 +417,13 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
         ,\strdmid,\strdrlabel{B}
     }\\
     \iff &
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdtubestart
         ,\strdtubemid,\strdbackground{strd roadcolor},\strdat{Right}{\strdllabel{B}}
         ,\strdwidecell{1}{1}{g}
         ,\strdmid
     } =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdbox{3}{3}{
             \strdmid
             ,\strdat{Start}{

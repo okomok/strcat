@@ -1,6 +1,8 @@
 
 \subsection{Kleisli Categories}
 
+\strdexternalname{kleisli}
+
 \definitionof{Kleisli Category}{
     Given a monad $(T,\eta,\mu)$ on \cat C, the \emph{Kleisli category} of $T$, %
     denoted as $\cat C_T$, is a category consisting of
@@ -14,7 +16,7 @@
 
 In diagrams, a morphism in $\cat C_T$ is depicted as a \emph{Kleisli box}
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{B},\strdstartlabel{\cat C_T}
         ,\strdbox{1.7}{1.7}{
             \strdfork{\strdmid}
@@ -28,7 +30,7 @@ In diagrams, a morphism in $\cat C_T$ is depicted as a \emph{Kleisli box}
 }
 The composition is defined by
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{C}
         ,\strdbox{1.7}{1.7}{
             \strdfork{\strdmid}
@@ -47,7 +49,7 @@ The composition is defined by
         }
         ,\strdmid,\strdrlabel{A}
     } \mydefeq
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{C}
         ,\strdbox{2.5}{2.5}{
             \strdfork{
@@ -72,7 +74,7 @@ The composition is defined by
 }
 Identity morphisms are defined by
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{A}
         ,\strdbox{1.7}{1.7}{
             \strdfork{\strdmid}
@@ -90,7 +92,7 @@ Identity morphisms are defined by
 \definitionof{Kleisli Adjunction}{
     Define a functor $L : \cat C \to \cat C_T$ as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{}
             ,\strdbox{1.7}{1.7}{
                 \strdfork{\strdmid,\strdcell{\catph{?}}}
@@ -104,7 +106,7 @@ Identity morphisms are defined by
     }
     $K : \cat C_T \to \cat C$ as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{}
             ,\strdbox{1.7}{1.7}{
                 \strdfork{\strdmid}
@@ -115,7 +117,7 @@ Identity morphisms are defined by
             }
             ,\strdmid,\strdrlabel{}
         } \mapsto
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid,\strdmid,\strdmid
             }

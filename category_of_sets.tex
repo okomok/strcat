@@ -1,11 +1,14 @@
 \section{Category of Sets}
 
+\strdexternalname{category_of_sets}
+
+
 \subsection{The Definition}
 
 \definitionof{Category of Sets}{
     The \emph{category of sets} $\catSet$ is a category whose objects are sets and whose morphisms are functions:
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{Z}
             ,\strdcell{g}
             ,\strdmid,\strdrlabel{Y}
@@ -22,7 +25,7 @@ Here we introduce the horizontal composition for \catSet.
 \definitionof{Monoidal Category of Sets}{
     Parallel strings are defined by
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdxscale{0.7}\strdljump
                 ,\strdmid,\strdrlabel{X}
@@ -32,13 +35,13 @@ Here we introduce the horizontal composition for \catSet.
                 ,\strdmid,\strdrlabel{X\myprime}
             }
         } \mydefeq\,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{X {\times} X\myprime}
         }
     }
     The \emph{horizontal composition} of functions is defined by
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdxscale{0.7}\strdljump
                 ,\strdmid,\strdrlabel{Y}
@@ -56,7 +59,7 @@ Here we introduce the horizontal composition for \catSet.
     }
     Strings for the singleton set $\lbrace \ast\rbrace$ is omitted so that an element of a set is represented as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{X}
             ,\strdcell{x}
         }
@@ -75,7 +78,7 @@ Informally such two-dimensional categories are called \emph{monoidal}.
 
 Given a category $\cat{C}$, a special string, a \emph{band}, is introduced for hom-sets:
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdtubeof{}{
             \strdtubestart%line
             ,\strdtubemid,\strdbackground{strd roadcolor}
@@ -84,13 +87,13 @@ Given a category $\cat{C}$, a special string, a \emph{band}, is introduced for h
             %,\strdtubeendline
         }
     } \mydefeq\,
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{\cat{C}(A{,}B)}
     }
 }
 A space-saving form is depicted as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdroad\strdmid,\strdroadlabel{B}{A}
     } 
 }
@@ -103,7 +106,7 @@ A space-saving form is depicted as
 
 The composition of morphisms can be depicted as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdtubestart
         ,\strdtubeextend{1}{1}
         ,\strdyhalf\strdtubemid,\strdbackground{strd roadcolor}
@@ -114,7 +117,7 @@ The composition of morphisms can be depicted as
             \strdtubepartright{1},\strdbackground{strd roadcolor}
         }
     }\ \ \text{or}\ \
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdroad\strdmid
         ,\strdfork{
             \strdroad\strdleft
@@ -125,11 +128,11 @@ The composition of morphisms can be depicted as
 \mynewline
 Identity morphisms can be depicted as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdtubestart
         ,\strdtubeclose,\strdbackground{strd roadcolor}
     }\ \ \text{or}\ \
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdroad\strdmid
         ,\strddeadend
     }
@@ -139,14 +142,14 @@ As an exercise, write down the associativity and unitality using these diagrams.
 \definitionof{Naming}{
     We don't distinguish the following two forms
     \In{align*}{
-        \strdgathered{
-            \strdmid,\strdrlabel{B},\strdstartlabel{\cat C}
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{B}
             ,\strdcell{h}
             ,\strdmid,\strdrlabel{A}
         } \,\sim\,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdroad\strdmid,\strdroadlabel{B}{A}
-            ,\strdcell{h},\strdstartlabel{\catSet}
+            ,\strdcell{h}
         }
     }
     We say $h$ in \cat C is \emph{named} in \catSet.
@@ -170,7 +173,7 @@ As an exercise, write down the associativity and unitality using these diagrams.
     }
     defined by
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdtubestart%line
             ,\strdtubemid,\strdbackground{strd roadcolor}
             ,\strdat{Right}{\strdllabel{A\myprime}}
@@ -193,7 +196,7 @@ As an exercise, write down the associativity and unitality using these diagrams.
             ,\strdat{Right}{\strdllabel{A}}
             ,\strdat{Left}{\strdrlabel{B}}
         } \mydefeq\,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B\myprime}
             ,\strdcell{b}
             ,\strdmid,\strdrlabel{B}
@@ -208,7 +211,7 @@ As an exercise, write down the associativity and unitality using these diagrams.
 
 This definition inspires us to depict hom-functors as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdtubeof{}{
             \strdtubestart%line
             ,\strdtubemid,\strdbackground{strd roadcolor}
@@ -217,7 +220,7 @@ This definition inspires us to depict hom-functors as
             ,\strdtubemid,\strdbackground{strd roadcolor}
         }
     } \ \ \text{or}\ \
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdyhalf{\strdroad\strdmid}
         ,\strdfork{
             \strdroad\strdleft
@@ -241,7 +244,7 @@ that looks topologically equivalent.
     }
     are respectively depicted as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdtubeof{}{
                 \strdtubestart%line
                 ,\strdtubemid,\strdbackground{strd roadcolor}
@@ -250,7 +253,7 @@ that looks topologically equivalent.
                 ,\strdtubemid,\strdbackground{strd roadcolor}
             }
         },\ 
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdtubeof{}{
                 \strdtubestart%line
                 ,\strdtubemid,\strdbackground{strd roadcolor}
@@ -269,7 +272,7 @@ that looks topologically equivalent.
         \mylhs{\catSet(A \times B,C)} &\cong \myrhs{\catSet(A,\catSet(B,C))} \\
         h &\mapsto (a \mapsto b \mapsto h(a,b)) \\
         ((a,b) \mapsto h(a)(b)) &\mymapsfrom h \\
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{C}
             ,\strdwidecell{1}{1}{h}
             ,\strdtubestart
@@ -277,7 +280,7 @@ that looks topologically equivalent.
             ,\strdat{Left}{\strdrlabel{A}}
             ,\strdat{Right}{\strdrlabel{B}}
         } &\sim
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdtubestart%line
             ,\strdtubemid,\strdbackground{strd roadcolor}
             ,\strdwidecell{1}{1}{h}
@@ -299,7 +302,7 @@ the following two propositions ensure ``move the right-side leg up and down" wor
 \In{proposition}{
     Currying merges:
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdyhalf{\strdroad\strdmid}
             ,\strdfork{
                 \strdxscale{1.7}{\strdroad\strdleft}
@@ -328,7 +331,7 @@ the following two propositions ensure ``move the right-side leg up and down" wor
                 ,\strdyhalf\strdmid
             }
         } =
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdyhalf{\strdroad\strdmid}
             ,\strdroadlaside
             ,\strdbox{2}{3}{

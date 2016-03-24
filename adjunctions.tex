@@ -1,5 +1,7 @@
-
 \section{Adjunctions}
+
+\strdexternalname{adjunctions}
+
 
 \definitionof{Adjunction}{
     Given two categories $\cat C$ and $\cat D$, an \emph{adjunction}
@@ -19,7 +21,7 @@
 
 A nice consequence is that this bijectivity needs no boxes, expressed by natural transformations only.
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdwidecell{1}{1}{f}
         ,\strdfork{
@@ -29,7 +31,7 @@ A nice consequence is that this bijectivity needs no boxes, expressed by natural
         ,\strdtube\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
         ,\strdtubeendline
     } =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdfork{
             \strdmid
@@ -48,7 +50,7 @@ A nice consequence is that this bijectivity needs no boxes, expressed by natural
         }
     }
     \iff
-    \Compose\strdgathered\strdinv{
+    \strdexternal\strdgathered{ \strdinv{
         \strdmid
         ,\strdfork{
             \strdmid
@@ -65,9 +67,9 @@ A nice consequence is that this bijectivity needs no boxes, expressed by natural
             ,\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
             ,\strdtubeendline
         }
-    }
+    } }
     =
-    \Compose\strdgathered\strdinv{
+    \strdexternal\strdgathered{ \strdinv{
         \strdmid
         ,\strdwidecell{1}{1}{g}
         ,\strdfork{
@@ -76,11 +78,11 @@ A nice consequence is that this bijectivity needs no boxes, expressed by natural
         ,\strdtubestart
         ,\strdtube\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
         ,\strdtubeendline
-    }
+    } }
 }
 where
 \In{align*}{
-    \Compose\strdgathered\strdinv{
+    \strdexternal\strdgathered{ \strdinv{
         \strdmid
         ,\strdfork{
             \strdmid
@@ -94,8 +96,8 @@ where
             ,\strdtubecap{1}{1},\strdat{Left}{\strdoverlabel{G}}
             ,\strdtubeendline
         }
-    } &\mydefeq
-    \Compose\strdgathered\strdinv{
+    } } &\mydefeq
+    \strdexternal\strdgathered{ \strdinv{
         \strdmid
         ,\strdfork{
             \strdmid
@@ -114,8 +116,8 @@ where
             ,\strdtubemid,\strdat{Left}{\strdoverlabel{G}}
             ,\strdtubeendline
         }
-    } \\
-    \strdgathered{
+    } } \\
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdfork{
             \strdmid
@@ -130,7 +132,7 @@ where
             ,\strdtubeendline
         }
     } &\mydefeq
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdfork{
             \strdmid
@@ -177,7 +179,7 @@ called the \emph{unit} and \emph{counit} respectively.
 
 \InList{strdproof,align*}{
     &
-    \strdgathered{
+    \strdexternal\strdgathered{
        \strdfork{
            \strdmid
            ,\strdmid
@@ -198,7 +200,7 @@ called the \emph{unit} and \emph{counit} respectively.
        }
     }
     =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid
         }
@@ -215,7 +217,7 @@ called the \emph{unit} and \emph{counit} respectively.
     }
     \\
     \iff &
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid,\strdmid,\strdmid
         }
@@ -235,7 +237,7 @@ called the \emph{unit} and \emph{counit} respectively.
         }
     }
     =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid,\strdmid,\strdmid
         }
@@ -258,7 +260,7 @@ called the \emph{unit} and \emph{counit} respectively.
     }
     \\
     \iff &
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid,\strdmid,\strdmid
         }
@@ -277,7 +279,7 @@ called the \emph{unit} and \emph{counit} respectively.
         }
     }
     =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdfork{
             \strdtubeof{strd frame}{
@@ -308,7 +310,7 @@ called the \emph{unit} and \emph{counit} respectively.
     }
     \\
     \iff &
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid,\strdmid
         }
@@ -317,7 +319,7 @@ called the \emph{unit} and \emph{counit} respectively.
         ,\strdwidecell{1}{1}{g}
     }
     =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid
         ,\strdfork{
             \strdtubeof{strd frame}{

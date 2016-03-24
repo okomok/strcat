@@ -1,5 +1,8 @@
 \section{Functors}
 
+\strdexternalname{functors}
+
+
 \subsection{The Definition}
 
 \definitionof{Functor}{
@@ -41,7 +44,7 @@
 
 In string diagrams, a functor can be depict as a \emph{tube} defined by
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid,\strdrlabel{B}
             ,\strdcell{f}
@@ -54,7 +57,7 @@ In string diagrams, a functor can be depict as a \emph{tube} defined by
             ,\strdtubeendline
         }
     } \mydefeq
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{FB}
         ,\strdbox{1}{1}{
             \strdmid,\strdrlabel{B}
@@ -67,7 +70,7 @@ In string diagrams, a functor can be depict as a \emph{tube} defined by
 }
 Placeholders make it simple:
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid,\strdrlabel{}
             ,\strdcell{\texttt{?}}
@@ -83,7 +86,7 @@ Placeholders make it simple:
 }
 One can check the functoriality ensures any tube like
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid,\strdrlabel{C}
             ,\strdcell{g}
@@ -105,13 +108,13 @@ be unambiguous. ``Join then tube" is the same as ``tube then join".
     Any functor preserves isomorphisms meaning that
     \In{align*}{
         (
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
         }
         ,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{A}
             ,\strdcell{g}
             ,\strdmid,\strdrlabel{B}
@@ -119,7 +122,7 @@ be unambiguous. ``Join then tube" is the same as ``tube then join".
         ) : \text{iso}
         \implies
         (
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid,\strdrlabel{B}
                 ,\strdcell{f}
@@ -132,7 +135,7 @@ be unambiguous. ``Join then tube" is the same as ``tube then join".
             }
         }
         ,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid,\strdrlabel{A}
                 ,\strdcell{g}
@@ -164,7 +167,7 @@ be unambiguous. ``Join then tube" is the same as ``tube then join".
     }
     is defined as 
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid
                 ,\strdcell{\Identity{\texttt{?}}}
@@ -197,7 +200,7 @@ be unambiguous. ``Join then tube" is the same as ``tube then join".
     }
     is defined by 
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid,\strdrlabel{}
                 ,\strdcell{\texttt{?}}
@@ -210,7 +213,7 @@ be unambiguous. ``Join then tube" is the same as ``tube then join".
                 ,\strdtubeendline
             }
         } \mydefeq
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{}
             ,\strdcell{\texttt{?}}
             ,\strdmid,\strdrlabel{}
@@ -228,7 +231,7 @@ be unambiguous. ``Join then tube" is the same as ``tube then join".
 }
 A contravariant functor is depicted as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid
             ,\strdcell{\strdupsidedown{\texttt{?}}}
@@ -259,7 +262,7 @@ A contravariant functor is depicted as
 
 With numbered placeholders, it is depicted as
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdfork{
                 \strdxscale{0.7}\strdljump
@@ -286,7 +289,7 @@ With numbered placeholders, it is depicted as
 }
 Spelling out the definition of functoriality, one can check a diagram like
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdxscale{0.7}\strdljump
             ,\strdmid
@@ -325,7 +328,7 @@ is unambiguous.
     }
     is defined as
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdfork{
                     \strdxscale{0.7}\strdljump
@@ -354,7 +357,7 @@ The definition of $F(\texttt{?},B)$ is an exercise.
 
 % One can spell out the functoriality:
 % \In{align*}{
-%     \strdgathered{
+%     \strdexternal\strdgathered{
 %         \strdfork{
 %             \strdxscale{0.7}\strdljump
 %             ,\strdmid
@@ -388,7 +391,7 @@ The definition of $F(\texttt{?},B)$ is an exercise.
 %             }
 %         }
 %     } \,=\,
-%     \strdgathered{
+%     \strdexternal\strdgathered{
 %         \strdfork{
 %             \strdxscale{0.7}\strdljump
 %             ,\strdmid
@@ -427,7 +430,7 @@ The definition of $F(\texttt{?},B)$ is an exercise.
     The \emph{category of small categories} $\catCat$ is the category whose objects are %
     all small categories and whose morphisms are functors:
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid,\strdrlabel{\cat{C}}
                 ,\strdcell{G}
@@ -450,7 +453,7 @@ The definition of $F(\texttt{?},B)$ is an exercise.
 }
 In other words, there is a functional box such that
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid,\strdrlabel{B}
             ,\strdmid,\strdrlabel{A}
@@ -463,7 +466,7 @@ In other words, there is a functional box such that
             ,\strdtubeendline
         }
     } =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdfork{
             \strdmid,\strdrlabel{B}
             ,\strdcell{f}
@@ -477,12 +480,12 @@ In other words, there is a functional box such that
             ,\strdtubeendline
         }
     } \iff
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{B}
         ,\strdcell{f}
         ,\strdmid,\strdrlabel{A}
     } =
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{B}
         ,\strdbox{1.7}{1.7}{
             \strdfork{
@@ -501,7 +504,7 @@ In other words, there is a functional box such that
 }
 One can make this box better-looking
 \In{align*}{
-    \strdgathered{
+    \strdexternal\strdgathered{
         \strdmid,\strdrlabel{B}
         ,\strdfork{
             \strdmid
@@ -528,7 +531,7 @@ One can make this box better-looking
     \label{ff.fun}
     This box has a functoriality-like property:
     \In{align*}{
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{C}
             ,\strdfork{
                 \strdmid
@@ -567,7 +570,7 @@ One can make this box better-looking
                 ,\strdtubesqcup{1}{1}
             }
         } \,=\,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{C}
             ,\strdfork{
                 \strdmid
@@ -600,7 +603,7 @@ Combined with \cref{f.p.inv},
     \In{align*}{
         &
         (
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid,\strdrlabel{B}
                 ,\strdmid,\strdrlabel{A}
@@ -614,7 +617,7 @@ Combined with \cref{f.p.inv},
             }
         }
         ,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdfork{
                 \strdmid,\strdrlabel{A}
                 ,\strdmid,\strdrlabel{B}
@@ -631,7 +634,7 @@ Combined with \cref{f.p.inv},
         \\
         \iff &
         (
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{B}
             ,\strdfork{
                 \strdmid
@@ -653,7 +656,7 @@ Combined with \cref{f.p.inv},
             }
         }
         ,
-        \strdgathered{
+        \strdexternal\strdgathered{
             \strdmid,\strdrlabel{A}
             ,\strdfork{
                 \strdmid
