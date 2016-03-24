@@ -136,6 +136,31 @@ Identity morphisms can be depicted as
 }
 As an exercise, write down the associativity and unitality using these diagrams. 
 
+\definitionof{Naming}{
+    We don't distinguish the following two forms
+    \In{align*}{
+        \strdgathered{
+            \strdmid,\strdrlabel{B},\strdstartlabel{\cat C}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{A}
+        } \,\sim\,
+        \strdgathered{
+            \strdroad\strdmid,\strdroadlabel{B}{A}
+            ,\strdcell{h},\strdstartlabel{\catSet}
+        }
+    }
+    We say $h$ in \cat C is \emph{named} in \catSet.
+}
+
+% Needs extranaturality
+% \In{proposition}{
+%     Naming {preserves naturalty}, meaning that given a family of morphisms 
+%     $(f_X : FX \to GX)_X$ with infrafunctors $F$ and $G$, %
+%     $f_X$ is natural in $X$ if and only if
+%     $\operatorname{name}(f_X): \catSing \to \catSet(FX,GX)$ is natural in $X$. %
+%     So does unnaming.
+% }
+
 \definitionof{Hom-Functor}{
     Hom-sets can be extended to the \emph{Hom-functor}
     \In{align*}{
@@ -324,32 +349,12 @@ the following two propositions ensure ``move the right-side leg up and down" wor
     }
 }
 
-
-\definitionof{Naming}{
-    In case $A$ is the singleton set, which is omitted in diagrams, a currying
-    \In{align*}{
-        \strdgathered{
-            \strdmid,\strdrlabel{C}
-            ,\strdcell{h}
-            ,\strdmid,\strdrlabel{B}
-        } \,\sim\,
-        \strdgathered{
-            \strdroad\strdmid,\strdroadlabel{C}{B}
-            ,\strdcell{h}
-        }
-        % \strdgathered{
-        %     \strdtubestart%line
-        %     ,\strdtubemid,\strdbackground{strd roadcolor}
-        %     ,\strdwidecell{1}{1}{h}
-        %     ,\strdat{Left}{\strdrlabel{C}}
-        %     ,\strdat{Right}{\strdllabel{B}}
-        % }
-    }
-    is trivial. We call it a \emph{naming} (\cite{f06week05b}).
+\In{remark}{
+    It is equivalently naming to curry a function whose left-side leg is the singleton set.
 }
 
 \In{proposition}{
-    Currying \emph{preserves naturality}, meaning that given a family of functions %
+    Currying preserves naturality, meaning that given a family of functions %
     $(f_X : FX \times B \to GX)_X$ with infrafunctors $F$ and $G$,
     $f_X$ is natural in $X$ if and only if $\operatorname{curry}(f_X)$ is. So does uncurrying.
 }

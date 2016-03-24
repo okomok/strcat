@@ -3,12 +3,12 @@
 % \begin{definition}[Vacuous Truth]
 % Given boolean expressions $P$ and $Q$, a boolean expression
 % \In{align*}{
-%     P \implies Q
+%     P \Rightarrow Q
 % } 
 % is true if $P$ is false.
 % As a consequence,
 % \In{align*}{
-%     (\forall x \in X)(Q(x)) \mydefeq (\forall x)(x \in X \implies Q(x))
+%     (\forall x \in X)(Q(x)) \mydefeq (\forall x)(x \in X \Rightarrow Q(x))
 % }
 % is true in case $X$ is the empty set.
 % \end{definition}
@@ -61,10 +61,10 @@
 \definitionof{Uniqueness}{
     Given a predicate $P$, a predicate $!P$ is defined by
     \In{align*}{
-        !P(a) \mydefeq P(a) \wedge (\forall a\myprime)(P(a\myprime) \implies a = a\myprime)
+        !P(x) \mydefeq P(x) \wedge (\forall x\myprime)(P(x\myprime) \Rightarrow x = x\myprime)
     }
     using the third lambda-tasted form, meaning that %
-    ``$a$ is the unique thing that satisfies $P$".
+    ``$x$ is the unique thing that satisfies $P$".
 }
 
 \definitionof{Unique Existential Quantifier}{
@@ -72,24 +72,25 @@
     where $\circ$ is the function composition. %
     Spelling out the detail,
     \In{align*}{
-        (\exists!a)(P(a)) = (\exists a)(!P(a))
+        (\exists!x)(P(x)) = (\exists x)(!P(x))
     }
-    meaning that ``there exists a unique thing that satisfies $P$".
+    meaning that ``there exists x unique thing that satisfies $P$".
 }
 
 \In{remark}{
     On the other hand,
     \In{math}{
-        (\exists a)(!P(a) \wedge Q(a))
+        (\exists x)(!P(x) \wedge Q(x))
     }
-    states ``there exists a unique $a$ that satisfies $P$. Furthermore, the $a$ satisfies $Q$".
+    states ``there exists a unique $x$ that satisfies $P$. Furthermore, the $x$ satisfies $Q$".
 }
 
-\In{definition}{
-    Given a predicate $P$ and a set $X$,
+\definitionof{Constraint Form}{
+    Given predicates $P$ and $Q$,
     \In{align*}{
-        (\forall x \in X)(P(x)) &\mydefeq (\forall x)(x \in X \implies P(x)) \\
-        (\exists x \in X)(P(x)) &\mydefeq (\exists x)(x \in X \wedge P(x))
+        (\forall x : Q)(P(x)) &\mydefeq (\forall x)(Q(x) \Rightarrow P(x)) \\
+        (\exists x : Q)(P(x)) &\mydefeq (\exists x)(Q(x) \wedge P(x)) \\
+        (\exists!x : Q)(P(x)) &\mydefeq (\exists!x)(Q(x) \wedge P(x))
     }
 }
 
@@ -105,7 +106,7 @@
     Given a binary predicate $P$,
     \In{align*}{
         & (\forall x \in X)(\exists!y\in Y)(P(x,y)) \\
-        \iff & (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(P(x,y) \iff y = f(x))
+        \iff & (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(P(x,y) \Leftrightarrow y = f(x))
     }
 }
 
@@ -116,7 +117,7 @@
 \definitionof{Functional Bijectivity}{
     Given a function $g : Y \to X$, the statement
     \In{align*}{
-        (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(x = g(y) \iff y = f(x))
+        (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(x = g(y) \Leftrightarrow y = f(x))
     }
     is known as the \emph{bijectivity} of $f$ and $g$. This is a special case of universality where $P(x,y)$ is $x = g(y)$.
 }

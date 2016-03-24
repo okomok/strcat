@@ -374,7 +374,7 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
         ,\strdwidecell{1}{1}{v}
         ,\strdmid
     } \\
-    \underset{\myreason{curry}}{\iff} &
+    \iff &
     \strdgathered{
         \strdfork{
             \strdmid
@@ -383,26 +383,25 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
         ,\strdtube\strdtubemid
         ,\strdwidecell{1}{1}{\lim}
         ,\strdmid
-        ,\strdwidecell{1}{1}{g}
-        ,\strdtubestart
-        ,\strdtubemid,\strdat{Right}{\strdrlabel{B}}
-    } =
+        ,\strdcell{g(x)}
+        ,\strdmid,\strdrlabel{B}
+    } \underset{\forall x}{=}
     \strdgathered{
         \strdfork{
             \strdmid
         }
         ,\strdtubestartline
         ,\strdtube\strdtubemid
-        ,\strdwidecell{1}{1}{v}
-        ,\strdtubemid,\strdat{Right}{\strdrlabel{B}}
+        ,\strdwidecell{1}{1}{v(x)}
+        ,\strdmid,\strdrlabel{B}
     } \\
-    \underset{\myreason{limit}}{\iff} &
+    \iff &
     \strdgathered{
         \strdmid
-        ,\strdwidecell{1}{1}{g}
+        ,\strdcell{g(x)}
         ,\strdtubestart
-        ,\strdtubemid,\strdat{Right}{\strdrlabel{B}}
-    } =
+        ,\strdmid,\strdrlabel{B}
+    } \,\underset{\forall x}{=}
     \strdgathered{
         \strdmid
         ,\strdbox{2}{2}{
@@ -411,12 +410,11 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
             }
             ,\strdtubestart
             ,\strdtube\strdtubemid
-            ,\strdwidecell{1}{1}{v}
+            ,\strdwidecell{1}{1}{v(x)}
         },\strdat{Left StartCorner}{\strdoverlabel{\lim}}
-        ,\strdtubestart
-        ,\strdtubemid,\strdat{Right}{\strdrlabel{B}}
+        ,\strdmid,\strdrlabel{B}
     }\\
-    \underset{\myreason{curry}}{\iff} &
+    \iff &
     \strdgathered{
         \strdtubestart
         ,\strdtubemid,\strdbackground{strd roadcolor},\strdat{Right}{\strdllabel{B}}
@@ -440,12 +438,11 @@ In diagrams, $G$ is such that there exists some box $\texttt{!}$ satisfying
                 }
                 ,\strdtubestart
                 ,\strdtube\strdtubemid
-                ,\strdwidecell{1}{1}{v}
+                ,\strdwidecell{1}{1}{v(x)}
             },\strdat{Left StartCorner}{\strdoverlabel{\lim}}
-            ,\strdtubestart
-            ,\strdtubemid,\strdat{Right}{\strdrlabel{B}}
-            ,\strdat{Left End}{\strdmid}
-        }%,\strdat{Left}{\strdoverlabel{\strdlvert{\operatorname{curry}}}}
+            ,\strdmid,\strdrlabel{B}
+        },\strdat{Left}{\strdoverlabel{\Lambda_x}}
+        ,\strdmid
     }
 }
 
