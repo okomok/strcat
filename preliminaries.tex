@@ -42,7 +42,7 @@
 }
 
 
-\subsection{Universality}
+\subsection{Bijectivity}
 
 \definitionof{Predicate}{
     We call a Boolean-valued function a \emph{predicate}.
@@ -94,15 +94,15 @@
     }
 }
 
-\definitionof{Universality}{
-    Given a binary predicate $P$, we boldly call a statement of the form
-    \In{align*}{
-        (\forall x \in X)(\exists!y\in Y)(P(x,y))
-    }
-    the \emph{universality} of $P$.
-}
+% \definitionof{Universality}{
+%     Given a binary predicate $P$, we boldly call a statement of the form
+%     \In{align*}{
+%         (\forall x \in X)(\exists!y\in Y)(P(x,y))
+%     }
+%     the \emph{universality} of $P$.
+% }
 
-\propositionof{Functional Universality}{
+\In{proposition}{%\propositionof{Functional Universality}{
     Given a binary predicate $P$,
     \In{align*}{
         & (\forall x \in X)(\exists!y\in Y)(P(x,y)) \\
@@ -114,12 +114,13 @@
     $(\implies)$ by the axiom of choice. $(\impliedby)$ immediate.
 }
 
-\definitionof{Functional Bijectivity}{
-    Given a function $g : Y \to X$, the statement
+\definitionof{Bijection}{
+    A \emph{bijection} is a pair of functions $f : X \to Y$ and $g : Y \to X$ satisfying the \emph{bijectivity}
     \In{align*}{
-        (\exists f : X \to Y)(\forall x \in X)(\forall y \in Y)(x = g(y) \Leftrightarrow y = f(x))
+        (\forall x \in X)(\forall y \in Y)(x = g(y) \Leftrightarrow y = f(x))
     }
-    is known as the \emph{bijectivity} of $f$ and $g$. This is a special case of universality such that $P(x,y)$ is $x = g(y)$.
+    A function that is a part of a bijection is called \emph{bijective}. %
+    Also each of the pair is called a bijection.
 }
 
 
