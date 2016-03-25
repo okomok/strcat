@@ -1,16 +1,11 @@
 \ProvidesPackage{cat}
 
-\usepackage{amsmath}% boldsymbol
-%\usepackage{textcomp}% textdblhyphen
-
 \newcommand*{\cat}[1]{\ensuremath{\mathcal{#1}}}
 \newcommand*{\catOb}[1]{\ensuremath{\operatorname{Ob}(\mathcal{#1})}}
-\newcommand*{\catCat}{\ensuremath{\boldsymbol{\mathrm{Cat}}}}
-\newcommand*{\catSet}{\ensuremath{\boldsymbol{\mathrm{Set}}}}
+\newcommand*{\catCat}{\ensuremath{\textbf{Cat}}}
+\newcommand*{\catSet}{\ensuremath{\textbf{Set}}}
 \newcommand*{\catop}{\ensuremath{^{\operatorname{op}}}}
 \newcommand*{\catNat}{\ensuremath{\operatorname{Nat}}}
 \newcommand*{\catSing}{\ensuremath{\lbrace\ast\rbrace}}
 \newcommand*{\catph}[1]{\ensuremath{\texttt{#1}}}
-\newcommand*{\catMnd}[1]{\ensuremath{\boldsymbol{\mathrm{Mnd}}(\cat{#1})}}
-% \newcommand*{\cathyphen}{\ensuremath{\text{\--}}}
-% \newcommand*{\catdblhyphen}{\ensuremath{\text{\textdblhyphen}}}
+\newcommand*{\catMnd}[1]{\ensuremath{\textbf{Mnd}(\cat{#1})}}
