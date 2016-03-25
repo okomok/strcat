@@ -21,24 +21,23 @@
     We casually call any form of anonymous functions a \emph{lambda expression}.
 }
 
-\definitionof{Lambda Form}{
-    Given a function $\Gamma$ whose domain is a set of functions, %
-    you can choose a short form of $\Gamma(\Lambda_x y)$ from the following \emph{lambda forms} of $\Gamma$
-    \In{enumerate}{
-        \item $\Gamma_x y$
-        \item $\Gamma x.y$
-        \item $(\Gamma x)(y)$
-        \item $\Gamma x y$
-    }
-}
-
-
 \definitionof{Placeholder Expression}{
     For simple lambda expressions, you may use \emph{placeholders} for example,
     \In{align*}{
         \texttt{?}{+}1 \mydefeq \Lambda_n n{+}1
     }
     Placeholder symbols can vary: $\texttt{?}$, $\texttt{-}$, $\texttt{1}$, etc.
+}
+
+\definitionof{Lambda Form}{
+    Given a function $\Gamma$ whose domain is a set of functions, %
+    you can choose an abbreviation for $\Gamma(\Lambda_x y)$ from the following \emph{lambda forms} of $\Gamma$
+    \In{enumerate}{
+        \item $\Gamma_x y$
+        \item $\Gamma x.y$
+        \item $(\Gamma x)(y)$
+        \item $\Gamma x y$
+    }
 }
 
 
