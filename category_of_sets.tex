@@ -353,8 +353,22 @@ the following two propositions ensure ``move the right-side leg up and down" wor
 }
 
 \In{remark}{
-    It is equivalently naming to curry a function whose left-side leg is the singleton set.
+    Currying a function whose left-side leg is the singleton set:
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{C}
+            ,\strdcell{h}
+            ,\strdfork{\strdimplicit\strdleft}
+            ,\strdright,\strdrlabel{B}
+        } \,\sim\,
+        \strdexternal\strdgathered{
+            \strdroad\strdmid,\strdroadlabel{C}{B}
+            ,\strdcell{h}
+        }
+    }
+    is equivalent to naming. 
 }
+
 
 \In{proposition}{
     Currying preserves naturality, meaning that given a family of functions %
