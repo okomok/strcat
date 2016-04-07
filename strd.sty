@@ -595,20 +595,20 @@
 \newcommand*{\strdtubeljump}{\strdcomposeC\strdtubeljumpC}
 \newcommand*{\strdtubeljumpC}[2]{% {newid}{previd}
     \strdljumpC{#1 LeftImpl}{#2 Left}
-    \strdempty@{#1 Left}{#1 LeftImpl}
+    \strdempty@{#1 Left}{#1 LeftImpl End}
     \strdljumpC{#1 Impl}{#2}
-    \strdempty@{#1}{#1 Impl}
+    \strdempty@{#1}{#1 Impl End}
     \strdljumpC{#1 RightImpl}{#2 Right}
-    \strdempty@{#1 Right}{#1 RightImpl}
+    \strdempty@{#1 Right}{#1 RightImpl End}
 }
 \newcommand*{\strdtuberjump}{\strdcomposeC\strdtuberjumpC}
 \newcommand*{\strdtuberjumpC}[2]{% {newid}{previd}
     \strdrjumpC{#1 LeftImpl}{#2 Left}
-    \strdempty@{#1 Left}{#1 LeftImpl}
+    \strdempty@{#1 Left}{#1 LeftImpl End}
     \strdrjumpC{#1 Impl}{#2}
-    \strdempty@{#1}{#1 Impl}
+    \strdempty@{#1}{#1 Impl End}
     \strdrjumpC{#1 RightImpl}{#2 Right}
-    \strdempty@{#1 Right}{#1 RightImpl}
+    \strdempty@{#1 Right}{#1 RightImpl End}
 }
 
 % tubepartleft

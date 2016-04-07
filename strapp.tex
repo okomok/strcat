@@ -1,0 +1,984 @@
+\documentclass{article}
+\title{Applicative Functors with Strings}
+\author{Shunsuke Sogame}
+
+\usepackage{my,cat,lambdax,hask,strd,strdproof,strdexternal}
+
+\allowdisplaybreaks
+\mynoabstract
+
+\include{refsetup}
+
+\usetikzlibrary{external}
+\tikzexternalize[prefix=out/]
+\graphicspath{ {out/} }
+
+
+\begin{document}
+
+\maketitle
+
+
+\section{Introduction}
+
+We will show how \emph{applicative functors} are represented in string diagrams. %
+Don't trust my poor mathematics. Any correction is welcome at %
+\href{https://github.com/okomok/strcat}{github.com/okomok/strcat}.  
+
+
+\section{String Diagrams}
+\strdexternalname{strapp_string_diagrams}
+
+We introduce \emph{string diagrams}, which are originated in category theory. %
+Don't be afraid. A string diagram is just a kind of expression trees.
+
+\subsection{Vertical Composition}
+
+First we define how to join strings vertically.
+
+\In{definition}{
+    A type $a$ is depicted as a string:
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{a}
+        }
+    }
+    Type names are often omitted.
+}
+
+\In{definition}{
+    A function is depicted as a node:
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{b}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{a}
+        }
+        \mydefeq
+        f \haskop{::} a \haskop{->} b
+    }
+}
+
+\In{definition}{
+    An identity function is indistinguishable from a type:
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{a}
+        }
+        \mydefeq
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{a}
+            ,\strdcell{\texttt{id}}
+            ,\strdmid,\strdrlabel{a}
+        }
+    }
+}
+
+%\In{definition}{
+\definitionof{Vertical Composition}{
+    The function composition joins strings: 
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{c}
+            ,\strdcell{g}
+            ,\strdmid,\strdrlabel{b}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{a}
+        }
+        \mydefeq
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{c}
+            ,\strdcell{g\texttt{.}f}
+            ,\strdmid,\strdrlabel{a}
+        }
+    }
+}
+
+One can check that any diagram build upon these definitions has no ambiguity due to the famous laws:
+\In{align*}{
+    h\haskdot(g\haskdot f) &= (h\haskdot g) \haskdot f \\
+    \texttt{id}\haskdot f &= f \\
+    g\haskdot \texttt{id} &= g \\
+}
+
+%\In{definition}{
+\definitionof{Value}{
+    Strings for the unit type \texttt{()} can be omitted so that a value $x \haskop{::} a$ is represented as
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{a}
+            ,\strdcell{x}
+        }
+    }
+}
+
+For example, a function application $f\,x$ is depicated as
+\In{align*}{
+    \strdexternal\strdgathered{
+        \strdmid,\strdrlabel{b}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{a}
+        ,\strdcell{x}
+    }
+}
+
+
+\subsection{Functors}
+\strdexternalname{strapp_functors}
+
+\definitionof{Functional Box}{
+    Given a function $k \haskop{::} (a \haskop{->} b) \haskop{->} (a\myprime \haskop{->} b\myprime)$, %
+    an application $k\,h$ can be depicated as a \emph{functional box}:
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{b\myprime}
+            ,\strdbox{1}{1}{
+                \strdmid,\strdrlabel{b}
+                ,\strdcell{h}
+                ,\strdmid,\strdrlabel{a}
+            },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{k}}
+            ,\strdmid,\strdrlabel{a\myprime}
+        }
+    }
+    rather than
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{a\myprime \haskop{->} b\myprime}
+            ,\strdcell{k}
+            ,\strdmid,\strdrlabel{a \haskop{->} b}
+            ,\strdcell{h}
+        }
+    }
+}
+
+
+\definitionof{Functorial Tube}{
+    Given a $\haskop{Functor} f$, an application of \haskop{fmap} %
+    can be depicated as a \emph{functorial tube} defined by 
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{a}
+                ,\strdcell{h}
+                ,\strdmid,\strdrlabel{b}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdtubemid
+                ,\strdat{Left Start}{\strdcellof{strd overlabel}{f}}
+                ,\strdtubeendline
+            }
+        } \mydefeq
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{fb}
+            ,\strdbox{1}{1}{
+                \strdmid,\strdrlabel{b}
+                ,\strdcell{h}
+                ,\strdmid,\strdrlabel{a}
+            },\strdat{Left}{\strdoverlabel{\strdlvert{\haskop{fmap}}}}
+            ,\strdmid,\strdrlabel{fa}
+        }
+    }
+    Tube names are often omitted.
+}
+
+The functor laws state that ``tube then join" equals to ``join then tube" so that %
+any diagram like
+\In{align*}{
+    \strdexternal\strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{c}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{b}
+            ,\strdcell{g}
+            ,\strdmid,\strdrlabel{a}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdtubemid
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }
+}
+has no ambiguity.
+
+
+\subsection{Horizontal Composition}
+\strdexternalname{strapp_string_diagrams_ex}
+
+We will make string diagrams two-dimentional, equipped with \emph{horizontal composition}.
+
+\In{definition}{
+    Parallel strings are pairs:
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdljump,\strdmid,\strdrlabel{a_1}
+            }
+            ,\strdmid,\strdrlabel{a_2}
+        } \mydefeq
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{\haskprod{a_1}{a_2}}
+        }
+    }
+    We don't distinguish \haskprod{a_1}{\haskprod{a_2}{a_3}} from %
+    \haskprod{\haskprod{a_1}{a_2}}{a_3} so that any tuple can be depicated as
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdljump,\strdmid,\strdrlabel{a_1}
+            }
+            ,\strdfork{
+                \strdmid,\strdrlabel{a_2}
+            }
+            ,\strdfork{
+                \strdrjump,\strdmid,\strdrlabel{a_3}
+            }
+        }\cdots
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{a_n}
+            }
+        }
+    }
+    without parenthese.
+}
+
+%\In{definition}{
+\definitionof{Horizontal Composition}{
+    Parallel nodes are defined by
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{b_1}
+                ,\strdcell{f_1}
+                ,\strdmid,\strdrlabel{a_1}
+            }
+            ,\strdfork{
+                \strdrjump
+                ,\strdmid,\strdrlabel{b_2}
+                ,\strdcell{f_2}
+                ,\strdmid,\strdrlabel{a_2}
+            }
+        } \mydefeq
+        \haskbackslash\haskprod{a_1}{a_2} \haskop{->} \haskprod{f_1\,a_1}{f_2\,a_2} 
+    }
+    Three or more parallel nodes are similarly defined.
+}
+
+
+\propositionof{Sliding}{
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid, \strdempty, \strdrlabel{b_1},
+                \strdmid, 
+                \strdcell{f_1},
+                \strdmid, \strdrlabel{a_1}
+            },
+            \strdxscale{1.2}\strdrjump,
+            \strdmid, \strdrlabel{b_2},
+            \strdcell{f_2},
+            \strdmid, \strdempty, \strdrlabel{a_2},
+            \strdmid
+        } =
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid, \strdrlabel{b_1},
+                \strdcell{f_1},
+                \strdmid, \strdrlabel{a_1}
+            },
+            \strdxscale{1.2}\strdrjump, \strdmid, \strdrlabel{b_2},
+            \strdcell{f_2},
+            \strdmid, \strdrlabel{a_2}
+        } =
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid, \strdrlabel{b_1},
+                \strdcell{f_1},
+                \strdmid, \strdempty, \strdrlabel{a_1},
+                \strdmid
+            },
+            \strdxscale{1.2}\strdrjump,
+            \strdmid, \strdempty, \strdrlabel{b_2},
+            \strdmid,
+            \strdcell{f_2},
+            \strdmid, \strdrlabel{a_2}
+        }
+    }
+}
+
+
+
+\subsection{Currying}
+\strdexternalname{strapp_currying}
+
+\definitionof{Band}{
+    A special string for function types, a \emph{band} is defined by
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdroad\strdmid,\strdroadlabel{b}{a}
+        } \mydefeq
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{a \haskop{->} b}
+        }
+    }
+    Notice that the order of types is flipped. %
+    So we often write $b \leftarrow a$ as $a \haskop{->} b$.
+}
+
+
+\definitionof{Currying}{
+    With bands, currying is represented by
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{c}
+            ,\strdcell{f}
+            ,\strdfork{
+                \strdleft,\strdrlabel{a}
+            }
+            ,\strdright,\strdrlabel{b}
+        } \sim
+        \strdexternal\strdgathered{
+            \strdroad\strdmid,\strdroadlabel{c}{b}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{a}
+        }
+    }
+    We don't distinguish these two diagrams, %
+    because ``move the right-side leg up and down" works correct in any form of diagrams.
+}
+
+\definitionof{Composition}{
+}
+
+\definitionof{Idenitity}{
+}
+
+\definitionof{Apply Operator}{
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdroad\strdmid,\strdroadlabel{b}{a}
+            ,\strdcell{\texttt{\$}}
+            ,\strdroad\strdmid,\strdroadlabel{b}{a}
+        } \mydefeq
+        \strdexternal\strdgathered{
+            \strdroad\strdmid,\strdroadlabel{b}{a}
+        }
+    }
+}
+
+\definitionof{Comma Operator}{
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdljump
+                ,\strdmid,\strdrlabel{a_1}
+                ,\strdwidecell{0.5}{1.5}{\texttt{,}}
+                ,\strdmid,\strdrlabel{a_1}
+            }
+            ,\strdmid,\strdrlabel{a_2}
+            ,\strdmid,\strdrlabel{a_2}
+        } \mydefeq
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdljump,\strdmid,\strdrlabel{a_1}
+            }
+            ,\strdmid,\strdrlabel{a_2}
+        }
+    }
+}
+
+\In{proposition}{
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{c}
+            ,\strdcell{\texttt{\$}}
+            ,\strdfork{
+                \strdroad\strdleft,\strdroadlabel{c}{b}
+                ,\strdcell{f}
+                ,\strdmid,\strdrlabel{a}
+            }
+            ,\strdfork{
+                \strdright,\strdrlabel{b}
+            }
+        } =
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{c}
+            ,\strdcell{f}
+            ,\strdfork{
+                \strdleft,\strdrlabel{a}
+            }
+            ,\strdright,\strdrlabel{b}
+        }
+    }
+}
+
+\section{Applicative Functors}
+
+\subsection{The Definition}
+\strdexternalname{strapp_applicative_def}
+
+Using string diagrams, an $\texttt{Applicative}\,f$ consists of
+\In{enumerate}{
+    \item $\texttt{Functor}\,f$
+    \item \In{math}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{a}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdwidecell{1}{1}{\texttt{pure}}
+            }
+            ,\strdmid,\strdrlabel{a}
+        }
+    }
+    \item \In{math}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{b},
+                \strdwidecell{2}{2}{\texttt{<*>}},
+                \strdfork{
+                    \strdljump,\strdroad\strdmid,\strdroadlabel{b}{a}
+                },
+                \strdrjump,
+                \strdmid,\strdrlabel{a}
+            },
+            \strdtube{
+                \strdtubestartline,
+                \strdtubemid,
+                \strdfork{
+                    \strdxscale{1}\strdtubeljump,\strdtubemid,\strdtubeendline
+                },
+                \strdxscale{1}\strdtuberjump,\strdtubemid,\strdtubeendline
+            }
+        }
+    }
+}
+satisfying the following laws, which we can never understand,
+\In{itemize}{
+    \item \InList{math,aligned}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{a},
+                \strdwidecell{2}{2}{\texttt{<*>}},
+                \strdfork{
+                    \strdljump,\strdroad\strdmid,\strdroadlabel{a}{a}
+                },
+                \strdrjump,
+                \strdmid,\strdrlabel{a}
+            },
+            \strdtubestartline,
+            \strdtube\strdtubemid,
+            \strdfork{
+                \strdtube{\strdxscale{1}\strdtubeljump,\strdtubemid,\strdtubeendline}
+                ,\strdwidecell{1}{1}{\texttt{pure}}
+                ,\strdroad\strdmid,\strddeadend,\strdroadlabel{}{a}
+            },
+            \strdtube{\strdxscale{1}\strdtuberjump,\strdtubemid,\strdtubeendline}
+        } =
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{a}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
+        }
+    }
+    \item \InList{math,aligned}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{b},
+                \strdwidecell{2}{2}{\texttt{<*>}},
+                \strdfork{
+                    \strdljump,\strdroad\strdmid,\strdroadlabel{b}{a}
+                },
+                \strdrjump,
+                \strdmid,\strdrlabel{a}
+            },
+            \strdtubestartline,
+            \strdtube\strdtubemid,
+            \strdfork{
+                \strdtube{\strdxscale{1}\strdtubeljump,\strdtubemid,\strdtubeendline}
+                ,\strdwidecell{1}{1}{\texttt{pure}}
+                ,\strdroad\strdmid,\strdroadlabel{b}{a}
+                ,\strdcell{h}
+            },
+            \strdtube{\strdxscale{1}\strdtuberjump,\strdtubemid,\strdtubeendline}
+            ,\strdwidecell{1}{1}{\texttt{pure}}
+            ,\strdmid,\strdrlabel{a}
+        } =
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{b}
+            }
+            ,\strdtube{
+                \strdtubestartline
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
+            ,\strdwidecell{1}{1}{\texttt{pure}}
+            ,\strdmid,\strdrlabel{b}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{a}
+        }
+    }
+    \item \InList{math,aligned}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{b},
+                \strdwidecell{2}{2}{\texttt{<*>}},
+                \strdfork{
+                    \strdljump,\strdroad\strdmid,\strdroadlabel{b}{a}
+                },
+                \strdrjump,
+                \strdmid,\strdrlabel{a}
+            },
+            \strdtubestartline,
+            \strdtube\strdtubemid,
+            \strdfork{
+                \strdtube{\strdxscale{1}\strdtubeljump,\strdtubemid,\strdtubeendline}
+            },
+            \strdtube{\strdxscale{1}\strdtuberjump,\strdtubemid,\strdtubeendline}
+            ,\strdwidecell{1}{1}{\texttt{pure}}
+            ,\strdmid,\strdrlabel{a}
+            ,\strdcell{y}
+        } =
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{b},
+                \strdwidecell{2.8}{2.8}{\texttt{<*>}},
+                \strdfork{
+                    \strdxscale{1.5}\strdljump,\strdroad\strdmid,\strdroadlabel{b}{b{\leftarrow}a}
+                },
+                \strdxscale{1.5}\strdrjump,
+                \strdroad\strdmid,\strdroadlabel{b}{a}
+            },
+            \strdtubestartline,
+            \strdtube\strdtubemid,
+            \strdfork{
+                \strdtube{\strdxscale{1.5}\strdtubeljump,\strdtubeextend{0.2}{0.8},\strdtubemid,\strdtubeendline}
+                ,\strdwidecell{1.5}{1.5}{\texttt{pure}}
+                ,\strdroad\strdmid,\strdroadlabel{b}{b{\leftarrow}a}
+                ,\strdroadlaside
+                ,\strdbox{2}{2}{
+                    \strdmid,\strdrlabel{b}
+                    ,\strdcell{\texttt{\$}}
+                    ,\strdfork{
+                        \strdroad\strdleft,
+                        \strdyhalf{\strdroad\strdmid},\strdat{Start}{\strdroadlabel{b}{a}}
+                    }
+                    ,\strdright,\strdrlabel{a}
+                    ,\strdcell{y}
+                    ,\strdyhalf{\strdjump}
+                }%,\strdat{Left}{\strdoverlabel{\strdlvert{\texttt{curry}}}}
+            },
+            \strdtube{\strdxscale{1.5}\strdtuberjump,\strdtubemid,\strdtubeendline}
+        }
+    }
+    \item TODO
+    \item \InList{math,aligned}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{b},
+                \strdwidecell{2}{2}{\texttt{<*>}},
+                \strdfork{
+                    \strdljump,\strdroad\strdmid,\strdroadlabel{b}{a}
+                },
+                \strdrjump,
+                \strdmid,\strdrlabel{a}
+            },
+            \strdtubestartline,
+            \strdtube\strdtubemid,
+            \strdfork{
+                \strdtube{\strdxscale{1}\strdtubeljump,\strdtubemid,\strdtubeendline}
+                ,\strdwidecell{1}{1}{\texttt{pure}}
+                ,\strdroad\strdmid,\strdroadlabel{b}{a}
+            },
+            \strdtube{\strdxscale{1}\strdtuberjump,\strdtubemid,\strdtubeendline}
+        } =
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{b},
+                \strdwidecell{2}{2}{\texttt{fmap}},
+                \strdfork{
+                    \strdljump,\strdroad\strdmid,\strdroadlabel{b}{a}
+                },
+                \strdrjump,
+                \strdmid,\strdrlabel{a}
+            },
+            \strdtubestartline,
+            \strdtube\strdtubemid,
+            \strdtube{\strdxscale{2}\strdtuberjump,\strdtubemid,\strdtubeendline}
+        }
+    }
+}
+
+\In{remark}{
+    The last law is redundant in case the \emph{free theorem} enabled.
+}
+
+
+\subsection{Lax Functors}
+\strdexternalname{strapp_lax}
+
+To depict applicative functors cuter, we represent an applicative functor as a forkable tube, %
+which is called a \emph{lax functor} in category theory. 
+
+\In{definition}{
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdyscale{0.5}{\strdimplicit\strdmid},
+                \strdimplicit\strdmid,\strdrlabel{\texttt{()}}
+            },
+            \strdtubestartline,
+            \strdtube{\strdyhalf\strdtubeclose}
+        } &\mydefeq
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdyscale{1}{\strdimplicit\strdmid},\strdrlabel{\texttt{()}},
+                \strdimplicit\strdmid,\strdrlabel{\texttt{()}}
+            },
+            \strdtubestartline,
+            \strdtube\strdtubemid,
+            \strdwidecell{1}{1}{\texttt{pure}}
+        }\\
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdparallel{
+                    \strdseq{\strdljump,\strdmid,\strdrlabel{a}},
+                    \strdseq{\strdrjump,\strdmid,\strdrlabel{b}}
+                }
+            },
+            \strdtubestart,
+            \strdtubeextend{1}{1},\strdcutoff\strdtubebound,
+            \strdparallel{
+                \strdseq{\strdtube{\strdtubepartleft{1}},\strdcutoff\strdtubebound},
+                \strdseq{\strdtube{\strdtubepartright{1}},\strdcutoff\strdtubebound}
+            }
+        } &\mydefeq
+        \strdgathered{
+            \strdfork{
+                \strdparallel{
+                    \strdseq{
+                        \strdljump,\strdmid,\strdrlabel{a},
+                        \strdroad\strdmid,\strdroadlabel{\haskprod{a}{b}}{b},
+                        \strdcell{\texttt{,}},
+                        \strdmid,\strdrlabel{a}
+                    },
+                    \strdseq{\strdrjump,\strdmid,\strdrlabel{b},\strdmid,\strdrlabel{b}}
+                }
+            },
+            \strdtubestart,
+            \strdtubeextend{2}{1},\strdcutoff\strdtubebound,\strdtube\strdtubemid,
+            \strdwidecell{3}{2}{\texttt{<*>}},
+            \strdtubestart,
+            \strdtube{
+                \strdparallel{
+                    \strdseq{
+                        \strdxscale{1}\strdtubeljump,\strdtubeextend{1}{0},
+                        \strdtubemid,%\strdframelabelat{Left End}{\strdlvert{\texttt{fmap}^f\!}},
+                        \strdtubemid,\strdcutoff\strdtubebound
+                    },
+                    \strdseq{\strdxscale{1}\strdtuberjump,\strdtubemid,\strdcutoff\strdtubebound}
+                }
+            }
+        }
+    }
+} 
+The laws of applicative functors state nodes freely move in tubes as far as well-typed. %
+Furthermore, one can check:
+%\In{proposition}{
+\propositionof{Unitality}{
+    \In{align*}{
+        &
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdparallel{
+                    \strdseq{\strdrjump,\strdimplicit{\strdyscale{2}\strdmid}},
+                    \strdseq{\strdljump,\strdydouble\strdmid},
+                    \Identity
+                }
+            },
+            \strdtube{
+                \strdtubestart,
+                \strdtubeextend{1}{1},\strdcutoff\strdtubebound,
+                \strdparallel{
+                    \strdseq{
+                        \strdtubepartleft{1},
+                        \strdcutoff\strdtubebound,
+                        \strdtubemid,
+                        \strdcutoff\strdtubebound
+                    },
+                    \strdseq{
+                        \strdtubepartright{1},
+                        \strdcutoff\strdtubebound,
+                        \strdyhalf\strdtubeclose
+                    }
+                }
+            }
+        } =
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid
+            },
+            \strdtube{
+                \strdtubestart,\strdcutoff\strdtubebound,
+                \strdtubemid,\strdcutoff\strdtubebound
+            }
+        } =
+        \strdexternal\strdgathered{
+            \strdflip{
+                \strdfork{
+                    \strdparallel{
+                        \strdseq{\strdrjump,\strdimplicit{\strdyscale{2}\strdmid}},
+                        \strdseq{\strdljump,\strdydouble\strdmid},
+                        \Identity
+                    }
+                },
+                \strdtube{
+                    \strdtubestart,
+                    \strdtubeextend{1}{1},\strdcutoff\strdtubebound,
+                    \strdparallel{
+                        \strdseq{
+                            \strdtubepartleft{1},
+                            \strdcutoff\strdtubebound,
+                            \strdtubemid,
+                            \strdcutoff\strdtubebound
+                        },
+                        \strdseq{
+                            \strdtubepartright{1},
+                            \strdcutoff\strdtubebound,
+                            \strdyhalf\strdtubeclose
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+%\In{proposition}{
+\propositionof{Associativity}{
+    \In{align*}{
+        &
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdparallel{
+                    \strdseq{\strdrjump,\strdydouble\strdmid},
+                    \strdseq{\strdljump,\strdydouble\strdmid},
+                    \strdseq{\strdljump,\strdxdouble\strdljump,\strdydouble\strdmid}
+                }
+            }
+            ,
+            \strdtube{
+                \strdtubestart,
+                \strdtubeextend{3}{1}, \strdcutoff\strdtubebound,
+                \strdparallel{
+                    \strdseq{
+                        \strdtubepartleft{3},
+                        \strdcutoff\strdtubebound,
+                        \strdparallel{
+                            \strdseq{\strdtubepartleft{1},\strdcutoff\strdtubebound},
+                            \strdseq{\strdtubepartright{1},\strdcutoff\strdtubebound}
+                        }
+                    },
+                    \strdseq{
+                        \strdtubepartright{1},
+                        \strdcutoff\strdtubebound,
+                        \strdtubemid,
+                        \strdcutoff\strdtubebound
+                    }
+                }
+            }
+        } =
+        \strdexternal\strdgathered{
+            \strdflip{
+                \strdfork{
+                    \strdparallel{
+                        \strdseq{\strdrjump,\strdydouble\strdmid},
+                        \strdseq{\strdljump,\strdydouble\strdmid},
+                        \strdseq{\strdljump,\strdxdouble\strdljump,\strdydouble\strdmid}
+                    }
+                },
+                \strdtube{
+                    \strdtubestart,
+                    \strdtubeextend{3}{1},\strdcutoff\strdtubebound,
+                    \strdparallel{
+                        \strdseq{
+                            \strdtubepartleft{3},
+                            \strdcutoff\strdtubebound,
+                            \strdparallel{
+                                \strdseq{\strdtubepartleft{1},\strdcutoff\strdtubebound},
+                                \strdseq{\strdtubepartright{1},\strdcutoff\strdtubebound}
+                            }
+                        },
+                        \strdseq{
+                            \strdtubepartright{1},
+                            \strdcutoff\strdtubebound,
+                            \strdtubemid,
+                            \strdcutoff\strdtubebound
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+So we assign 
+\In{align*}{
+    \strdexternal\strdgathered{
+        \strdfork{
+            \strdrjump,
+            \strdparallel{
+                \strdseq{\strdrjump,\Identity\strdmid},
+                \strdseq{\strdljump,\Identity\strdmid},
+                \strdseq{\strdljump,\strdxdouble\strdljump,\Identity\strdmid}
+            }
+        },
+        \strdtube{
+            \strdtubestart,
+            \strdtubeextend{2}{2},\strdcutoff\strdtubebound,
+            \strdparallel{
+                \strdseq{
+                    \strdtubepartleft{1},
+                    \strdcutoff\strdtubebound
+                },
+                \strdseq{
+                    \strdtubepartmid{1}{1},
+                    \strdcutoff\strdtubebound
+                },
+                \strdseq{
+                    \strdtubepartright{1},
+                    \strdcutoff\strdtubebound
+                }
+            }
+        }
+    }
+}
+to this equation. A tube that has more forks is similarly defined without ambiguity.
+\mynewline
+Now we can depict applicative functors using:
+\In{proposition}{
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{a},
+                \strdwidecell{1}{1}{\texttt{pure}},
+                \strdmid,\strdrlabel{a},
+                \strdcell{a}
+            },
+            \strdtubestart,\strdcutoff\strdtubebound,
+            \strdtube\strdtubemid
+        } &=
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{a},
+                \strdcell{a},
+                \Identity
+            },
+            \strdtube{
+                \strdtubestart,\strdcutoff\strdtubebound,
+                \strdyscale{1.5}\strdtubemid,\strdcutoff\strdtubebound,%\strdtubelabelat{Left}{\strdlvert{\texttt{fmap}^f\!}},
+                \strdyhalf\strdtubeclose
+            }
+        } \\
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{b},
+                \strdwidecell{2}{2}{\texttt{<*>}},
+                \strdfork{
+                    \strdljump,\strdroad\strdmid,\strdroadlabel{b}{a}
+                },
+                \strdrjump,
+                \strdmid,\strdrlabel{a}
+            } ,
+            \strdtube{
+                \strdtubestart,\strdcutoff\strdtubebound,
+                \strdtubemid,
+                \strdfork{
+                    \strdxscale{1}\strdtubeljump,\strdtubemid,\strdcutoff\strdtubebound
+                }
+                ,
+                \strdxscale{1}\strdtuberjump,\strdtubemid,\strdcutoff\strdtubebound
+            }
+        } &=
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{b},
+                \strdcell{\texttt{\$}},
+                \strdfork{
+                    \strdroad\strdleft,\strdroad\strdmid,\strdroadlabel{b}{a}
+                },
+                \strdright,\strdmid,\strdrlabel{a}
+            },
+            \strdtubestart,
+            \strdtube{
+                \strdtubeextend{1}{1},\strdcutoff\strdtubebound,
+                \strdtubemid,%\strdtubellabel{\strdlvert{\texttt{fmap}^f\!}},
+                \strdtubemid,
+                \strdcutoff\strdtubebound,
+                \strdfork{
+                    \strdtubepartleft{1},\strdcutoff\strdtubebound
+                },
+                \strdtubepartright{1},\strdcutoff\strdtubebound,
+                \Identity
+            }
+        }
+    }
+}
+Thanks to these diagrams, you can immediately prove:
+\propositionof{Lift}{
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdfork{
+                \strdmid,\strdrlabel{c},
+                \strdcell{h},
+                \strdfork{
+                    \strdleft,\strdrlabel{a}
+                },
+                \strdright,\strdrlabel{b}
+            },
+            \strdtube{
+                \strdtubestart,
+                \strdtubeextend{1}{1},\strdcutoff\strdtubebound,
+                \strdtubemid,
+                \strdfork{
+                    \strdtubepartleft{1},\strdtubeend,\strdwidecell{1}{1}{x}
+                },
+                \strdtubepartright{1},\strdtubeend,\strdwidecell{1}{1}{y},
+                \Identity
+            }
+        } = h \haskop{<\$>} x \haskop{<*>} y
+    }
+}
+
+% Informally speaking, a \emph{lax functor} is a forked tube.
+%
+% Given monoidal categories $(\cat C,\otimes,I)$ and $(\cat C\myprime,\otimes\myprime,I\myprime)$, %
+% a lax monoidal functor
+% \In{align*}{
+%     F : (\cat C,\otimes,I) \to (\cat C\myprime,\otimes\myprime,I\myprime)
+% }
+% consists of
+% \In{enumerate}{
+%     \item a functor $F : \cat C \to \cat D$ 
+%     \item a natural transformation $(\phi_{A,B} : FA \otimes\myprime FB \to F(A \otimes B))_{A,B}$
+%     \item a morphism $\phi _0 : I\myprime \to FI$
+% }
+% satisfying the coherence conditions
+
+\include{references}
+
+%\include{regression}
+
+\end{document}
