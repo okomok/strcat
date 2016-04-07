@@ -1,0 +1,14 @@
+\ProvidesPackage{hask}
+
+\usepackage{amsmath,mathtools,etoolbox,lambda,graphicx}
+
+\newcommand*{\haskdot}{\texttt{.}}
+\newcommand*{\haskop}[1]{\ensuremath{\operatorname{\texttt{#1}}}}
+\newcommand*{\haskbackslash}{\texttt{\char`\\}}
+
+\newcommand*{\haskprod}[2]{\ensuremath{\texttt{(}#1\texttt{,}#2\texttt{)}}}
+\newcommand*{\haskcoprod}[2]{#1\texttt{+}#2}
+
+\newcommand*{\haskone}{\texttt{()}}
+\newcommand*{\haskzero}{\texttt{Void}}
+
