@@ -24,7 +24,7 @@
 
 \section{Introduction}
 
-We will show how \emph{applicative functors} are represented in string diagrams. %
+We will show how applicative functors are depicted in \emph{string diagrams}. %
 Don't trust my poor mathematics. Any correction is welcome at %
 \href{https://github.com/okomok/strcat}{github.com/okomok/strcat}.  
 
@@ -37,7 +37,7 @@ Don't be afraid. A string diagram in this document is just a kind of expression 
 
 \subsection{Vertical Composition}
 
-First we define how to join strings vertically.
+First we define how to join strings.
 
 \In{definition}{
     A type $a$ is depicted as a string:
@@ -97,7 +97,7 @@ First we define how to join strings vertically.
     }
 }
 
-One can check that any diagram build upon these definitions has no ambiguity due to the famous laws:
+One can check that any diagram built upon these definitions has no ambiguity due to the famous laws:
 \In{align*}{
     h\haskdot(g\haskdot f) &= (h\haskdot g) \haskdot f \\
     \texttt{id}\haskdot f &= f \\
@@ -131,7 +131,7 @@ For example, a function application $f\,x$ is depicted as
 
 \definitionof{Functional Box}{
     Given a function $k \haskop{::} (a \haskop{->} b) \haskop{->} (a\myprime \haskop{->} b\myprime)$, %
-    an application $k\,h$ can be depicted as a \emph{functional box}:
+    an application $k\,h$ can be depicted as a \emph{box}:
     \In{align*}{
         \strdexternal\strdgathered{
             \strdmid,\strdrlabel{b\myprime}
@@ -157,7 +157,7 @@ For example, a function application $f\,x$ is depicted as
 
 \definitionof{Functorial Tube}{
     Given a $\haskop{Functor} f$, an application of \haskop{fmap} %
-    can be depicted as a \emph{functorial tube} defined by 
+    can be depicted as a \emph{tube} defined by 
     \In{align*}{
         \strdexternal\strdgathered{
             \strdfork{
@@ -212,7 +212,7 @@ has no ambiguity.
 \subsection{Horizontal Composition}
 \strdexternalname{strapp_string_diagrams_ex}
 
-We will make string diagrams two-dimensional, equipped with \emph{horizontal composition}.
+We will make string diagrams two-dimensional, equipped with the \emph{horizontal composition}.
 
 \In{definition}{
     Parallel strings are pairs.
@@ -949,7 +949,7 @@ which is called a \emph{lax functor} in category theory.
     }
 } 
 
-The laws of applicative functors represent the following propositions.
+The laws of applicative functors justify these pictures by the following propositions satisfied.
 
 \propositionof{Naturality}{
     \In{align*}{
@@ -957,7 +957,7 @@ The laws of applicative functors represent the following propositions.
             \strdfork{
                 \strdparallel{
                     \strdseq{\strdljump,\strdmid,\strdmid,\strdat{Mid}{\strdcell{h}}},
-                    \strdseq{\strdrjump,\strdydouble\strdmid},
+                    \strdseq{\strdrjump,\strdmid,\strdmid,\strdat{Mid}{\strdcell{k}}},
                     \Identity
                 }
             },
@@ -984,7 +984,7 @@ The laws of applicative functors represent the following propositions.
             \strdfork{
                 \strdparallel{
                     \strdseq{\strdljump,\strdmid,\strdat{Mid}{\strdcell{h}},\strdmid},
-                    \strdseq{\strdrjump,\strdydouble\strdmid},
+                    \strdseq{\strdrjump,\strdmid,\strdat{Mid}{\strdcell{k}},\strdmid},
                     \Identity
                 }
             },
@@ -1003,58 +1003,7 @@ The laws of applicative functors represent the following propositions.
                     }
                 }
             }
-        } \\
-        \strdexternal\strdgathered{ \strdflip{
-            \strdfork{
-                \strdparallel{
-                    \strdseq{\strdljump,\strdmid,\strdmid,\strdat{Mid}{\strdcell{h}}},
-                    \strdseq{\strdrjump,\strdydouble\strdmid},
-                    \Identity
-                }
-            },
-            \strdtube{
-                \strdtubestart,
-                \strdtubeextend{1}{1},\strdcutoff\strdtubebound,
-                \strdparallel{
-                    \strdseq{
-                        \strdtubepartleft{1},
-                        \strdcutoff\strdtubebound,
-                        \strdtubemid,
-                        \strdcutoff\strdtubebound
-                    },
-                    \strdseq{
-                        \strdtubepartright{1},
-                        \strdcutoff\strdtubebound,
-                        \strdtubemid,
-                        \strdcutoff\strdtubebound
-                    }
-                }
-            }
-        } } &=
-        \strdexternal\strdgathered{ \strdflip{
-            \strdfork{
-                \strdparallel{
-                    \strdseq{\strdljump,\strdmid,\strdat{Mid}{\strdcell{h}},\strdmid},
-                    \strdseq{\strdrjump,\strdydouble\strdmid},
-                    \Identity
-                }
-            },
-            \strdtube{
-                \strdtubestart,
-                \strdtubeextend{1}{1},\strdcutoff\strdtubebound,
-                \strdtubemid,\strdcutoff\strdtubebound,
-                \strdparallel{
-                    \strdseq{
-                        \strdtubepartleft{1},
-                        \strdcutoff\strdtubebound
-                    },
-                    \strdseq{
-                        \strdtubepartright{1},
-                        \strdcutoff\strdtubebound
-                    }
-                }
-            }
-        } } 
+        } 
     }
 }
 
@@ -1226,7 +1175,7 @@ to which we assign
         }
     }
 }
-A tube that has more forks is similarly defined without ambiguity.
+A tube that has more forks can be similarly defined without ambiguity.
 \In{remark}{
     In our diagrams, cutoff lines are preferred to parentheses.
 }
