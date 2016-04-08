@@ -126,6 +126,40 @@ For example, a function application $f\,x$ is depicted as
 }
 
 
+Due to the following definition, equations containing diagrams can often be simplified, known as \emph{pointfree} style.
+
+\definitionof{Function Equality}{
+    \In{align*}{
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{b}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{a}
+            ,\strdcell{x}
+        }
+        \underset{\forall x}{=}
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{b}
+            ,\strdcell{g}
+            ,\strdmid,\strdrlabel{a}
+            ,\strdcell{x}
+        }
+        \iff
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{b}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{a}
+        }
+        =
+        \strdexternal\strdgathered{
+            \strdmid,\strdrlabel{b}
+            ,\strdcell{g}
+            ,\strdmid,\strdrlabel{a}
+        }
+    }
+}
+
+
+
 \subsection{Functors}
 \strdexternalname{strapp_functors}
 
@@ -494,7 +528,7 @@ to which we assign
 }
 A band that has more forks is similarly defined. The equations for fat forms are left as an exercise.
 \mynewline
-\indent For later use, we rephrase the two famous operators.
+\indent For later use, we note the two famous operators.
 \definitionof{Apply Operator}{
     \In{align*}{
         \strdexternal\strdgathered{
