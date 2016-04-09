@@ -98,10 +98,9 @@ First we define how to join strings.
 }
 
 One can check that any diagram built upon these definitions has no ambiguity due to the famous laws:
-\In{align*}{
-    h\haskdot(g\haskdot f) &= (h\haskdot g) \haskdot f \\
-    \texttt{id}\haskdot f &= f \\
-    g\haskdot \texttt{id} &= g \\
+\In{itemize}{
+    \item \emph{unitality}: $f\haskdot\texttt{id} = f = \texttt{id}\haskdot f$
+    \item \emph{associativity}: $(h\haskdot g) \haskdot f = h\haskdot(g\haskdot f)$
 }
 
 %\In{definition}{
